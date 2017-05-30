@@ -1,31 +1,60 @@
-#ctdrCampoBusqueda{
-                overflow: hidden;
-                padding: 1em;
-                margin: 0 auto;
-                width: 450px;
-            }
-            #ctdrCampoBusqueda img, #ctdrCampoBusqueda input{
-                height: 36px;
-                float: right;
-                border: solid 2px blueviolet;
-                border-radius: 7px;
-                box-sizing: border-box;
-            }
-            #ctdrCampoBusqueda img{
-                width: 36px;
-                border-left: 0;
-                border-top-left-radius: 0;
-                border-bottom-left-radius: 0;
-                cursor: pointer;
-            }
-            #ctdrCampoBusqueda input{
-                width: 400px;
-                /* display: none; */
-                border-right: 0;
-                border-top-right-radius: 0;
-                border-bottom-right-radius: 0;
-                outline:none;
-            }
-            .bordeIdentificador{
-                border: 1px solid blue;
-            }
+    #ctdrCampoBusqueda {
+        overflow: hidden;
+        border: 2px solid blueviolet;
+        border-radius: 6px;
+        padding: 5px;
+    }
+    
+    #ctdrCampoBusqueda img,
+    #ctdrCampoBusqueda input {
+        float: right;
+        height: 36px;
+        box-sizing: border-box;
+    }
+    
+    #ctdrCampoBusqueda input {
+        border: 0;
+        outline: none;
+    }
+    
+    @media screen and (min-width: 1000px) {
+        #ctdrCampoBusqueda {
+            float: right;
+        }
+        #ctdrCampoBusqueda img {
+            width: 36px;
+            cursor: pointer;
+        }
+        #ctdrCampoBusqueda input {
+            width: 0px;
+            transition: all cubic-bezier(0.175, 0.885, 0.32, 1.275) 2s;
+        }
+    }
+    
+    @media screen and (min-width: 600px) and (max-width: 1000px) {
+        #ctdrCampoBusqueda {
+            width: 50%;
+        }
+        #ctdrCampoBusqueda img {
+            width: 10%;
+            cursor: none;
+        }
+        #ctdrCampoBusqueda input {
+            width: 90%;
+        }
+    }
+    
+    @media screen and (min-width: 100px) and (max-width: 600px) {
+        #ctdrCampoBusqueda {
+            width: auto;
+            padding-left: 0;
+            padding-right: 0;
+        }
+        #ctdrCampoBusqueda img {
+            width: 10%;
+            cursor: none;
+        }
+        #ctdrCampoBusqueda input {
+            width: 90%;
+        }
+    }
