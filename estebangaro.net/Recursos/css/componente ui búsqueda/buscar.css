@@ -1,0 +1,31 @@
+#ctdrCampoBusqueda{
+                overflow: hidden;
+                padding: 1em;
+                margin: 0 auto;
+                width: 450px;
+            }
+            #ctdrCampoBusqueda img, #ctdrCampoBusqueda input{
+                height: 36px;
+                float: right;
+                border: solid 2px blueviolet;
+                border-radius: 7px;
+                box-sizing: border-box;
+            }
+            #ctdrCampoBusqueda img{
+                width: 36px;
+                border-left: 0;
+                border-top-left-radius: 0;
+                border-bottom-left-radius: 0;
+                cursor: pointer;
+            }
+            #ctdrCampoBusqueda input{
+                width: 400px;
+                /* display: none; */
+                border-right: 0;
+                border-top-right-radius: 0;
+                border-bottom-right-radius: 0;
+                outline:none;
+            }
+            .bordeIdentificador{
+                border: 1px solid blue;
+            }
