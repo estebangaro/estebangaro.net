@@ -13,10 +13,13 @@
     overflow: hidden;
 }
 
-#contenedorMenu img {
+#contenedorMenu > img {
     float: left;
     width: 36px;
     height: 36px;
+}
+
+#contenedorMenu > img, #ctdrCampoBusqueda{
     margin-top: 21px;
 }
 

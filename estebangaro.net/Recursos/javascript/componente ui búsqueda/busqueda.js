@@ -31,8 +31,20 @@ function validaEjecucionBtnBusqueda() {
 
 function animaCampoBusqueda(estado) {
     $('#ctdrCampoBusqueda input').css({
-        'width': !estado ? '0' : '300px'
+        'width': !estado ? '0' : '300px',
+        'border-bottom': !estado? '0': '0.5px solid whitesmoke'
     });
+    if(estado){
+        $('#agrupadorOpciones').css({
+            'opacity':'0',
+            'visibility':'hidden'
+        });
+    }else{
+         $('#agrupadorOpciones').css({
+            'opacity':'1',
+            'visibility':'visible'
+        });
+    }
 }
 
 function ajustaBtnBusqueda() {
