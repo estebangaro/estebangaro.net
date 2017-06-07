@@ -10,7 +10,7 @@ $(function() {
 });
 
 function establecePredeterminado() {
-    // ajustaBtnBusqueda(); // Determina la lógica de ajuste de componente ui búsqueda.
+    ajustaBtnBusqueda(); // Determina la lógica de ajuste de componente ui búsqueda.
 }
 
 function ajustaAltoFondo() {
