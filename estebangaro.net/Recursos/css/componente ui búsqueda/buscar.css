@@ -34,28 +34,34 @@
     
     @media screen and (min-width: 600px) and (max-width: 1000px) {
         #ctdrCampoBusqueda {
-            width: 50%;
+            width: 250px;
+            display: inline-block;
+            margin-top: 10px;
+            border: 0.5px solid whitesmoke;
+            border-radius: 10px;
         }
         #ctdrCampoBusqueda img {
-            width: 10%;
+            /* width: 10%; */
             cursor: none;
         }
         #ctdrCampoBusqueda input {
-            width: 90%;
+            width: 200px;
+            /* border-bottom: 0.5px solid whitesmoke; */
         }
     }
     
     @media screen and (min-width: 100px) and (max-width: 600px) {
         #ctdrCampoBusqueda {
-            width: auto;
+            display: none;
+            /* width: auto;
             padding-left: 0;
-            padding-right: 0;
+            padding-right: 0; */
         }
-        #ctdrCampoBusqueda img {
+        /* #ctdrCampoBusqueda img {
             width: 10%;
             cursor: none;
         }
         #ctdrCampoBusqueda input {
             width: 90%;
-        }
+        } */
     }

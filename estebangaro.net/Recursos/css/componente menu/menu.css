@@ -13,13 +13,14 @@
     overflow: hidden;
 }
 
-#contenedorMenu > img {
+#contenedorMenu>img {
     float: left;
     width: 36px;
     height: 36px;
 }
 
-#contenedorMenu > img, #ctdrCampoBusqueda{
+#contenedorMenu>img,
+#ctdrCampoBusqueda {
     margin-top: 21px;
 }
 
@@ -34,27 +35,16 @@
     font-family: Circular, Helvetica, Arial, sans-serif;
     font-weight: bold;
     cursor: pointer;
+    text-align: left;
+}
+
+#contenedorMenu nav>span>img {
+    width: 18px;
+    height: 18px;
 }
 
 #contenedorMenu nav:hover {
     color: rgba(255, 255, 51, 0.5)
-}
-
-#fondoFijo,
-#fondoFijoColor {
-    background-image: url(../../imagenes/fondo4.jpg);
-    background-repeat: no-repeat;
-    background-size: cover;
-    width: 100%;
-    position: fixed;
-    height: 100%;
-    top: 0;
-    left: 0;
-}
-
-#fondoFijoColor {
-    background-image: none;
-    background-color: rgba(106, 96, 107, 0.3);
 }
 
 #contenedorMenu ul {
@@ -68,6 +58,7 @@
     -webkit-transition: all 1s cubic-bezier(0.215, 0.610, 0.355, 1);
     -moz-transition: all 1s cubic-bezier(0.215, 0.610, 0.355, 1);
     transition: all 1s cubic-bezier(0.215, 0.610, 0.355, 1);
+    text-align: left;
 }
 
 #contenedorMenu ul>li {
@@ -113,12 +104,13 @@
 }
 
 @media screen and (min-width: 100px) and (max-width: 1000px) {
-    #fondoMenu,
-    #fondoFijo,
-    #fondoFijoColor {
-        position: absolute;
+    #contenedorMenu nav>span>img {
+        display: none;
     }
-    #contenedorMenu img,
+    #contenedorMenu {
+        text-align: center;
+    }
+    #contenedorMenu>img,
     #contenedorMenu img.iconoMenu {
         display: block;
         width: 36px;

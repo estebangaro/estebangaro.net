@@ -1,0 +1,24 @@
+#fondoFijo,
+#fondoFijoColor {
+    background-image: url(../../imagenes/fondo4.jpg);
+    background-repeat: no-repeat;
+    background-size: cover;
+    width: 100%;
+    position: fixed;
+    height: 100%;
+    top: 0;
+    left: 0;
+}
+
+#fondoFijoColor {
+    background-image: none;
+    /* background-color: rgba(106, 96, 107, 0.3); */
+}
+
+@media screen and (min-width: 100px) and (max-width: 1000px) {
+    #fondoMenu,
+    #fondoFijo,
+    #fondoFijoColor {
+        position: absolute;
+    }
+}
