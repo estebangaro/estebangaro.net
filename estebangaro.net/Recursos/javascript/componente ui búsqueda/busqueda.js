@@ -31,18 +31,18 @@ function validaEjecucionBtnBusqueda() {
 
 function animaCampoBusqueda(estado) {
     $('#ctdrCampoBusqueda input').css({
-        'width': !estado ? '0' : '300px',
-        'border-bottom': !estado? '0': '0.5px solid whitesmoke'
+        'width': !estado ? '0' : '280px',
+        'border-bottom': !estado ? '0' : '0.5px solid whitesmoke'
     });
-    if(estado){
+    if (estado) {
         $('#agrupadorOpciones').css({
-            'opacity':'0',
-            'visibility':'hidden'
+            'opacity': '0',
+            'visibility': 'hidden'
         });
-    }else{
-         $('#agrupadorOpciones').css({
-            'opacity':'1',
-            'visibility':'visible'
+    } else {
+        $('#agrupadorOpciones').css({
+            'opacity': '1',
+            'visibility': 'visible'
         });
     }
 }
