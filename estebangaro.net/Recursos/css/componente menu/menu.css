@@ -44,7 +44,7 @@
 }
 
 #contenedorMenu nav:hover {
-    color: rgba(255, 255, 51, 0.5)
+    color: greenyellow;
 }
 
 #contenedorMenu ul {
@@ -72,7 +72,7 @@
 }
 
 #contenedorMenu ul>li:hover {
-    color: rgb(255, 204, 153);
+    color: greenyellow;
 }
 
 #contenedorMenu li>ul {
