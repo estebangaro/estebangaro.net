@@ -5,65 +5,16 @@
     <title>Prueba carrusel 1</title>
     <meta charset="UTF-8" />
     <meta name="viewport" content="width=device-width, initial-scale=1" />
-    <!-- <link href="css/style.css" rel="stylesheet"> -->
-    <style>
-        #contenedorCarrusel {
-            width: 85%;
-            margin: 0 auto;
-            font-family: Circular, Helvetica, Arial, sans-serif;
-        }
-        
-        #contenedorCarrusel div {
-            box-sizing: border-box;
-        }
-        
-        #ventanaCarrusel {
-            width: 100%;
-            position: relative;
-            height: 500px;
-            overflow: hidden;
-            border: 1.2px solid blue;
-        }
-        
-        #contenidoCarrusel {
-            width: 400%;
-            /* Definir en función del número de elementos del carrusel */
-            height: 100%;
-            position: absolute;
-            top: 0;
-            left: -100%;
-            -webkit-transition: all 1s cubic-bezier(0.445, 0.05, 0.55, 0.95);
-            -moz-transition: all 1s cubic-bezier(0.445, 0.05, 0.55, 0.95);
-            transition: all 1s cubic-bezier(0.445, 0.05, 0.55, 0.95);
-        }
-        
-        #contenidoCarrusel>div {
-            float: left;
-            width: 25%;
-            /* Definir en función del número de elementos del carrusel */
-            height: 100%;
-            text-align: center;
-            font-size: 2em;
-            margin: 0;
-        }
-        
-        #contenidoCarrusel>div a {
-            text-decoration: none;
-            display: inline-block;
-            border-radius: 10px;
-            background-color: mediumorchid;
-            color: white;
-            padding: 0.5em 1em;
-            font-size: 0.8em;
-        }
-    </style>
+    <link href="../../css/componente carrusel/carrusel.css" rel="stylesheet" />
+    <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.2.1/jquery.min.js"></script>
+    <script src="../../javascript/componente carrusel/carrusel.js"></script>
 </head>
 
 <body>
     <div id="contenedorCarrusel">
         <div id="ventanaCarrusel">
             <!-- Definir ancho fijo -->
-            <div id="contenidoCarrusel">
+            <div id="cont_1" class="contenidoCarrusel animaCarrusel">
                 <div>
                     <h1>
                         Entity Framework Code First Approach + MySQL Database
@@ -88,6 +39,12 @@
                     </h1>
                     <a href="">Leer</a>
                 </div>
+            </div>
+            <div id="contenidoBtns">
+                <img src="../../imagenes/boton_c.png" alt="1">
+                <img src="../../imagenes/boton_c.png" alt="2">
+                <img src="../../imagenes/boton_c.png" alt="3">
+                <img src="../../imagenes/boton_c.png" alt="4">
             </div>
         </div>
     </div>
