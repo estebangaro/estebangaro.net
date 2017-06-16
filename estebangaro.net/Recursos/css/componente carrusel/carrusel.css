@@ -16,6 +16,19 @@
     border: 1.2px solid blue;
 }
 
+#ventanaCarrusel:hover>div.herramientas {
+    visibility: visible;
+    opacity: 1;
+}
+
+.herramientas {
+    visibility: hidden;
+    opacity: 0;
+    -webkit-transition: all 1s cubic-bezier(0.215, 0.610, 0.355, 1);
+    -moz-transition: all 1s cubic-bezier(0.215, 0.610, 0.355, 1);
+    transition: all 1s cubic-bezier(0.215, 0.610, 0.355, 1);
+}
+
 .contenidoCarrusel {
     width: 400%;
     /* Definir en función del número de elementos del carrusel */
@@ -39,6 +52,22 @@
     text-align: center;
     font-size: 2em;
     margin: 0;
+}
+
+#contenidoFlechas>img {
+    width: 60px;
+    height: 60px;
+    position: absolute;
+    top: 50%;
+    margin-top: -30px;
+    margin-right: 0.2em;
+    right: 0;
+    cursor: pointer;
+}
+
+#contenidoFlechas>img:last-child {
+    left: 0;
+    margin-left: 0.2em;
 }
 
 #contenidoBtns {
@@ -67,4 +96,8 @@
     color: white;
     padding: 0.5em 1em;
     font-size: 0.8em;
+}
+
+#cont_2 {
+    display: none;
 }
