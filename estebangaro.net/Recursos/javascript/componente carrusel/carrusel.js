@@ -6,7 +6,7 @@ $(function() {
     enlazarEvts();
     setInterval(function() {
         $('#contenidoFlechas > img:first-child').click();
-    }, 6000);
+    }, 7000);
 });
 
 function obtenDesplazamientoHorizontal(indice) {
@@ -71,7 +71,7 @@ function desplazaCarrusel(manejadorFlecha) {
     if (manejadorFlecha != undefined)
         setTimeout(function() {
             manejadorFlecha(false); // Actualización de contenedor espejo activo.
-        }, 1000);
+        }, 1500);
 }
 
 function cargaAvisos() {
@@ -107,5 +107,5 @@ function clickFlecha(flecha) {
     desplazaCarrusel(validaDesplazamientoInactivo);
     setTimeout(function() {
         enlazarEvts();
-    }, 1000);
+    }, 1500);
 }
