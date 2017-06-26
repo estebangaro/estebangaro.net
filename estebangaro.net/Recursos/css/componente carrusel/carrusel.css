@@ -1,7 +1,8 @@
 #contenedorCarrusel {
-    width: 85%;
+    width: 100%;
     margin: 0 auto;
     font-family: Circular, Helvetica, Arial, sans-serif;
+    position: relative;
 }
 
 #contenedorCarrusel div {
@@ -11,19 +12,12 @@
 #ventanaCarrusel {
     width: 100%;
     position: relative;
-    height: 500px;
+    height: 100%;
     overflow: hidden;
-    border: 1.2px solid blue;
-}
-
-#ventanaCarrusel:hover>div.herramientas {
-    visibility: visible;
-    opacity: 1;
+    /* border: 1.2px solid blue; */
 }
 
 .herramientas {
-    visibility: hidden;
-    opacity: 0;
     -webkit-transition: all 1s cubic-bezier(0.215, 0.610, 0.355, 1);
     -moz-transition: all 1s cubic-bezier(0.175, 0.885, 0.32, 1.275);
     transition: all 1s cubic-bezier(0.175, 0.885, 0.32, 1.275);
@@ -32,7 +26,7 @@
 .contenidoCarrusel {
     width: 400%;
     /* Definir en función del número de elementos del carrusel */
-    height: 100%;
+    /* height: 100%; */
     position: absolute;
     top: 0;
     left: -300%;
@@ -103,4 +97,39 @@
     visibility: hidden;
     opacity: 0;
     left: 100%
+}
+
+@media screen and (min-width: 1025px) {
+    .herramientas {
+        visibility: hidden;
+        opacity: 0;
+    }
+    #contenedorCarrusel:hover .herramientas {
+        visibility: visible;
+        opacity: 1;
+    }
+}
+
+@media screen and (min-width: 600px) and (max-width: 1025px) {
+    .contenidoCarrusel>div {
+        font-size: 1.5em;
+    }
+    .herramientas {
+        visibility: visible;
+        opacity: 1;
+    }
+}
+
+@media screen and (min-width: 100px) and (max-width: 600px) {
+    .contenidoCarrusel>div {
+        font-size: 1em;
+    }
+    .herramientas {
+        visibility: hidden;
+        opacity: 0;
+    }
+    .herramientas:last-child {
+        visibility: visible;
+        opacity: 1;
+    }
 }

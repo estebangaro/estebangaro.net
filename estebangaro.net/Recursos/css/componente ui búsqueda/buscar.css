@@ -18,7 +18,7 @@
         color: white;
     }
     
-    @media screen and (min-width: 1000px) {
+    @media screen and (min-width: 1025px) {
         #ctdrCampoBusqueda {
             float: right;
         }
@@ -32,7 +32,7 @@
         }
     }
     
-    @media screen and (min-width: 600px) and (max-width: 1000px) {
+    @media screen and (min-width: 600px) and (max-width: 1025px) {
         #ctdrCampoBusqueda {
             width: 250px;
             display: inline-block;
@@ -53,15 +53,5 @@
     @media screen and (min-width: 100px) and (max-width: 600px) {
         #ctdrCampoBusqueda {
             display: none;
-            /* width: auto;
-            padding-left: 0;
-            padding-right: 0; */
         }
-        /* #ctdrCampoBusqueda img {
-            width: 10%;
-            cursor: none;
-        }
-        #ctdrCampoBusqueda input {
-            width: 90%;
-        } */
     }

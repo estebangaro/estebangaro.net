@@ -1,13 +1,50 @@
 var _carruselconfiguracion;
+var _carruselTemporizador;
 
 $(function() {
     cargaAvisos();
     estableceBotonesDesp();
     enlazarEvts();
-    setInterval(function() {
-        $('#contenidoFlechas > img:first-child').click();
-    }, 7000);
+    ajustaAlturaCarrusel();
+    estableceTemporizadorCarrusel(true);
+    $(window).resize(
+        function() {
+            ajustaAlturaCarrusel();
+        });
 });
+
+function ajustaAlturaCarrusel() {
+    var _alto = $('#contenedorMenu').innerHeight();
+    var _altoVentana = $(window).height();
+    _carruselconfiguracion.alturaCarrusel = _altoVentana - _alto;
+    $('#contenedorCarrusel').css({
+        'top': _alto + 'px',
+        'height': (_altoVentana - _alto) + 'px'
+    });
+    $('#cont_1 > div').each(function() {
+        ajustaTextoCarrusel($(this));
+    });
+    $('#cont_2 > div').each(function() {
+        ajustaTextoCarrusel($(this));
+    });
+}
+
+function ajustaTextoCarrusel(aviso) {
+    var _altoAviso = aviso.height();
+    aviso.css('margin-top',
+        ((_carruselconfiguracion.alturaCarrusel - _altoAviso) / 2 -
+            $('#contenidoBtns').height()) + 'px');
+}
+
+function estableceTemporizadorCarrusel(estado) {
+    if (estado)
+        _carruselTemporizador = setInterval(function() {
+            muestraSiguienteAviso($('#contenidoFlechas > img:first-child'),
+                validaDesplazamientoInactivo);
+        }, 7000);
+    else
+        clearInterval(_carruselTemporizador);
+}
 
 function obtenDesplazamientoHorizontal(indice) {
     return (_carruselconfiguracion.cantidadElementos -
@@ -51,7 +88,7 @@ function configuraContenido(contenidoC, estado, desplazamiento, anima) {
     }
 }
 
-function desplazaCarrusel(manejadorFlecha) {
+function desplazaCarrusel(manejadorFlecha, ejecutaAlTerminoAnimacion) {
     var _desplazaI;
     var _inactivo = _carruselconfiguracion.activo == 'cont_1' ? 'cont_2' : 'cont_1';
     if (manejadorFlecha != undefined)
@@ -71,6 +108,11 @@ function desplazaCarrusel(manejadorFlecha) {
     if (manejadorFlecha != undefined)
         setTimeout(function() {
             manejadorFlecha(false); // Actualización de contenedor espejo activo.
+        }, 1500);
+
+    if (ejecutaAlTerminoAnimacion != undefined)
+        setTimeout(function() {
+            ejecutaAlTerminoAnimacion(true); // Método de utilería para habilitar algún evento y temporizador.
         }, 1500);
 }
 
@@ -92,20 +134,46 @@ function obtenPosicionBtn(botonOrigen) {
 
 function enlazarEvts() {
     $('#contenidoBtns > img').on('click', function() {
-        _carruselconfiguracion.indice = obtenPosicionBtn($(this));
-        desplazaCarrusel();
+        click_Boton($(this));
     });
     $('#contenidoFlechas>img').on('click', function() {
-        clickFlecha($(this));
+        click_Boton($(this), validaDesplazamientoInactivo);
     });
 }
 
-function clickFlecha(flecha) {
-    $('#contenidoFlechas > img').off('click');
-    $('#contenidoBtns > img').off('click');
-    _carruselconfiguracion.indice += obtenPosicionBtn(flecha);
-    desplazaCarrusel(validaDesplazamientoInactivo);
-    setTimeout(function() {
-        enlazarEvts();
-    }, 1500);
+function click_Boton(flecha, eventoCirculo) {
+    estableceTemporizadorCarrusel(false);
+    muestraSiguienteAviso(flecha, eventoCirculo, estableceTemporizadorCarrusel);
+}
+
+function estableceEventos(estado) {
+    if (estado)
+        setTimeout(function() {
+            enlazarEvts();
+        }, 1500);
+    else {
+        $('#contenidoFlechas > img').off('click');
+        $('#contenidoBtns > img').off('click');
+    }
+}
+
+function muestraSiguienteAviso(boton, eventoCirculo, ejecutaAlfinal) {
+    var _btnParent = boton.parent().attr('id');
+    estableceEventos(false);
+    if (_btnParent == 'contenidoFlechas')
+        _carruselconfiguracion.indice += obtenPosicionBtn(boton);
+    else
+        _carruselconfiguracion.indice = obtenPosicionBtn(boton);
+    desplazaCarrusel(eventoCirculo, function(estado) {
+        estableceEventos(estado);
+        refrescaBotonDesplazamiento();
+        if (ejecutaAlfinal != undefined)
+            ejecutaAlfinal(estado);
+    });
+}
+
+function refrescaBotonDesplazamiento() {
+    $('#contenidoBtns > img').attr('src', '../../imagenes/boton_c.png')
+        .eq(_carruselconfiguracion.indice - 1)
+        .attr('src', '../../imagenes/loading.gif');
 }
