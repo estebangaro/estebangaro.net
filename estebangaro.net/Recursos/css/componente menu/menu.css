@@ -92,7 +92,7 @@
     margin: 0 1em;
 }
 
-@media screen and (min-width: 1000px) {
+@media screen and (min-width: 1025px) {
     #contenedorMenu ul>li:hover>ul {
         visibility: visible;
         opacity: 1;
@@ -103,7 +103,7 @@
     }
 }
 
-@media screen and (min-width: 100px) and (max-width: 1000px) {
+@media screen and (min-width: 100px) and (max-width: 1025px) {
     #contenedorMenu nav>span>img {
         display: none;
     }

@@ -1,3 +1,5 @@
+/** Sección FIJA STYLES **/
+
 #fondoFijo,
 #fondoFijoColor {
     background-image: url(../../imagenes/fondo4.jpg);
@@ -12,8 +14,49 @@
 
 #fondoFijoColor {
     background-image: none;
-    /* background-color: rgba(106, 96, 107, 0.3); */
+    background-color: rgba(106, 96, 107, 0.5);
 }
+
+
+/** Sección FIJA STYLES  FIN **/
+
+
+/** Sección 1 Carrusel STYLES **/
+
+#seccion1Principal,
+#seccion2Principal {
+    position: absolute;
+    left: 0;
+    top: 0;
+    width: 100%;
+    height: 100%;
+}
+
+#seccion1Principal>div.Contenido,
+#seccion2Principal>div.Contenido {
+    width: 85%;
+    margin: 0 auto;
+}
+
+.contenidoCarrusel {
+    color: white;
+}
+
+
+/** Sección 1 Carrusel STYLES FIN**/
+
+
+/** Sección 2 Carrusel STYLES **/
+
+#seccion2Principal {
+    top: 100%;
+    background-image: url(../../imagenes/fondo2.jpg);
+    background-repeat: no-repeat;
+    background-size: cover;
+}
+
+
+/** Sección 2 Carrusel STYLES **/
 
 @media screen and (min-width: 100px) and (max-width: 1000px) {
     #fondoMenu,
