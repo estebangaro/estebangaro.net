@@ -10,6 +10,7 @@ $(function() {
     $(window).resize(
         function() {
             ajustaAlturaCarrusel();
+            cargaAvisos();
         });
 });
 
@@ -122,6 +123,8 @@ function cargaAvisos() {
         cantidadElementos: 4, // cantidad de elementos "aviso" a visualizar.
         activo: 'cont_1'
     };
+    refrescaBotonDesplazamiento();
+    $('#cont_1').addClass('animaCarrusel');
 }
 
 function estableceBotonesDesp() {
