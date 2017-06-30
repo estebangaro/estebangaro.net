@@ -19,6 +19,12 @@
     height: 36px;
 }
 
+#contenedorMenu span>a {
+    text-decoration: none;
+    color: white;
+    font-family: Circular, Helvetica, Arial, sans-serif;
+}
+
 #contenedorMenu>img,
 #ctdrCampoBusqueda {
     margin-top: 21px;
@@ -31,11 +37,11 @@
 #contenedorMenu nav {
     float: right;
     margin: 2em 1em;
-    color: white;
-    font-family: Circular, Helvetica, Arial, sans-serif;
     font-weight: bold;
     cursor: pointer;
     text-align: left;
+    color: white;
+    font-family: Circular, Helvetica, Arial, sans-serif;
 }
 
 #contenedorMenu nav>span>img {

@@ -1,0 +1,18 @@
+﻿@model List<centro.recursos.net.Models.Entity_Framework.OpcionMenu>
+
+@using centro.recursos.net.Models.Helpers
+
+<div id="fondoMenu">
+    <div id="contenedorMenu">
+        <img src="../../imagenes/busqueda.png" alt="logotipo" />
+        <div id="ctdrCampoBusqueda">
+            <img src="../../imagenes/busqueda.png" alt="">
+            <input type="text" placeholder="Buscar...">
+        </div>
+        <img src="../../imagenes/icono_menu_2.png" alt="icono menu" class="iconoMenu" />
+        <div id="agrupadorOpciones">
+            @Html.GeneraMenu(Model)
+        </div>
+    </div>
+</div>
+

@@ -14,7 +14,7 @@ namespace centro.recursos.net.Models.Entity_Framework
         public bool Visible { get; set; }
         public InfoRegistro Auditoria { get; set; }
 
-        public Nullable<int> MenuPadre { get; set; }
+        public Nullable<short> MenuPadre { get; set; }
         public virtual OpcionMenu Padre { get; set; }
         public virtual ICollection<OpcionMenu> Opciones { get; set; }
     }
