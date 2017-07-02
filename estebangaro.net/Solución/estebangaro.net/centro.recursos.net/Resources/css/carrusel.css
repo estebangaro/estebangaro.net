@@ -1,0 +1,135 @@
+#contenedorCarrusel {
+    width: 100%;
+    margin: 0 auto;
+    font-family: Circular, Helvetica, Arial, sans-serif;
+    position: relative;
+}
+
+#contenedorCarrusel div {
+    box-sizing: border-box;
+}
+
+#ventanaCarrusel {
+    width: 100%;
+    position: relative;
+    height: 100%;
+    overflow: hidden;
+    /* border: 1.2px solid blue; */
+}
+
+.herramientas {
+    -webkit-transition: all 1s cubic-bezier(0.215, 0.610, 0.355, 1);
+    -moz-transition: all 1s cubic-bezier(0.175, 0.885, 0.32, 1.275);
+    transition: all 1s cubic-bezier(0.175, 0.885, 0.32, 1.275);
+}
+
+.contenidoCarrusel {
+    width: 400%;
+    /* Definir en función del número de elementos del carrusel */
+    /* height: 100%; */
+    position: absolute;
+    top: 0;
+    left: -300%;
+}
+
+.animaCarrusel {
+    -webkit-transition: left 1.5s cubic-bezier(0.5, 0.31, 0.84, 0.05);
+    -moz-transition: left 1.5s cubic-bezier(0.5, 0.31, 0.84, 0.05);
+    transition: left 1.5s cubic-bezier(0.5, 0.31, 0.84, 0.05);
+}
+
+.contenidoCarrusel>div {
+    float: right;
+    width: 25%;
+    /* Definir en función del número de elementos del carrusel */
+    height: 100%;
+    text-align: center;
+    font-size: 2em;
+    margin: 0;
+}
+
+#contenidoFlechas>img {
+    width: 60px;
+    height: 60px;
+    position: absolute;
+    top: 50%;
+    margin-top: -30px;
+    margin-right: 0.2em;
+    right: 0;
+    cursor: pointer;
+}
+
+#contenidoFlechas>img:last-child {
+    left: 0;
+    margin-left: 0.2em;
+}
+
+#contenidoBtns {
+    position: absolute;
+    width: 100%;
+    bottom: 0;
+    text-align: center;
+}
+
+#contenidoBtns>img {
+    margin-right: 0.2em;
+    width: 32px;
+    height: 32px;
+    cursor: pointer;
+}
+
+#contenidoBtns>img:last-child {
+    margin-right: 0;
+}
+
+.contenidoCarrusel>div a {
+    text-decoration: none;
+    display: inline-block;
+    border-radius: 10px;
+    background-color: mediumorchid;
+    color: white;
+    padding: 0.5em 1em;
+    font-size: 0.8em;
+}
+
+#cont_2 {
+    /*display: none;*/
+    visibility: hidden;
+    opacity: 0;
+    left: 100%
+}
+
+@media screen and (min-width: 1025px) {
+    .herramientas {
+        visibility: hidden;
+        opacity: 0;
+    }
+    #contenedorCarrusel:hover .herramientas {
+        visibility: visible;
+        opacity: 1;
+    }
+}
+
+@media screen and (min-width: 600px) and (max-width: 1025px) {
+    .contenidoCarrusel>div {
+        font-size: 1.5em;
+    }
+    .herramientas {
+        visibility: visible;
+        opacity: 1;
+    }
+}
+
+@media screen and (min-width: 100px) and (max-width: 600px) {
+    .contenidoCarrusel>div {
+        font-size: 1em;
+    }
+    .herramientas {
+        visibility: hidden;
+        opacity: 0;
+    }
+    .herramientas:last-child {
+        visibility: visible;
+        opacity: 1;
+    }
+}

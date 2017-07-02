@@ -4,15 +4,15 @@
 
 <div id="fondoMenu">
     <div id="contenedorMenu">
-        <img src="../../imagenes/busqueda.png" alt="logotipo" />
+        <img src="~/Resources/imagenes/menu/busqueda.png" alt="logotipo"/>
         <div id="ctdrCampoBusqueda">
-            <img src="../../imagenes/busqueda.png" alt="">
+            <img src="~/Resources/imagenes/menu/busqueda.png" />
             <input type="text" placeholder="Buscar...">
         </div>
-        <img src="../../imagenes/icono_menu_2.png" alt="icono menu" class="iconoMenu" />
+        <img src="~/Resources/imagenes/menu/icono_menu_2.png" alt="icono menu" class="iconoMenu" />
         <div id="agrupadorOpciones">
             @Html.GeneraMenu(Model)
         </div>
     </div>
+    <img src="~/Resources/imagenes/menu/cerrar.png" class="oculto"/>
 </div>
-

@@ -25,6 +25,10 @@
     font-family: Circular, Helvetica, Arial, sans-serif;
 }
 
+.oculto {
+    display: none;
+}
+
 #contenedorMenu>img,
 #ctdrCampoBusqueda {
     margin-top: 21px;
