@@ -1,0 +1,27 @@
+﻿@model List<centro.recursos.net.Models.Entity_Framework.AvisoCarrusel>
+
+@using centro.recursos.net.Models.Helpers
+
+<div id="contenedorCarrusel">
+    <div id="ventanaCarrusel">
+        <!-- Definir ancho fijo -->
+        <div id="cont_1" class="contenidoCarrusel">
+            @Html.GeneraAvisos(Model)
+        </div>
+        <div id="cont_2" class="contenidoCarrusel">
+            @Html.GeneraAvisos(Model)
+        </div>
+        <div id="contenidoFlechas" class="herramientas">
+            <img src="~/Resources/imagenes/carrusel/flechaD.png" alt="1">
+            <img src="~/Resources/imagenes/carrusel/flechaI.png" alt="-1">
+        </div>
+        <div id="contenidoBtns" class="herramientas">
+            <img src="~/Resources/imagenes/carrusel/boton_c.png" alt="1">
+            <img src="~/Resources/imagenes/carrusel/boton_c.png" alt="2">
+            <img src="~/Resources/imagenes/carrusel/boton_c.png" alt="3">
+            <img src="~/Resources/imagenes/carrusel/boton_c.png" alt="4">
+        </div>
+    </div>
+    <input type="hidden" value="@Model.Count" id="avisosCuenta" name="avisosCuenta"/>
+    <img src="~/Resources/imagenes/carrusel/loading.gif" class="oculto" />
+</div>

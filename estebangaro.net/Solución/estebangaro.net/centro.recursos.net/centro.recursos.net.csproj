@@ -97,10 +97,26 @@
   </ItemGroup>
   <ItemGroup>
     <Content Include="Global.asax" />
+    <Content Include="Resources\css\buscar.css" />
+    <Content Include="Resources\css\carrusel.css" />
+    <Content Include="Resources\css\home.css" />
+    <Content Include="Resources\css\menu.css" />
+    <Content Include="Resources\imagenes\carrusel\boton_c.png" />
+    <Content Include="Resources\imagenes\carrusel\flechaD.png" />
+    <Content Include="Resources\imagenes\carrusel\flechaI.png" />
+    <Content Include="Resources\imagenes\carrusel\loading.gif" />
+    <Content Include="Resources\imagenes\menu\busqueda.png" />
+    <Content Include="Resources\imagenes\menu\cerrar.png" />
+    <Content Include="Resources\imagenes\menu\icono_menu_2.png" />
+    <Content Include="Resources\javascript\busqueda.js" />
+    <Content Include="Resources\javascript\carrusel.js" />
+    <Content Include="Resources\javascript\home.js" />
+    <Content Include="Resources\javascript\menu.js" />
     <Content Include="Web.config" />
   </ItemGroup>
   <ItemGroup>
     <Compile Include="App_Start\RouteConfig.cs" />
+    <Compile Include="Controllers\ControladorBase.cs" />
     <Compile Include="Controllers\HomeController.cs" />
     <Compile Include="Global.asax.cs">
       <DependentUpon>Global.asax</DependentUpon>
@@ -115,12 +131,16 @@
     <Compile Include="Models\Entity Framework\InfoRegistro.cs" />
     <Compile Include="Models\Entity Framework\OpcionMenu.cs" />
     <Compile Include="Models\Helpers\Html.cs" />
+    <Compile Include="Models\Repositorios\GaroNetDb.cs" />
+    <Compile Include="Models\Repositorios\IGaroNetDb.cs" />
+    <Compile Include="Models\Utileria\Respuesta.cs" />
     <Compile Include="Properties\AssemblyInfo.cs" />
   </ItemGroup>
   <ItemGroup>
     <Content Include="Views\web.config" />
     <Content Include="packages.config" />
     <Content Include="Views\Shared\_Menu.cshtml" />
+    <Content Include="Views\Home\_Carrusel.cshtml" />
     <None Include="Web.Debug.config">
       <DependentUpon>Web.config</DependentUpon>
     </None>
@@ -130,7 +150,7 @@
   </ItemGroup>
   <ItemGroup>
     <Folder Include="App_Data\" />
-    <Folder Include="Views\Home\" />
+    <Folder Include="Resources\imagenes\home\" />
   </ItemGroup>
   <PropertyGroup>
     <VisualStudioVersion Condition="'$(VisualStudioVersion)' == ''">10.0</VisualStudioVersion>

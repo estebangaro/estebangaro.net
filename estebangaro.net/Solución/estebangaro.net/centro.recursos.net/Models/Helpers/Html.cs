@@ -24,8 +24,7 @@ namespace centro.recursos.net.Models.Helpers
 
                 return _menu;
             }
-            else
-                return _HTMLMenu as MvcHtmlString;
+            return _HTMLMenu as MvcHtmlString;
         }
 
         private static XElement ObtenMarcado(OpcionMenu opcion)
@@ -41,18 +40,48 @@ namespace centro.recursos.net.Models.Helpers
                 }
                 _elemento = new XElement(_esSuperMenu ? "nav" : "li",
                     _esSuperMenu ? new XElement("span", opcion.Descripcion,
-                        new XElement("img", new XAttribute("src", "../../imagenes/flecha.png"))) : 
+                        new XElement("img", new XAttribute("src", "../../imagenes/flecha.png"))) :
                         new XElement("span", opcion.Descripcion),
                     new XElement("ul", _elementosHijo));
             }
             else
-                _elemento = new XElement( _esSuperMenu ? "nav" : "li",
+                _elemento = new XElement(_esSuperMenu ? "nav" : "li",
                     new XElement("span",
+                        !string.IsNullOrEmpty(opcion.URI) ?
                         new XElement("a",
                             new XText(opcion.Descripcion),
-                            new XAttribute("href", opcion.URI))));
+                            new XAttribute("href", opcion.URI)) :
+                        (XNode)new XText(opcion.Descripcion)
+                        ));
 
             return _elemento;
+        }
+
+        public static MvcHtmlString GeneraAvisos(this HtmlHelper helper, List<AvisoCarrusel> avisos)
+        {
+            string _avisos = "";
+            var _HTMLAvisos = helper.ViewContext.RequestContext.HttpContext.Session["_HTMLavisoscarrusel"];
+
+            if (_HTMLAvisos == null)
+            {
+                foreach (AvisoCarrusel aviso in avisos)
+                    _avisos += ObtenMarcado(aviso).ToString();
+
+                MvcHtmlString avisosHTML = new MvcHtmlString(_avisos);
+                helper.ViewContext.RequestContext.HttpContext.Session["_HTMLavisoscarrusel"] = avisosHTML;
+
+                return avisosHTML;
+            }
+            return _HTMLAvisos as MvcHtmlString;
+        }
+
+        private static XElement ObtenMarcado(AvisoCarrusel aviso)
+        {
+            return new XElement("div",
+                new XElement("h1", aviso.Contenido),
+                new XElement("a", aviso.Boton.Texto,
+                    new XAttribute("href", aviso.URI),
+                    new XAttribute("style", $"background-color:{aviso.Boton.Color}")));
         }
     }
 }
