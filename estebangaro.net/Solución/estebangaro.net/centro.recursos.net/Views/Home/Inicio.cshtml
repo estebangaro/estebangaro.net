@@ -1,0 +1,35 @@
+﻿
+@{
+    Layout = null;
+}
+
+<!DOCTYPE html>
+<html>
+
+<head>
+    <title>estebangaro.net</title>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1" />
+    <link href="~/Resources/css/menu.css" rel="stylesheet" />
+    <link href="~/Resources/css/buscar.css" rel="stylesheet" />
+    <link href="~/Resources/css/home.css" rel="stylesheet" />
+    <link href="~/Resources/css/carrusel.css" rel="stylesheet" />
+    <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.2.1/jquery.min.js"></script>
+    <script src="~/Resources/javascript/home.js"></script>
+    <script src="~/Resources/javascript/busqueda.js"></script>
+    <script src="~/Resources/javascript/menu.js"></script>
+    <script src="~/Resources/javascript/carrusel.js"></script>
+</head>
+
+<body>
+    <div id="fondoFijo"></div>
+    <div id="fondoFijoColor"></div>
+    @Html.Action("_Menu")
+    <div id="seccion1Principal">
+        <div class="Contenido">
+            @Html.Action("_Carrusel")
+        </div>
+    </div>
+    <div id="seccion2Principal"></div>
+</body>
+</html>

@@ -16,14 +16,8 @@ namespace centro.recursos.net
             routes.MapRoute(
                 name: "Default",
                 url: "{controller}/{action}/{id}",
-                defaults: new { controller = "Home", action = "GaRo", id = UrlParameter.Optional }
+                defaults: new { controller = "Home", action = "GaRoNET", id = UrlParameter.Optional }
             );
-
-            routes.MapRoute(
-                    name: "apiRutaPersonalizada",
-                    url: "api/{controller}/{action}/{clave}",
-                    defaults: new { controller = "Hogar", action = "Principal", clave = 0 }
-                );
         }
     }
 }

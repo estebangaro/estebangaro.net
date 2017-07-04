@@ -34,7 +34,7 @@ namespace centro.recursos.net.Models.Repositorios
 
         public Respuesta<List<OpcionMenu>> ObtenOpcionesMenu()
         {
-            dbContextoEF.Configuration.ProxyCreationEnabled = false;
+            //dbContextoEF.Configuration.ProxyCreationEnabled = false;
             List<OpcionMenu> opciones;
             Respuesta<List<OpcionMenu>> estado;
 
@@ -42,7 +42,7 @@ namespace centro.recursos.net.Models.Repositorios
             {
                 opciones = dbContextoEF
                     .OpcionesMenu
-                    .Include(opcion => opcion.Opciones.Where(op => op.Visible).OrderBy(op => op.Orden))
+                    .Include(opcion => opcion.Opciones)
                     .Where(opcion => opcion.MenuPadre == null && opcion.Visible)
                     .OrderByDescending(opcion => opcion.Orden)
                     .ToList();

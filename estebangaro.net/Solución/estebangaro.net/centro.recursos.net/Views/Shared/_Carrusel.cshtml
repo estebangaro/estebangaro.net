@@ -16,10 +16,10 @@
             <img src="~/Resources/imagenes/carrusel/flechaI.png" alt="-1">
         </div>
         <div id="contenidoBtns" class="herramientas">
-            <img src="~/Resources/imagenes/carrusel/boton_c.png" alt="1">
-            <img src="~/Resources/imagenes/carrusel/boton_c.png" alt="2">
-            <img src="~/Resources/imagenes/carrusel/boton_c.png" alt="3">
-            <img src="~/Resources/imagenes/carrusel/boton_c.png" alt="4">
+            @for (int i = 1; i <= Model.Count; i++)
+            {
+                <img src="~/Resources/imagenes/carrusel/boton_c.png" alt="@i">
+            }
         </div>
     </div>
     <input type="hidden" value="@Model.Count" id="avisosCuenta" name="avisosCuenta"/>

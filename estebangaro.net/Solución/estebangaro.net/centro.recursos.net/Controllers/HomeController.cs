@@ -13,7 +13,7 @@ namespace centro.recursos.net.Controllers
         // Home
         public ActionResult GaRoNET()
         {
-            throw new NotImplementedException();
+            return View("Inicio");
         }
 
         public PartialViewResult _Menu()

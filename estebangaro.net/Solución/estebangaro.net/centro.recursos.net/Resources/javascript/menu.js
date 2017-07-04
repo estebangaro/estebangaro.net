@@ -1,6 +1,6 @@
 $(function() {
     $(window).resize(function() {
-        $('.iconoMenu').attr('src', '../../imagenes/icono_menu_2.png');
+        $('.iconoMenu').attr('src', '/Resources/imagenes/menu/icono_menu_2.png');
     });
     $('#contenedorMenu nav').click(function() {
         muestraOpcion($(this));
@@ -16,7 +16,7 @@ $(function() {
                 'opacity': '1'
             });
             $('#agrupadorOpciones>div').css({ 'background-color': 'rgba(2, 2, 2, 0.5)' });
-            $(this).attr('src', '../../imagenes/cerrar.png');
+            $(this).attr('src', '/Resources/imagenes/menu/cerrar.png');
         } else {
             $('#agrupadorOpciones nav').css({
                 'visibility': 'hidden',
@@ -27,7 +27,7 @@ $(function() {
                 'max-height': '0'
             });
             $('#agrupadorOpciones>div').css({ 'background-color': 'transparent' });
-            $(this).attr('src', '../../imagenes/icono_menu_2.png');
+            $(this).attr('src', '/Resources/imagenes/menu/icono_menu_2.png');
         }
     });
 });

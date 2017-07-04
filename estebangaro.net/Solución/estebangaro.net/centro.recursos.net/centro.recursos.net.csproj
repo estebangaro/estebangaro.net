@@ -105,8 +105,11 @@
     <Content Include="Resources\imagenes\carrusel\flechaD.png" />
     <Content Include="Resources\imagenes\carrusel\flechaI.png" />
     <Content Include="Resources\imagenes\carrusel\loading.gif" />
+    <Content Include="Resources\imagenes\home\fondo2.JPG" />
+    <Content Include="Resources\imagenes\home\fondo4.jpg" />
     <Content Include="Resources\imagenes\menu\busqueda.png" />
     <Content Include="Resources\imagenes\menu\cerrar.png" />
+    <Content Include="Resources\imagenes\menu\flecha.png" />
     <Content Include="Resources\imagenes\menu\icono_menu_2.png" />
     <Content Include="Resources\javascript\busqueda.js" />
     <Content Include="Resources\javascript\carrusel.js" />
@@ -140,7 +143,8 @@
     <Content Include="Views\web.config" />
     <Content Include="packages.config" />
     <Content Include="Views\Shared\_Menu.cshtml" />
-    <Content Include="Views\Home\_Carrusel.cshtml" />
+    <Content Include="Views\Shared\_Carrusel.cshtml" />
+    <Content Include="Views\Home\Inicio.cshtml" />
     <None Include="Web.Debug.config">
       <DependentUpon>Web.config</DependentUpon>
     </None>
@@ -150,7 +154,6 @@
   </ItemGroup>
   <ItemGroup>
     <Folder Include="App_Data\" />
-    <Folder Include="Resources\imagenes\home\" />
   </ItemGroup>
   <PropertyGroup>
     <VisualStudioVersion Condition="'$(VisualStudioVersion)' == ''">10.0</VisualStudioVersion>
@@ -167,7 +170,7 @@
           <AutoAssignPort>True</AutoAssignPort>
           <DevelopmentServerPort>54868</DevelopmentServerPort>
           <DevelopmentServerVPath>/</DevelopmentServerVPath>
-          <IISUrl>http://192.168.0.13:2412/</IISUrl>
+          <IISUrl>http://192.168.0.13:2509/</IISUrl>
           <NTLMAuthentication>False</NTLMAuthentication>
           <UseCustomServer>False</UseCustomServer>
           <CustomServerUrl>
