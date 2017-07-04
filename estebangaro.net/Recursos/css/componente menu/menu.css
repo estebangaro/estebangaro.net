@@ -53,7 +53,9 @@
     height: 18px;
 }
 
-#contenedorMenu nav:hover {
+#contenedorMenu nav:hover,
+#contenedorMenu ul>li:hover,
+#contenedorMenu span>a:hover {
     color: greenyellow;
 }
 
@@ -79,10 +81,6 @@
     background-color: rgba(2, 2, 2, 0.7);
     color: white;
     position: relative;
-}
-
-#contenedorMenu ul>li:hover {
-    color: greenyellow;
 }
 
 #contenedorMenu li>ul {

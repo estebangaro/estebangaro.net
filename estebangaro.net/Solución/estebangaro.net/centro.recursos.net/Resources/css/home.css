@@ -2,7 +2,7 @@
 
 #fondoFijo,
 #fondoFijoColor {
-    background-image: url(../../imagenes/fondo4.jpg);
+    background-image: url('../imagenes/home/fondo4.jpg');
     background-repeat: no-repeat;
     background-size: cover;
     width: 100%;
@@ -50,7 +50,7 @@
 
 #seccion2Principal {
     top: 100%;
-    background-image: url(../../imagenes/fondo2.jpg);
+    background-image: url('../imagenes/home/fondo2.JPG');
     background-repeat: no-repeat;
     background-size: cover;
 }

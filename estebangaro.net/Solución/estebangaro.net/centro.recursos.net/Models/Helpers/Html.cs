@@ -40,7 +40,7 @@ namespace centro.recursos.net.Models.Helpers
                 }
                 _elemento = new XElement(_esSuperMenu ? "nav" : "li",
                     _esSuperMenu ? new XElement("span", opcion.Descripcion,
-                        new XElement("img", new XAttribute("src", "../../imagenes/flecha.png"))) :
+                        new XElement("img", new XAttribute("src", "/Resources/imagenes/menu/flecha.png"))) :
                         new XElement("span", opcion.Descripcion),
                     new XElement("ul", _elementosHijo));
             }
@@ -81,7 +81,7 @@ namespace centro.recursos.net.Models.Helpers
                 new XElement("h1", aviso.Contenido),
                 new XElement("a", aviso.Boton.Texto,
                     new XAttribute("href", aviso.URI),
-                    new XAttribute("style", $"background-color:{aviso.Boton.Color}")));
+                    new XAttribute("class", $"{aviso.Boton.Color.ToLower()}_slider")));
         }
     }
 }
