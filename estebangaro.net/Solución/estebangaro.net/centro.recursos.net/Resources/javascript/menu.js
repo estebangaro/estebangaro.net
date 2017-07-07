@@ -15,7 +15,7 @@ $(function() {
                 'visibility': 'visible',
                 'opacity': '1'
             });
-            $('#agrupadorOpciones>div').css({ 'background-color': 'rgba(2, 2, 2, 0.5)' });
+            $('#agrupadorOpciones>div').css({ 'background-color': 'rgba(2, 2, 2, 0.8)' });
             $(this).attr('src', '/Resources/imagenes/menu/cerrar.png');
         } else {
             $('#agrupadorOpciones nav').css({

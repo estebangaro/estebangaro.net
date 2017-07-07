@@ -58,7 +58,7 @@
 
 /** Sección 2 Carrusel STYLES **/
 
-@media screen and (min-width: 100px) and (max-width: 1000px) {
+@media screen and (min-width: 100px) and (max-width: 600px) {
     #fondoMenu,
     #fondoFijo,
     #fondoFijoColor {

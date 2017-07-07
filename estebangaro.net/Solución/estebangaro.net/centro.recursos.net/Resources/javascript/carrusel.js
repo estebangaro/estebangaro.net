@@ -8,7 +8,6 @@ $(function() {
     estableceTemporizadorCarrusel(true);
     $(window).resize(
         function () {
-            cargaAvisos();
             ajustaAlturaCarrusel();
         });
 });
@@ -179,7 +178,7 @@ function muestraSiguienteAviso(boton, eventoCirculo, ejecutaAlfinal) {
 }
 
 function refrescaBotonDesplazamiento() {
-    $('#contenidoBtns > img').attr('src', '../../imagenes/boton_c.png')
+    $('#contenidoBtns > img').attr('src', '/Resources/imagenes/carrusel/boton_c3.png')
         .eq(_carruselconfiguracion.indice - 1)
-        .attr('src', '../../imagenes/loading.gif');
+        .attr('src', '/Resources/imagenes/carrusel/boton_c1.png');
 }

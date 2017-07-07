@@ -12,16 +12,17 @@
             @Html.GeneraAvisos(Model)
         </div>
         <div id="contenidoFlechas" class="herramientas">
-            <img src="~/Resources/imagenes/carrusel/flechaD.png" alt="1">
-            <img src="~/Resources/imagenes/carrusel/flechaI.png" alt="-1">
+            <img src="~/Resources/imagenes/carrusel/flecha2D.png" alt="1">
+            <img src="~/Resources/imagenes/carrusel/flecha2I.png" alt="-1">
         </div>
         <div id="contenidoBtns" class="herramientas">
             @for (int i = 1; i <= Model.Count; i++)
             {
-                <img src="~/Resources/imagenes/carrusel/boton_c.png" alt="@i">
+                <img src="~/Resources/imagenes/carrusel/boton_c3.png" alt="@i">
             }
         </div>
     </div>
-    <input type="hidden" value="@Model.Count" id="avisosCuenta" name="avisosCuenta"/>
-    <img src="~/Resources/imagenes/carrusel/loading.gif" class="oculto" />
+    <input type="hidden" value="@Model.Count" id="avisosCuenta" name="avisosCuenta"/>    
+    <img src="~/Resources/imagenes/carrusel/boton_c1.png" class="oculto" />
+    <img src="~/Resources/imagenes/carrusel/boton_c3.png" class="oculto" />
 </div>
