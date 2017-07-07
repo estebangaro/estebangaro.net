@@ -101,10 +101,10 @@
     <Content Include="Resources\css\carrusel.css" />
     <Content Include="Resources\css\home.css" />
     <Content Include="Resources\css\menu.css" />
-    <Content Include="Resources\imagenes\carrusel\boton_c.png" />
-    <Content Include="Resources\imagenes\carrusel\flechaD.png" />
-    <Content Include="Resources\imagenes\carrusel\flechaI.png" />
-    <Content Include="Resources\imagenes\carrusel\loading.gif" />
+    <Content Include="Resources\imagenes\carrusel\boton_c1.png" />
+    <Content Include="Resources\imagenes\carrusel\boton_c3.png" />
+    <Content Include="Resources\imagenes\carrusel\flecha2D.png" />
+    <Content Include="Resources\imagenes\carrusel\flecha2I.png" />
     <Content Include="Resources\imagenes\home\fondo2.JPG" />
     <Content Include="Resources\imagenes\home\fondo4.jpg" />
     <Content Include="Resources\imagenes\menu\busqueda.png" />

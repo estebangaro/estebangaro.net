@@ -5,7 +5,8 @@ $(function() {
         establecePredeterminado();
     });
     $(window).resize(function() {
-        $('*').attr('style', '');
+        $('.styleVerifica').attr('style', '');
+        $('.styleVerifica *').attr('style', '');
     });
 });
 

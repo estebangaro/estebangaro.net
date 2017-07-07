@@ -31,10 +31,11 @@ namespace centro.recursos.net.Models.Helpers
         {
             XElement _elemento;
             bool _esSuperMenu = !opcion.MenuPadre.HasValue;
-            if (opcion.Opciones.Count > 0)
+            List<OpcionMenu> hijos = opcion.Opciones.Where(op => op.Visible).OrderBy(op => op.Orden).ToList();
+            if (hijos.Count > 0)
             {
                 List<XElement> _elementosHijo = new List<XElement>();
-                foreach (OpcionMenu opcionH in opcion.Opciones)
+                foreach (OpcionMenu opcionH in hijos)
                 {
                     _elementosHijo.Add(ObtenMarcado(opcionH));
                 }

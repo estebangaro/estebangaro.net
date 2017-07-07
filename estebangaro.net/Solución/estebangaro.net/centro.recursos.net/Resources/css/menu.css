@@ -177,7 +177,11 @@
 }
 
 @media screen and (min-width: 100px) and (max-width: 600px) {
-    #agrupadorOpciones>div {
+    #agrupadorOpciones > div {
         width: 100%;
+    }
+
+    #fondoMenu {
+        background-color: rgba(2, 2, 2, 0.8);
     }
 }
