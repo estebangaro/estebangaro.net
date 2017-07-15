@@ -24,7 +24,7 @@
 }
 
 .contenidoCarrusel {
-    width: 400%;
+    /* width: 400%; */
     /* Definir en función del número de elementos del carrusel */
     /* height: 100%; */
     position: absolute;
@@ -40,7 +40,7 @@
 
 .contenidoCarrusel>div {
     float: right;
-    width: 25%;
+    /* width: 25%; */
     /* Definir en función del número de elementos del carrusel */
     height: 100%;
     text-align: center;
@@ -97,6 +97,19 @@
     visibility: hidden;
     opacity: 0;
     left: 100%
+}
+
+.azul_slider{
+    background-color:blue;
+}
+.verde_slider{
+    background-color:forestgreen;
+}
+.rojo_slider{
+    background-color:darkred;
+}
+azul2_slider{
+    background-color: darkblue;
 }
 
 @media screen and (min-width: 1025px) {

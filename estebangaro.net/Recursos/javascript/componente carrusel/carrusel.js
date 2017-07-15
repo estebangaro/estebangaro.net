@@ -3,14 +3,12 @@ var _carruselTemporizador;
 
 $(function() {
     cargaAvisos();
-    estableceBotonesDesp();
     enlazarEvts();
     ajustaAlturaCarrusel();
     estableceTemporizadorCarrusel(true);
     $(window).resize(
         function() {
             ajustaAlturaCarrusel();
-            // cargaAvisos();
         });
 });
 
@@ -22,6 +20,7 @@ function ajustaAlturaCarrusel() {
         'top': _alto + 'px',
         'height': (_altoVentana - _alto) + 'px'
     });
+
     $('#cont_1 > div').each(function() {
         ajustaTextoCarrusel($(this));
     });
@@ -31,10 +30,15 @@ function ajustaAlturaCarrusel() {
 }
 
 function ajustaTextoCarrusel(aviso) {
+    var _ancho = (100 / _carruselconfiguracion.cantidadElementos);
+    aviso.css('width', _ancho + '%');
     var _altoAviso = aviso.height();
-    aviso.css('margin-top',
-        ((_carruselconfiguracion.alturaCarrusel - _altoAviso) / 2 -
-            $('#contenidoBtns').height()) + 'px');
+    aviso.css({
+        'margin-top':
+            ((_carruselconfiguracion.alturaCarrusel - _altoAviso) / 2 -
+                $('#contenidoBtns').height()) + 'px',
+        'width': _ancho + '%'
+    });
 }
 
 function estableceTemporizadorCarrusel(estado) {
@@ -120,15 +124,13 @@ function desplazaCarrusel(manejadorFlecha, ejecutaAlTerminoAnimacion) {
 function cargaAvisos() {
     _carruselconfiguracion = {
         indice: 1, // índice de aviso inicial.
-        cantidadElementos: 4, // $('#avisosCuenta'), // cantidad de elementos "aviso" a visualizar.
+        cantidadElementos: parseInt($('#avisosCuenta').val()), // cantidad de elementos "aviso" a visualizar.
         activo: 'cont_1'
     };
     refrescaBotonDesplazamiento();
-    $('#cont_1').addClass('animaCarrusel');
-}
-
-function estableceBotonesDesp() {
-
+    $('#cont_1').addClass('animaCarrusel')
+        .css({ 'width': (_carruselconfiguracion.cantidadElementos * 100) + '%' });
+    $('#cont_2').css({ 'width': (_carruselconfiguracion.cantidadElementos * 100) + '%' });
 }
 
 function obtenPosicionBtn(botonOrigen) {
