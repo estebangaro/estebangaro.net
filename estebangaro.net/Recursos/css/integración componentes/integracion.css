@@ -69,10 +69,21 @@
 
 /** Sección 2 Carrusel STYLES **/
 
+@media screen and (min-width: 600px) and (max-width: 1025px) {
+    #seccion2Principal {
+        height: auto;
+        background-image: url('../../imagenes/fondo5.jpeg');
+    }
+}
+
 @media screen and (min-width: 100px) and (max-width: 600px) {
     #fondoMenu,
     #fondoFijo,
     #fondoFijoColor {
         position: absolute;
+    }
+    #seccion2Principal {
+        height: auto;
+        background-image: url('../../imagenes/fondo5.jpg');
     }
 }
