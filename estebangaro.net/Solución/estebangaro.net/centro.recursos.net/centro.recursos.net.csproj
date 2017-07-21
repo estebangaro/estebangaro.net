@@ -126,16 +126,19 @@
     </Compile>
     <Compile Include="Models\Configuraciones Fluent API\BotonAvisoConfig.cs" />
     <Compile Include="Models\Configuraciones Fluent API\InfoRegistroConfig.cs" />
+    <Compile Include="Models\Configuraciones Fluent API\NoticiaPrincipalConfig.cs" />
     <Compile Include="Models\Configuraciones Fluent API\OpcionMenuConfig.cs" />
     <Compile Include="Models\Entity Framework\AvisoCarrusel.cs" />
     <Compile Include="Models\Configuraciones Fluent API\AvisoCarruselConfig.cs" />
     <Compile Include="Models\Entity Framework\BotonAviso.cs" />
     <Compile Include="Models\Entity Framework\GaroNETDbContexto.cs" />
     <Compile Include="Models\Entity Framework\InfoRegistro.cs" />
+    <Compile Include="Models\Entity Framework\NoticiaPrincipal.cs" />
     <Compile Include="Models\Entity Framework\OpcionMenu.cs" />
     <Compile Include="Models\Helpers\Html.cs" />
     <Compile Include="Models\Repositorios\GaroNetDb.cs" />
     <Compile Include="Models\Repositorios\IGaroNetDb.cs" />
+    <Compile Include="Models\Utileria\Enumeraciones.cs" />
     <Compile Include="Models\Utileria\Respuesta.cs" />
     <Compile Include="Properties\AssemblyInfo.cs" />
   </ItemGroup>
@@ -145,6 +148,7 @@
     <Content Include="Views\Shared\_Menu.cshtml" />
     <Content Include="Views\Shared\_Carrusel.cshtml" />
     <Content Include="Views\Home\Inicio.cshtml" />
+    <Content Include="Views\Shared\_Noticias.cshtml" />
     <None Include="Web.Debug.config">
       <DependentUpon>Web.config</DependentUpon>
     </None>
