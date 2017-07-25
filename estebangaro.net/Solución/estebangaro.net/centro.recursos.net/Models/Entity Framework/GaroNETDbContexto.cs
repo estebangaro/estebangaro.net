@@ -17,6 +17,10 @@
         public virtual DbSet<BotonAviso> BotonesAvisos { get; set; }
         public virtual DbSet<AvisoCarrusel> AvisosCarrusel { get; set; }
         public virtual DbSet<NoticiaPrincipal> NoticiasPrincipales { get; set; }
+        public virtual DbSet<Articulo> Articulos { get; set; }
+        public virtual DbSet<Comentario> Comentarios { get; set; }
+        public virtual DbSet<Puesto> Puestos { get; set; }
+        public virtual DbSet<Autor> Autores { get; set; }
 
         protected override void OnModelCreating(DbModelBuilder modelBuilder)
         {
@@ -24,7 +28,11 @@
                 .Add(new OpcionMenuConfig())
                 .Add(new BotonAvisoConfig())
                 .Add(new AvisoCarruselConfig())
-                .Add(new NoticiaPrincipalConfig());
+                .Add(new NoticiaPrincipalConfig())
+                .Add(new ArticuloConfig())
+                .Add(new ComentarioConfig())
+                .Add(new PuestoConfig())
+                .Add(new AutorConfig());
         }
     }
 }

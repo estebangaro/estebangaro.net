@@ -33,6 +33,10 @@ namespace centro.recursos.net.Models.Configuraciones_Fluent_API
             HasMany(_op => _op.Opciones)
                 .WithOptional(_op => _op.Padre)
                 .HasForeignKey(_op => _op.MenuPadre);
+
+            HasRequired(_op => _op.Articulo)
+                .WithMany(ar => ar.OpcionesMenu)
+                .HasForeignKey(_op => _op.URI);
         }
     }
 }

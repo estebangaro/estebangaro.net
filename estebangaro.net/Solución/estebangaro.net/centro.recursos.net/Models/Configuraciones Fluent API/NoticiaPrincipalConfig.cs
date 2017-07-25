@@ -11,6 +11,8 @@ namespace centro.recursos.net.Models.Configuraciones_Fluent_API
     {
         public NoticiaPrincipalConfig()
         {
+            ToTable("Noticias", "SeccionPrincipal");
+
             Property(notiP => notiP.Titulo)
                 .IsUnicode()
                 .HasMaxLength(60)
@@ -27,6 +29,9 @@ namespace centro.recursos.net.Models.Configuraciones_Fluent_API
                 .IsUnicode()
                 .HasMaxLength(200)
                 .IsRequired();
+            HasRequired(notiP => notiP.Articulo)
+                .WithMany(ar => ar.Noticias)
+                .HasForeignKey(notiP => notiP.URI);
         }
     }
 }

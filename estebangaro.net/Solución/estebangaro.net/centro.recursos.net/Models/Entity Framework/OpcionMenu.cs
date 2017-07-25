@@ -10,12 +10,13 @@ namespace centro.recursos.net.Models.Entity_Framework
         public short OpcionMenuId { get; set; }
         public string Descripcion { get; set; }
         public short Orden { get; set; }
-        public string URI { get; set; }
         public bool Visible { get; set; }
         public InfoRegistro Auditoria { get; set; }
 
         public Nullable<short> MenuPadre { get; set; }
         public virtual OpcionMenu Padre { get; set; }
         public virtual ICollection<OpcionMenu> Opciones { get; set; }
+        public string URI { get; set; }
+        public virtual Articulo Articulo { get; set; }
     }
 }
