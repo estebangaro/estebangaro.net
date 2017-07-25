@@ -27,6 +27,8 @@ C:\Users\esteb\Documents\GitHub\estebangaro.net\estebangaro.net\Solución\esteba
 C:\Users\esteb\Documents\GitHub\estebangaro.net\estebangaro.net\Solución\estebangaro.net\centro.recursos.net\bin\centro.recursos.net.dll.config
 C:\Users\esteb\Documents\GitHub\estebangaro.net\estebangaro.net\Solución\estebangaro.net\centro.recursos.net\bin\centro.recursos.net.dll
 C:\Users\esteb\Documents\GitHub\estebangaro.net\estebangaro.net\Solución\estebangaro.net\centro.recursos.net\bin\centro.recursos.net.pdb
+C:\Users\esteb\Documents\GitHub\estebangaro.net\estebangaro.net\Solución\estebangaro.net\centro.recursos.net\bin\EntityFramework.dll
+C:\Users\esteb\Documents\GitHub\estebangaro.net\estebangaro.net\Solución\estebangaro.net\centro.recursos.net\bin\EntityFramework.SqlServer.dll
 C:\Users\esteb\Documents\GitHub\estebangaro.net\estebangaro.net\Solución\estebangaro.net\centro.recursos.net\bin\Microsoft.CodeDom.Providers.DotNetCompilerPlatform.dll
 C:\Users\esteb\Documents\GitHub\estebangaro.net\estebangaro.net\Solución\estebangaro.net\centro.recursos.net\bin\Microsoft.Web.Infrastructure.dll
 C:\Users\esteb\Documents\GitHub\estebangaro.net\estebangaro.net\Solución\estebangaro.net\centro.recursos.net\bin\System.Web.Helpers.dll
@@ -35,6 +37,8 @@ C:\Users\esteb\Documents\GitHub\estebangaro.net\estebangaro.net\Solución\esteba
 C:\Users\esteb\Documents\GitHub\estebangaro.net\estebangaro.net\Solución\estebangaro.net\centro.recursos.net\bin\System.Web.Webpages.Deployment.dll
 C:\Users\esteb\Documents\GitHub\estebangaro.net\estebangaro.net\Solución\estebangaro.net\centro.recursos.net\bin\System.Web.Webpages.dll
 C:\Users\esteb\Documents\GitHub\estebangaro.net\estebangaro.net\Solución\estebangaro.net\centro.recursos.net\bin\System.Web.Webpages.Razor.dll
+C:\Users\esteb\Documents\GitHub\estebangaro.net\estebangaro.net\Solución\estebangaro.net\centro.recursos.net\bin\EntityFramework.xml
+C:\Users\esteb\Documents\GitHub\estebangaro.net\estebangaro.net\Solución\estebangaro.net\centro.recursos.net\bin\EntityFramework.SqlServer.xml
 C:\Users\esteb\Documents\GitHub\estebangaro.net\estebangaro.net\Solución\estebangaro.net\centro.recursos.net\bin\Microsoft.CodeDom.Providers.DotNetCompilerPlatform.xml
 C:\Users\esteb\Documents\GitHub\estebangaro.net\estebangaro.net\Solución\estebangaro.net\centro.recursos.net\bin\System.Web.Razor.xml
 C:\Users\esteb\Documents\GitHub\estebangaro.net\estebangaro.net\Solución\estebangaro.net\centro.recursos.net\bin\System.Web.Webpages.xml
@@ -50,8 +54,3 @@ C:\Users\esteb\Documents\GitHub\estebangaro.net\estebangaro.net\Solución\esteba
 C:\Users\esteb\Documents\GitHub\estebangaro.net\estebangaro.net\Solución\estebangaro.net\centro.recursos.net\bin\es\System.Web.Mvc.resources.dll
 C:\Users\esteb\Documents\GitHub\estebangaro.net\estebangaro.net\Solución\estebangaro.net\centro.recursos.net\obj\Debug\centro.recursos.net.dll
 C:\Users\esteb\Documents\GitHub\estebangaro.net\estebangaro.net\Solución\estebangaro.net\centro.recursos.net\obj\Debug\centro.recursos.net.pdb
-C:\Users\esteb\Documents\GitHub\estebangaro.net\estebangaro.net\Solución\estebangaro.net\centro.recursos.net\bin\EntityFramework.dll
-C:\Users\esteb\Documents\GitHub\estebangaro.net\estebangaro.net\Solución\estebangaro.net\centro.recursos.net\bin\EntityFramework.SqlServer.dll
-C:\Users\esteb\Documents\GitHub\estebangaro.net\estebangaro.net\Solución\estebangaro.net\centro.recursos.net\bin\EntityFramework.xml
-C:\Users\esteb\Documents\GitHub\estebangaro.net\estebangaro.net\Solución\estebangaro.net\centro.recursos.net\bin\EntityFramework.SqlServer.xml
-C:\Users\esteb\Documents\GitHub\estebangaro.net\estebangaro.net\Solución\estebangaro.net\centro.recursos.net\obj\Debug\centro.recursos.net.csprojResolveAssemblyReference.cache

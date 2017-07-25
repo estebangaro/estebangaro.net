@@ -124,17 +124,25 @@
     <Compile Include="Global.asax.cs">
       <DependentUpon>Global.asax</DependentUpon>
     </Compile>
+    <Compile Include="Models\Configuraciones Fluent API\ArticuloConfig.cs" />
+    <Compile Include="Models\Configuraciones Fluent API\AutorConfig.cs" />
     <Compile Include="Models\Configuraciones Fluent API\BotonAvisoConfig.cs" />
+    <Compile Include="Models\Configuraciones Fluent API\ComentarioConfig.cs" />
     <Compile Include="Models\Configuraciones Fluent API\InfoRegistroConfig.cs" />
     <Compile Include="Models\Configuraciones Fluent API\NoticiaPrincipalConfig.cs" />
     <Compile Include="Models\Configuraciones Fluent API\OpcionMenuConfig.cs" />
+    <Compile Include="Models\Configuraciones Fluent API\PuestoConfig.cs" />
+    <Compile Include="Models\Entity Framework\Articulo.cs" />
+    <Compile Include="Models\Entity Framework\Autor.cs" />
     <Compile Include="Models\Entity Framework\AvisoCarrusel.cs" />
     <Compile Include="Models\Configuraciones Fluent API\AvisoCarruselConfig.cs" />
     <Compile Include="Models\Entity Framework\BotonAviso.cs" />
+    <Compile Include="Models\Entity Framework\Comentario.cs" />
     <Compile Include="Models\Entity Framework\GaroNETDbContexto.cs" />
     <Compile Include="Models\Entity Framework\InfoRegistro.cs" />
     <Compile Include="Models\Entity Framework\NoticiaPrincipal.cs" />
     <Compile Include="Models\Entity Framework\OpcionMenu.cs" />
+    <Compile Include="Models\Entity Framework\Puesto.cs" />
     <Compile Include="Models\Helpers\Html.cs" />
     <Compile Include="Models\Repositorios\GaroNetDb.cs" />
     <Compile Include="Models\Repositorios\IGaroNetDb.cs" />

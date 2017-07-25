@@ -32,6 +32,10 @@ namespace centro.recursos.net.Models.Configuraciones_Fluent_API
             HasRequired(_av => _av.Boton)
                 .WithMany(_btn => _btn.Avisos)
                 .HasForeignKey(_av => _av.BotonId);
+
+            HasRequired(_av => _av.Articulo)
+                .WithMany(ar => ar.Avisos)
+                .HasForeignKey(_av => _av.URI);
         }
     }
 }
