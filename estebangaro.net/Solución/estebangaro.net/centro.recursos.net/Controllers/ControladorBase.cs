@@ -13,7 +13,7 @@ namespace centro.recursos.net.Controllers
         #region Propiedades
 
         protected Models.Repositorios.IGaroNetDb Repositorio { get; set; }
-        private string CadenaConexion
+        public string CadenaConexion
         {
             get
             {

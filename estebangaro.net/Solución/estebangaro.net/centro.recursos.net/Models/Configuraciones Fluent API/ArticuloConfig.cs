@@ -39,7 +39,7 @@ namespace centro.recursos.net.Models.Configuraciones_Fluent_API
 
             HasMany(a => a.Comentarios).
                 WithRequired(co => co.Articulo).
-            HasForeignKey(co => co.IdArticulo);
+            HasForeignKey(co => co.URI);
 
         }
     }

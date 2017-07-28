@@ -10,6 +10,7 @@ namespace centro.recursos.net.Models.Entity_Framework
         public string URI { get; set; }
         public string Titulo { get; set; }
         public string Localizacion { get; set; }
+        public InfoRegistro Auditoria { get; set; }
 
         public virtual ICollection<Autor> Autores { get; set; }
         public virtual ICollection<Comentario> Comentarios { get; set; }

@@ -14,7 +14,7 @@ namespace centro.recursos.net.Models.Entity_Framework
         public virtual ICollection<Comentario> Comentarios { get; set; }
         public Nullable<int> IdComentarioP { get; set; }
         public virtual Comentario ComentarioPadre { get; set; }
-        public int IdArticulo { get; set; }
+        public string URI { get; set; }
         public virtual Articulo Articulo { get; set; }
     }
 }
