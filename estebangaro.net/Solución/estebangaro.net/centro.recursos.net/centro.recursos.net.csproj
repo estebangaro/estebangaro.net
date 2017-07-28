@@ -144,6 +144,7 @@
     <Compile Include="Models\Entity Framework\OpcionMenu.cs" />
     <Compile Include="Models\Entity Framework\Puesto.cs" />
     <Compile Include="Models\Helpers\Html.cs" />
+    <Compile Include="Models\Inicializadores\InicializadorBD.cs" />
     <Compile Include="Models\Repositorios\GaroNetDb.cs" />
     <Compile Include="Models\Repositorios\IGaroNetDb.cs" />
     <Compile Include="Models\Utileria\Enumeraciones.cs" />
@@ -182,7 +183,7 @@
           <AutoAssignPort>True</AutoAssignPort>
           <DevelopmentServerPort>54868</DevelopmentServerPort>
           <DevelopmentServerVPath>/</DevelopmentServerVPath>
-          <IISUrl>http://192.168.0.13:2509/</IISUrl>
+          <IISUrl>http://localhost:2802/</IISUrl>
           <NTLMAuthentication>False</NTLMAuthentication>
           <UseCustomServer>False</UseCustomServer>
           <CustomServerUrl>
