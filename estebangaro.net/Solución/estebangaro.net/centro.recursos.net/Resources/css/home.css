@@ -1,7 +1,7 @@
 /** Sección FIJA STYLES **/
 
 #fondoFijo,
-#fondoFijoColor {
+.fondoFijoColor {
     background-image: url('../imagenes/home/fondo4.jpg');
     background-repeat: no-repeat;
     background-size: cover;
@@ -12,7 +12,7 @@
     left: 0;
 }
 
-#fondoFijoColor {
+.fondoFijoColor {
     background-image: none;
     background-color: rgba(106, 96, 107, 0.5);
 }
@@ -46,7 +46,7 @@
 /** Sección 1 Carrusel STYLES FIN**/
 
 
-/** Sección 2 Carrusel STYLES **/
+/** Sección 2 Noticias STYLES **/
 
 #seccion2Principal {
     top: 100%;
@@ -55,13 +55,35 @@
     background-size: cover;
 }
 
+    #seccion2Principal > div.Contenido {
+        position: relative;
+        overflow: hidden;
+    }
+
+    #seccion2Principal > .fondoFijoColor {
+        position: absolute;
+        background-color: transparent;
+        /* rgba(106, 96, 107, 0.5); */
+    }
+
 
 /** Sección 2 Carrusel STYLES **/
+
+@media screen and (min-width: 600px) and (max-width: 1025px) {
+    #seccion2Principal {
+        height: auto;
+        background-image: url('../imagenes/home/fondo5.jpeg');
+    }
+}
 
 @media screen and (min-width: 100px) and (max-width: 600px) {
     #fondoMenu,
     #fondoFijo,
     #fondoFijoColor {
         position: absolute;
+    }
+    #seccion2Principal {
+        height: auto;
+        background-image: url('../imagenes/home/fondo5.jpg');
     }
 }

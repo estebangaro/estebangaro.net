@@ -29,7 +29,9 @@ namespace centro.recursos.net.Models.Configuraciones_Fluent_API
                     DatabaseGeneratedOption.Computed);
 
             Property(_inf => _inf.Modificacion)
-                .HasColumnName("Fecha Modificacion");
+                .HasColumnName("Fecha Modificacion")
+                .HasDatabaseGeneratedOption(System.ComponentModel.DataAnnotations.Schema.
+                    DatabaseGeneratedOption.Computed);
         }
     }
 }

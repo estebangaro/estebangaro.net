@@ -12,6 +12,11 @@ namespace centro.recursos.net.Models.Inicializadores
     {
         protected override void Seed(GaroNETDbContexto context)
         {
+            CargaDatos(context);
+        }
+
+        public void CargaDatos(GaroNETDbContexto contexto)
+        {
             Articulo[] articulos =
             {
                 new Articulo{ Localizacion = "Ciudad de México", Titulo = "Lenguage Integrated Query",
@@ -47,7 +52,7 @@ namespace centro.recursos.net.Models.Inicializadores
                 new Articulo{ Localizacion = "Ciudad de México", Titulo = "Windows Presentation Foundation", // [15]
                     URI = "/Frameworks/WPF", Auditoria = new InfoRegistro{ UsuarioCreacion = "estebangaro"}}
             };
-            OpcionMenu[] opcionesP = 
+            OpcionMenu[] opcionesP =
             {
                 new OpcionMenu{ Auditoria = new InfoRegistro { UsuarioCreacion = "estebangaro" },
                     Descripcion="Acerca De", Orden = 5, Visible = true },
@@ -132,6 +137,16 @@ namespace centro.recursos.net.Models.Inicializadores
                     Descripcion = "Enviando peticiones AJAX a controladores MVC", Imagen = "ajax.png",
                     Titulo = "ASP .NET y AJAX"},
             };
+
+            contexto.Articulos.AddRange(articulos);
+            contexto.OpcionesMenu.AddRange(opcionesP);
+            contexto.OpcionesMenu.AddRange(subOpciones1);
+            contexto.OpcionesMenu.AddRange(subOpciones2);
+            contexto.BotonesAvisos.AddRange(botones);
+            contexto.AvisosCarrusel.AddRange(avisos);
+            contexto.NoticiasPrincipales.AddRange(noticias);
+
+            contexto.SaveChanges();
         }
     }
 }

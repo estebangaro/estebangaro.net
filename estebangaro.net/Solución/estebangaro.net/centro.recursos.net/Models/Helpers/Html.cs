@@ -12,8 +12,7 @@ namespace centro.recursos.net.Models.Helpers
     {
         public static MvcHtmlString GeneraMenu(this HtmlHelper helper, List<OpcionMenu> opciones)
         {
-            var _HTMLMenu = helper.ViewContext.RequestContext.HttpContext.Session["_HTMLmenu"];
-            if (_HTMLMenu == null)
+            if (opciones != null)
             {
                 List<XElement> _opciones = new List<XElement>();
                 foreach (OpcionMenu opcion in opciones)
@@ -24,7 +23,8 @@ namespace centro.recursos.net.Models.Helpers
 
                 return _menu;
             }
-            return _HTMLMenu as MvcHtmlString;
+            return helper.ViewContext.RequestContext.
+                HttpContext.Session["_HTMLmenu"] as MvcHtmlString;
         }
 
         private static XElement ObtenMarcado(OpcionMenu opcion)
@@ -61,19 +61,20 @@ namespace centro.recursos.net.Models.Helpers
         public static MvcHtmlString GeneraAvisos(this HtmlHelper helper, List<AvisoCarrusel> avisos)
         {
             string _avisos = "";
-            var _HTMLAvisos = helper.ViewContext.RequestContext.HttpContext.Session["_HTMLavisoscarrusel"];
 
-            if (_HTMLAvisos == null)
+            if (avisos != null)
             {
                 foreach (AvisoCarrusel aviso in avisos)
                     _avisos += ObtenMarcado(aviso).ToString();
 
                 MvcHtmlString avisosHTML = new MvcHtmlString(_avisos);
-                helper.ViewContext.RequestContext.HttpContext.Session["_HTMLavisoscarrusel"] = avisosHTML;
+                helper.ViewContext.RequestContext.HttpContext.Session["_HTMLavisoscarrusel"] =
+                    new Tuple<MvcHtmlString, int>(avisosHTML, avisos.Count);
 
                 return avisosHTML;
             }
-            return _HTMLAvisos as MvcHtmlString;
+            return ((Tuple<MvcHtmlString, int>)helper.ViewContext.RequestContext.
+                HttpContext.Session["_HTMLavisoscarrusel"]).Item1;
         }
 
         private static XElement ObtenMarcado(AvisoCarrusel aviso)
@@ -83,6 +84,37 @@ namespace centro.recursos.net.Models.Helpers
                 new XElement("a", aviso.Boton.Texto,
                     new XAttribute("href", aviso.URI),
                     new XAttribute("class", $"{aviso.Boton.Color.ToLower()}_slider")));
+        }
+
+        public static MvcHtmlString GeneraNoticias(this HtmlHelper helper, List<NoticiaPrincipal> noticias)
+        {
+            string _noticias = "";
+
+            foreach (NoticiaPrincipal noticia in noticias)
+                _noticias += ObtenMarcado(noticia).ToString();
+
+            MvcHtmlString noticiasHTML = new MvcHtmlString(_noticias);
+
+            return noticiasHTML;
+        }
+
+        private static XElement ObtenMarcado(NoticiaPrincipal noticia)
+        {
+            return new XElement("div",
+                   new XElement("p",
+                       new XText(noticia.Titulo),
+                       new XAttribute("class", "tituloBNR")),
+                   new XElement("p",
+                       new XElement("img",
+                           new XAttribute("src",
+                                $"/Resources/imagenes/noticias/{noticia.Imagen}")),
+                       new XAttribute("class", "imagenBNR")),
+                   new XElement("p",
+                       new XElement("a",
+                           noticia.Descripcion,
+                           new XAttribute("href", noticia.URI))),
+                   new XAttribute("class", "bloqueNR")
+                );
         }
     }
 }

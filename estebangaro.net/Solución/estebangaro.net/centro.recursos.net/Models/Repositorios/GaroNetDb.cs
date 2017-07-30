@@ -94,53 +94,33 @@ namespace centro.recursos.net.Models.Repositorios
 
         }
 
-        public Respuesta<Tuple<List<NoticiaPrincipal>, TIPOS_NOTICIASP>> ObtenNoticias()
+        public Respuesta<List<NoticiaPrincipal>> ObtenNoticias()
         {
             dbContextoEF.Configuration.ProxyCreationEnabled = false;
-            List<NoticiaPrincipal> noticiasRecientes, noticiasComentadas;
-            Respuesta<Tuple<List<NoticiaPrincipal>, TIPOS_NOTICIASP>> estado;
-            TIPOS_NOTICIASP tipos;
+            Respuesta<List<NoticiaPrincipal>> estado;
  
             try
             {
-                tipos = TIPOS_NOTICIASP.RECIENTES_MASCOMENTADAS;
-                noticiasRecientes = dbContextoEF
-                    .NoticiasPrincipales
-                    .OrderByDescending(noticia => noticia.Auditoria.Creacion)
-                    .Take(4)
-                    .ToList();
-                List<int> excluirNoticias = noticiasRecientes.Select(noti => noti.Id).ToList();
-                noticiasComentadas = dbContextoEF
-                    .NoticiasPrincipales
-                    .Where(noti => !excluirNoticias.Contains(noti.Id))
-                    //.OrderByDescending(noti => noti.Comentarios.Count())
-                    .Take(4)
-                    .ToList();
-                if (noticiasComentadas.Count < 4)
-                {
-                    tipos = TIPOS_NOTICIASP.RECIENTES;
-                    noticiasComentadas = dbContextoEF
-                    .NoticiasPrincipales
-                    .OrderByDescending(noticia => noticia.Auditoria.Creacion)
-                    .Skip(4)
-                    .Take(4)
-                    .ToList();
-                }
-                var conjunto = noticiasRecientes.Union(noticiasComentadas).ToList();
-
+                IQueryable<NoticiaPrincipal> recientes = dbContextoEF.NoticiasPrincipales.
+                    OrderByDescending(noti => noti.Auditoria.Creacion).
+                    Take(4);
+                IQueryable<NoticiaPrincipal> comentadas = dbContextoEF.NoticiasPrincipales.
+                    OrderByDescending(noti => noti.Articulo.Comentarios.Count).
+                    Except(recientes).
+                    Take(4);
+                var conjunto = recientes.Union(comentadas).ToList();
                 if (conjunto.Count == 8) // Recuperar de archivo de configuración.
-                    estado = Respuesta<object>.GeneraRespuestaNoExcepcion(true,
-                        new Tuple<List<NoticiaPrincipal>, TIPOS_NOTICIASP>(conjunto, tipos));
+                    estado = Respuesta<object>.GeneraRespuestaNoExcepcion(true, conjunto);
                 else
                     estado = Respuesta<object>.
-                        GeneraRespuestaNoExcepcion<Tuple<List<NoticiaPrincipal>, TIPOS_NOTICIASP>>(false, null,
+                        GeneraRespuestaNoExcepcion<List<NoticiaPrincipal>>(false, null,
                         detalle: "Tenemos problemas para recuperar los noticias principales, intentalo mas tarde",
                         iconoCliente: ICONOS_RESPUESTA.ADVERTENCIA);
             }
             catch (Exception ex)
             {
                 estado = Respuesta<object>.
-                    GeneraRespuestaExcepcion<Tuple<List<NoticiaPrincipal>, TIPOS_NOTICIASP>>(ex,
+                    GeneraRespuestaExcepcion<List<NoticiaPrincipal>>(ex,
                     NombreMetodo: "GaroNetDb.ObtenNoticias()");
             }
 

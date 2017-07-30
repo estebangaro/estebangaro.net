@@ -14,6 +14,6 @@ namespace centro.recursos.net.Models.Repositorios
 
         Respuesta<List<AvisoCarrusel>> ObtenAvisosCarrusel();
 
-        Respuesta<Tuple<List<NoticiaPrincipal>, TIPOS_NOTICIASP>> ObtenNoticias();
+        Respuesta<List<NoticiaPrincipal>> ObtenNoticias();
     }
 }
