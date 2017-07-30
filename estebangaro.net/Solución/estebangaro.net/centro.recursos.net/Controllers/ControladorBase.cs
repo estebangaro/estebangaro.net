@@ -25,7 +25,7 @@ namespace centro.recursos.net.Controllers
 
         #endregion
 
-        #region Controladores
+        #region Contructores
 
         public ControladorBase()
         {
@@ -52,6 +52,50 @@ namespace centro.recursos.net.Controllers
             return $"{respuesta.Detalle}|{respuesta.Excepcion}|{(int)respuesta.Icono}";
         }
 
+        /// <summary>
+        /// Método para habilitar la creación de BD.
+        /// </summary>
+        protected void HabilitaBD()
+        {
+            try
+            {
+                using (Models.Entity_Framework.GaroNETDbContexto contexto =
+                    new Models.Entity_Framework.GaroNETDbContexto(CadenaConexion))
+                {
+                    contexto.Articulos.Add(
+                        new Models.Entity_Framework.Articulo
+                        {
+                            Auditoria = new Models.Entity_Framework.InfoRegistro { UsuarioCreacion = "Esteban GaRo" },
+                            Localizacion = "Ciudad de México",
+                            Titulo = "Demostración",
+                            URI = "/Demostracion/Articulo"
+                        }
+                        );
+                    contexto.SaveChanges();
+                }
+            }
+            catch (Exception ex)
+            {
+
+            }
+        }
+
+        /// <summary>
+        /// Carga los datos predeterminados.
+        /// </summary>
+        protected void CargaDatos()
+        {
+            try
+            {
+                using (Models.Entity_Framework.GaroNETDbContexto contexto
+                    = new Models.Entity_Framework.GaroNETDbContexto(CadenaConexion))
+                {
+                    Models.Inicializadores.InicializadorBD dbInicializador =
+                        new Models.Inicializadores.InicializadorBD();
+                    dbInicializador.CargaDatos(contexto);
+                }
+            }catch(Exception ex) { }
+        }
         #endregion
     }
 }

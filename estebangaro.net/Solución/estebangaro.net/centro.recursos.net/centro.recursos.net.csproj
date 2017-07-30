@@ -97,24 +97,33 @@
   </ItemGroup>
   <ItemGroup>
     <Content Include="Global.asax" />
+    <Content Include="Models\Scripts\Columnas Autocalculadas.sql" />
     <Content Include="Resources\css\buscar.css" />
     <Content Include="Resources\css\carrusel.css" />
     <Content Include="Resources\css\home.css" />
     <Content Include="Resources\css\menu.css" />
+    <Content Include="Resources\css\noticias.css" />
     <Content Include="Resources\imagenes\carrusel\boton_c1.png" />
     <Content Include="Resources\imagenes\carrusel\boton_c3.png" />
     <Content Include="Resources\imagenes\carrusel\flecha2D.png" />
     <Content Include="Resources\imagenes\carrusel\flecha2I.png" />
     <Content Include="Resources\imagenes\home\fondo2.JPG" />
     <Content Include="Resources\imagenes\home\fondo4.jpg" />
+    <Content Include="Resources\imagenes\home\fondo5.jpeg" />
+    <Content Include="Resources\imagenes\home\fondo5.jpg" />
     <Content Include="Resources\imagenes\menu\busqueda.png" />
     <Content Include="Resources\imagenes\menu\cerrar.png" />
     <Content Include="Resources\imagenes\menu\flecha.png" />
     <Content Include="Resources\imagenes\menu\icono_menu_2.png" />
+    <Content Include="Resources\imagenes\noticias\ajax.png" />
+    <Content Include="Resources\imagenes\noticias\asp.png" />
+    <Content Include="Resources\imagenes\noticias\entity.png" />
+    <Content Include="Resources\imagenes\noticias\mysql.png" />
     <Content Include="Resources\javascript\busqueda.js" />
     <Content Include="Resources\javascript\carrusel.js" />
     <Content Include="Resources\javascript\home.js" />
     <Content Include="Resources\javascript\menu.js" />
+    <Content Include="Resources\javascript\noticias.js" />
     <Content Include="Web.config" />
   </ItemGroup>
   <ItemGroup>
@@ -157,7 +166,7 @@
     <Content Include="Views\Shared\_Menu.cshtml" />
     <Content Include="Views\Shared\_Carrusel.cshtml" />
     <Content Include="Views\Home\Inicio.cshtml" />
-    <Content Include="Views\Shared\_Noticias.cshtml" />
+    <Content Include="Views\Shared\_NoticiasP.cshtml" />
     <None Include="Web.Debug.config">
       <DependentUpon>Web.config</DependentUpon>
     </None>
@@ -183,7 +192,7 @@
           <AutoAssignPort>True</AutoAssignPort>
           <DevelopmentServerPort>54868</DevelopmentServerPort>
           <DevelopmentServerVPath>/</DevelopmentServerVPath>
-          <IISUrl>http://localhost:2802/</IISUrl>
+          <IISUrl>http://192.168.0.7:2510/</IISUrl>
           <NTLMAuthentication>False</NTLMAuthentication>
           <UseCustomServer>False</UseCustomServer>
           <CustomServerUrl>

@@ -13,29 +13,67 @@ namespace centro.recursos.net.Controllers
         // Home
         public ActionResult GaRoNET()
         {
+            //HabilitaBD();
+            //CargaDatos();
             return View("Inicio");
         }
 
         public PartialViewResult _Menu()
         {
-            Respuesta<List<OpcionMenu>> opciones = Repositorio.ObtenOpcionesMenu();
-            PartialViewResult resultado = null;
-            if (opciones.Estado)
-                resultado = PartialView(opciones.Resultado);
+            Respuesta<List<OpcionMenu>> opciones;
+
+            if (Session["_HTMLmenu"] == null)
+                opciones = Repositorio.ObtenOpcionesMenu();
             else
-                ViewBag.LayoutExcepcion = GeneraRespuestaExcepcion<List<OpcionMenu>>(opciones);
+                opciones = null;
+            PartialViewResult resultado = null;
+            if (opciones != null && opciones.Estado)
+                resultado = PartialView(opciones.Resultado);
+            else if (opciones != null)
+                ViewBag.LayoutExcepcion += ViewBag.LayoutExcepcion != null ?
+                    $"@{GeneraRespuestaExcepcion<List<OpcionMenu>>(opciones)}" :
+                    GeneraRespuestaExcepcion<List<OpcionMenu>>(opciones);
+            else
+                resultado = PartialView(null);
 
             return resultado;
         }
 
         public PartialViewResult _Carrusel()
         {
-            Respuesta<List<AvisoCarrusel>> avisos = Repositorio.ObtenAvisosCarrusel();
-            PartialViewResult resultado = null;
-            if (avisos.Estado)
-                resultado = PartialView(avisos.Resultado);
+            Respuesta<List<AvisoCarrusel>> avisos;
+
+            if (Session["_HTMLavisoscarrusel"] == null)
+                avisos = Repositorio.ObtenAvisosCarrusel();
             else
-                ViewBag.LayoutExcepcion = GeneraRespuestaExcepcion<List<AvisoCarrusel>>(avisos);
+                avisos = null;
+            PartialViewResult resultado = null;
+
+            if (avisos != null && avisos.Estado)
+                resultado = PartialView(avisos.Resultado);
+            else if (avisos != null)
+                ViewBag.LayoutExcepcion += ViewBag.LayoutExcepcion += ViewBag.LayoutExcepcion != null ?
+                    $"@{GeneraRespuestaExcepcion<List<AvisoCarrusel>>(avisos)}" :
+                    GeneraRespuestaExcepcion<List<AvisoCarrusel>>(avisos);
+            else
+            {
+                resultado = PartialView(null);
+                ViewBag.AvisosCuenta = ((Tuple<MvcHtmlString, int>)Session["_HTMLavisoscarrusel"]).Item2;
+            }
+
+            return resultado;
+        }
+
+        public PartialViewResult _NoticiasP()
+        {
+            Respuesta<List<NoticiaPrincipal>> noticias = Repositorio.ObtenNoticias();
+            PartialViewResult resultado = null;
+            if (noticias.Estado)
+                resultado = PartialView(noticias.Resultado);
+            else
+                ViewBag.LayoutExcepcion += ViewBag.LayoutExcepcion += ViewBag.LayoutExcepcion != null ?
+                    $"@{GeneraRespuestaExcepcion<List<NoticiaPrincipal>>(noticias)}" :
+                    GeneraRespuestaExcepcion<List<NoticiaPrincipal>>(noticias);
 
             return resultado;
         }

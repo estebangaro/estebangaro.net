@@ -54,4 +54,3 @@ C:\Users\esteb\Documents\GitHub\estebangaro.net\estebangaro.net\Solución\esteba
 C:\Users\esteb\Documents\GitHub\estebangaro.net\estebangaro.net\Solución\estebangaro.net\centro.recursos.net\bin\es\System.Web.Mvc.resources.dll
 C:\Users\esteb\Documents\GitHub\estebangaro.net\estebangaro.net\Solución\estebangaro.net\centro.recursos.net\obj\Debug\centro.recursos.net.dll
 C:\Users\esteb\Documents\GitHub\estebangaro.net\estebangaro.net\Solución\estebangaro.net\centro.recursos.net\obj\Debug\centro.recursos.net.pdb
-C:\Users\esteb\Documents\GitHub\estebangaro.net\estebangaro.net\Solución\estebangaro.net\centro.recursos.net\obj\Debug\centro.recursos.net.csprojResolveAssemblyReference.cache

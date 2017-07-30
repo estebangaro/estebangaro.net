@@ -14,22 +14,29 @@
     <link href="~/Resources/css/buscar.css" rel="stylesheet" />
     <link href="~/Resources/css/home.css" rel="stylesheet" />
     <link href="~/Resources/css/carrusel.css" rel="stylesheet" />
+    <link href="~/Resources/css/noticias.css" rel="stylesheet" />
     <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.2.1/jquery.min.js"></script>
     <script src="~/Resources/javascript/home.js"></script>
     <script src="~/Resources/javascript/busqueda.js"></script>
     <script src="~/Resources/javascript/menu.js"></script>
     <script src="~/Resources/javascript/carrusel.js"></script>
+    <script src="~/Resources/javascript/noticias.js"></script>
 </head>
 
 <body>
     <div id="fondoFijo"></div>
-    <div id="fondoFijoColor"></div>
+    <div class="fondoFijoColor"></div>
     @Html.Action("_Menu")
     <div id="seccion1Principal">
         <div class="Contenido">
             @Html.Action("_Carrusel")
         </div>
     </div>
-    <div id="seccion2Principal"></div>
+    <div id="seccion2Principal" class="styleVerifica">
+        <div class="fondoFijoColor"></div>
+        <div class="Contenido">
+            @Html.Action("_NoticiasP")
+        </div>
+    </div>
 </body>
 </html>
