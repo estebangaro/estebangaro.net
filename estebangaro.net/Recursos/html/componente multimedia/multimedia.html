@@ -1,0 +1,117 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <title>Componente multimedia</title>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1">
+    <!-- <link href="css/style.css" rel="stylesheet"> -->
+    <style>
+        #seccion3Principal {
+            position: absolute;
+            /* top: 200%; */
+            top: 0;
+            left: 0;
+            width: 100%;
+            height: 100%;
+            overflow: hidden;
+        }
+        
+        #franjaOpciones {
+            position: absolute;
+            width: 100%;
+            background-color: rgba(255, 255, 255, 0.5);
+            text-align: center;
+            z-index: 1;
+        }
+        
+        #franjaOpciones>.ctdrFranjaOpcion {
+            display: inline-block;
+            overflow: hidden;
+        }
+        
+        .ctdrFranjaOpcion>.franjaOpcion {
+            float: left;
+            box-sizing: border-box;
+            padding: 0.5em 1em;
+            /*background-color: azure; */
+            margin: 0;
+        }
+        
+        #ctdrMultimedia {
+            position: absolute;
+            top: 0;
+            left: 0;
+            width: 200%;
+            /* En función del número de elementos multimedia */
+            height: 100%;
+            overflow: hidden;
+            transition: all 1s cubic-bezier(0.175, 0.885, 0.32, 1.275);
+        }
+        
+        #ctdrMultimedia>.ctdMultimedia {
+            box-sizing: border-box;
+            width: 50%;
+            float: left;
+            height: 100%;
+            background-size: cover;
+        }
+        
+        #ctdrMultimedia>.ctdMultimedia:first-child {
+            background-image: url(../../imagenes/fondo2.JPG);
+        }
+        
+        #ctdrMultimedia>.ctdMultimedia:last-child {
+            background-image: url(../../imagenes/fondo.jpg);
+        }
+    </style>
+</head>
+
+<body>
+    <div id="seccion3Principal">
+        <div id="franjaOpciones">
+            <div class="ctdrFranjaOpcion">
+                <div class="franjaOpcion">
+                    <span>¿Por qu&eacute; .NET?</span>
+                </div>
+                <div class="franjaOpcion">
+                    <span>Mi primer Framework .NET</span>
+                </div>
+                <div class="franjaOpcion">
+                    <span>¿Qu&eacute; hacen los programadores?</span>
+                </div>
+            </div>
+        </div>
+        <div id="ctdrMultimedia">
+            <div class="ctdMultimedia">
+                <span>
+                Conoce las ventajas y desventajas del .NET Framework y porqu&eacute; lo deber&iacute;s 
+                de considerar como tu plataforma de desarrollo preferida.
+                </span>
+                <a href="">
+                    Mas informaci&oactue;n
+                </a>
+            </div>
+            <div class="ctdMultimedia">
+                <span>
+                Todos tuvimos un framework que nos meti&oacute; por el cual profundizamos en una tecnología,
+                me gustaría hablarles del querido Windows Forms.
+                </span>
+                <a href="">
+                    Descubre mas
+                </a>
+            </div>
+            <!-- <div class="ctdMultimedia">
+                <span>
+                ¿Programador o desarrollador?, ¿Analista o tira-código?, ¿Hay sufuciente trabajo?
+                a titulo personal comparto mis opiniones acerca de.
+                </span>
+                <a href="">
+                    Mas informaci&oactue;n
+                </a>
+            </div> -->
+        </div>
+    </div>
+</body>
+
+</html>
