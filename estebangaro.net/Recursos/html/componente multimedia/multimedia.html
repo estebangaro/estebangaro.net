@@ -22,7 +22,7 @@
             width: 100%;
             background-color: rgba(255, 255, 255, 0.5);
             text-align: center;
-            z-index: 1;
+            z-index: 3;
         }
         
         #franjaOpciones>.ctdrFranjaOpcion {
@@ -52,9 +52,33 @@
         #ctdrMultimedia>.ctdMultimedia {
             box-sizing: border-box;
             width: 50%;
+            /*En función del número de elementos multimedia*/
             float: left;
             height: 100%;
             background-size: cover;
+        }
+        
+        .msjMultimedia {
+            background-color: rgba(0, 0, 0, 0.5);
+        }
+        
+        .ctdMultimedia p {
+            width: 50%;
+            margin: 1em auto;
+            text-align: center;
+        }
+        
+        .ctdMultimedia span {
+            font-size: 1.5em;
+            color: azure;
+        }
+        
+        .ctdMultimedia a {
+            border: 2px solid white;
+            padding: 0.5em 1em;
+            color: azure;
+            display: inline-block;
+            text-decoration: none;
         }
         
         #ctdrMultimedia>.ctdMultimedia:first-child {
@@ -65,6 +89,24 @@
             background-image: url(../../imagenes/fondo.jpg);
         }
     </style>
+    <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.2.1/jquery.min.js"></script>
+    <script>
+        $(function() {
+            ajustaAltoMsjMultimedia();
+            $(window).resize(function() {
+                ajustaAltoMsjMultimedia();
+            });
+        });
+
+        function ajustaAltoMsjMultimedia() {
+            var altoPadre = $('.ctdMultimedia').height() / 2;
+            $('.msjMultimedia').each(function() {
+                $(this).css({
+                    'margin-top': (altoPadre - $(this).height() / 2) + 'px'
+                });
+            });
+        }
+    </script>
 </head>
 
 <body>
@@ -84,22 +126,34 @@
         </div>
         <div id="ctdrMultimedia">
             <div class="ctdMultimedia">
-                <span>
-                Conoce las ventajas y desventajas del .NET Framework y porqu&eacute; lo deber&iacute;s 
-                de considerar como tu plataforma de desarrollo preferida.
-                </span>
-                <a href="">
-                    Mas informaci&oactue;n
-                </a>
+                <div class="msjMultimedia">
+                    <p>
+                        <span>
+                    Conoce las ventajas y desventajas del .NET Framework y porqu&eacute; lo deber&iacute;s 
+                    de considerar como tu plataforma de desarrollo preferida.
+                    </span>
+                    </p>
+                    <p>
+                        <a href="">
+                    Mas informaci&oacute;n
+                    </a>
+                    </p>
+                </div>
             </div>
             <div class="ctdMultimedia">
-                <span>
-                Todos tuvimos un framework que nos meti&oacute; por el cual profundizamos en una tecnología,
-                me gustaría hablarles del querido Windows Forms.
-                </span>
-                <a href="">
-                    Descubre mas
-                </a>
+                <div class="msjMultimedia">
+                    <p>
+                        <span>
+                    Conoce las ventajas y desventajas del .NET Framework y porqu&eacute; lo deber&iacute;s 
+                    de considerar como tu plataforma de desarrollo preferida.
+                    </span>
+                    </p>
+                    <p>
+                        <a href="">
+                    Mas informaci&oacute;n
+                    </a>
+                    </p>
+                </div>
             </div>
             <!-- <div class="ctdMultimedia">
                 <span>
