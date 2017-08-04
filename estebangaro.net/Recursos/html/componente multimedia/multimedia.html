@@ -20,22 +20,46 @@
         #franjaOpciones {
             position: absolute;
             width: 100%;
-            background-color: rgba(255, 255, 255, 0.5);
+            background-color: rgba(255, 255, 255, 0.3);
             text-align: center;
             z-index: 3;
         }
         
         #franjaOpciones>.ctdrFranjaOpcion {
             display: inline-block;
-            overflow: hidden;
         }
         
         .ctdrFranjaOpcion>.franjaOpcion {
-            float: left;
             box-sizing: border-box;
-            padding: 0.5em 1em;
+            padding: 1em 1em;
             /*background-color: azure; */
             margin: 0;
+            cursor: pointer;
+            color: white;
+            position: relative;
+            display: inline-block;
+        }
+        
+        .flechaFranjaOp {
+            position: absolute;
+            bottom: 0;
+            left: 50%;
+            background-color: whitesmoke;
+            -ms-transform: rotate(45deg);
+            /* IE 9 */
+            -webkit-transform: rotate(45deg);
+            /* Chrome, Safari, Opera */
+            transform: rotate(45deg);
+            display: none;
+        }
+        
+        .ctdrFranjaOpcion>.franjaOpcion:first-child {
+            background-color: whitesmoke;
+            color: cornflowerblue;
+        }
+        
+        .ctdrFranjaOpcion>.franjaOpcion:first-child>.flechaFranjaOp {
+            display: block;
         }
         
         #ctdrMultimedia {
@@ -92,11 +116,58 @@
     <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.2.1/jquery.min.js"></script>
     <script>
         $(function() {
-            ajustaAltoMsjMultimedia();
-            $(window).resize(function() {
-                ajustaAltoMsjMultimedia();
-            });
+            ajustaResize();
+            enlazaEvts();
+            $(window).resize(ajustaResize);
         });
+
+        function resetFranjaOp(seleccionado) {
+            if (seleccionado == undefined) {
+                $('.franjaOpcion').css({
+                    'background-color': 'initial',
+                    'color': 'white'
+                });
+                $('.flechaFranjaOp').css({
+                    'display': 'none'
+                });
+            } else {
+                seleccionado.css({
+                    'background-color': 'whitesmoke',
+                    'color': 'cornflowerblue'
+                });
+                seleccionado.children('.flechaFranjaOp').css({
+                    'display': 'block'
+                });
+            }
+        }
+
+        function enlazaEvts() {
+            $('.franjaOpcion').click(function() {
+                resetFranjaOp();
+                resetFranjaOp($(this));
+                $('#ctdrMultimedia').css({
+                    'left': (parseInt($(this).attr('id').replace("op_", "")) * -100) + '%'
+                });
+            });
+        }
+
+        function ajustaResize() {
+            ajustaAltoMsjMultimedia();
+            ajustaAltoFranjaOps();
+            ajustaDimensionFlecha();
+        }
+
+        function ajustaDimensionFlecha() {
+            var tamFranjaOp = ($('.ctdrFranjaOpcion').height() -
+                $('.franjaOpcion > span').height()) / 2;
+            $('.flechaFranjaOp')
+                .height(tamFranjaOp)
+                .width(tamFranjaOp)
+                .css({
+                    'margin-left': (-tamFranjaOp / 2) + 'px',
+                    'bottom': (-tamFranjaOp / 2) + 'px'
+                });
+        }
 
         function ajustaAltoMsjMultimedia() {
             var altoPadre = $('.ctdMultimedia').height() / 2;
@@ -106,6 +177,10 @@
                 });
             });
         }
+
+        function ajustaAltoFranjaOps() {
+            $('#franjaOpciones').height($('.ctdrFranjaOpcion').height());
+        }
     </script>
 </head>
 
@@ -113,13 +188,16 @@
     <div id="seccion3Principal">
         <div id="franjaOpciones">
             <div class="ctdrFranjaOpcion">
-                <div class="franjaOpcion">
+                <div class="franjaOpcion" id="op_0">
+                    <div class="flechaFranjaOp"></div>
                     <span>¿Por qu&eacute; .NET?</span>
                 </div>
-                <div class="franjaOpcion">
+                <div class="franjaOpcion" id="op_1">
+                    <div class="flechaFranjaOp"></div>
                     <span>Mi primer Framework .NET</span>
                 </div>
-                <div class="franjaOpcion">
+                <div class="franjaOpcion" id="op_2">
+                    <div class="flechaFranjaOp"></div>
                     <span>¿Qu&eacute; hacen los programadores?</span>
                 </div>
             </div>
