@@ -5,189 +5,19 @@
     <title>Componente multimedia</title>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1">
-    <!-- <link href="css/style.css" rel="stylesheet"> -->
-    <style>
-        #seccion3Principal {
-            position: absolute;
-            /* top: 200%; */
-            top: 0;
-            left: 0;
-            width: 100%;
-            height: 100%;
-            overflow: hidden;
-        }
-        
-        #franjaOpciones {
-            position: absolute;
-            width: 100%;
-            background-color: rgba(255, 255, 255, 0.3);
-            text-align: center;
-            z-index: 3;
-        }
-        
-        #franjaOpciones>.ctdrFranjaOpcion {
-            display: inline-block;
-        }
-        
-        .ctdrFranjaOpcion>.franjaOpcion {
-            box-sizing: border-box;
-            padding: 1em 1em;
-            /*background-color: azure; */
-            margin: 0;
-            cursor: pointer;
-            color: white;
-            position: relative;
-            display: inline-block;
-        }
-        
-        .flechaFranjaOp {
-            position: absolute;
-            bottom: 0;
-            left: 50%;
-            background-color: whitesmoke;
-            -ms-transform: rotate(45deg);
-            /* IE 9 */
-            -webkit-transform: rotate(45deg);
-            /* Chrome, Safari, Opera */
-            transform: rotate(45deg);
-            display: none;
-        }
-        
-        .ctdrFranjaOpcion>.franjaOpcion:first-child {
-            background-color: whitesmoke;
-            color: cornflowerblue;
-        }
-        
-        .ctdrFranjaOpcion>.franjaOpcion:first-child>.flechaFranjaOp {
-            display: block;
-        }
-        
-        #ctdrMultimedia {
-            position: absolute;
-            top: 0;
-            left: 0;
-            width: 200%;
-            /* En función del número de elementos multimedia */
-            height: 100%;
-            overflow: hidden;
-            transition: all 1s cubic-bezier(0.175, 0.885, 0.32, 1.275);
-        }
-        
-        #ctdrMultimedia>.ctdMultimedia {
-            box-sizing: border-box;
-            width: 50%;
-            /*En función del número de elementos multimedia*/
-            float: left;
-            height: 100%;
-            background-size: cover;
-        }
-        
-        .msjMultimedia {
-            background-color: rgba(0, 0, 0, 0.5);
-        }
-        
-        .ctdMultimedia p {
-            width: 50%;
-            margin: 1em auto;
-            text-align: center;
-        }
-        
-        .ctdMultimedia span {
-            font-size: 1.5em;
-            color: azure;
-        }
-        
-        .ctdMultimedia a {
-            border: 2px solid white;
-            padding: 0.5em 1em;
-            color: azure;
-            display: inline-block;
-            text-decoration: none;
-        }
-        
-        #ctdrMultimedia>.ctdMultimedia:first-child {
-            background-image: url(../../imagenes/fondo2.JPG);
-        }
-        
-        #ctdrMultimedia>.ctdMultimedia:last-child {
-            background-image: url(../../imagenes/fondo.jpg);
-        }
-    </style>
+    <link href="../../css/componente multimedia/multimedia.css" rel="stylesheet">
     <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.2.1/jquery.min.js"></script>
-    <script>
-        $(function() {
-            ajustaResize();
-            enlazaEvts();
-            $(window).resize(ajustaResize);
-        });
-
-        function resetFranjaOp(seleccionado) {
-            if (seleccionado == undefined) {
-                $('.franjaOpcion').css({
-                    'background-color': 'initial',
-                    'color': 'white'
-                });
-                $('.flechaFranjaOp').css({
-                    'display': 'none'
-                });
-            } else {
-                seleccionado.css({
-                    'background-color': 'whitesmoke',
-                    'color': 'cornflowerblue'
-                });
-                seleccionado.children('.flechaFranjaOp').css({
-                    'display': 'block'
-                });
-            }
-        }
-
-        function enlazaEvts() {
-            $('.franjaOpcion').click(function() {
-                resetFranjaOp();
-                resetFranjaOp($(this));
-                $('#ctdrMultimedia').css({
-                    'left': (parseInt($(this).attr('id').replace("op_", "")) * -100) + '%'
-                });
-            });
-        }
-
-        function ajustaResize() {
-            ajustaAltoMsjMultimedia();
-            ajustaAltoFranjaOps();
-            ajustaDimensionFlecha();
-        }
-
-        function ajustaDimensionFlecha() {
-            var tamFranjaOp = ($('.ctdrFranjaOpcion').height() -
-                $('.franjaOpcion > span').height()) / 2;
-            $('.flechaFranjaOp')
-                .height(tamFranjaOp)
-                .width(tamFranjaOp)
-                .css({
-                    'margin-left': (-tamFranjaOp / 2) + 'px',
-                    'bottom': (-tamFranjaOp / 2) + 'px'
-                });
-        }
-
-        function ajustaAltoMsjMultimedia() {
-            var altoPadre = $('.ctdMultimedia').height() / 2;
-            $('.msjMultimedia').each(function() {
-                $(this).css({
-                    'margin-top': (altoPadre - $(this).height() / 2) + 'px'
-                });
-            });
-        }
-
-        function ajustaAltoFranjaOps() {
-            $('#franjaOpciones').height($('.ctdrFranjaOpcion').height());
-        }
-    </script>
+    <script src="../../javascript/componente multimedia/multimedia.js"></script>
 </head>
 
 <body>
     <div id="seccion3Principal">
         <div id="franjaOpciones">
             <div class="ctdrFranjaOpcion">
+                <div id="franjaSelector">
+                    <span>¿Por qu&eacute; .NET?</span>
+                    <img src="../../imagenes/flecha3A.png" />
+                </div>
                 <div class="franjaOpcion" id="op_0">
                     <div class="flechaFranjaOp"></div>
                     <span>¿Por qu&eacute; .NET?</span>
