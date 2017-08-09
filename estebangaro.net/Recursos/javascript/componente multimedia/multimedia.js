@@ -56,6 +56,20 @@
                         });
                 }
             });
+
+            $(window).scroll(function() {
+                var posYseccion3 = parseInt($('#seccion3Principal').css('top').replace('px', ''));
+                var altoSeccion3 = $('#seccion3Principal').height();
+                var altoMenu = $('#fondoMenu').innerHeight();
+                var posicionScroll = $(document).scrollTop();
+
+                if (posicionScroll >= (posYseccion3 - altoMenu) && posicionScroll <= posYseccion3) {
+                    // Desplazamiento vertical descendente.
+                    var topMenu = posicionScroll - (posYseccion3 - altoMenu);
+                    $('#fondoMenu').css({ 'top': (-1 * topMenu) + 'px' });
+                } else
+                    $('#fondoMenu').css({ 'top': '0' });
+            });
         }
 
         function ajustaResize() {
