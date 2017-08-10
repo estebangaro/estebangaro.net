@@ -58,23 +58,31 @@
             });
 
             $(window).scroll(function() {
-                var posYseccion3 = parseInt($('#seccion3Principal').css('top').replace('px', ''));
-                var altoSeccion3 = $('#seccion3Principal').height();
-                var altoMenu = $('#fondoMenu').innerHeight();
-                var posicionScroll = $(document).scrollTop();
+                if ($('#ctdrCampoBusqueda').css('display') != 'none') {
+                    var posYseccion3 = parseInt($('#seccion3Principal').css('top').replace('px', ''));
+                    var altoSeccion3 = $('#seccion3Principal').height();
+                    var altoMenu = $('#fondoMenu').innerHeight();
+                    var posicionScroll = $(document).scrollTop();
 
-                if (posicionScroll >= (posYseccion3 - altoMenu) && posicionScroll <= posYseccion3) {
-                    // Desplazamiento vertical descendente.
-                    var topMenu = posicionScroll - (posYseccion3 - altoMenu);
-                    $('#fondoMenu').css({ 'top': (-1 * topMenu) + 'px' });
-                } else
-                    $('#fondoMenu').css({ 'top': '0' });
+                    if (posicionScroll >= (posYseccion3 - altoMenu) && posicionScroll <= posYseccion3) {
+                        var topMenu = posicionScroll - (posYseccion3 - altoMenu);
+                        $('#fondoMenu').css({ 'top': (-1 * topMenu) + 'px' });
+                    } else if (posicionScroll > posYseccion3 && posicionScroll <= (posYseccion3 + altoSeccion3)) {
+                        if (posicionScroll >= (posYseccion3 + altoSeccion3 - altoMenu)) {
+                            var topMenu = posicionScroll - posYseccion3 - altoSeccion3;
+                            $('#fondoMenu').css({ 'top': topMenu + 'px' });
+                        } else
+                            $('#fondoMenu').css({ 'top': (-1 * altoMenu) + 'px' });
+                    } else
+                        $('#fondoMenu').css({ 'top': '0' });
+                }
             });
         }
 
         function ajustaResize() {
             ajustaAltoMsjMultimedia();
             ajustaDimensionFlecha();
+            $(window).scroll();
         }
 
         function ajustaDimensionFlecha() {
