@@ -75,11 +75,6 @@
     background-size: cover;
 }
 
-#seccion3Principal {
-    top: 200%;
-    overflow: hidden;
-}
-
 #seccion2Principal>div.Contenido {
     position: relative;
     overflow: hidden;
@@ -92,12 +87,24 @@
 }
 
 
+/* Sección 3 Multimedia STYLES */
+
+#seccion3Principal {
+    top: 200%;
+    overflow: hidden;
+}
+
+
 /** Sección 2 Carrusel STYLES **/
 
 @media screen and (min-width: 600px) and (max-width: 1025px) {
     #seccion2Principal {
+        top: 200%;
         height: auto;
         background-image: url('../../imagenes/fondo5.jpeg');
+    }
+    #seccion3Principal {
+        top: 100%;
     }
 }
 
@@ -109,6 +116,10 @@
     }
     #seccion2Principal {
         height: auto;
+        top: 200%;
         background-image: url('../../imagenes/fondo5.jpg');
+    }
+    #seccion3Principal {
+        top: 100%;
     }
 }
