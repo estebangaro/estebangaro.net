@@ -6,30 +6,55 @@
 
         function resetFranjaOp(seleccionado) {
             if (seleccionado == undefined) {
-                if ($('#franjaSelector').css('display') != 'block')
+                if ($('#franjaSelector').css('display') != 'block') {
                     $('.franjaOpcion').css({
                         'background-color': 'initial',
                         'color': 'white'
                     });
-                $('.flechaFranjaOp').css({
-                    'display': 'none'
-                });
-            } else {
-                if ($('#franjaSelector').css('display') != 'block') {
-                    seleccionado.css({
-                        'background-color': 'whitesmoke',
-                        'color': 'cornflowerblue'
+                    $('.franjaOpcion').css({
+                        'visibility': 'visible',
+                        'opacity': '1'
                     });
-                    seleccionado.children('.flechaFranjaOp').css({
-                        'display': 'block'
+                } else {
+                    $('.franjaOpcion').css({
+                        'color': 'white',
+                        'background-color': 'rgba(0, 255, 255, 0.5)'
                     });
-                } else
                     $('.franjaOpcion').css({
                         'visibility': 'hidden',
                         'opacity': '0'
                     });
+                }
+                $('.flechaFranjaOp').css({
+                    'display': 'none'
+                });
+            } else {
+                if ($('#franjaSelector').css('display') != 'block')
+                    seleccionaFranjaOpcion(seleccionado);
+                else
+                    seleccionaFranjaOpcion(seleccionado, false);
 
                 $('#franjaSelector > span').text(seleccionado.text());
+            }
+        }
+
+        function seleccionaFranjaOpcion(seleccionado, modoNormal = true) {
+            if (modoNormal) {
+                seleccionado.css({
+                    'background-color': 'whitesmoke',
+                    'color': 'cornflowerblue'
+                });
+                seleccionado.children('.flechaFranjaOp').css({
+                    'display': 'block'
+                });
+            } else {
+                seleccionado.css({
+                    'color': 'yellow'
+                });
+                $('.franjaOpcion').css({
+                    'visibility': 'hidden',
+                    'opacity': '0'
+                });
             }
         }
 
@@ -82,7 +107,16 @@
         function ajustaResize() {
             ajustaAltoMsjMultimedia();
             ajustaDimensionFlecha();
+            ajustaSeleccion();
             $(window).scroll();
+        }
+
+        function ajustaSeleccion() {
+            resetFranjaOp();
+            $('.franjaOpcion > span').each(function() {
+                if ($(this).text().trim() == $('#franjaSelector > span').text().trim())
+                    resetFranjaOp($(this).parent());
+            });
         }
 
         function ajustaDimensionFlecha() {

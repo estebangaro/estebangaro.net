@@ -15,5 +15,7 @@ namespace centro.recursos.net.Models.Repositorios
         Respuesta<List<AvisoCarrusel>> ObtenAvisosCarrusel();
 
         Respuesta<List<NoticiaPrincipal>> ObtenNoticias();
+
+        Respuesta<List<Multimedia>> ObtenMultimedia();
     }
 }

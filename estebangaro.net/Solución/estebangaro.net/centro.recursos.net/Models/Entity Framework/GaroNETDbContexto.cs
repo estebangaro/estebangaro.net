@@ -21,6 +21,7 @@
         public virtual DbSet<Comentario> Comentarios { get; set; }
         public virtual DbSet<Puesto> Puestos { get; set; }
         public virtual DbSet<Autor> Autores { get; set; }
+        public virtual DbSet<Multimedia> Multimedia { get; set; }
 
         protected override void OnModelCreating(DbModelBuilder modelBuilder)
         {
@@ -32,7 +33,8 @@
                 .Add(new ArticuloConfig())
                 .Add(new ComentarioConfig())
                 .Add(new PuestoConfig())
-                .Add(new AutorConfig());
+                .Add(new AutorConfig())
+                .Add(new MultimediaConfig());
         }
     }
 }

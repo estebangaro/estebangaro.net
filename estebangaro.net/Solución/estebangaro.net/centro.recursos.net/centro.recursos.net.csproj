@@ -138,6 +138,7 @@
     <Compile Include="Models\Configuraciones Fluent API\BotonAvisoConfig.cs" />
     <Compile Include="Models\Configuraciones Fluent API\ComentarioConfig.cs" />
     <Compile Include="Models\Configuraciones Fluent API\InfoRegistroConfig.cs" />
+    <Compile Include="Models\Configuraciones Fluent API\MultimediaConfig.cs" />
     <Compile Include="Models\Configuraciones Fluent API\NoticiaPrincipalConfig.cs" />
     <Compile Include="Models\Configuraciones Fluent API\OpcionMenuConfig.cs" />
     <Compile Include="Models\Configuraciones Fluent API\PuestoConfig.cs" />
@@ -149,6 +150,7 @@
     <Compile Include="Models\Entity Framework\Comentario.cs" />
     <Compile Include="Models\Entity Framework\GaroNETDbContexto.cs" />
     <Compile Include="Models\Entity Framework\InfoRegistro.cs" />
+    <Compile Include="Models\Entity Framework\Multimedia.cs" />
     <Compile Include="Models\Entity Framework\NoticiaPrincipal.cs" />
     <Compile Include="Models\Entity Framework\OpcionMenu.cs" />
     <Compile Include="Models\Entity Framework\Puesto.cs" />

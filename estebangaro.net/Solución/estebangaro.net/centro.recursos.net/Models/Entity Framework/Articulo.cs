@@ -17,5 +17,6 @@ namespace centro.recursos.net.Models.Entity_Framework
         public virtual ICollection<AvisoCarrusel> Avisos { get; set; }
         public virtual ICollection<NoticiaPrincipal> Noticias { get; set; }
         public virtual ICollection<OpcionMenu> OpcionesMenu { get; set; }
+        public virtual ICollection<Multimedia> Multimedia { get; set; }
     }
 }
