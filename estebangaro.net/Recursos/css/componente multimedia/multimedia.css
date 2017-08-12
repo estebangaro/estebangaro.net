@@ -138,7 +138,7 @@ overflow: hidden;
         background-color: rgba(0, 255, 255, 0.5);
     }
     .ctdrFranjaOpcion>.franjaOpcion:nth-child(2) {
-        color: white;
+        color: yellow;
         background-color: rgba(0, 255, 255, 0.5);
     }
     .flechaFranjaOp,

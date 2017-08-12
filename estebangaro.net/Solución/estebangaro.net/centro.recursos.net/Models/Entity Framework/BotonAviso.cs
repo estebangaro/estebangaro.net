@@ -13,5 +13,6 @@ namespace centro.recursos.net.Models.Entity_Framework
         public InfoRegistro Auditoria { get; set; }
 
         public virtual ICollection<AvisoCarrusel> Avisos { get; set; }
+        public virtual ICollection<Multimedia> Multimedia { get; set; }
     }
 }

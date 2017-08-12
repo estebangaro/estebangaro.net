@@ -127,6 +127,37 @@ namespace centro.recursos.net.Models.Repositorios
             return estado;
         }
 
+        public Respuesta<List<Multimedia>> ObtenMultimedia()
+        {
+            //dbContextoEF.Configuration.ProxyCreationEnabled = false;
+            //Respuesta<List<Multimedia>> estado;
+
+            //try
+            //{
+            //    var multimedia = dbContextoEF.Multimedia.
+            //        OrderByDescending(noti => noti.Auditoria.Creacion).
+            //        ToList();
+
+            //    if (multimedia.Count > 0) // Recuperar de archivo de configuración.
+            //        estado = Respuesta<object>.GeneraRespuestaNoExcepcion<List<Multimedia>>(true, multimedia);
+            //    else
+            //        estado = Respuesta<object>.
+            //            GeneraRespuestaNoExcepcion<List<Multimedia>>(false, null,
+            //            detalle: "Tenemos problemas para recuperar la sección multimedia, intentalo mas tarde",
+            //            iconoCliente: ICONOS_RESPUESTA.ADVERTENCIA);
+            //}
+            //catch (Exception ex)
+            //{
+            //    estado = Respuesta<object>.
+            //        GeneraRespuestaExcepcion<List<Multimedia>>(ex,
+            //        NombreMetodo: "GaroNetDb.ObtenMultimedia()");
+            //}
+
+            //return estado;
+
+            throw new NotImplementedException();
+        }
+
         #endregion
     }
 }
