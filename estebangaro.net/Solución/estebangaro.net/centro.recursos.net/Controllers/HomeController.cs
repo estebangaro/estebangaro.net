@@ -30,9 +30,9 @@ namespace centro.recursos.net.Controllers
             if (opciones != null && opciones.Estado)
                 resultado = PartialView(opciones.Resultado);
             else if (opciones != null)
-                ViewBag.LayoutExcepcion += ViewBag.LayoutExcepcion != null ?
+                ViewBag.LayoutExcepcion += (ViewBag.LayoutExcepcion != null ?
                     $"@{GeneraRespuestaExcepcion<List<OpcionMenu>>(opciones)}" :
-                    GeneraRespuestaExcepcion<List<OpcionMenu>>(opciones);
+                    GeneraRespuestaExcepcion<List<OpcionMenu>>(opciones));
             else
                 resultado = PartialView(null);
 
@@ -52,9 +52,9 @@ namespace centro.recursos.net.Controllers
             if (avisos != null && avisos.Estado)
                 resultado = PartialView(avisos.Resultado);
             else if (avisos != null)
-                ViewBag.LayoutExcepcion += ViewBag.LayoutExcepcion += ViewBag.LayoutExcepcion != null ?
+                ViewBag.LayoutExcepcion += (ViewBag.LayoutExcepcion != null ?
                     $"@{GeneraRespuestaExcepcion<List<AvisoCarrusel>>(avisos)}" :
-                    GeneraRespuestaExcepcion<List<AvisoCarrusel>>(avisos);
+                    GeneraRespuestaExcepcion<List<AvisoCarrusel>>(avisos));
             else
             {
                 resultado = PartialView(null);
@@ -71,9 +71,23 @@ namespace centro.recursos.net.Controllers
             if (noticias.Estado)
                 resultado = PartialView(noticias.Resultado);
             else
-                ViewBag.LayoutExcepcion += ViewBag.LayoutExcepcion += ViewBag.LayoutExcepcion != null ?
+                ViewBag.LayoutExcepcion += (ViewBag.LayoutExcepcion != null ?
                     $"@{GeneraRespuestaExcepcion<List<NoticiaPrincipal>>(noticias)}" :
-                    GeneraRespuestaExcepcion<List<NoticiaPrincipal>>(noticias);
+                    GeneraRespuestaExcepcion<List<NoticiaPrincipal>>(noticias));
+
+            return resultado;
+        }
+
+        public PartialViewResult _SeccionesMultimedia()
+        {
+            Respuesta<List<Multimedia>> multimedia = Repositorio.ObtenMultimedia();
+            PartialViewResult resultado = null;
+            if (multimedia.Estado)
+                resultado = PartialView(multimedia.Resultado);
+            else
+                ViewBag.LayoutExcepcion += (ViewBag.LayoutExcepcion != null ?
+                    $"@{GeneraRespuestaExcepcion<List<Multimedia>>(multimedia)}" :
+                    GeneraRespuestaExcepcion<List<Multimedia>>(multimedia));
 
             return resultado;
         }

@@ -102,6 +102,7 @@
     <Content Include="Resources\css\carrusel.css" />
     <Content Include="Resources\css\home.css" />
     <Content Include="Resources\css\menu.css" />
+    <Content Include="Resources\css\multimedia.css" />
     <Content Include="Resources\css\noticias.css" />
     <Content Include="Resources\imagenes\carrusel\boton_c1.png" />
     <Content Include="Resources\imagenes\carrusel\boton_c3.png" />
@@ -115,6 +116,9 @@
     <Content Include="Resources\imagenes\menu\cerrar.png" />
     <Content Include="Resources\imagenes\menu\flecha.png" />
     <Content Include="Resources\imagenes\menu\icono_menu_2.png" />
+    <Content Include="Resources\imagenes\multimedia\flecha3A.png" />
+    <Content Include="Resources\imagenes\multimedia\fondo.jpg" />
+    <Content Include="Resources\imagenes\multimedia\fondo2.JPG" />
     <Content Include="Resources\imagenes\noticias\ajax.png" />
     <Content Include="Resources\imagenes\noticias\asp.png" />
     <Content Include="Resources\imagenes\noticias\entity.png" />
@@ -123,6 +127,7 @@
     <Content Include="Resources\javascript\carrusel.js" />
     <Content Include="Resources\javascript\home.js" />
     <Content Include="Resources\javascript\menu.js" />
+    <Content Include="Resources\javascript\multimedia.js" />
     <Content Include="Resources\javascript\noticias.js" />
     <Content Include="Web.config" />
   </ItemGroup>
@@ -169,6 +174,7 @@
     <Content Include="Views\Shared\_Carrusel.cshtml" />
     <Content Include="Views\Home\Inicio.cshtml" />
     <Content Include="Views\Shared\_NoticiasP.cshtml" />
+    <Content Include="Views\Shared\_SeccionesMultimedia.cshtml" />
     <None Include="Web.Debug.config">
       <DependentUpon>Web.config</DependentUpon>
     </None>

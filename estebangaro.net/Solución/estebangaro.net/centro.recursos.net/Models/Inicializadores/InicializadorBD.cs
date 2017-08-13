@@ -137,6 +137,21 @@ namespace centro.recursos.net.Models.Inicializadores
                     Descripcion = "Enviando peticiones AJAX a controladores MVC", Imagen = "ajax.png",
                     Titulo = "ASP .NET y AJAX"},
             };
+            Multimedia[] multimedia = new Multimedia[]
+            {
+                new Multimedia{ Auditoria = new InfoRegistro { UsuarioCreacion = "estebangaro" },
+                    Articulo = articulos[9], Boton=botones[0], Estado=true, Imagen="fondo.JPG",
+                    Informacion="Conoce las ventajas y desventajas del .NET Framework y porqué lo deberías " +
+                    "de considerar como tu plataforma de desarrollo preferida.(1)", Orden=0, Titulo="¿Por qué .NET?"},
+                new Multimedia{ Auditoria = new InfoRegistro { UsuarioCreacion = "estebangaro" },
+                    Articulo = articulos[9], Boton=botones[0], Estado=true, Imagen="fondo2.jpg",
+                    Informacion="Conoce las ventajas y desventajas del .NET Framework y porqué lo deberías " +
+                    "de considerar como tu plataforma de desarrollo preferida.(3)", Orden=2, Titulo="¿Por qué .NET (3)?"},
+                new Multimedia{ Auditoria = new InfoRegistro { UsuarioCreacion = "estebangaro" },
+                    Articulo = articulos[9], Boton=botones[0], Estado=true, Imagen="fondo2.jpg",
+                    Informacion="Conoce las ventajas y desventajas del .NET Framework y porqué lo deberías " +
+                    "de considerar como tu plataforma de desarrollo preferida.(2)", Orden=2, Titulo="¿Por qué .NET (4)?"}
+            };
 
             contexto.Articulos.AddRange(articulos);
             contexto.OpcionesMenu.AddRange(opcionesP);
@@ -145,6 +160,7 @@ namespace centro.recursos.net.Models.Inicializadores
             contexto.BotonesAvisos.AddRange(botones);
             contexto.AvisosCarrusel.AddRange(avisos);
             contexto.NoticiasPrincipales.AddRange(noticias);
+            contexto.Multimedia.AddRange(multimedia);
 
             contexto.SaveChanges();
         }
