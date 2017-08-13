@@ -24,7 +24,8 @@
 /** Sección 1 Carrusel STYLES **/
 
 #seccion1Principal,
-#seccion2Principal {
+#seccion2Principal,
+#seccion3Principal {
     position: absolute;
     left: 0;
     top: 0;
@@ -66,13 +67,24 @@
         /* rgba(106, 96, 107, 0.5); */
     }
 
+/* Sección 3 Multimedia STYLES */
+
+#seccion3Principal {
+    top: 200%;
+    overflow: hidden;
+}
+
 
 /** Sección 2 Carrusel STYLES **/
 
 @media screen and (min-width: 600px) and (max-width: 1025px) {
     #seccion2Principal {
+        top: 200%;
         height: auto;
         background-image: url('../imagenes/home/fondo5.jpeg');
+    }
+    #seccion3Principal {
+        top: 100%;
     }
 }
 
@@ -84,6 +96,10 @@
     }
     #seccion2Principal {
         height: auto;
+        top: 200%;
         background-image: url('../imagenes/home/fondo5.jpg');
+    }
+    #seccion3Principal {
+        top: 100%;
     }
 }

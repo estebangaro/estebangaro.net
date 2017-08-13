@@ -99,6 +99,26 @@ END;
 GO
 
 /*
+	Columnas autocalculadas [SeccionPrincipal].[Multimedia]
+*/
+
+GO
+ALTER TABLE [SeccionPrincipal].[Multimedia]
+ADD CONSTRAINT default_multimedia DEFAULT GETDATE() FOR [Fecha Creacion];
+GO
+GO
+CREATE TRIGGER actualizaFechaMod_Multimedia
+ON [SeccionPrincipal].[Multimedia]
+AFTER UPDATE AS  
+BEGIN
+	UPDATE Modificados
+	SET Modificados.[Fecha Modificacion] = GETDATE()
+	FROM [SeccionPrincipal].[Multimedia] Modificados INNER JOIN
+		inserted ON Modificados.MultimediaId = inserted.MultimediaId;
+END;
+GO
+
+/*
 	Columnas autocalculadas [Menu].[Opciones]
 */
 

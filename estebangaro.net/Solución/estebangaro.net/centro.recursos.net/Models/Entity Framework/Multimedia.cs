@@ -8,6 +8,7 @@ namespace centro.recursos.net.Models.Entity_Framework
     public class Multimedia
     {
         public int MultimediaId { get; set; }
+        public string Titulo { get; set; }
         public string Informacion { get; set; }
         public string Imagen { get; set; }
         public int Orden { get; set; }

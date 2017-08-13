@@ -19,6 +19,12 @@ namespace centro.recursos.net.Models.Configuraciones_Fluent_API
                 .IsRequired()
                 .HasMaxLength(255);
 
+            Property(mult => mult.Titulo)
+                .HasColumnName("TituloMultimedia")
+                .IsUnicode()
+                .IsRequired()
+                .HasMaxLength(50);
+
             Property(mult => mult.Imagen)
                 .HasColumnName("UriImagen")
                 .IsUnicode()

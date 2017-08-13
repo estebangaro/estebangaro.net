@@ -15,12 +15,14 @@
     <link href="~/Resources/css/home.css" rel="stylesheet" />
     <link href="~/Resources/css/carrusel.css" rel="stylesheet" />
     <link href="~/Resources/css/noticias.css" rel="stylesheet" />
+    <link href="~/Resources/css/multimedia.css" rel="stylesheet" />
     <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.2.1/jquery.min.js"></script>
     <script src="~/Resources/javascript/home.js"></script>
     <script src="~/Resources/javascript/busqueda.js"></script>
     <script src="~/Resources/javascript/menu.js"></script>
     <script src="~/Resources/javascript/carrusel.js"></script>
     <script src="~/Resources/javascript/noticias.js"></script>
+    <script src="~/Resources/javascript/multimedia.js"></script>
 </head>
 
 <body>
@@ -37,6 +39,9 @@
         <div class="Contenido">
             @Html.Action("_NoticiasP")
         </div>
+    </div>
+    <div id="seccion3Principal">
+        @Html.Action("_SeccionesMultimedia")
     </div>
 </body>
 </html>
