@@ -1,0 +1,113 @@
+<!DOCTYPE html>
+<html>
+
+<head>
+    <title>Diseño sección autores</title>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1" />
+    <!--<link href="css/style.css" rel="stylesheet" />-->
+    <style>
+        #ctdrVentanaAutores {
+            height: 1000px;
+            width: 85%;
+            margin: 0 auto;
+            position: relative;
+            overflow: hidden;
+        }
+        
+        #ventanaAutores {
+            position: absolute;
+            top: 0;
+            left: 0;
+            overflow: hidden;
+            width: 133.33%;
+            transition: all 1s linear;
+        }
+        
+        .ctdrAutor {
+            width: 25%;
+            box-sizing: border-box;
+            float: left;
+        }
+        
+        .ctdrAutor>div.fotoAutor {
+            margin: 0 auto;
+            width: 135px;
+            height: 135px;
+            border-radius: 50%;
+            box-sizing: border-box;
+            overflow: hidden;
+        }
+        
+        div.fotoAutor>img {
+            width: 100%;
+            height: 100%;
+        }
+        
+        .ctdrAutor>p.nombreAutor {
+            width: 100%;
+            text-align: center;
+        }
+        
+        div.division {
+            border: solid blue 1px;
+            width: 90%;
+            margin: 0 auto;
+        }
+        
+        .ctdrAutor>p.puestoAutor {
+            width: 100%;
+            text-align: center;
+        }
+        
+        #seccion4Principal {
+            width: 100%;
+            height: 100%;
+            top: 0;
+            left: 0;
+        }
+    </style>
+</head>
+
+<body>
+    <div id="seccion4Principal">
+        <div id="ctdrVentanaAutores">
+            <div id="ventanaAutores">
+                <div class="ctdrAutor">
+                    <div class="fotoAutor">
+                        <img src="../../imagenes/garo.jpg" alt="">
+                    </div>
+                    <p class="nombreAutor">Esteban GaRo</p>
+                    <div class="division"></div>
+                    <p class="puestoAutor">CEO</p>
+                </div>
+                <div class="ctdrAutor">
+                    <div class="fotoAutor">
+                        <img src="../../imagenes/garo.jpg" alt="">
+                    </div>
+                    <p class="nombreAutor">Esteban GaRo 2</p>
+                    <div class="division"></div>
+                    <p class="puestoAutor">CEO</p>
+                </div>
+                <div class="ctdrAutor">
+                    <div class="fotoAutor">
+                        <img src="../../imagenes/garo.jpg" alt="">
+                    </div>
+                    <p class="nombreAutor">Esteban GaRo 2</p>
+                    <div class="division"></div>
+                    <p class="puestoAutor">CEO</p>
+                </div>
+                <div class="ctdrAutor">
+                    <div class="fotoAutor">
+                        <img src="../../imagenes/garo.jpg" alt="">
+                    </div>
+                    <p class="nombreAutor">Esteban GaRo 2</p>
+                    <div class="division"></div>
+                    <p class="puestoAutor">CEO</p>
+                </div>
+            </div>
+        </div>
+    </div>
+</body>
+
+</html>
