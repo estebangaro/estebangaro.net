@@ -59,7 +59,7 @@
     position: absolute;
     top: 0;
     left: 0;
-    width: 300%;
+    /*width: 300%; */
     /* En función del número de elementos multimedia */
     height: 100%;
     overflow: hidden;
@@ -68,7 +68,7 @@
 
 #ctdrMultimedia>.ctdMultimedia {
     box-sizing: border-box;
-    width: 33.33%;
+    /* width: 33.33%; */
     /*En función del número de elementos multimedia*/
     float: left;
     height: 100%;
