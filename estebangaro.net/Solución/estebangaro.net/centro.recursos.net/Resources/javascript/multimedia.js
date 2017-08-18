@@ -2,6 +2,7 @@
             ajustaResize();
             enlazaEvts();
             $(window).resize(ajustaResize);
+            ajustarDimensionCtdrs();
         });
 
         function resetFranjaOp(seleccionado) {
@@ -56,6 +57,12 @@
                     'opacity': '0'
                 });
             }
+        }
+
+        function ajustarDimensionCtdrs() {
+            var opcionesMultimedia = parseInt($('#numeroOpcionesMult').val());
+            $('#ctdrMultimedia').css('width', (opcionesMultimedia * 100) + '%');
+            $('#ctdrMultimedia>.ctdMultimedia').css('width', (100/opcionesMultimedia).toFixed(2) + '%');
         }
 
         function enlazaEvts() {
