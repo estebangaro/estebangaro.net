@@ -25,7 +25,8 @@
 
 #seccion1Principal,
 #seccion2Principal,
-#seccion3Principal {
+#seccion3Principal,
+#seccion4Principal {
     position: absolute;
     left: 0;
     top: 0;
@@ -73,6 +74,13 @@
 #seccion3Principal {
     top: 200%;
     overflow: hidden;
+}
+
+
+/* Sección 4 Autores STYLES */
+
+#seccion4Principal {
+    top: 300%;
 }
 
 
