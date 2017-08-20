@@ -1,10 +1,9 @@
-var _numAutoresVisible_autores, _numDesplazamientos_autores, _posicion_autores;
+var _numAutoresVisible_autores, _numDesplazamientos_autores, _posicion_autores,
+    _temporizador_autores;
 $(function() {
     ajustaVentanaAutores();
-    $('.btnsAutores').click(desplazaAutores);
-    setInterval(function() {
-        $('#derAutor').click();
-    }, 5000);
+    $('.btns').click(desplazaAutores);
+    iniciaTemporizador();
     $(window).resize(
         function() {
             ajustaVentanaAutores();
@@ -45,8 +44,19 @@ function ajustaVentanaAutores() {
     }
 }
 
-function desplazaAutores() {
+function iniciaTemporizador() {
+    _temporizador_autores = setInterval(function() {
+        desplazaAutores({ data: true });
+    }, 5000);
+}
+
+function desplazaAutores(estado) {
     if ($('.btnsAutores').css('display') != 'none') {
+        if (estado.data == null) {
+            clearInterval(_temporizador_autores);
+            iniciaTemporizador();
+        }
+
         if ($(this).attr('id') == 'izqAutor')
             _posicion_autores -= 1;
         else
