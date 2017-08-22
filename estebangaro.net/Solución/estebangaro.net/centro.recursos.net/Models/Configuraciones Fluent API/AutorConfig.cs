@@ -38,6 +38,14 @@ namespace centro.recursos.net.Models.Configuraciones_Fluent_API
                 .HasMaxLength(255)
                 .IsOptional();
 
+            Property(a => a.Estado)
+                .HasColumnName("EsVisible")
+                .IsRequired();
+
+            Property(a => a.Orden)
+                .HasColumnName("Prioridad")
+                .IsRequired();
+
             /* Asociaciones con Puesto y Articulos se describen en las respectivas configuraciones */
         }
 

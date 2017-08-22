@@ -52,6 +52,14 @@ namespace centro.recursos.net.Models.Inicializadores
                 new Articulo{ Localizacion = "Ciudad de México", Titulo = "Windows Presentation Foundation", // [15]
                     URI = "/Frameworks/WPF", Auditoria = new InfoRegistro{ UsuarioCreacion = "estebangaro"}}
             };
+            Autor[] autores = 
+            {
+                new Autor{ Apellido = "GaRo", Articulos = articulos, Auditoria = new InfoRegistro { UsuarioCreacion = "estebangaro" },
+                    Estado = true, Imagen = "garo.jpg", Nacimiento = new DateTime(1991, 09, 25), Nombre = "Esteban",
+                    Puesto = new Puesto{ Auditoria = new InfoRegistro { UsuarioCreacion = "estebangaro"},
+                        Descripcion = "Desarrollador .NET en Financiera Contigo", Nombre = "Desarrollador .NET",
+                        Inicio = new DateTime(2016, 01, 18) }, Orden = 1 }
+            };
             OpcionMenu[] opcionesP =
             {
                 new OpcionMenu{ Auditoria = new InfoRegistro { UsuarioCreacion = "estebangaro" },
@@ -154,6 +162,7 @@ namespace centro.recursos.net.Models.Inicializadores
             };
 
             contexto.Articulos.AddRange(articulos);
+            contexto.Autores.AddRange(autores);
             contexto.OpcionesMenu.AddRange(opcionesP);
             contexto.OpcionesMenu.AddRange(subOpciones1);
             contexto.OpcionesMenu.AddRange(subOpciones2);

@@ -98,12 +98,17 @@
   <ItemGroup>
     <Content Include="Global.asax" />
     <Content Include="Models\Scripts\Columnas Autocalculadas.sql" />
+    <Content Include="Resources\css\autores.css" />
     <Content Include="Resources\css\buscar.css" />
     <Content Include="Resources\css\carrusel.css" />
     <Content Include="Resources\css\home.css" />
     <Content Include="Resources\css\menu.css" />
     <Content Include="Resources\css\multimedia.css" />
     <Content Include="Resources\css\noticias.css" />
+    <Content Include="Resources\imagenes\autores\facebook-icon.png" />
+    <Content Include="Resources\imagenes\autores\garo.jpg" />
+    <Content Include="Resources\imagenes\autores\linkedin-icon.png" />
+    <Content Include="Resources\imagenes\autores\twitter-icon.png" />
     <Content Include="Resources\imagenes\carrusel\boton_c1.png" />
     <Content Include="Resources\imagenes\carrusel\boton_c3.png" />
     <Content Include="Resources\imagenes\carrusel\flecha2D.png" />
@@ -112,6 +117,8 @@
     <Content Include="Resources\imagenes\home\fondo4.jpg" />
     <Content Include="Resources\imagenes\home\fondo5.jpeg" />
     <Content Include="Resources\imagenes\home\fondo5.jpg" />
+    <Content Include="Resources\imagenes\home\fondo6.jpg" />
+    <Content Include="Resources\imagenes\home\fondo7.jpg" />
     <Content Include="Resources\imagenes\menu\busqueda.png" />
     <Content Include="Resources\imagenes\menu\cerrar.png" />
     <Content Include="Resources\imagenes\menu\flecha.png" />
@@ -123,6 +130,7 @@
     <Content Include="Resources\imagenes\noticias\asp.png" />
     <Content Include="Resources\imagenes\noticias\entity.png" />
     <Content Include="Resources\imagenes\noticias\mysql.png" />
+    <Content Include="Resources\javascript\autores.js" />
     <Content Include="Resources\javascript\busqueda.js" />
     <Content Include="Resources\javascript\carrusel.js" />
     <Content Include="Resources\javascript\home.js" />
@@ -175,6 +183,7 @@
     <Content Include="Views\Home\Inicio.cshtml" />
     <Content Include="Views\Shared\_NoticiasP.cshtml" />
     <Content Include="Views\Shared\_SeccionesMultimedia.cshtml" />
+    <Content Include="Views\Shared\_SeccionesAutor.cshtml" />
     <None Include="Web.Debug.config">
       <DependentUpon>Web.config</DependentUpon>
     </None>

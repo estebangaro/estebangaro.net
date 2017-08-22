@@ -1,0 +1,13 @@
+﻿@model List<centro.recursos.net.Models.Entity_Framework.Autor>
+
+<input id="numAutores" type="hidden" value="@Model.Count" />
+@foreach (var Autor in Model) {
+<div class="ctdrAutor">
+    <div class="fotoAutor">
+        <img src="/Resources/imagenes/autores/@Autor.Imagen" alt="">
+    </div>
+    <p class="nombreAutor">@(Autor.Nombre + " " + Autor.Apellido)</p>
+<div class="division"></div>
+    <p class="puestoAutor">@Autor.Puesto.Nombre</p>
+</div>
+}
