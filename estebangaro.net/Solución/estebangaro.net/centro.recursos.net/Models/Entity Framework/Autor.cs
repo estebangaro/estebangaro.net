@@ -14,6 +14,8 @@ namespace centro.recursos.net.Models.Entity_Framework
         public DateTime Nacimiento { get; set; }
         public InfoRegistro Auditoria { get; set; }
         public string Imagen { get; set; }
+        public bool Estado { get; set; }
+        public int Orden { get; set; }
 
         public int IdPuesto { get; set; }
         public virtual Puesto Puesto { get; set; }

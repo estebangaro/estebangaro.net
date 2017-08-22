@@ -158,6 +158,37 @@ namespace centro.recursos.net.Models.Repositorios
             return estado;
         }
 
+        public Respuesta<List<Autor>> ObtenAutores()
+        {
+            dbContextoEF.Configuration.ProxyCreationEnabled = false;
+            Respuesta<List<Autor>> estado;
+
+            try
+            {
+                var autores = dbContextoEF.Autores.
+                    Include(aut => aut.Puesto).
+                    Where(aut => aut.Estado).
+                    OrderBy(aut => aut.Orden).
+                    ToList();
+
+                if (autores.Count > 0) // Recuperar de archivo de configuración.
+                    estado = Respuesta<object>.GeneraRespuestaNoExcepcion<List<Autor>>(true, autores);
+                else
+                    estado = Respuesta<object>.
+                        GeneraRespuestaNoExcepcion<List<Autor>>(false, null,
+                        detalle: "Tenemos problemas para recuperar la sección autores, intentalo mas tarde",
+                        iconoCliente: ICONOS_RESPUESTA.ADVERTENCIA);
+            }
+            catch (Exception ex)
+            {
+                estado = Respuesta<object>.
+                    GeneraRespuestaExcepcion<List<Autor>>(ex,
+                    NombreMetodo: "GaroNetDb.ObtenAutores()");
+            }
+
+            return estado;
+        }
+
         #endregion
     }
 }

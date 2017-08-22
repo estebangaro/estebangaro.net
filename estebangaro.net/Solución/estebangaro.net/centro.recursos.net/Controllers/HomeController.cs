@@ -91,5 +91,19 @@ namespace centro.recursos.net.Controllers
 
             return resultado;
         }
+
+        public PartialViewResult _SeccionesAutor()
+        {
+            Respuesta<List<Autor>> autores = Repositorio.ObtenAutores();
+            PartialViewResult resultado = null;
+            if (autores.Estado)
+                resultado = PartialView(autores.Resultado);
+            else
+                ViewBag.LayoutExcepcion += (ViewBag.LayoutExcepcion != null ?
+                    $"@{GeneraRespuestaExcepcion<List<Autor>>(autores)}" :
+                    GeneraRespuestaExcepcion<List<Autor>>(autores));
+
+            return resultado;
+        }
     }
 }

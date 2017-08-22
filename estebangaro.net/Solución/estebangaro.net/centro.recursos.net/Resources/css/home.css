@@ -25,7 +25,8 @@
 
 #seccion1Principal,
 #seccion2Principal,
-#seccion3Principal {
+#seccion3Principal,
+#seccion4Principal {
     position: absolute;
     left: 0;
     top: 0;
@@ -75,6 +76,12 @@
 }
 
 
+/* Sección 4 Autores STYLES */
+
+#seccion4Principal {
+    top: 300%;
+}
+
 /** Sección 2 Carrusel STYLES **/
 
 @media screen and (min-width: 600px) and (max-width: 1025px) {
@@ -97,7 +104,17 @@
     #seccion2Principal {
         height: auto;
         top: 200%;
-        background-image: url('../imagenes/home/fondo5.jpg');
+        background-image: url('../imagenes/home/fondo7.jpg');
+        background-size: contain;
+        background-repeat: repeat;
+    }
+    #seccion4Principal {
+        background-image: url('../imagenes/home/fondo6.jpg');
+        background-size: contain;
+        background-repeat: repeat;
+    }
+    .ctdrAutor{
+        background-color:rgba(0,0,0, 0.7);
     }
     #seccion3Principal {
         top: 100%;

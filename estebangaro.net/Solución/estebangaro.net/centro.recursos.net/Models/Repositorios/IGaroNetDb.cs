@@ -17,5 +17,7 @@ namespace centro.recursos.net.Models.Repositorios
         Respuesta<List<NoticiaPrincipal>> ObtenNoticias();
 
         Respuesta<List<Multimedia>> ObtenMultimedia();
+
+        Respuesta<List<Autor>> ObtenAutores();
     }
 }
