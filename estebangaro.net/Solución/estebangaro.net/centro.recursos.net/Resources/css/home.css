@@ -108,6 +108,16 @@
         background-size: contain;
         background-repeat: repeat;
     }
+        #seccion2Principal > div.Contenido {
+            width:100%;
+        }
+            #seccion2Principal > div.Contenido > .noticiasR:first-child {
+                background-color: rgb(153,0,153);
+            }
+            #seccion2Principal > div.Contenido > .noticiasR:last-child {
+                background-color: rgb(0,0,0);
+            }
+        
     #seccion4Principal {
         background-image: url('../imagenes/home/fondo6.jpg');
         background-size: contain;
