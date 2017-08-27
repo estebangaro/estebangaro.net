@@ -1,0 +1,64 @@
+﻿<!DOCTYPE html>
+<html>
+
+<head>
+    <title>Test visualizador</title>
+    <meta charset="UTF-8" />
+    <!--<link href="css/style.css" rel="stylesheet">-->
+    <style>
+        .reservada{
+            color:blue;
+        }
+        .assembly{
+            color:gray;
+        }
+        .class{
+            color: darkcyan;
+        }
+        .coments{
+            color: forestgreen;
+        }
+        .strings {
+            color: orangered;
+        }
+    </style>
+</head>
+
+<body>
+    <div>
+<pre>
+<span class="reservada">using</span> <span class="assembly">System;</span>
+<span class="reservada">using</span> <span class="assembly">System.Collections.Generic;</span>
+<span class="reservada">using</span> <span class="assembly">System.Linq;</span>
+<span class="reservada">using</span> <span class="assembly">System.Text;</span>
+<span class="reservada">using</span> <span class="assembly">System.Threading.Tasks;</span>
+
+<span class="reservada">namespace</span> <span>delegados_t2_2</span>
+<span>{</span>
+    <span class="reservada">class</span> <span class="class">Program</span>
+    <span>{</span>
+        <span class="reservada">static</span> <span class="reservada">void</span> <span>Main(<span class="reservada">string</span>[]</span> <span>args)</span>
+        <span>{</span>
+            <span class="coments">// Se solicita el número entero A</span>
+            <span><span class="class">Console</span>.WriteLine(</span> <span class="strings">"Introducir número A: "</span> <span>);</span>
+            <span class="reservada">int</span> <span>A</span> <span>=</span> <span><span class="reservada">int</span>.Parse(<span class="class">Console</span>.ReadLine());</span>
+            <span class="coments">// Se solicita el número entero B</span>
+            <span><span class="class">Console</span>.WriteLine(</span> <span class="strings">"Introducir número B: "</span> <span>);</span>
+            <span class="reservada">int</span> <span>B</span> <span>=</span> <span><span class="reservada">int</span>.Parse(<span class="class">Console</span>.ReadLine());</span>
+
+            <span class="coments">// Se crea una instancia de Operaciones (expuesta por el proyecto de</span>
+            <span class="coments">// bibliotecas "delegados t2 1")</span>
+            <span>delegados_t2_1.<span class="class">Operaciones</span></span> <span>operacion</span> <span>=</span>
+                <span class="reservada">new</span> <span>delegados_t2_1.<span class="class">Operaciones</span>();</span>
+            <span class="coments">// Se asigna método con nombre a la referencia delegado Action string</span>
+            <span>operacion.MostrarMsj</span> <span>=</span> <span><span class="class">Console</span>.WriteLine;</span>
+            <span class="coments">// Se obtiene el resultado de la operación.</span>
+            <span class="reservada">float</span> <span>division</span> <span>=</span> <span>operacion.Divide(A, B);</span>
+        <span>}</span>
+    <span>}</span>
+<span>}</span>
+</pre>
+    </div>
+</body>
+
+</html>
