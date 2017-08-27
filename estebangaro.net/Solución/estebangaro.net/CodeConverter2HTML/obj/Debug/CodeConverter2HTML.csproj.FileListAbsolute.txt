@@ -1,0 +1,6 @@
+C:\Users\esteb\Documents\GitHub\estebangaro.net\estebangaro.net\Solución\estebangaro.net\CodeConverter2HTML\bin\Debug\CodeConverter2HTML.exe.config
+C:\Users\esteb\Documents\GitHub\estebangaro.net\estebangaro.net\Solución\estebangaro.net\CodeConverter2HTML\bin\Debug\CodeConverter2HTML.exe
+C:\Users\esteb\Documents\GitHub\estebangaro.net\estebangaro.net\Solución\estebangaro.net\CodeConverter2HTML\bin\Debug\CodeConverter2HTML.pdb
+C:\Users\esteb\Documents\GitHub\estebangaro.net\estebangaro.net\Solución\estebangaro.net\CodeConverter2HTML\obj\Debug\CodeConverter2HTML.csprojResolveAssemblyReference.cache
+C:\Users\esteb\Documents\GitHub\estebangaro.net\estebangaro.net\Solución\estebangaro.net\CodeConverter2HTML\obj\Debug\CodeConverter2HTML.exe
+C:\Users\esteb\Documents\GitHub\estebangaro.net\estebangaro.net\Solución\estebangaro.net\CodeConverter2HTML\obj\Debug\CodeConverter2HTML.pdb
