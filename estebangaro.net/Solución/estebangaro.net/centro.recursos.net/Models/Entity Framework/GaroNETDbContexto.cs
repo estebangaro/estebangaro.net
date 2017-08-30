@@ -22,6 +22,8 @@
         public virtual DbSet<Puesto> Puestos { get; set; }
         public virtual DbSet<Autor> Autores { get; set; }
         public virtual DbSet<Multimedia> Multimedia { get; set; }
+        public virtual DbSet<PalabraCodigo> PalabrasCode { get; set; }
+        public virtual DbSet<CategoriaPalabraCodigo> CategoriasPalabrasCode { get; set; }
 
         protected override void OnModelCreating(DbModelBuilder modelBuilder)
         {
@@ -34,7 +36,9 @@
                 .Add(new ComentarioConfig())
                 .Add(new PuestoConfig())
                 .Add(new AutorConfig())
-                .Add(new MultimediaConfig());
+                .Add(new MultimediaConfig())
+                .Add(new PalabraCodigoConfig())
+                .Add(new CategoriaPalabraCodigoConfig());
         }
     }
 }

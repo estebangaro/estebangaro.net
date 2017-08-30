@@ -1,0 +1,51 @@
+<!DOCTYPE html><html>
+<hea>
+<title> Test visualizador </title>
+<meta charset = "UTF-8" />
+<style>
+.reservada{
+color: blue;
+}
+.assembly{
+color: gray;
+}
+.class{
+color: darkcyan;
+}
+.coments{
+color: forestgreen;
+}
+.strings {
+color: orangered;
+}
+</style>
+</head>
+<body>
+<div>
+<pre>
+<span class="reservada">using</span> <span class="assembly">System</span>;
+<span class="reservada">using</span> <span class="assembly">System.Collections.Generic</span>;
+<span class="reservada">using</span> <span class="assembly">System.Linq</span>;
+<span class="reservada">using</span> <span class="assembly">System.Text</span>;
+<span class="reservada">using</span> <span class="assembly">System.Threading.Tasks</span>;
+
+<span class="reservada">namespace</span> delegados_t2_2
+{
+    <span class="reservada">class</span> <span class="class">Program</span>
+    {
+        <span class="reservada">static</span> void Main(<span class="reservada">string</span>[] args)
+        {
+            <span class="class">Console</span>.WriteLine<span class="strings">("Introducir número A: "</span>);
+            <span class="reservada">int</span> A = <span class="reservada">int</span>.Parse(<span class="class">Console</span>.ReadLine());
+            <span class="class">Console</span>.WriteLine<span class="strings">("Introducir número B: "</span>);
+            <span class="reservada">int</span> B = <span class="reservada">int</span>.Parse(<span class="class">Console</span>.ReadLine());
+
+            delegados_t2_1.<span class="class">Operaciones</span> operacion =
+                new delegados_t2_1.<span class="class">Operaciones</span>();
+            operacion.MostrarMsj = <span class="class">Console</span>.WriteLine;
+
+            <span class="reservada">float</span> division = operacion.Divide(A, B);
+        }
+    }
+}
+</pre></div></body></html>

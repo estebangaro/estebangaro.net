@@ -1,0 +1,134 @@
+<!DOCTYPE html><html>
+<hea>
+<title> Test visualizador </title>
+<meta charset = "UTF-8" />
+<style>
+.reservada{
+color: blue;
+}
+.assembly{
+color: gray;
+}.normal{color: black;}
+.class{
+color: darkcyan;
+}
+.coments{
+color: forestgreen;
+}
+.strings {
+color: orangered;
+}
+</style>
+</head>
+<body>
+<div>
+<pre>
+<span class="reservada">using</span> <span class="assembly">centro.recursos.net.Models.Entity_Framework</span>;
+<span class="reservada">using</span> <span class="assembly">centro.recursos.net.Models.Utileria</span>;
+<span class="reservada">using</span> <span class="assembly">System</span>;
+<span class="reservada">using</span> <span class="assembly">System.Collections.Generic</span>;
+<span class="reservada">using</span> <span class="assembly">System.Linq</span>;
+<span class="reservada">using</span> <span class="assembly">System.Web</span>;
+<span class="reservada">using</span> <span class="assembly">System.Web.Mvc</span>;
+
+<span class="reservada">namespace</span> centro.recursos.net.Controllers
+{
+    <span class="reservada">public</span> <span class="reservada">class</span> HomeController : ControladorBase
+    {
+        <span class="coments">// Home</span>
+        <span class="reservada">public</span> ActionResult GaRoNET()
+        {
+            <span class="coments">//HabilitaBD();</span>
+            <span class="coments">//CargaDatos();</span>
+            <span class="reservada">return</span> View<span class="strings">("Inicio"</span>);
+        }
+
+        <span class="reservada">public</span> PartialViewResult _Menu()
+        {
+            <span class="class">Respuesta</span>&lt;<span class="class">List</span>&lt;OpcionMenu&gt;&gt; opciones;
+
+            <span class="reservada">if</span> (Session<span class="strings">["_HTMLmenu"</span>] == <span class="reservada">null</span>)
+                opciones = Repositorio.ObtenOpcionesMenu();
+            <span class="reservada">else</span>
+                opciones = <span class="reservada">null</span>;
+            PartialViewResult resultado = <span class="reservada">null</span>;
+            <span class="reservada">if</span> (opciones != <span class="reservada">null</span> && opciones.Estado)
+                resultado = PartialView(opciones.Resultado);
+            <span class="reservada">else</span> <span class="reservada">if</span> (opciones != <span class="reservada">null</span>)
+                ViewBag.LayoutExcepcion += (ViewBag.LayoutExcepcion != <span class="reservada">null</span> ?
+                    $"@{GeneraRespuestaExcepcion&lt;<span class="class">List</span>&lt;OpcionMenu&gt;&gt;(opciones)}" :
+                    GeneraRespuestaExcepcion&lt;<span class="class">List</span>&lt;OpcionMenu&gt;&gt;(opciones));
+            <span class="reservada">else</span>
+                resultado = PartialView(<span class="reservada">null</span>);
+
+            <span class="reservada">return</span> resultado;
+        }
+
+        <span class="reservada">public</span> PartialViewResult _Carrusel()
+        {
+            <span class="class">Respuesta</span>&lt;<span class="class">List</span>&lt;AvisoCarrusel&gt;&gt; avisos;
+
+            <span class="reservada">if</span> (Session<span class="strings">["_HTMLavisoscarrusel"</span>] == <span class="reservada">null</span>)
+                avisos = Repositorio.ObtenAvisosCarrusel();
+            <span class="reservada">else</span>
+                avisos = <span class="reservada">null</span>;
+            PartialViewResult resultado = <span class="reservada">null</span>;
+
+            <span class="reservada">if</span> (avisos != <span class="reservada">null</span> && avisos.Estado)
+                resultado = PartialView(avisos.Resultado);
+            <span class="reservada">else</span> <span class="reservada">if</span> (avisos != <span class="reservada">null</span>)
+                ViewBag.LayoutExcepcion += (ViewBag.LayoutExcepcion != <span class="reservada">null</span> ?
+                    $"@{GeneraRespuestaExcepcion&lt;<span class="class">List</span>&lt;AvisoCarrusel&gt;&gt;(avisos)}" :
+                    GeneraRespuestaExcepcion&lt;<span class="class">List</span>&lt;AvisoCarrusel&gt;&gt;(avisos));
+            <span class="reservada">else</span>
+            {
+                resultado = PartialView(<span class="reservada">null</span>);
+                ViewBag.AvisosCuenta = ((Tuple&lt;MvcHtmlString, <span class="reservada">int</span>&gt;)Session<span class="strings">["_HTMLavisoscarrusel"</span>]).Item2;
+            }
+
+            <span class="reservada">return</span> resultado;
+        }
+
+        <span class="reservada">public</span> PartialViewResult _NoticiasP()
+        {
+            <span class="class">Respuesta</span>&lt;<span class="class">List</span>&lt;NoticiaPrincipal&gt;&gt; noticias = Repositorio.ObtenNoticias();
+            PartialViewResult resultado = <span class="reservada">null</span>;
+            <span class="reservada">if</span> (noticias.Estado)
+                resultado = PartialView(noticias.Resultado);
+            <span class="reservada">else</span>
+                ViewBag.LayoutExcepcion += (ViewBag.LayoutExcepcion != <span class="reservada">null</span> ?
+                    $"@{GeneraRespuestaExcepcion&lt;<span class="class">List</span>&lt;NoticiaPrincipal&gt;&gt;(noticias)}" :
+                    GeneraRespuestaExcepcion&lt;<span class="class">List</span>&lt;NoticiaPrincipal&gt;&gt;(noticias));
+
+            <span class="reservada">return</span> resultado;
+        }
+
+        <span class="reservada">public</span> PartialViewResult _SeccionesMultimedia()
+        {
+            <span class="class">Respuesta</span>&lt;<span class="class">List</span>&lt;<span class="class">Multimedia</span>&gt;&gt; multimedia = Repositorio.ObtenMultimedia();
+            PartialViewResult resultado = <span class="reservada">null</span>;
+            <span class="reservada">if</span> (multimedia.Estado)
+                resultado = PartialView(multimedia.Resultado);
+            <span class="reservada">else</span>
+                ViewBag.LayoutExcepcion += (ViewBag.LayoutExcepcion != <span class="reservada">null</span> ?
+                    $"@{GeneraRespuestaExcepcion&lt;<span class="class">List</span>&lt;<span class="class">Multimedia</span>&gt;&gt;(multimedia)}" :
+                    GeneraRespuestaExcepcion&lt;<span class="class">List</span>&lt;<span class="class">Multimedia</span>&gt;&gt;(multimedia));
+
+            <span class="reservada">return</span> resultado;
+        }
+
+        <span class="reservada">public</span> PartialViewResult _SeccionesAutor()
+        {
+            <span class="class">Respuesta</span>&lt;<span class="class">List</span>&lt;Autor&gt;&gt; autores = Repositorio.ObtenAutores();
+            PartialViewResult resultado = <span class="reservada">null</span>;
+            <span class="reservada">if</span> (autores.Estado)
+                resultado = PartialView(autores.Resultado);
+            <span class="reservada">else</span>
+                ViewBag.LayoutExcepcion += (ViewBag.LayoutExcepcion != <span class="reservada">null</span> ?
+                    $"@{GeneraRespuestaExcepcion&lt;<span class="class">List</span>&lt;Autor&gt;&gt;(autores)}" :
+                    GeneraRespuestaExcepcion&lt;<span class="class">List</span>&lt;Autor&gt;&gt;(autores));
+
+            <span class="reservada">return</span> resultado;
+        }
+    }
+}</pre></div></body></html>

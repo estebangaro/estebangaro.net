@@ -1,9 +1,11 @@
 ﻿using System;
 using System.Collections.Generic;
+using System.IO;
 using System.Linq;
 using System.Text;
 using System.Text.RegularExpressions;
 using System.Threading.Tasks;
+using System.Xml.Linq;
 
 namespace CodeConverter2HTML
 {
@@ -11,31 +13,28 @@ namespace CodeConverter2HTML
     {
         static void Main(string[] args)
         {
-            string code = GetCode();
-            //List<string> codeLines = code.Split('\n').ToList();
+            string code = PrepareCodeString(GetCode());
 
-            //foreach(string line in codeLines)
-            //{
-            //    var coincidencias = line
-            //        .Split(' ')
-            //        .Where(EvalComentsStrings);
-            //    Console.WriteLine(line);
-            //}
-            Console.WriteLine("Antes de reemplazo");
-            Console.WriteLine(code);
             code = ReplaceAssemblyWords(code);
             code = ReplaceKeyReservedWords(code);
             code = ReplaceClassWords(code);
             code = ReplaceKeyReservedWordsWithWhiteSkips(code);
             code = ReplaceStrings(code);
             code = ReplaceComments(code);
-            Console.WriteLine("Después de reemplazo");
-            Console.WriteLine(code);
+            code = ReplaceBrackets(code);
+            WriteCode(code);
+        }
+
+        static string PrepareCodeString(string code)
+        {
+            return code.Replace("<", "|").Replace(">", "*");
         }
 
         static string ReplaceKeyReservedWords(string inputString)
         {
-            string[] keywords = { "int", "decimal", "float", "string", "double", "short", "static", "namespace", "using" };
+            string[] keywords = { "int", "decimal", "float", "public",
+                "string", "double", "short", "static", "namespace",
+                "using", "false", "var", "try", "if", "else", "object", "null", "true", "catch", "return" };
             foreach (var primitivo in keywords)
             {
                 inputString = Regex.Replace(inputString, $@"\b{primitivo}\b", $"<span class=\"reservada\">{primitivo}</span>");
@@ -84,7 +83,7 @@ namespace CodeConverter2HTML
 
         static string ReplaceClassWords(string inputString)
         {
-            string[] classWords = { "Console", "Program", "Operaciones"};
+            string[] classWords = { "Console", "Program", "Operaciones", "List", "Multimedia", "Respuesta"};
             foreach (var primitivo in classWords)
             {
                 inputString = Regex.Replace(inputString, $@"\b{primitivo}\b", 
@@ -96,18 +95,18 @@ namespace CodeConverter2HTML
 
         static string ReplaceStrings(string inputString)
         {
-            inputString = Regex.Replace(inputString, "[^=]\"[\\w \\.ÁÉÍÓÚáéíóú:]+\"",
+            inputString = Regex.Replace(inputString, "[^=]\"[\\w \\.ÁÉÍÓÚáéíóú:{}@\\(\\)\\*\\|]+\"",
                     match =>
                     {
                         string matchWithOutSpan = Regex.Replace(match.Value, "<span class=\"\\w+\">(?<value>.+)</span>",
-                                match2 =>
-                                {
-                                    return match2.Value.
-                                        Replace(match2.Value, match2.Groups["value"].Value);
-                                }
+                                match2 => match2.Value.Replace(match2.Value, match2.Groups["value"].Value)
                             );
-                        return matchWithOutSpan.Replace(matchWithOutSpan,
-                            $"<span class=\"strings\">{matchWithOutSpan}</span>");
+                        string matchWithOutInter = Regex.Replace(matchWithOutSpan, "{(?<value>.+)}",
+                                 match2 => match2.Value.Replace(match2.Value, 
+                                    $"<span class=\"normal\">{match2.Value}</span>")
+                            );
+                        return matchWithOutInter.Replace(matchWithOutInter,
+                            $"<span class=\"strings\">{matchWithOutInter}</span>");
                     });
 
             return inputString;
@@ -132,38 +131,87 @@ namespace CodeConverter2HTML
             return inputString;
         }
 
+        static string ReplaceBrackets(string inputString)
+        {
+            inputString = Regex
+                .Replace(inputString, "\\*", "&gt;");
+            inputString = Regex
+                .Replace(inputString, "\\|", "&lt;");
+
+            return inputString;
+        }
+
         static string GetCode()
         {
-            return "using System;\r\n" +
-            "using System.Collections.Generic;\r\n" +
-            "using System.Linq;\r\n" +
-            "using System.Text;\r\n" +
-            "using System.Threading.Tasks;\r\n" +
-            "\r\n" +
-            "namespace delegados_t2_2\r\n" +
-            "{\r\n" +
-            "    class Program\r\n" +
-            "    {\r\n" +
-            "        static void Main(string[] args)\r\n" +
-            "        {\r\n" +
-            "            // Se solicita el número entero A\r\n" +
-            "            Console.WriteLine( \"Introducir número A: \" );\r\n" +
-            "            int A = int.Parse(Console.ReadLine());\r\n" +
-            "            // Se solicita el número entero B\r\n" +
-            "            Console.WriteLine( \"Introducir número B: \" );\r\n" +
-            "            int B = int.Parse(Console.ReadLine());\r\n" +
-            "\r\n" +
-            "            // Se crea una instancia de Operaciones (expuesta por el proyecto de\r\n" +
-            "            // bibliotecas \"delegados_t2_1\")\r\n" +
-            "            delegados_t2_1.Operaciones operacion =\r\n" +
-            "                new delegados_t2_1.Operaciones();\r\n" +
-            "            // Se asigna método con nombre a la referencia delegado Action<string>\r\n" +
-            "            operacion.MostrarMsj = Console.WriteLine;\r\n" +
-            "            // Se obtiene el resultado de la operación.\r\n" +
-            "            float division = operacion.Divide(A, B);\r\n" +
-            "        }\r\n" +
-            "    }\r\n" +
-            "}\r\n";
+            string code;
+            try
+            {
+                using (FileStream streamCodeFile = new FileStream("Program 2.cs", FileMode.Open, FileAccess.Read))
+                {
+                    using (StreamReader codeReader = new StreamReader(streamCodeFile))
+                    {
+                        code = codeReader.ReadToEnd();
+                    }
+                }
+            }
+            catch
+            {
+                code = null;
+            }
+
+            return code;
+        }
+
+        static bool WriteCode(string code)
+        {
+            string htmlTemplate =
+                "<!DOCTYPE html>"+
+ "<html>\r\n"+
+ "<hea>\r\n" +
+     "<title> Test visualizador </title>\r\n" +
+        "<meta charset = \"UTF-8\" />\r\n" +
+         "<style>\r\n" +
+             ".reservada{\r\n" +
+                "color: blue;\r\n" +
+            "}\r\n" +
+        ".assembly{\r\n" +
+                "color: gray;\r\n" +
+            "}.normal{color: black;}\r\n" +
+        ".class{\r\n" +
+            "color: darkcyan;\r\n" +
+        "}\r\n" +
+        ".coments{\r\n" +
+            "color: forestgreen;\r\n" +
+        "}\r\n" +
+        ".strings {\r\n" +
+            "color: orangered;\r\n" +
+        "}\r\n" +
+    "</style>\r\n" +
+"</head>\r\n" +
+"<body>\r\n" +
+"<div>\r\n" +
+"<pre>\r\n" + code + "</pre></div></body></html>";
+                
+            bool stateWriteProcess;
+            try
+            {
+                if (File.Exists("Program 2.html")) File.Delete("Program 2.html");
+                using (FileStream streamCodeFile = new FileStream("Program 2.html",
+                FileMode.Create, FileAccess.Write))
+                {
+                    using (StreamWriter codeWritter = new StreamWriter(streamCodeFile))
+                    {
+                        codeWritter.WriteLine(htmlTemplate);
+                        stateWriteProcess = true;
+                    }
+                }
+            }
+            catch
+            {
+                stateWriteProcess = false;
+            }
+
+            return stateWriteProcess;
         }
     }
 }
