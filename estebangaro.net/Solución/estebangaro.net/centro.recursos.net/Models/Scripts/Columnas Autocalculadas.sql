@@ -177,3 +177,43 @@ BEGIN
 		inserted ON Modificados.Id = inserted.Id;
 END;
 GO
+
+/*
+	Columnas autocalculadas [Configuracion].[CategoriasPalabrasCodigo]
+*/
+
+GO
+ALTER TABLE [Configuracion].[CategoriasPalabrasCodigo]
+ADD CONSTRAINT default_categoriaspalabrascodigo DEFAULT GETDATE() FOR [Fecha Creacion];
+GO
+GO
+CREATE TRIGGER actualizaFechaMod_CategoriasPalabrasCodigo
+ON [Configuracion].[CategoriasPalabrasCodigo]
+AFTER UPDATE AS  
+BEGIN
+	UPDATE Modificados
+	SET Modificados.[Fecha Modificacion] = GETDATE()
+	FROM [Configuracion].[CategoriasPalabrasCodigo] Modificados INNER JOIN
+		inserted ON Modificados.Id = inserted.Id;
+END;
+GO
+
+/*
+	Columnas autocalculadas [Configuracion].[CategoriasPalabrasCodigo]
+*/
+
+GO
+ALTER TABLE [Configuracion].[PalabrasCodigo]
+ADD CONSTRAINT default_PalabrasCodigo DEFAULT GETDATE() FOR [Fecha Creacion];
+GO
+GO
+CREATE TRIGGER actualizaFechaMod_CategoriasPalabrasCodigo
+ON [Configuracion].[PalabrasCodigo]
+AFTER UPDATE AS  
+BEGIN
+	UPDATE Modificados
+	SET Modificados.[Fecha Modificacion] = GETDATE()
+	FROM [Configuracion].[PalabrasCodigo] Modificados INNER JOIN
+		inserted ON Modificados.Id = inserted.Id;
+END;
+GO

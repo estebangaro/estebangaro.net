@@ -4,22 +4,35 @@ using System.IO;
 using System.Linq;
 using System.Text;
 using System.Text.RegularExpressions;
+using centro.recursos.net.Models.Utileria;
+using centro.recursos.net.Models.Entity_Framework;
+using centro.recursos.net.Models.Repositorios;
 using System.Threading.Tasks;
 using System.Xml.Linq;
+using System.Configuration;
 
 namespace CodeConverter2HTML
 {
     class Program
     {
+        static string CadenaConexion
+        {
+            get
+            {
+                string amb = ConfigurationManager.AppSettings["ambiente"];
+                amb = string.IsNullOrEmpty(amb) ? "dev" : amb;
+                return $"GaroNETDbContexto_{amb}";
+            }
+        }
+
         static void Main(string[] args)
         {
             string code = PrepareCodeString(GetCode());
 
+            code = ReplaceStrings(code);
             code = ReplaceAssemblyWords(code);
             code = ReplaceKeyReservedWords(code);
-            code = ReplaceClassWords(code);
-            code = ReplaceKeyReservedWordsWithWhiteSkips(code);
-            code = ReplaceStrings(code);
+            code = CleanStrings(code);
             code = ReplaceComments(code);
             code = ReplaceBrackets(code);
             WriteCode(code);
@@ -32,28 +45,50 @@ namespace CodeConverter2HTML
 
         static string ReplaceKeyReservedWords(string inputString)
         {
-            string[] keywords = { "int", "decimal", "float", "public",
+            /* string[] keywords = { "int", "decimal", "float", "public",
                 "string", "double", "short", "static", "namespace",
-                "using", "false", "var", "try", "if", "else", "object", "null", "true", "catch", "return" };
-            foreach (var primitivo in keywords)
+                "using", "false", "var", "try", "if", "else", "object", "null", "true", "catch", "return" }; */
+
+            GaroNetDb contextoBD = new GaroNetDb(CadenaConexion);
+            List<string> keywords = null;
+            Respuesta<List<PalabraCodigo>> estado = contextoBD.ObtenPalabrasCodigo();
+            if (estado.Estado)
             {
-                inputString = Regex.Replace(inputString, $@"\b{primitivo}\b", $"<span class=\"reservada\">{primitivo}</span>");
+                keywords = estado.Resultado
+                    .Where(palabra => palabra.CategoriaId == 1)
+                    .Select(palabra => palabra.Nombre)
+                    .ToList();
+                foreach (var primitivo in keywords)
+                {
+                    inputString = Regex.Replace(inputString, $@"\b{primitivo}\b", $"<span class=\"reservada\">{primitivo}</span>");
+                }
             }
+
+            inputString = ReplaceClassWords(inputString, estado.Resultado);
+            inputString = ReplaceKeyReservedWordsWithWhiteSkips(inputString, estado.Resultado);
 
             return inputString;
         }
 
-        static string ReplaceKeyReservedWordsWithWhiteSkips(string inputString)
+        static string ReplaceKeyReservedWordsWithWhiteSkips(string inputString,
+             List<PalabraCodigo> palabras)
         {
-            string[] keywords = { "class" };
-            foreach (var primitivo in keywords)
+            if (palabras != null)
             {
-                inputString = Regex.Replace(inputString, $@"( {primitivo} |^{primitivo} )",
-                    match =>
-                    {
-                        return match.Value.
-                            Replace(primitivo, $"<span class=\"reservada\">{primitivo}</span>");
-                    });
+                List<string> keywords = palabras
+                    .Where(palabra => palabra.CategoriaId == 3)
+                    .Select(palabra => palabra.Nombre)
+                    .ToList();
+
+                foreach (var primitivo in keywords)
+                {
+                    inputString = Regex.Replace(inputString, $@"( {primitivo} |^{primitivo} )",
+                        match =>
+                        {
+                            return match.Value.
+                                Replace(primitivo, $"<span class=\"reservada\">{primitivo}</span>");
+                        });
+                }
             }
 
             return inputString;
@@ -81,32 +116,58 @@ namespace CodeConverter2HTML
             return inputString;
         }
 
-        static string ReplaceClassWords(string inputString)
+        static string ReplaceClassWords(string inputString, 
+            List<PalabraCodigo> palabras)
         {
-            string[] classWords = { "Console", "Program", "Operaciones", "List", "Multimedia", "Respuesta"};
-            foreach (var primitivo in classWords)
+            // string[] classWords = { "Console", "Program", "Operaciones", "List", "Multimedia", "Respuesta"};
+            GaroNetDb contextoBD = new GaroNetDb(CadenaConexion);
+            List<string> classWords = null;
+      
+            if (palabras != null)
             {
-                inputString = Regex.Replace(inputString, $@"\b{primitivo}\b", 
-                    $"<span class=\"class\">{primitivo}</span>");
+                classWords = palabras
+                    .Where(palabra => palabra.CategoriaId == 2)
+                    .Select(palabra => palabra.Nombre)
+                    .ToList();
+                foreach (var primitivo in classWords)
+                {
+                    inputString = Regex.Replace(inputString, $@"\b{primitivo}\b",
+                        $"<span class=\"class\">{primitivo}</span>");
+                }
             }
+
+            return inputString;
+        }
+
+        static string CleanStrings(string inputString)
+        {
+            inputString = Regex.Replace(inputString,
+                  "(?<prevalue>[^=])(?<value>\".+\")",
+                    match =>
+                    {
+                        //string matchWithOutSpan = Regex.Replace(match.Groups["value"].Value,
+                        //        "<span class=\"()\">(?<value>.+)</span>",
+                        //        match2 => match2.Value.Replace(match2.Value, match2.Groups["value"].Value)
+                        //    );
+                        string matchWithOutInter = Regex.Replace(match.Groups["value"].Value, "{(?<value>.+)}",
+                                 match2 => match2.Value.Replace(match2.Value,
+                                    $"<span class=\"normal\">{match2.Value}</span>")
+                            );
+                        return match.Groups["prevalue"].Value + matchWithOutInter;
+                    });
 
             return inputString;
         }
 
         static string ReplaceStrings(string inputString)
         {
-            inputString = Regex.Replace(inputString, "[^=]\"[\\w \\.ÁÉÍÓÚáéíóú:{}@\\(\\)\\*\\|]+\"",
+            inputString = Regex.Replace(inputString,
+                  "(?<prevalue>[^=])(?<value>\".+\")",
                     match =>
                     {
-                        string matchWithOutSpan = Regex.Replace(match.Value, "<span class=\"\\w+\">(?<value>.+)</span>",
-                                match2 => match2.Value.Replace(match2.Value, match2.Groups["value"].Value)
-                            );
-                        string matchWithOutInter = Regex.Replace(matchWithOutSpan, "{(?<value>.+)}",
-                                 match2 => match2.Value.Replace(match2.Value, 
-                                    $"<span class=\"normal\">{match2.Value}</span>")
-                            );
-                        return matchWithOutInter.Replace(matchWithOutInter,
-                            $"<span class=\"strings\">{matchWithOutInter}</span>");
+                        return match.Groups["prevalue"].Value + match.Groups["value"].Value.
+                            Replace(match.Groups["value"].Value,
+                            $"<span class=\"strings\">{match.Groups["value"].Value}</span>");
                     });
 
             return inputString;
