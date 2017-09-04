@@ -176,7 +176,7 @@ namespace centro.recursos.net.Models.Inicializadores
                 new PalabraCodigo{ Auditoria = new InfoRegistro { UsuarioCreacion = "estebangaro" },
                 Nombre = "public", Categoria = categoriasPalabras[0] },
                 new PalabraCodigo{ Auditoria = new InfoRegistro { UsuarioCreacion = "estebangaro" },
-                Nombre = "Console", Categoria = categoriasPalabras[0] },
+                Nombre = "Console", Categoria = categoriasPalabras[1] },
                 new PalabraCodigo{ Auditoria = new InfoRegistro { UsuarioCreacion = "estebangaro" },
                 Nombre = "protected", Categoria = categoriasPalabras[0] },
                 new PalabraCodigo{ Auditoria = new InfoRegistro { UsuarioCreacion = "estebangaro" },
@@ -232,9 +232,43 @@ namespace centro.recursos.net.Models.Inicializadores
                 new PalabraCodigo{ Auditoria = new InfoRegistro { UsuarioCreacion = "estebangaro" },
                 Nombre = "async", Categoria = categoriasPalabras[0] },
                 new PalabraCodigo{ Auditoria = new InfoRegistro { UsuarioCreacion = "estebangaro" },
-                Nombre = "await", Categoria = categoriasPalabras[0] }
+                Nombre = "await", Categoria = categoriasPalabras[0] },
+                new PalabraCodigo{ Auditoria = new InfoRegistro { UsuarioCreacion = "estebangaro" },
+                Nombre = "abstract", Categoria = categoriasPalabras[0] },
+                new PalabraCodigo{ Auditoria = new InfoRegistro { UsuarioCreacion = "estebangaro" },
+                Nombre = "interface", Categoria = categoriasPalabras[0] },
+                new PalabraCodigo{ Auditoria = new InfoRegistro { UsuarioCreacion = "estebangaro" },
+                Nombre = "Task", Categoria = categoriasPalabras[1] },
+                new PalabraCodigo{ Auditoria = new InfoRegistro { UsuarioCreacion = "estebangaro" },
+                Nombre = "DbContext", Categoria = categoriasPalabras[1] },
+                new PalabraCodigo{ Auditoria = new InfoRegistro { UsuarioCreacion = "estebangaro" },
+                Nombre = "List", Categoria = categoriasPalabras[1] },
+                new PalabraCodigo{ Auditoria = new InfoRegistro { UsuarioCreacion = "estebangaro" },
+                Nombre = "Dictionary", Categoria = categoriasPalabras[1] },
+                new PalabraCodigo{ Auditoria = new InfoRegistro { UsuarioCreacion = "estebangaro" },
+                Nombre = "IEnumerable", Categoria = categoriasPalabras[1] },
+                new PalabraCodigo{ Auditoria = new InfoRegistro { UsuarioCreacion = "estebangaro" },
+                Nombre = "File", Categoria = categoriasPalabras[1] },
+                new PalabraCodigo{ Auditoria = new InfoRegistro { UsuarioCreacion = "estebangaro" },
+                Nombre = "FileStream", Categoria = categoriasPalabras[1] },
+                new PalabraCodigo{ Auditoria = new InfoRegistro { UsuarioCreacion = "estebangaro" },
+                Nombre = "StreamReader", Categoria = categoriasPalabras[1] },
+                new PalabraCodigo{ Auditoria = new InfoRegistro { UsuarioCreacion = "estebangaro" },
+                Nombre = "StreamWritter", Categoria = categoriasPalabras[1] },
+                new PalabraCodigo{ Auditoria = new InfoRegistro { UsuarioCreacion = "estebangaro" },
+                Nombre = "Controller", Categoria = categoriasPalabras[1] },
+                new PalabraCodigo{ Auditoria = new InfoRegistro { UsuarioCreacion = "estebangaro" },
+                Nombre = "ApiController", Categoria = categoriasPalabras[1] },
+                new PalabraCodigo{ Auditoria = new InfoRegistro { UsuarioCreacion = "estebangaro" },
+                Nombre = "HttpResponseMessage", Categoria = categoriasPalabras[1] },
+                new PalabraCodigo{ Auditoria = new InfoRegistro { UsuarioCreacion = "estebangaro" },
+                Nombre = "HttpRequestMessage", Categoria = categoriasPalabras[1] },
+                new PalabraCodigo{ Auditoria = new InfoRegistro { UsuarioCreacion = "estebangaro" },
+                Nombre = "MediaTypeFormatter", Categoria = categoriasPalabras[1] }
             };
 
+            contexto.CategoriasPalabrasCode.AddRange(categoriasPalabras);
+            contexto.PalabrasCode.AddRange(palabras);
             contexto.Articulos.AddRange(articulos);
             contexto.Autores.AddRange(autores);
             contexto.OpcionesMenu.AddRange(opcionesP);

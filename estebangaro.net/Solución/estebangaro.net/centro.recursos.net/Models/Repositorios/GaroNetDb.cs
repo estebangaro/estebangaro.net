@@ -189,6 +189,34 @@ namespace centro.recursos.net.Models.Repositorios
             return estado;
         }
 
+        public Respuesta<List<PalabraCodigo>> ObtenPalabrasCodigo()
+        {
+            dbContextoEF.Configuration.ProxyCreationEnabled = false;
+            Respuesta<List<PalabraCodigo>> estado;
+
+            try
+            {
+                var palabras = dbContextoEF.PalabrasCode.
+                    ToList();
+
+                if (palabras.Count > 0) // Recuperar de archivo de configuración.
+                    estado = Respuesta<object>.GeneraRespuestaNoExcepcion<List<PalabraCodigo>>(true, palabras);
+                else
+                    estado = Respuesta<object>.
+                        GeneraRespuestaNoExcepcion<List<PalabraCodigo>>(false, null,
+                        detalle: "Tenemos problemas para recuperar las palabras de código, intentalo mas tarde",
+                        iconoCliente: ICONOS_RESPUESTA.ADVERTENCIA);
+            }
+            catch (Exception ex)
+            {
+                estado = Respuesta<object>.
+                    GeneraRespuestaExcepcion<List<PalabraCodigo>>(ex,
+                    NombreMetodo: "GaroNetDb.ObtenPalabrasCodigo()");
+            }
+
+            return estado;
+        }
+
         #endregion
     }
 }

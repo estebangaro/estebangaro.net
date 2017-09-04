@@ -19,5 +19,7 @@ namespace centro.recursos.net.Models.Repositorios
         Respuesta<List<Multimedia>> ObtenMultimedia();
 
         Respuesta<List<Autor>> ObtenAutores();
+
+        Respuesta<List<PalabraCodigo>> ObtenPalabrasCodigo();
     }
 }
