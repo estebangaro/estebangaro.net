@@ -142,13 +142,21 @@ namespace CodeConverter2HTML
         static string CleanStrings(string inputString)
         {
             inputString = Regex.Replace(inputString,
+                "[^=]\"([^<>]*(<span class=\"\\w+\">\\w+</span>)+[^<>]*)+\"",
+                match =>
+                {
+                    string matchWithOutSpan = Regex.Replace(match.Value,
+                            "<span class=\"\\w+\">(?<value>.+)</span>",
+                            match2 => match2.Value.Replace(match2.Value, match2.Groups["value"].Value)
+                        );
+
+                    return matchWithOutSpan;
+                });
+
+            inputString = Regex.Replace(inputString,
                   "(?<prevalue>[^=])(?<value>\".+\")",
                     match =>
                     {
-                        //string matchWithOutSpan = Regex.Replace(match.Groups["value"].Value,
-                        //        "<span class=\"()\">(?<value>.+)</span>",
-                        //        match2 => match2.Value.Replace(match2.Value, match2.Groups["value"].Value)
-                        //    );
                         string matchWithOutInter = Regex.Replace(match.Groups["value"].Value, "{(?<value>.+)}",
                                  match2 => match2.Value.Replace(match2.Value,
                                     $"<span class=\"normal\">{match2.Value}</span>")

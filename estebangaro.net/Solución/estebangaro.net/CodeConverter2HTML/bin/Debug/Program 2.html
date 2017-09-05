@@ -23,284 +23,112 @@ color: orangered;
 <body>
 <div>
 <pre>
+<span class="reservada">using</span> <span class="assembly">centro.recursos.net.Models.Entity_Framework</span>;
+<span class="reservada">using</span> <span class="assembly">centro.recursos.net.Models.Utileria</span>;
 <span class="reservada">using</span> <span class="assembly">System</span>;
 <span class="reservada">using</span> <span class="assembly">System.Collections.Generic</span>;
-<span class="reservada">using</span> <span class="assembly">System.IO</span>;
 <span class="reservada">using</span> <span class="assembly">System.Linq</span>;
-<span class="reservada">using</span> <span class="assembly">System.Text</span>;
-<span class="reservada">using</span> <span class="assembly">System.Text.RegularExpressions</span>;
-<span class="reservada">using</span> <span class="assembly">centro.recursos.net.Models.Utileria</span>;
-<span class="reservada">using</span> <span class="assembly">centro.recursos.net.Models.Entity_Framework</span>;
-<span class="reservada">using</span> <span class="assembly">centro.recursos.net.Models.Repositorios</span>;
-<span class="reservada">using</span> <span class="assembly">System.Threading.Tasks</span>;
-<span class="reservada">using</span> <span class="assembly">System.Xml.Linq</span>;
-<span class="reservada">using</span> <span class="assembly">System.Configuration</span>;
+<span class="reservada">using</span> <span class="assembly">System.Web</span>;
+<span class="reservada">using</span> <span class="assembly">System.Web.Mvc</span>;
 
-<span class="reservada">namespace</span> CodeConverter2HTML
+<span class="reservada">namespace</span> centro.recursos.net.Controllers
 {
-    <span class="reservada">class</span> Program
+    <span class="reservada">public</span> <span class="reservada">class</span> HomeController : ControladorBase
     {
-        <span class="reservada">static</span> <span class="reservada">string</span> CadenaConexion
+        <span class="coments">// Home</span>
+        <span class="reservada">public</span> ActionResult GaRoNET()
         {
-            <span class="reservada">get</span>
+            <span class="coments">//HabilitaBD();</span>
+            <span class="coments">//CargaDatos();</span>
+            <span class="reservada">return</span> View(<span class="strings">"Inicio"</span>);
+        }
+
+        <span class="reservada">public</span> PartialViewResult _Menu()
+        {
+            Respuesta&lt;<span class="class">List</span>&lt;OpcionMenu&gt;&gt; opciones;
+
+            <span class="reservada">if</span> (Session[<span class="strings">"_HTMLmenu"</span>] == <span class="reservada">null</span>)
+                opciones = Repositorio.ObtenOpcionesMenu();
+            <span class="reservada">else</span>
+                opciones = <span class="reservada">null</span>;
+            PartialViewResult resultado = <span class="reservada">null</span>;
+            <span class="reservada">if</span> (opciones != <span class="reservada">null</span> && opciones.Estado)
+                resultado = PartialView(opciones.Resultado);
+            <span class="reservada">else</span> <span class="reservada">if</span> (opciones != <span class="reservada">null</span>)
+                ViewBag.LayoutExcepcion += (ViewBag.LayoutExcepcion != <span class="reservada">null</span> ?
+                    $<span class="strings">"@<span class="normal">{GeneraRespuestaExcepcion&lt;List&lt;OpcionMenu&gt;&gt;(opciones)}</span>"</span> :
+                    GeneraRespuestaExcepcion&lt;<span class="class">List</span>&lt;OpcionMenu&gt;&gt;(opciones));
+            <span class="reservada">else</span>
+                resultado = PartialView(<span class="reservada">null</span>);
+
+            <span class="reservada">return</span> resultado;
+        }
+
+        <span class="reservada">public</span> PartialViewResult _Carrusel()
+        {
+            Respuesta&lt;<span class="class">List</span>&lt;AvisoCarrusel&gt;&gt; avisos;
+
+            <span class="reservada">if</span> (Session[<span class="strings">"_HTMLavisoscarrusel"</span>] == <span class="reservada">null</span>)
+                avisos = Repositorio.ObtenAvisosCarrusel();
+            <span class="reservada">else</span>
+                avisos = <span class="reservada">null</span>;
+            PartialViewResult resultado = <span class="reservada">null</span>;
+
+            <span class="reservada">if</span> (avisos != <span class="reservada">null</span> && avisos.Estado)
+                resultado = PartialView(avisos.Resultado);
+            <span class="reservada">else</span> <span class="reservada">if</span> (avisos != <span class="reservada">null</span>)
+                ViewBag.LayoutExcepcion += (ViewBag.LayoutExcepcion != <span class="reservada">null</span> ?
+                    $<span class="strings">"@<span class="normal">{GeneraRespuestaExcepcion&lt;List&lt;AvisoCarrusel&gt;&gt;(avisos)}</span>"</span> :
+                    GeneraRespuestaExcepcion&lt;<span class="class">List</span>&lt;AvisoCarrusel&gt;&gt;(avisos));
+            <span class="reservada">else</span>
             {
-                <span class="reservada">string</span> amb = ConfigurationManager.AppSettings[<span class="strings">"ambiente"</span>];
-                amb = <span class="reservada">string</span>.IsNullOrEmpty(amb) ? <span class="strings">"dev"</span> : amb;
-                <span class="reservada">return</span> $<span class="strings">"GaroNETDbContexto_<span class="normal">{amb}</span>"</span>;
-            }
-        }
-
-        <span class="reservada">static</span> <span class="reservada">void</span> Main(<span class="reservada">string</span>[] args)
-        {
-            <span class="reservada">string</span> code = PrepareCodeString(GetCode());
-
-            code = ReplaceStrings(code);
-            code = ReplaceAssemblyWords(code);
-            code = ReplaceKeyReservedWords(code);
-            code = CleanStrings(code);
-            code = ReplaceComments(code);
-            code = ReplaceBrackets(code);
-            WriteCode(code);
-        }
-
-        <span class="reservada">static</span> <span class="reservada">string</span> PrepareCodeString(<span class="reservada">string</span> code)
-        {
-            <span class="reservada">return</span> code.Replace(<span class="strings">"&lt;", "&lt;").Replace("&gt;", "&gt;"</span>);
-        }
-
-        <span class="reservada">static</span> <span class="reservada">string</span> ReplaceKeyReservedWords(<span class="reservada">string</span> inputString)
-        {
-            /&gt; <span class="reservada">string</span>[] keywords = { <span class="strings">"<span class="reservada">int</span>", "<span class="reservada">decimal</span>", "<span class="reservada">float</span>", "<span class="reservada">public</span>"</span>,
-                <span class="strings">"<span class="reservada">string</span>", "<span class="reservada">double</span>", "<span class="reservada">short</span>", "<span class="reservada">static</span>", "<span class="reservada">namespace</span>"</span>,
-                <span class="strings">"<span class="reservada">using</span>", "<span class="reservada">false</span>", "var", "try", "<span class="reservada">if</span>", "<span class="reservada">else</span>", "<span class="reservada">object</span>", "<span class="reservada">null</span>", "<span class="reservada">true</span>", "catch", "<span class="reservada">return</span>"</span> }; &gt;/
-
-            GaroNetDb contextoBD = new GaroNetDb(CadenaConexion);
-            <span class="class">List</span>&lt;<span class="reservada">string</span>&gt; keywords = <span class="reservada">null</span>;
-            Respuesta&lt;<span class="class">List</span>&lt;PalabraCodigo&gt;&gt; estado = contextoBD.ObtenPalabrasCodigo();
-            <span class="reservada">if</span> (estado.Estado)
-            {
-                keywords = estado.Resultado
-                    .Where(palabra =&gt; palabra.CategoriaId == 1)
-                    .Select(palabra =&gt; palabra.Nombre)
-                    .ToList();
-                <span class="reservada">foreach</span> (var primitivo in keywords)
-                {
-                    inputString = Regex.Replace(inputString, $@<span class="strings">"\b<span class="normal">{primitivo}\b", $"&lt;span class=\"reservada\"&gt;{primitivo}</span>&lt;/span&gt;"</span>);
-                }
-            }
-
-            inputString = ReplaceClassWords(inputString, estado.Resultado);
-            inputString = ReplaceKeyReservedWordsWithWhiteSkips(inputString, estado.Resultado);
-
-            <span class="reservada">return</span> inputString;
-        }
-
-        <span class="reservada">static</span> <span class="reservada">string</span> ReplaceKeyReservedWordsWithWhiteSkips(<span class="reservada">string</span> inputString,
-             <span class="class">List</span>&lt;PalabraCodigo&gt; palabras)
-        {
-            <span class="reservada">if</span> (palabras != <span class="reservada">null</span>)
-            {
-                <span class="class">List</span>&lt;<span class="reservada">string</span>&gt; keywords = palabras
-                    .Where(palabra =&gt; palabra.CategoriaId == 3)
-                    .Select(palabra =&gt; palabra.Nombre)
-                    .ToList();
-
-                <span class="reservada">foreach</span> (var primitivo in keywords)
-                {
-                    inputString = Regex.Replace(inputString, $@<span class="strings">"( <span class="normal">{primitivo} &lt;^{primitivo}</span> )"</span>,
-                        match =&gt;
-                        {
-                            <span class="reservada">return</span> match.Value.
-                                Replace(primitivo, $<span class="strings">"&lt;span class=\"reservada\"&gt;<span class="normal">{primitivo}</span>&lt;/span&gt;"</span>);
-                        });
-                }
+                resultado = PartialView(<span class="reservada">null</span>);
+                ViewBag.AvisosCuenta = ((Tuple&lt;MvcHtmlString, <span class="reservada">int</span>&gt;)Session[<span class="strings">"_HTMLavisoscarrusel"</span>]).Item2;
             }
 
-            <span class="reservada">return</span> inputString;
+            <span class="reservada">return</span> resultado;
         }
 
-        <span class="reservada">static</span> <span class="reservada">string</span> ReplaceAssemblyWords(<span class="reservada">string</span> inputString)
+        <span class="reservada">public</span> PartialViewResult _NoticiasP()
         {
-            <span class="reservada">int</span> count = 0;
-            var matches = Regex.Matches(inputString, @<span class="strings">"<span class="reservada">using</span> (?&lt;ensamblado&gt;\w+[\.\w]&gt;);"</span>);
-            <span class="reservada">foreach</span>(Match match in matches)
-            {
-                StringBuilder stringBuilder = new StringBuilder(inputString);
-                <span class="reservada">string</span> assemblyMatchString = match.Groups[<span class="strings">"ensamblado"</span>].Value;
-                
-                inputString = stringBuilder.Replace(assemblyMatchString,
-                    assemblyMatchString.Replace(assemblyMatchString,
-                        $<span class="strings">"&lt;span class=\"assembly\"&gt;<span class="normal">{assemblyMatchString}</span>&lt;/span&gt;"</span>),
-                        match.Groups[<span class="strings">"ensamblado"</span>].Index + (count &gt; 30),
-                        match.Groups[<span class="strings">"ensamblado"</span>].Length
-                    ).ToString();
+            Respuesta&lt;<span class="class">List</span>&lt;NoticiaPrincipal&gt;&gt; noticias = Repositorio.ObtenNoticias();
+            PartialViewResult resultado = <span class="reservada">null</span>;
+            <span class="reservada">if</span> (noticias.Estado)
+                resultado = PartialView(noticias.Resultado);
+            <span class="reservada">else</span>
+                ViewBag.LayoutExcepcion += (ViewBag.LayoutExcepcion != <span class="reservada">null</span> ?
+                    $<span class="strings">"@<span class="normal">{GeneraRespuestaExcepcion&lt;List&lt;NoticiaPrincipal&gt;&gt;(noticias)}</span>"</span> :
+                    GeneraRespuestaExcepcion&lt;<span class="class">List</span>&lt;NoticiaPrincipal&gt;&gt;(noticias));
 
-                count++;
-            }
-
-            <span class="reservada">return</span> inputString;
+            <span class="reservada">return</span> resultado;
         }
 
-        <span class="reservada">static</span> <span class="reservada">string</span> ReplaceClassWords(<span class="reservada">string</span> inputString, 
-            <span class="class">List</span>&lt;PalabraCodigo&gt; palabras)
+        <span class="reservada">public</span> PartialViewResult _SeccionesMultimedia()
         {
-            <span class="coments">// string</span>[] classWords = { <span class="strings">"<span class="class">Console</span>", "Program", "Operaciones", "<span class="class">List</span>", "Multimedia", "Respuesta"};</span>
-            GaroNetDb contextoBD = new GaroNetDb(CadenaConexion);
-            <span class="class">List</span>&lt;<span class="reservada">string</span>&gt; classWords = <span class="reservada">null</span>;
-      
-            <span class="reservada">if</span> (palabras != <span class="reservada">null</span>)
-            {
-                classWords = palabras
-                    .Where(palabra =&gt; palabra.CategoriaId == 2)
-                    .Select(palabra =&gt; palabra.Nombre)
-                    .ToList();
-                <span class="reservada">foreach</span> (var primitivo in classWords)
-                {
-                    inputString = Regex.Replace(inputString, $@<span class="strings">"\b<span class="normal">{primitivo}</span>\b"</span>,
-                        $<span class="strings">"&lt;span class=\"class\"&gt;<span class="normal">{primitivo}</span>&lt;/span&gt;"</span>);
-                }
-            }
+            Respuesta&lt;<span class="class">List</span>&lt;Multimedia&gt;&gt; multimedia = Repositorio.ObtenMultimedia();
+            PartialViewResult resultado = <span class="reservada">null</span>;
+            <span class="reservada">if</span> (multimedia.Estado)
+                resultado = PartialView(multimedia.Resultado);
+            <span class="reservada">else</span>
+                ViewBag.LayoutExcepcion += (ViewBag.LayoutExcepcion != <span class="reservada">null</span> ?
+                    $<span class="strings">"@<span class="normal">{GeneraRespuestaExcepcion&lt;List&lt;Multimedia&gt;&gt;(multimedia)}</span>"</span> :
+                    GeneraRespuestaExcepcion&lt;<span class="class">List</span>&lt;Multimedia&gt;&gt;(multimedia));
 
-            <span class="reservada">return</span> inputString;
+            <span class="reservada">return</span> resultado;
         }
 
-        <span class="reservada">static</span> <span class="reservada">string</span> CleanStrings(<span class="reservada">string</span> inputString)
+        <span class="reservada">public</span> PartialViewResult _SeccionesAutor()
         {
-            inputString = Regex.Replace(inputString,
-                  <span class="strings">"(?&lt;prevalue&gt;[^=])(?&lt;value&gt;\".+\")"</span>,
-                    match =&gt;
-                    {
-                        <span class="coments">//string</span> matchWithOutSpan = Regex.Replace(match.Groups[<span class="strings">"value"].Value,</span>
-                        <span class="coments">//        "&lt;span class=\"()\"&gt;(?&lt;value&gt;.+)&lt;/span&gt;",</span>
-                        <span class="coments">//        match2 =&gt; match2.Value.Replace(match2.Value, match2.Groups["value"].Value)</span>
-                        <span class="coments">//    );</span>
-                        <span class="reservada">string</span> matchWithOutInter = Regex.Replace(match.Groups[<span class="strings">"value"].Value, "<span class="normal">{(?&lt;value&gt;.+)}</span>"</span>,
-                                 match2 =&gt; match2.Value.Replace(match2.Value,
-                                    $<span class="strings">"&lt;span class=\"normal\"&gt;<span class="normal">{match2.Value}</span>&lt;/span&gt;"</span>)
-                            );
-                        <span class="reservada">return</span> match.Groups[<span class="strings">"prevalue"</span>].Value + matchWithOutInter;
-                    });
+            Respuesta&lt;<span class="class">List</span>&lt;Autor&gt;&gt; autores = Repositorio.ObtenAutores();
+            PartialViewResult resultado = <span class="reservada">null</span>;
+            <span class="reservada">if</span> (autores.Estado)
+                resultado = PartialView(autores.Resultado);
+            <span class="reservada">else</span>
+                ViewBag.LayoutExcepcion += (ViewBag.LayoutExcepcion != <span class="reservada">null</span> ?
+                    $<span class="strings">"@<span class="normal">{GeneraRespuestaExcepcion&lt;List&lt;Autor&gt;&gt;(autores)}</span>"</span> :
+                    GeneraRespuestaExcepcion&lt;<span class="class">List</span>&lt;Autor&gt;&gt;(autores));
 
-            <span class="reservada">return</span> inputString;
-        }
-
-        <span class="reservada">static</span> <span class="reservada">string</span> ReplaceStrings(<span class="reservada">string</span> inputString)
-        {
-            inputString = Regex.Replace(inputString,
-                  <span class="strings">"(?&lt;prevalue&gt;[^=])(?&lt;value&gt;\".+\")"</span>,
-                    match =&gt;
-                    {
-                        <span class="reservada">return</span> match.Groups[<span class="strings">"prevalue"].Value + match.Groups["value"</span>].Value.
-                            Replace(match.Groups[<span class="strings">"value"</span>].Value,
-                            $<span class="strings">"&lt;span class=\"strings\"&gt;<span class="normal">{match.Groups["value"].Value}</span>&lt;/span&gt;"</span>);
-                    });
-
-            <span class="reservada">return</span> inputString;
-        }
-
-        <span class="reservada">static</span> <span class="reservada">string</span> ReplaceComments(<span class="reservada">string</span> inputString)
-        {
-            inputString = Regex.Replace(inputString, <span class="strings">"<span class="coments">//.+[^\r\n]"</span>,</span>
-                    match =&gt;
-                    {
-                         <span class="reservada">string</span> matchWithOutSpan = Regex.Replace(match.Value, <span class="strings">"&lt;span class=\"\\w+\"&gt;(?&lt;value&gt;.+)&lt;/span&gt;"</span>,
-                                match2 =&gt;
-                                {
-                                    <span class="reservada">return</span> match2.Value.
-                                        Replace(match2.Value, match2.Groups[<span class="strings">"value"</span>].Value);
-                                }
-                            );
-                        <span class="reservada">return</span> matchWithOutSpan.Replace(matchWithOutSpan,
-                            $<span class="strings">"&lt;span class=\"coments\"&gt;<span class="normal">{matchWithOutSpan}</span>&lt;/span&gt;"</span>);
-                    });
-
-            <span class="reservada">return</span> inputString;
-        }
-
-        <span class="reservada">static</span> <span class="reservada">string</span> ReplaceBrackets(<span class="reservada">string</span> inputString)
-        {
-            inputString = Regex
-                .Replace(inputString, <span class="strings">"\\&gt;", "&gt;"</span>);
-            inputString = Regex
-                .Replace(inputString, <span class="strings">"\\&lt;", "&lt;"</span>);
-
-            <span class="reservada">return</span> inputString;
-        }
-
-        <span class="reservada">static</span> <span class="reservada">string</span> GetCode()
-        {
-            <span class="reservada">string</span> code;
-            try
-            {
-                <span class="reservada">using</span> (<span class="class">FileStream</span> streamCodeFile = new <span class="class">FileStream</span>(<span class="strings">"Program 2.cs"</span>, FileMode.Open, FileAccess.Read))
-                {
-                    <span class="reservada">using</span> (<span class="class">StreamReader</span> codeReader = new <span class="class">StreamReader</span>(streamCodeFile))
-                    {
-                        code = codeReader.ReadToEnd();
-                    }
-                }
-            }
-            catch
-            {
-                code = <span class="reservada">null</span>;
-            }
-
-            <span class="reservada">return</span> code;
-        }
-
-        <span class="reservada">static</span> <span class="reservada">bool</span> WriteCode(<span class="reservada">string</span> code)
-        {
-            <span class="reservada">string</span> htmlTemplate =
-                <span class="strings">"&lt;!DOCTYPE html&gt;"</span>+
- <span class="strings">"&lt;html&gt;\r\n"</span>+
- <span class="strings">"&lt;hea&gt;\r\n"</span> +
-     <span class="strings">"&lt;title&gt; Test visualizador &lt;/title&gt;\r\n"</span> +
-        <span class="strings">"&lt;meta charset = \"UTF-8\" /&gt;\r\n"</span> +
-         <span class="strings">"&lt;style&gt;\r\n"</span> +
-             <span class="strings">".reservada{\r\n"</span> +
-                <span class="strings">"color: blue;\r\n"</span> +
-            <span class="strings">"}\r\n"</span> +
-        <span class="strings">".assembly{\r\n"</span> +
-                <span class="strings">"color: gray;\r\n"</span> +
-            <span class="strings">"}.normal<span class="normal">{color: black;}</span>\r\n"</span> +
-        <span class="strings">".class{\r\n"</span> +
-            <span class="strings">"color: darkcyan;\r\n"</span> +
-        <span class="strings">"}\r\n"</span> +
-        <span class="strings">".coments{\r\n"</span> +
-            <span class="strings">"color: forestgreen;\r\n"</span> +
-        <span class="strings">"}\r\n"</span> +
-        <span class="strings">".strings {\r\n"</span> +
-            <span class="strings">"color: orangered;\r\n"</span> +
-        <span class="strings">"}\r\n"</span> +
-    <span class="strings">"&lt;/style&gt;\r\n"</span> +
-<span class="strings">"&lt;/head&gt;\r\n"</span> +
-<span class="strings">"&lt;body&gt;\r\n"</span> +
-<span class="strings">"&lt;div&gt;\r\n"</span> +
-<span class="strings">"&lt;pre&gt;\r\n"</span> + code + 
-<span class="strings">"&lt;/pre&gt;&lt;/div&gt;&lt;/body&gt;&lt;/html&gt;"</span>;
-                
-            <span class="reservada">bool</span> stateWriteProcess;
-            try
-            {
-                <span class="reservada">if</span> (<span class="class">File</span>.Exists(<span class="strings">"Program 2.html")) <span class="class">File</span>.Delete("Program 2.html"</span>);
-                <span class="reservada">using</span> (<span class="class">FileStream</span> streamCodeFile = new <span class="class">FileStream</span>(<span class="strings">"Program 2.html"</span>,
-                FileMode.Create, FileAccess.Write))
-                {
-                    <span class="reservada">using</span> (StreamWriter codeWritter = new StreamWriter(streamCodeFile))
-                    {
-                        codeWritter.WriteLine(htmlTemplate);
-                        stateWriteProcess = <span class="reservada">true</span>;
-                    }
-                }
-            }
-            catch
-            {
-                stateWriteProcess = <span class="reservada">false</span>;
-            }
-
-            <span class="reservada">return</span> stateWriteProcess;
+            <span class="reservada">return</span> resultado;
         }
     }
-}
-
-</pre></div></body></html>
+}</pre></div></body></html>
