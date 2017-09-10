@@ -199,7 +199,7 @@ namespace centro.recursos.net.Models.Repositorios
                 var palabras = dbContextoEF.PalabrasCode.
                     ToList();
 
-                if (palabras.Count > 0) // Recuperar de archivo de configuración.
+                if (palabras.Count > 0)
                     estado = Respuesta<object>.GeneraRespuestaNoExcepcion<List<PalabraCodigo>>(true, palabras);
                 else
                     estado = Respuesta<object>.
@@ -212,6 +212,36 @@ namespace centro.recursos.net.Models.Repositorios
                 estado = Respuesta<object>.
                     GeneraRespuestaExcepcion<List<PalabraCodigo>>(ex,
                     NombreMetodo: "GaroNetDb.ObtenPalabrasCodigo()");
+            }
+
+            return estado;
+        }
+
+        public Respuesta<List<ClasePersonalizada>> ObtenClasesPersonalizadasCodigo(string articuloId = null)
+        {
+            dbContextoEF.Configuration.ProxyCreationEnabled = false;
+            Respuesta<List<ClasePersonalizada>> estado;
+
+            try
+            {
+                var clases = dbContextoEF
+                    .ClasesPersonalizadasCode
+                    .Where(clasep => clasep.ArticuloId == (articuloId!=null? articuloId: clasep.ArticuloId))
+                    .ToList();
+
+                if (clases.Count > 0)
+                    estado = Respuesta<object>.GeneraRespuestaNoExcepcion<List<ClasePersonalizada>>(true, clases);
+                else
+                    estado = Respuesta<object>.
+                        GeneraRespuestaNoExcepcion<List<ClasePersonalizada>>(true, null,
+                        detalle: "No existen clases personalizadas para la categoria especificada",
+                        iconoCliente: ICONOS_RESPUESTA.ADVERTENCIA);
+            }
+            catch (Exception ex)
+            {
+                estado = Respuesta<object>.
+                    GeneraRespuestaExcepcion<List<ClasePersonalizada>>(ex,
+                    NombreMetodo: "GaroNetDb.ObtenClasesPersonalizadasCodigo(int?)");
             }
 
             return estado;

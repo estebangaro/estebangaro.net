@@ -8,20 +8,20 @@ using System.Web.Mvc;
 
 namespace centro.recursos.net.Controllers
 {
-    public class HomeController : ControladorBase
+    public class HomeControllerFake : ControladorBase
     {
         // Home
         public ActionResult GaRoNET()
         {
-            //HabilitaBD();
-            //CargaDatos();
+            //Te AMO Jaky
+            //Mucho demasiado
             return View("Inicio");
         }
 
         public PartialViewResult _Menu()
         {
             Respuesta<List<OpcionMenu>> opciones;
-            string demoString = "Hola " + "Mundo";
+
             if (Session["_HTMLmenu"] == null)
                 opciones = Repositorio.ObtenOpcionesMenu();
             else
@@ -78,7 +78,7 @@ namespace centro.recursos.net.Controllers
             return resultado;
         }
 
-        public PartialViewResult _SeccionesMultimedia()
+        public PartialViewResult SeccionesMultimedia()
         {
             Respuesta<List<Multimedia>> multimedia = Repositorio.ObtenMultimedia();
             PartialViewResult resultado = null;

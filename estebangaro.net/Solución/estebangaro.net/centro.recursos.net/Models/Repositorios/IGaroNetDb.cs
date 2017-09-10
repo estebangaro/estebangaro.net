@@ -21,5 +21,7 @@ namespace centro.recursos.net.Models.Repositorios
         Respuesta<List<Autor>> ObtenAutores();
 
         Respuesta<List<PalabraCodigo>> ObtenPalabrasCodigo();
+
+        Respuesta<List<ClasePersonalizada>> ObtenClasesPersonalizadasCodigo(string articuloId = null);
     }
 }

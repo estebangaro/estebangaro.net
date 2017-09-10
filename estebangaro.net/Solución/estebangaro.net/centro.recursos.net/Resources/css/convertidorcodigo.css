@@ -1,0 +1,27 @@
+﻿.ctdrCodigo{
+    border: solid blue 1.5px;
+}
+
+.reservada {
+    color: blue;
+}
+
+.assembly {
+    color: gray;
+}
+
+.normal {
+    color: black;
+}
+
+.class {
+    color: darkcyan;
+}
+
+.coments {
+    color: forestgreen;
+}
+
+.strings {
+    color: orangered;
+}

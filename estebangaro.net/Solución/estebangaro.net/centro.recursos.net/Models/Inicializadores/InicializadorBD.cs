@@ -52,6 +52,25 @@ namespace centro.recursos.net.Models.Inicializadores
                 new Articulo{ Localizacion = "Ciudad de México", Titulo = "Windows Presentation Foundation", // [15]
                     URI = "/Frameworks/WPF", Auditoria = new InfoRegistro{ UsuarioCreacion = "estebangaro"}}
             };
+            ClasePersonalizada[] clasesPersonalizadas = 
+            {
+                new ClasePersonalizada{ Articulo = articulos[5], Nombre = "HomeControllerFake",
+                    Auditoria = new InfoRegistro{ UsuarioCreacion = "estebangaro"} },
+                new ClasePersonalizada{ Articulo = articulos[5], Nombre = "ControladorBase",
+                    Auditoria = new InfoRegistro{ UsuarioCreacion = "estebangaro"} },
+                new ClasePersonalizada{ Articulo = articulos[5], Nombre = "Respuesta",
+                    Auditoria = new InfoRegistro{ UsuarioCreacion = "estebangaro"} },
+                new ClasePersonalizada{ Articulo = articulos[5], Nombre = "OpcionMenu",
+                    Auditoria = new InfoRegistro{ UsuarioCreacion = "estebangaro"} },
+                new ClasePersonalizada{ Articulo = articulos[5], Nombre = "AvisoCarrusel",
+                    Auditoria = new InfoRegistro{ UsuarioCreacion = "estebangaro"} },
+                new ClasePersonalizada{ Articulo = articulos[5], Nombre = "NoticiaPrincipal",
+                    Auditoria = new InfoRegistro{ UsuarioCreacion = "estebangaro"} },
+                new ClasePersonalizada{ Articulo = articulos[5], Nombre = "Multimedia",
+                    Auditoria = new InfoRegistro{ UsuarioCreacion = "estebangaro"} },
+                new ClasePersonalizada{ Articulo = articulos[5], Nombre = "Autor",
+                    Auditoria = new InfoRegistro{ UsuarioCreacion = "estebangaro"} }
+            };
             Autor[] autores = 
             {
                 new Autor{ Apellido = "GaRo", Articulos = articulos, Auditoria = new InfoRegistro { UsuarioCreacion = "estebangaro" },
@@ -264,12 +283,17 @@ namespace centro.recursos.net.Models.Inicializadores
                 new PalabraCodigo{ Auditoria = new InfoRegistro { UsuarioCreacion = "estebangaro" },
                 Nombre = "HttpRequestMessage", Categoria = categoriasPalabras[1] },
                 new PalabraCodigo{ Auditoria = new InfoRegistro { UsuarioCreacion = "estebangaro" },
-                Nombre = "MediaTypeFormatter", Categoria = categoriasPalabras[1] }
+                Nombre = "MediaTypeFormatter", Categoria = categoriasPalabras[1] },
+                new PalabraCodigo{ Auditoria = new InfoRegistro { UsuarioCreacion = "estebangaro" },
+                Nombre = "ActionResult", Categoria = categoriasPalabras[1] },
+                new PalabraCodigo{ Auditoria = new InfoRegistro { UsuarioCreacion = "estebangaro" },
+                Nombre = "PartialViewResult", Categoria = categoriasPalabras[1] }
             };
-
+      
             contexto.CategoriasPalabrasCode.AddRange(categoriasPalabras);
             contexto.PalabrasCode.AddRange(palabras);
             contexto.Articulos.AddRange(articulos);
+            contexto.ClasesPersonalizadasCode.AddRange(clasesPersonalizadas);
             contexto.Autores.AddRange(autores);
             contexto.OpcionesMenu.AddRange(opcionesP);
             contexto.OpcionesMenu.AddRange(subOpciones1);

@@ -141,7 +141,7 @@ namespace CodeConverter2HTML
 
         static string CleanStrings(string inputString)
         {
-            inputString = Regex.Replace(inputString,
+            /* inputString = Regex.Replace(inputString,
                 "[^=]\"([^<>]*(<span class=\"\\w+\">\\w+</span>)+[^<>]*)+\"",
                 match =>
                 {
@@ -151,7 +151,7 @@ namespace CodeConverter2HTML
                         );
 
                     return matchWithOutSpan;
-                });
+                }); */
 
             inputString = Regex.Replace(inputString,
                   "(?<prevalue>[^=])(?<value>\".+\")",
@@ -170,7 +170,7 @@ namespace CodeConverter2HTML
         static string ReplaceStrings(string inputString)
         {
             inputString = Regex.Replace(inputString,
-                  "(?<prevalue>[^=])(?<value>\".+\")",
+                  "(?<prevalue>[^=])(?<value>\"[^\\+\"]+\")", // "Hola " + "Mundo"
                     match =>
                     {
                         return match.Groups["prevalue"].Value + match.Groups["value"].Value.

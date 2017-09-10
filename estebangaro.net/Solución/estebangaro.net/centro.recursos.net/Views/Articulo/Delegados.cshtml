@@ -1,0 +1,14 @@
+﻿<!DOCTYPE html>
+
+<html>
+    <head>
+        <title>Delegados</title>
+        <link href="~/Resources/css/convertidorcodigo.css" rel="stylesheet" />
+    </head>
+    <body>
+        <div id="CdrCodigoFuente">
+            @Html.Action("_ConvertidorCodigo",
+                new { rutaCodigos = "MVC", idArticulo = "/Frameworks/Entity Framework" })
+        </div>
+    </body>
+</html>
