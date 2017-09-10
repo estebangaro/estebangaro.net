@@ -46,7 +46,7 @@ color: orangered;
         <span class="reservada">public</span> PartialViewResult _Menu()
         {
             Respuesta&lt;<span class="class">List</span>&lt;OpcionMenu&gt;&gt; opciones;
-
+            <span class="reservada">string</span> demoString = <span class="strings">"Hola "</span> + <span class="strings">"Mundo"</span>;
             <span class="reservada">if</span> (Session[<span class="strings">"_HTMLmenu"</span>] == <span class="reservada">null</span>)
                 opciones = Repositorio.ObtenOpcionesMenu();
             <span class="reservada">else</span>
@@ -56,7 +56,7 @@ color: orangered;
                 resultado = PartialView(opciones.Resultado);
             <span class="reservada">else</span> <span class="reservada">if</span> (opciones != <span class="reservada">null</span>)
                 ViewBag.LayoutExcepcion += (ViewBag.LayoutExcepcion != <span class="reservada">null</span> ?
-                    $<span class="strings">"@<span class="normal">{GeneraRespuestaExcepcion&lt;List&lt;OpcionMenu&gt;&gt;(opciones)}</span>"</span> :
+                    $<span class="strings">"@<span class="normal">{GeneraRespuestaExcepcion&lt;<span class="class">List</span>&lt;OpcionMenu&gt;&gt;(opciones)}</span>"</span> :
                     GeneraRespuestaExcepcion&lt;<span class="class">List</span>&lt;OpcionMenu&gt;&gt;(opciones));
             <span class="reservada">else</span>
                 resultado = PartialView(<span class="reservada">null</span>);
@@ -78,7 +78,7 @@ color: orangered;
                 resultado = PartialView(avisos.Resultado);
             <span class="reservada">else</span> <span class="reservada">if</span> (avisos != <span class="reservada">null</span>)
                 ViewBag.LayoutExcepcion += (ViewBag.LayoutExcepcion != <span class="reservada">null</span> ?
-                    $<span class="strings">"@<span class="normal">{GeneraRespuestaExcepcion&lt;List&lt;AvisoCarrusel&gt;&gt;(avisos)}</span>"</span> :
+                    $<span class="strings">"@<span class="normal">{GeneraRespuestaExcepcion&lt;<span class="class">List</span>&lt;AvisoCarrusel&gt;&gt;(avisos)}</span>"</span> :
                     GeneraRespuestaExcepcion&lt;<span class="class">List</span>&lt;AvisoCarrusel&gt;&gt;(avisos));
             <span class="reservada">else</span>
             {
@@ -97,7 +97,7 @@ color: orangered;
                 resultado = PartialView(noticias.Resultado);
             <span class="reservada">else</span>
                 ViewBag.LayoutExcepcion += (ViewBag.LayoutExcepcion != <span class="reservada">null</span> ?
-                    $<span class="strings">"@<span class="normal">{GeneraRespuestaExcepcion&lt;List&lt;NoticiaPrincipal&gt;&gt;(noticias)}</span>"</span> :
+                    $<span class="strings">"@<span class="normal">{GeneraRespuestaExcepcion&lt;<span class="class">List</span>&lt;NoticiaPrincipal&gt;&gt;(noticias)}</span>"</span> :
                     GeneraRespuestaExcepcion&lt;<span class="class">List</span>&lt;NoticiaPrincipal&gt;&gt;(noticias));
 
             <span class="reservada">return</span> resultado;
@@ -111,7 +111,7 @@ color: orangered;
                 resultado = PartialView(multimedia.Resultado);
             <span class="reservada">else</span>
                 ViewBag.LayoutExcepcion += (ViewBag.LayoutExcepcion != <span class="reservada">null</span> ?
-                    $<span class="strings">"@<span class="normal">{GeneraRespuestaExcepcion&lt;List&lt;Multimedia&gt;&gt;(multimedia)}</span>"</span> :
+                    $<span class="strings">"@<span class="normal">{GeneraRespuestaExcepcion&lt;<span class="class">List</span>&lt;Multimedia&gt;&gt;(multimedia)}</span>"</span> :
                     GeneraRespuestaExcepcion&lt;<span class="class">List</span>&lt;Multimedia&gt;&gt;(multimedia));
 
             <span class="reservada">return</span> resultado;
@@ -125,7 +125,7 @@ color: orangered;
                 resultado = PartialView(autores.Resultado);
             <span class="reservada">else</span>
                 ViewBag.LayoutExcepcion += (ViewBag.LayoutExcepcion != <span class="reservada">null</span> ?
-                    $<span class="strings">"@<span class="normal">{GeneraRespuestaExcepcion&lt;List&lt;Autor&gt;&gt;(autores)}</span>"</span> :
+                    $<span class="strings">"@<span class="normal">{GeneraRespuestaExcepcion&lt;<span class="class">List</span>&lt;Autor&gt;&gt;(autores)}</span>"</span> :
                     GeneraRespuestaExcepcion&lt;<span class="class">List</span>&lt;Autor&gt;&gt;(autores));
 
             <span class="reservada">return</span> resultado;

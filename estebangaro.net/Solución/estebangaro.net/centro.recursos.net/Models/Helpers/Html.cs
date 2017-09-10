@@ -1,15 +1,22 @@
 ﻿using centro.recursos.net.Models.Entity_Framework;
 using System;
 using System.Collections.Generic;
+using System.Configuration;
+using System.IO;
 using System.Linq;
 using System.Web;
 using System.Web.Mvc;
 using System.Xml.Linq;
+using centro.recursos.net.Models.Utileria;
 
 namespace centro.recursos.net.Models.Helpers
 {
     public static class Html
     {
+        private static string RutaImagenesMenu { get; } = ConfigurationManager.AppSettings["ImagenesMenu"];
+        private static string RutaImagenesNoticias { get; } = ConfigurationManager.AppSettings["ImagenesNoticias"];
+        private static string RutaCodigoArticulos { get; } = ConfigurationManager.AppSettings["codigoArticulos"];
+
         public static MvcHtmlString GeneraMenu(this HtmlHelper helper, List<OpcionMenu> opciones)
         {
             if (opciones != null)
@@ -41,7 +48,7 @@ namespace centro.recursos.net.Models.Helpers
                 }
                 _elemento = new XElement(_esSuperMenu ? "nav" : "li",
                     _esSuperMenu ? new XElement("span", opcion.Descripcion,
-                        new XElement("img", new XAttribute("src", "/Resources/imagenes/menu/flecha.png"))) :
+                        new XElement("img", new XAttribute("src", $"{RutaImagenesMenu}/flecha.png"))) :
                         new XElement("span", opcion.Descripcion),
                     new XElement("ul", _elementosHijo));
             }
@@ -107,7 +114,7 @@ namespace centro.recursos.net.Models.Helpers
                    new XElement("p",
                        new XElement("img",
                            new XAttribute("src",
-                                $"/Resources/imagenes/noticias/{noticia.Imagen}")),
+                                $"{RutaImagenesNoticias}/{noticia.Imagen}")),
                        new XAttribute("class", "imagenBNR")),
                    new XElement("p",
                        new XElement("a",
@@ -116,5 +123,25 @@ namespace centro.recursos.net.Models.Helpers
                    new XAttribute("class", "bloqueNR")
                 );
         }
+
+        public static MvcHtmlString GeneraHTMLDeCarpetaCodigo(this HtmlHelper helper, 
+            string nombreCarpeta, List<PalabraCodigo> palabrasCodigo, 
+            List<string> clasesPersonalizadas = null)
+        {
+            string marcado = string.Empty;
+            string rutaCodigo = $"{helper.ViewContext.HttpContext.Server.MapPath("~")}{RutaCodigoArticulos}/{nombreCarpeta}";
+            ConvertidorCodigoAHTML convertidor = 
+                new ConvertidorCodigoAHTML(palabrasCodigo, clasesPersonalizadas);
+
+            foreach(string archivo in Directory.EnumerateFiles(rutaCodigo))
+            {
+                string contenido = LectorArchivos.ObtenContenidoCadena(archivo);
+                if (contenido != null)
+                    marcado += $"<div class=\"ctdrCodigo\"><pre>{convertidor.ObtenHTML(contenido)}</pre></div>";
+            }
+
+            return new MvcHtmlString(marcado);
+        }
+
     }
 }
