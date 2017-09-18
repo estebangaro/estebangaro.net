@@ -23,6 +23,7 @@
     <UseGlobalApplicationHostFile />
     <NuGetPackageImportStamp>
     </NuGetPackageImportStamp>
+    <Use64BitIISExpress />
   </PropertyGroup>
   <PropertyGroup Condition=" '$(Configuration)|$(Platform)' == 'Debug|AnyCPU' ">
     <DebugSymbols>true</DebugSymbols>
@@ -101,7 +102,7 @@
     <Content Include="Resources\css\autores.css" />
     <Content Include="Resources\css\buscar.css" />
     <Content Include="Resources\css\carrusel.css" />
-    <Content Include="Resources\css\convertidorcodigo.css" />
+    <Content Include="Resources\css\visualizadorcodigo.css" />
     <Content Include="Resources\css\home.css" />
     <Content Include="Resources\css\menu.css" />
     <Content Include="Resources\css\multimedia.css" />
@@ -131,6 +132,7 @@
     <Content Include="Resources\imagenes\noticias\asp.png" />
     <Content Include="Resources\imagenes\noticias\entity.png" />
     <Content Include="Resources\imagenes\noticias\mysql.png" />
+    <Content Include="Resources\imagenes\visualizadorcodigo\download.png" />
     <Content Include="Resources\javascript\autores.js" />
     <Content Include="Resources\javascript\busqueda.js" />
     <Content Include="Resources\javascript\carrusel.js" />
@@ -138,6 +140,7 @@
     <Content Include="Resources\javascript\menu.js" />
     <Content Include="Resources\javascript\multimedia.js" />
     <Content Include="Resources\javascript\noticias.js" />
+    <Content Include="Resources\javascript\visualizadorcodigo.js" />
     <Content Include="Web.config" />
   </ItemGroup>
   <ItemGroup>
@@ -185,8 +188,8 @@
     <Compile Include="Models\Utileria\PalabrasCodigo.cs" />
     <Compile Include="Models\Utileria\Respuesta.cs" />
     <Compile Include="Properties\AssemblyInfo.cs" />
-    <Content Include="Resources\codigo\MVC\demo.txt" />
-    <Content Include="Resources\codigo\MVC\Program.txt" />
+    <Content Include="Resources\codigo\MVC\02%40demo%40cs.txt" />
+    <Content Include="Resources\codigo\MVC\01%40Program%40cs.txt" />
   </ItemGroup>
   <ItemGroup>
     <Content Include="Views\web.config" />
@@ -198,7 +201,7 @@
     <Content Include="Views\Shared\_SeccionesMultimedia.cshtml" />
     <Content Include="Views\Shared\_SeccionesAutor.cshtml" />
     <Content Include="Views\Articulo\Delegados.cshtml" />
-    <Content Include="Views\Articulo\_ConvertidorCodigo.cshtml" />
+    <Content Include="Views\Shared\_ConvertidorCodigo.cshtml" />
     <None Include="Web.Debug.config">
       <DependentUpon>Web.config</DependentUpon>
     </None>
@@ -224,7 +227,7 @@
           <AutoAssignPort>True</AutoAssignPort>
           <DevelopmentServerPort>54868</DevelopmentServerPort>
           <DevelopmentServerVPath>/</DevelopmentServerVPath>
-          <IISUrl>http://192.168.0.5:2510/</IISUrl>
+          <IISUrl>http://192.168.0.8:2510/</IISUrl>
           <NTLMAuthentication>False</NTLMAuthentication>
           <UseCustomServer>False</UseCustomServer>
           <CustomServerUrl>

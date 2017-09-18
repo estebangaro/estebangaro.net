@@ -1,0 +1,86 @@
+﻿.reservada {
+    color: blue;
+}
+
+.assembly {
+    color: gray;
+}
+
+.normal {
+    color: black;
+}
+
+.class {
+    color: darkcyan;
+}
+
+.coments {
+    color: forestgreen;
+}
+
+.strings {
+    color: orangered;
+}
+
+.EnzdosCodigoFuente,
+.CdrCodigoFuente {
+    width: 100%;
+    margin: 0;
+    position: relative;
+    overflow: hidden;
+}
+
+.EnzdosCodigoFuente {
+    top: 1px;
+    z-index: 1;
+}
+
+    .EnzdosCodigoFuente > .EnzdoCodigoFuente {
+        float: left;
+        padding: 0.5em 1em;
+        border-top: 1px solid black;
+        border-right: 1px solid black;
+        font-weight: bold;
+        cursor: pointer;
+        color: purple;
+        background-color: transparent;
+    }
+
+    .EnzdosCodigoFuente > a {
+        width: 32px;
+        height: 32px;
+        float: right;
+        cursor: pointer;
+    }
+        /* Visualización predeterminada */
+
+        .EnzdosCodigoFuente > .EnzdoCodigoFuente:first-child {
+            background-color: white;
+            color: black;
+            border-left: 1px solid black;
+        }
+
+.CdrCodigoFuente > .ctdrCodigo:first-child {
+    visibility: visible;
+    opacity: 1;
+}
+/* Fin Visualización predeterminada */
+
+.CdrCodigoFuente {
+    border: 1px solid black;
+    height: 300px;
+}
+
+.CdrCodigoFuente > .ctdrCodigo {
+        position: absolute;
+        top: 0;
+        left: 0;
+        width: 100%;
+        height: 100%;
+        visibility: hidden;
+        opacity: 0;
+        overflow: auto;
+        -webkit-transition: all 1s cubic-bezier(0.075, 0.82, 0.165, 1);
+        -moz-transition: all 1s cubic-bezier(0.075, 0.82, 0.165, 1);
+        transition: all 1s cubic-bezier(0.075, 0.82, 0.165, 1);
+}

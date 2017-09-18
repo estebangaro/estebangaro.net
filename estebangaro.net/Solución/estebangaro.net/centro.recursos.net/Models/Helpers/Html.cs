@@ -13,10 +13,6 @@ namespace centro.recursos.net.Models.Helpers
 {
     public static class Html
     {
-        private static string RutaImagenesMenu { get; } = ConfigurationManager.AppSettings["ImagenesMenu"];
-        private static string RutaImagenesNoticias { get; } = ConfigurationManager.AppSettings["ImagenesNoticias"];
-        private static string RutaCodigoArticulos { get; } = ConfigurationManager.AppSettings["codigoArticulos"];
-
         public static MvcHtmlString GeneraMenu(this HtmlHelper helper, List<OpcionMenu> opciones)
         {
             if (opciones != null)
@@ -48,7 +44,7 @@ namespace centro.recursos.net.Models.Helpers
                 }
                 _elemento = new XElement(_esSuperMenu ? "nav" : "li",
                     _esSuperMenu ? new XElement("span", opcion.Descripcion,
-                        new XElement("img", new XAttribute("src", $"{RutaImagenesMenu}/flecha.png"))) :
+                        new XElement("img", new XAttribute("src", $"{Rutas.RutaImagenesMenu}/flecha.png"))) :
                         new XElement("span", opcion.Descripcion),
                     new XElement("ul", _elementosHijo));
             }
@@ -114,7 +110,7 @@ namespace centro.recursos.net.Models.Helpers
                    new XElement("p",
                        new XElement("img",
                            new XAttribute("src",
-                                $"{RutaImagenesNoticias}/{noticia.Imagen}")),
+                                $"{Rutas.RutaImagenesNoticias}/{noticia.Imagen}")),
                        new XAttribute("class", "imagenBNR")),
                    new XElement("p",
                        new XElement("a",
@@ -128,19 +124,28 @@ namespace centro.recursos.net.Models.Helpers
             string nombreCarpeta, List<PalabraCodigo> palabrasCodigo, 
             List<string> clasesPersonalizadas = null)
         {
-            string marcado = string.Empty;
-            string rutaCodigo = $"{helper.ViewContext.HttpContext.Server.MapPath("~")}{RutaCodigoArticulos}/{nombreCarpeta}";
+            int indice = 1;
+            string marcado = string.Empty, encabezados = string.Empty;
+            string rutaCodigo = $"{helper.ViewContext.HttpContext.Server.MapPath("~")}{Rutas.RutaCodigoArticulos}/{nombreCarpeta}";
             ConvertidorCodigoAHTML convertidor = 
                 new ConvertidorCodigoAHTML(palabrasCodigo, clasesPersonalizadas);
 
             foreach(string archivo in Directory.EnumerateFiles(rutaCodigo))
             {
+                encabezados += $"<div class=\"EnzdoCodigoFuente\" indice=\"{indice++}\">" +
+                    $"{LectorArchivos.ObtenNombreCodigo(archivo)}</div>";
+
                 string contenido = LectorArchivos.ObtenContenidoCadena(archivo);
                 if (contenido != null)
                     marcado += $"<div class=\"ctdrCodigo\"><pre>{convertidor.ObtenHTML(contenido)}</pre></div>";
             }
+            encabezados += $"<a><img src=" +
+                $"\"{Rutas.RutaImagenesVisualizadorCodigo}/download.png\" title=\"Descargar\" class=\"descargarCodigo\"></img></a>";
+            encabezados += $"<input type=\"hidden\" value=\"{nombreCarpeta}\"/>";
+            encabezados = $"<div class=\"EnzdosCodigoFuente\">{encabezados}</div>";
+            marcado = $"<div class=\"CdrCodigoFuente\">{marcado}</div>";
 
-            return new MvcHtmlString(marcado);
+            return new MvcHtmlString(encabezados + marcado);
         }
 
     }

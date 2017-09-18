@@ -17,7 +17,7 @@ namespace centro.recursos.net.Controllers
         }
 
         public PartialViewResult _ConvertidorCodigo(string rutaCodigos, 
-            string idArticulo)
+            string idArticulo = null)
         {
             Respuesta<List<ClasePersonalizada>> clasesPersonalizadas = 
                 Repositorio.ObtenClasesPersonalizadasCodigo(idArticulo);
@@ -45,6 +45,19 @@ namespace centro.recursos.net.Controllers
                     GeneraRespuestaExcepcion<List<PalabraCodigo>>(palabrascodigo));
         
             return resultado;
+        }
+
+        public ActionResult DescargarCodigo(string archivo, int indice, string carpeta)
+        {
+            // carpeta = MVC
+            // archivo = program.cs
+            // indice = 1
+            string[] infoArchivo = archivo.Split('.');
+            string nombreArchivo = $"{indice.ToString("D2")}@{infoArchivo[0]}@{infoArchivo[1]}.txt";
+            string rutaArchivo = $"{Server.MapPath("~")}{Rutas.RutaCodigoArticulos}/{carpeta}/{nombreArchivo}";
+            var Resultado = GeneraArchivoRespuesta(rutaArchivo, archivo);
+
+            return Resultado;
         }
     }
 }

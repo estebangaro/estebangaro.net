@@ -96,6 +96,20 @@ namespace centro.recursos.net.Controllers
                 }
             }catch(Exception ex) { }
         }
+
+        protected FileContentResult GeneraArchivoRespuesta(string rutaArchivo, 
+            string nombreArchivo)
+        {
+            byte[] archivo = LectorArchivos.ObtenContenidoBinario(rutaArchivo);
+            FileContentResult resultado = null;
+
+            if(archivo != null)
+            {
+                resultado = File(archivo, "text/plain", $"{nombreArchivo}");
+            }
+
+            return resultado;
+        }
         #endregion
     }
 }

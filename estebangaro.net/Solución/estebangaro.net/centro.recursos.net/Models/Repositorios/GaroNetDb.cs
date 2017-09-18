@@ -224,18 +224,13 @@ namespace centro.recursos.net.Models.Repositorios
 
             try
             {
-                var clases = dbContextoEF
+                var clases = articuloId != null ? dbContextoEF
                     .ClasesPersonalizadasCode
-                    .Where(clasep => clasep.ArticuloId == (articuloId!=null? articuloId: clasep.ArticuloId))
-                    .ToList();
+                    .Where(clasep => clasep.ArticuloId == articuloId)
+                    .ToList() :
+                    new List<ClasePersonalizada>();
 
-                if (clases.Count > 0)
-                    estado = Respuesta<object>.GeneraRespuestaNoExcepcion<List<ClasePersonalizada>>(true, clases);
-                else
-                    estado = Respuesta<object>.
-                        GeneraRespuestaNoExcepcion<List<ClasePersonalizada>>(true, null,
-                        detalle: "No existen clases personalizadas para la categoria especificada",
-                        iconoCliente: ICONOS_RESPUESTA.ADVERTENCIA);
+                estado = Respuesta<object>.GeneraRespuestaNoExcepcion<List<ClasePersonalizada>>(true, clases);
             }
             catch (Exception ex)
             {

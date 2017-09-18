@@ -1,0 +1,298 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <title></title>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1">
+    <style>
+        .reservada {
+            color: blue;
+        }
+        
+        .assembly {
+            color: gray;
+        }
+        
+        .class {
+            color: darkcyan;
+        }
+        
+        .coments {
+            color: forestgreen;
+        }
+        
+        .strings {
+            color: orangered;
+        }
+        
+        .normal {
+            color: black;
+        }
+        
+        .EnzdosCodigoFuente,
+        .CdrCodigoFuente {
+            width: 100%;
+            margin: 0;
+            position: relative;
+            overflow: hidden;
+        }
+        
+        .EnzdosCodigoFuente {
+            top: 1px;
+            z-index: 1;
+        }
+        
+        .EnzdosCodigoFuente>.EnzdoCodigoFuente {
+            float: left;
+            padding: 0.5em 1em;
+            border-top: 1px solid black;
+            border-right: 1px solid black;
+            font-weight: bold;
+            cursor: pointer;
+            color: purple;
+            background-color: transparent;
+        }
+        
+        .EnzdosCodigoFuente>img {
+            width: 32px;
+            height: 32px;
+            float: right;
+            cursor: pointer;
+        }
+        /* Visualización predeterminada */
+        
+        .EnzdosCodigoFuente>.EnzdoCodigoFuente:first-child {
+            background-color: white;
+            color: black;
+            border-left: 1px solid black;
+        }
+        
+        .CdrCodigoFuente>.ctdrCodigo:first-child {
+            visibility: visible;
+            opacity: 1;
+        }
+        /* Fin Visualización predeterminada */
+        
+        .EnzdosCodigoFuente>.EnzdoCodigoFuente:last-child {
+            border-left: 0;
+        }
+        
+        .CdrCodigoFuente {
+            border: 1px solid black;
+            height: 300px;
+        }
+        
+        .CdrCodigoFuente>.ctdrCodigo {
+            position: absolute;
+            top: 0;
+            left: 0;
+            width: 100%;
+            height: 100%;
+            visibility: hidden;
+            opacity: 0;
+            overflow: auto;
+            -webkit-transition: all 1s cubic-bezier(0.075, 0.82, 0.165, 1);
+            -moz-transition: all 1s cubic-bezier(0.075, 0.82, 0.165, 1);
+            transition: all 1s cubic-bezier(0.075, 0.82, 0.165, 1);
+        }
+    </style>
+    <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.2.1/jquery.min.js"></script>
+    <script>
+        $(function() {
+            $('.EnzdoCodigoFuente').click(function() {
+                var visibles = obtenVisibles();
+                var codigoseleccionado =
+                    $('.CdrCodigoFuente > .ctdrCodigo:nth-child(' +
+                        parseInt($(this).attr('indice')) + ')');
+                muestraCodigoSeleccionado(visibles, false);
+                muestraCodigoSeleccionado({
+                    encabezado: $(this),
+                    codigo: codigoseleccionado
+                }, true);
+            });
+        });
+
+        function muestraCodigoSeleccionado(elementos, estado) {
+            elementos.encabezado.css({
+                'background-color': estado ? 'white' : 'transparent',
+                'color': estado ? 'black' : 'purple'
+            });
+            elementos.codigo.css({
+                'visibility': estado ? 'visible' : 'hidden',
+                'opacity': estado ? '1' : '0'
+            });
+        }
+
+        function obtenVisibles() {
+            var encabezado, codigo;
+            $('.EnzdoCodigoFuente').each(function() {
+                var color = $(this).css('background-color');
+                if (color != 'transparent' &&
+                    color != 'rgba(0, 0, 0, 0)')
+                    encabezado = $(this);
+            });
+            codigo = $('.ctdrCodigo:visible');
+
+            return {
+                encabezado: encabezado,
+                codigo: codigo
+            };
+        }
+    </script>
+</head>
+
+<body>
+    <div id="delegadosCodigoFuente" class="codigoFuente">
+
+        <div class="EnzdosCodigoFuente">
+            <div class="EnzdoCodigoFuente" indice="1">Program.cs</div>
+            <div class="EnzdoCodigoFuente" indice="2">demo.cs</div>
+            <img src="../../imagenes/download.png" alt="download" title="Descargar">
+        </div>
+        <div class="CdrCodigoFuente">
+            <div class="ctdrCodigo"><pre style="font-family: comic -sans;font-size: 1.1em;"><span class="reservada">using</span> <span class="assembly">System</span>;
+            <span class="reservada">using</span> <span class="assembly">System.Collections.Generic</span>;
+            <span class="reservada">using</span> <span class="assembly">System.Linq</span>;
+            <span class="reservada">using</span> <span class="assembly">System.Text</span>;
+            <span class="reservada">using</span> <span class="assembly">System.Threading.Tasks</span>;
+            
+            <span class="reservada">namespace</span> delegados_t2_2
+            {
+            class Program
+            {
+            <span class="reservada">static</span> <span class="reservada">void</span> Main(<span class="reservada">string</span>[] args)
+            {
+                <span class="class">Console</span>.
+                WriteLine(<span class="strings">"Jaqueline"</span>);
+                <span class="reservada">int</span> A = <span class="reservada">int</span>.
+                    Parse(<span class="class">Console</span>.ReadLine());
+                <span class="class">Console</span>.
+                WriteLine(<span class="strings">"Introducir número B: "</span>);
+                <span class="reservada">int</span> B = <span class="reservada">int</span>.Parse(<span class="class">Console</span>.ReadLine());
+            
+                delegados_t2_1.Operaciones operacion = 
+                new delegados_t2_1.Operaciones();
+                operacion.MostrarMsj = <span class="class">Console</span>.WriteLine;
+            
+                <span class="reservada">float</span> division = operacion.Divide(A, B);
+            }
+            }
+            }
+            </pre></div>
+            <div class="ctdrCodigo"><pre><span class="reservada">using</span> <span class="assembly">centro.recursos.net.Models.Entity_Framework</span>;
+            <span class="reservada">using</span> <span class="assembly">centro.recursos.net.Models.Utileria</span>;
+            <span class="reservada">using</span> <span class="assembly">System</span>;
+            <span class="reservada">using</span> <span class="assembly">System.Collections.Generic</span>;
+            <span class="reservada">using</span> <span class="assembly">System.Linq</span>;
+            <span class="reservada">using</span> <span class="assembly">System.Web</span>;
+            <span class="reservada">using</span> <span class="assembly">System.Web.Mvc</span>;
+            
+            <span class="reservada">namespace</span> centro.recursos.net.Controllers
+            {
+                <span class="reservada">public</span> class <span class="class">HomeControllerFake</span> : <span class="class">ControladorBase</span>
+                {
+                    <span class="coments">// Home</span>
+                    <span class="reservada">public</span> <span class="class">ActionResult</span> GaRoNET()
+                    {
+                        <span class="coments">//Te AMO Jaky</span>
+                        <span class="coments">//Mucho demasiado</span>
+                        <span class="reservada">return</span> View(<span class="strings">"Inicio"</span>);
+                    }
+            
+                    <span class="reservada">public</span> <span class="class">PartialViewResult</span> _Menu()
+                    {
+                        <span class="class">Respuesta</span>&lt;<span class="class">List</span>&lt;<span class="class">OpcionMenu</span>&gt;&gt; opciones;
+            
+                        <span class="reservada">if</span> (Session[<span class="strings">"_HTMLmenu"</span>] == <span class="reservada">null</span>)
+                            opciones = Repositorio.ObtenOpcionesMenu();
+                        <span class="reservada">else</span>
+                            opciones = <span class="reservada">null</span>;
+                        <span class="class">PartialViewResult</span> resultado = <span class="reservada">null</span>;
+                        <span class="reservada">if</span> (opciones != <span class="reservada">null</span> &amp;&amp; opciones.Estado)
+                            resultado = PartialView(opciones.Resultado);
+                        <span class="reservada">else</span> <span class="reservada">if</span> (opciones != <span class="reservada">null</span>)
+                            ViewBag.LayoutExcepcion += (ViewBag.LayoutExcepcion != <span class="reservada">null</span> ?
+                                $<span class="strings">"@<span class="normal">{GeneraRespuestaExcepcion&lt;<span class="class">List</span>&lt;<span class="class">OpcionMenu</span>&gt;&gt;(opciones)}</span>"</span> :
+                                GeneraRespuestaExcepcion&lt;<span class="class">List</span>&lt;<span class="class">OpcionMenu</span>&gt;&gt;(opciones));
+                        <span class="reservada">else</span>
+                            resultado = PartialView(<span class="reservada">null</span>);
+            
+                        <span class="reservada">return</span> resultado;
+                    }
+            
+                    <span class="reservada">public</span> <span class="class">PartialViewResult</span> _Carrusel()
+                    {
+                        <span class="class">Respuesta</span>&lt;<span class="class">List</span>&lt;<span class="class">AvisoCarrusel</span>&gt;&gt; avisos;
+            
+                        <span class="reservada">if</span> (Session[<span class="strings">"_HTMLavisoscarrusel"</span>] == <span class="reservada">null</span>)
+                            avisos = Repositorio.ObtenAvisosCarrusel();
+                        <span class="reservada">else</span>
+                            avisos = <span class="reservada">null</span>;
+                        <span class="class">PartialViewResult</span> resultado = <span class="reservada">null</span>;
+            
+                        <span class="reservada">if</span> (avisos != <span class="reservada">null</span> &amp;&amp; avisos.Estado)
+                            resultado = PartialView(avisos.Resultado);
+                        <span class="reservada">else</span> <span class="reservada">if</span> (avisos != <span class="reservada">null</span>)
+                            ViewBag.LayoutExcepcion += (ViewBag.LayoutExcepcion != <span class="reservada">null</span> ?
+                                $<span class="strings">"@<span class="normal">{GeneraRespuestaExcepcion&lt;<span class="class">List</span>&lt;<span class="class">AvisoCarrusel</span>&gt;&gt;(avisos)}</span>"</span> :
+                                GeneraRespuestaExcepcion&lt;<span class="class">List</span>&lt;<span class="class">AvisoCarrusel</span>&gt;&gt;(avisos));
+                        <span class="reservada">else</span>
+                        {
+                            resultado = PartialView(<span class="reservada">null</span>);
+                            ViewBag.AvisosCuenta = ((Tuple&lt;MvcHtmlString, <span class="reservada">int</span>&gt;)Session[<span class="strings">"_HTMLavisoscarrusel"</span>]).Item2;
+                        }
+            
+                        <span class="reservada">return</span> resultado;
+                    }
+            
+                    <span class="reservada">public</span> <span class="class">PartialViewResult</span> _NoticiasP()
+                    {
+                        <span class="class">Respuesta</span>&lt;<span class="class">List</span>&lt;<span class="class">NoticiaPrincipal</span>&gt;&gt; noticias = Repositorio.ObtenNoticias();
+                        <span class="class">PartialViewResult</span> resultado = <span class="reservada">null</span>;
+                        <span class="reservada">if</span> (noticias.Estado)
+                            resultado = PartialView(noticias.Resultado);
+                        <span class="reservada">else</span>
+                            ViewBag.LayoutExcepcion += (ViewBag.LayoutExcepcion != <span class="reservada">null</span> ?
+                                $<span class="strings">"@<span class="normal">{GeneraRespuestaExcepcion&lt;<span class="class">List</span>&lt;<span class="class">NoticiaPrincipal</span>&gt;&gt;(noticias)}</span>"</span> :
+                                GeneraRespuestaExcepcion&lt;<span class="class">List</span>&lt;<span class="class">NoticiaPrincipal</span>&gt;&gt;(noticias));
+            
+                        <span class="reservada">return</span> resultado;
+                    }
+            
+                    <span class="reservada">public</span> <span class="class">PartialViewResult</span> SeccionesMultimedia()
+                    {
+                        <span class="class">Respuesta</span>&lt;<span class="class">List</span>&lt;<span class="class">Multimedia</span>&gt;&gt; multimedia = Repositorio.ObtenMultimedia();
+                        <span class="class">PartialViewResult</span> resultado = <span class="reservada">null</span>;
+                        <span class="reservada">if</span> (multimedia.Estado)
+                            resultado = PartialView(multimedia.Resultado);
+                        <span class="reservada">else</span>
+                            ViewBag.LayoutExcepcion += (ViewBag.LayoutExcepcion != <span class="reservada">null</span> ?
+                                $<span class="strings">"@<span class="normal">{GeneraRespuestaExcepcion&lt;<span class="class">List</span>&lt;<span class="class">Multimedia</span>&gt;&gt;(multimedia)}</span>"</span> :
+                                GeneraRespuestaExcepcion&lt;<span class="class">List</span>&lt;<span class="class">Multimedia</span>&gt;&gt;(multimedia));
+            
+                        <span class="reservada">return</span> resultado;
+                    }
+            
+                    <span class="reservada">public</span> <span class="class">PartialViewResult</span> _SeccionesAutor()
+                    {
+                        <span class="class">Respuesta</span>&lt;<span class="class">List</span>&lt;<span class="class">Autor</span>&gt;&gt; autores = Repositorio.ObtenAutores();
+                        <span class="class">PartialViewResult</span> resultado = <span class="reservada">null</span>;
+                        <span class="reservada">if</span> (autores.Estado)
+                            resultado = PartialView(autores.Resultado);
+                        <span class="reservada">else</span>
+                            ViewBag.LayoutExcepcion += (ViewBag.LayoutExcepcion != <span class="reservada">null</span> ?
+                                $<span class="strings">"@<span class="normal">{GeneraRespuestaExcepcion&lt;<span class="class">List</span>&lt;<span class="class">Autor</span>&gt;&gt;(autores)}</span>"</span> :
+                                GeneraRespuestaExcepcion&lt;<span class="class">List</span>&lt;<span class="class">Autor</span>&gt;&gt;(autores));
+            
+                        <span class="reservada">return</span> resultado;
+                    }
+                }
+            }</pre></div>
+        </div>
+
+
+    </div>
+</body>
+
+</html>
