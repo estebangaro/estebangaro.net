@@ -29,5 +29,50 @@ namespace centro.recursos.net.Models.Utileria
 
             return code;
         }
+
+        public static byte[] ObtenContenidoBinario(string rutaArchivo)
+        {
+            byte[] code;
+            try
+            {
+                using (FileStream streamCodeFile =
+                    new FileStream(rutaArchivo, FileMode.Open, FileAccess.Read))
+                {
+                    code = new byte[streamCodeFile.Length];
+                    streamCodeFile.Read(code, 0, code.Length);
+                }
+            }
+            catch
+            {
+                code = null;
+            }
+
+            return code;
+        }
+
+        public static string ObtenNombreCodigo(string rutaArchivo)
+        {
+            string nombre;
+            try
+            {
+                FileInfo inforArchivo = new FileInfo(rutaArchivo);
+                string[] nombreInfo =
+                    rutaArchivo.Split(new char[] { '@' }, StringSplitOptions.RemoveEmptyEntries);
+                if (nombreInfo.Length == 3)
+                {
+                    nombre = $"{nombreInfo[1]}.{nombreInfo[2].Split('.')[0]}";
+                }
+                else
+                {
+                    nombre = "formato.desconocido";
+                }
+            }
+            catch (Exception)
+            {
+                nombre = "nombre.desconocido";
+            }
+
+            return nombre;
+        }
     }
 }
