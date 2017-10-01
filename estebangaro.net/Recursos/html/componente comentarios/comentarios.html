@@ -6,13 +6,44 @@
         <meta name="viewport" content="width=device-width, initial-scale=1" />
         <style>
             body{
-                background-color: azure;
+                background-color: black;
             }
+            .center{
+                width: 80%;
+                margin: 0 auto;
+            }
+
             .cdrComentario{
                 width: 100%;
                 overflow: hidden;
+                position: relative;
+                margin-top: 16px;
             }
-            .avatarComentario, .comentario{
+            .cdrComentario:last-child{
+                margin-bottom: 0;
+            }
+            .bordeComentarioP, .bordeComentarioS{
+                border-style: solid;
+                border-color: white;
+                border-width: 1px;
+            }
+            .bordeComentarioP{
+                position: absolute;
+                height: 100%;
+                top: 0;
+                /*DesplazamientoH = 50% H avatar*/
+                left: 30px;
+            }
+            .bordeComentarioS{
+                position: relative;
+                /*Ancho = 3/4% H avatar*/
+                width: 45px;
+                /*DesplazamientoV = 50% V avatar + 100% margin Ctdr + 100% borde Ctdr + 100% bordeComentarios*/
+                top: 48px;
+                /*DesplazamientoH = - 3/4% H avatar*/
+                left: -45px;
+            }
+            .avatarComentario, .comentarios, .comentario{
                 box-sizing: border-box;
             }
             .avatarComentario{
@@ -20,11 +51,15 @@
                 height: 60px;
                 border-radius: 50%;
                 overflow: hidden;
+                position: relative;
                 float: left;
             }
             .avatarComentario > img{
                 width: 100%;
                 height: 100%;
+            }
+            .comentarios{
+                float:right;
             }
             .comentario, .flechaComentario, .cuerpoComentario{
                 background-color: white;
@@ -32,10 +67,9 @@
                 border-radius: 10px;
             }
             .comentario{
-                width: auto;
-                /* height: 150px; */
-                float:right;
+                width: 100%;
                 position: relative;
+                padding: 0;
             }
             .flechaComentario{
                 width: 15px;
@@ -47,10 +81,11 @@
             .cuerpoComentario{
                 border:0;
                 position: relative;
-                top: -5px;
+                top: 0px;
                 left: 0;
                 width: 100%;
                 height: 100%;
+                margin: 0;
             }
             .titulo, .contenido{
                 margin: 1em;
@@ -94,11 +129,22 @@
             function ajustaComponenteComentarios(){
                 ajustaAnchoComentsCaja();
                 ajustaFlechaComentsCaja();
+                ajustaAltoComentsComents();
+            }
+
+            function ajustaAltoComentsComents(){
+                $('.cdrComentario > .comentarios > .cdrComentario:last-child').each(function(){
+                    var altoCtdr = $(this).outerHeight();
+                    var altoAvatar = $('.avatarComentario').outerHeight() / 2;
+                    var despVertical = (altoCtdr-altoAvatar)*-1;
+                    var bordeP = $(this).parent().parent().children('.bordeComentarioP');
+                    bordeP.css('top', despVertical + 'px');
+                });
             }
 
             function ajustaFlechaComentsCaja(){
                 $('.flechaComentario').each(function(){
-                    var altoAvatar = $(this).parent().prev().outerHeight();
+                    var altoAvatar = $(this).parent().parent().prev().outerHeight();
                     var desplazamientoV = (altoAvatar / 2) - ($(this).outerHeight() / 2);
                     var desplazamientoH = $(this).outerWidth() / 2 * -1;
                     $(this).css('top', desplazamientoV + 'px').css('left', desplazamientoH + 'px');
@@ -107,36 +153,235 @@
 
             function ajustaAnchoComentsCaja(){
                 $('.comentario').each(function(){
-                    var anchoAvatar = $(this).prev().outerWidth();
-                    var anchoContenedor = $(this).parent().innerWidth();
+                    var anchoAvatar = $(this).parent().prev().outerWidth();
+                    var anchoContenedor = $(this).parent().parent().innerWidth();
                     var anchoFlecha = $('.flechaComentario', $(this)).outerWidth();
                     var porcentajeAncho = 100.00 - parseFloat(
                         ((anchoAvatar + anchoFlecha) * 100) / anchoContenedor);
-                    $(this).css('width', porcentajeAncho + '%');
+                    $(this).parent().css('width', porcentajeAncho + '%');
                 });
             }
         </script>
     </head>
     <body>
-        <div class="cdrComentario">
-            <div class="avatarComentario">
-                <img src="..\..\imagenes\ranma.jpg" alt="">
-            </div>
-            <div class="comentario">
-                <div class="flechaComentario"></div>
-                <div class="cuerpoComentario">
-                        <div class="titulo">
-                                <img class="mostrarComentarios" src="..\..\imagenes\flechaDn.png" alt="">
-                                <span class="autorComentario">esteban garo</span>
-                                <span class="fechaComentario">23/09/2017</span>
-                                <img class="cerrarComentario" src="..\..\imagenes\salir.png" alt="">
+        <div class="center">          
+        
+            <div class="cdrComentario">
+                <div class="bordeComentarioP"></div>
+                <div class="avatarComentario">
+                            <img src="..\..\imagenes\ranma.jpg" alt="">
+                        </div>
+                <div class="comentarios">
+                            <div class="comentario">
+                                <div class="flechaComentario"></div>
+                                <div class="cuerpoComentario">
+                                        <div class="titulo">
+                                                <img class="mostrarComentarios" src="..\..\imagenes\flechaDn.png" alt="">
+                                                <span class="autorComentario">esteban garo</span>
+                                                <span class="fechaComentario">23/09/2017</span>
+                                                <img class="cerrarComentario" src="..\..\imagenes\salir.png" alt="">
+                                            </div>
+                                            <div class="contenido">
+                                                    Bruce Straley, creativo mejor reconocido por ser el director de Uncharted 2: Among Thieves y The Last of Us, abandonará Naughty Dog. Lo anterior lo hará después de haber colaborado en proyectos de la compañía por 18 años.
+                                                    Straley fue el responsable de compartir esta noticia por medio de una publicación en el blog de Naughty Dog, sitio donde señaló que tomó esta decisión ya que en su año sabático se dio cuenta que sus intereses iban hacia otra dirección. Al percatarse optó por dar un paso al costado.
+                                            </div>
+                                </div>
                             </div>
-                            <div class="contenido">
-                                    Bruce Straley, creativo mejor reconocido por ser el director de Uncharted 2: Among Thieves y The Last of Us, abandonará Naughty Dog. Lo anterior lo hará después de haber colaborado en proyectos de la compañía por 18 años.
-                                    Straley fue el responsable de compartir esta noticia por medio de una publicación en el blog de Naughty Dog, sitio donde señaló que tomó esta decisión ya que en su año sabático se dio cuenta que sus intereses iban hacia otra dirección. Al percatarse optó por dar un paso al costado.
+                            <div class="bordeComentarioS"></div>
+                            <div class="cdrComentario">
+                                <div class="bordeComentarioP"></div>
+                                <div class="avatarComentario">
+                                    <img src="..\..\imagenes\akane.jpg" alt="">
+                                </div>
+                                <div class="comentarios">
+                                    <div class="comentario">
+                                        <div class="flechaComentario"></div>
+                                        <div class="cuerpoComentario">
+                                                <div class="titulo">
+                                                        <img class="mostrarComentarios" src="..\..\imagenes\flechaDn.png" alt="">
+                                                        <span class="autorComentario">ambar trejo</span>
+                                                        <span class="fechaComentario">30/09/2017</span>
+                                                        <img class="cerrarComentario" src="..\..\imagenes\salir.png" alt="">
+                                                    </div>
+                                                    <div class="contenido">
+                                                            Bruce Straley, creativo mejor reconocido por ser el director de Uncharted 2: Among Thieves y The Last of Us, abandonará Naughty Dog. Lo anterior lo hará después de haber colaborado en proyectos de la compañía por 18 años.
+                                                            Straley fue el responsable de compartir esta noticia por medio de una publicación en el blog de Naughty Dog, sitio donde señaló que tomó esta decisión ya que en su año sabático se dio cuenta que sus intereses iban hacia otra dirección. Al percatarse optó por dar un paso al costado.
+                                                    </div>
+                                        </div>
+                                    </div>
+                                    <div class="bordeComentarioS"></div>
+                                    <div class="cdrComentario">
+                                            <div class="bordeComentarioP"></div>
+                                            <div class="avatarComentario">
+                                                <img src="..\..\imagenes\akane.jpg" alt="">
+                                            </div>
+                                            <div class="comentarios">
+                                                <div class="comentario">
+                                                    <div class="flechaComentario"></div>
+                                                    <div class="cuerpoComentario">
+                                                            <div class="titulo">
+                                                                    <img class="mostrarComentarios" src="..\..\imagenes\flechaDn.png" alt="">
+                                                                    <span class="autorComentario">ambar trejo</span>
+                                                                    <span class="fechaComentario">30/09/2017</span>
+                                                                    <img class="cerrarComentario" src="..\..\imagenes\salir.png" alt="">
+                                                                </div>
+                                                                <div class="contenido">
+                                                                        Bruce Straley, creativo mejor reconocido por ser el director de Uncharted 2: Among Thieves y The Last of Us, abandonará Naughty Dog. Lo anterior lo hará después de haber colaborado en proyectos de la compañía por 18 años.
+                                                                        Straley fue el responsable de compartir esta noticia por medio de una publicación en el blog de Naughty Dog, sitio donde señaló que tomó esta decisión ya que en su año sabático se dio cuenta que sus intereses iban hacia otra dirección. Al percatarse optó por dar un paso al costado.
+                                                                </div>
+                                                    </div>
+                                                </div>
+                                                <div class="bordeComentarioS"></div>
+                                                <div class="cdrComentario">
+                                                    
+                                                    <div class="avatarComentario">
+                                                        <img src="..\..\imagenes\akane.jpg" alt="">
+                                                    </div>
+                                                    <div class="comentarios">
+                                                        <div class="comentario">
+                                                            <div class="flechaComentario"></div>
+                                                            <div class="cuerpoComentario">
+                                                                    <div class="titulo">
+                                                                            <img class="mostrarComentarios" src="..\..\imagenes\flechaDn.png" alt="">
+                                                                            <span class="autorComentario">ambar trejo</span>
+                                                                            <span class="fechaComentario">30/09/2017</span>
+                                                                            <img class="cerrarComentario" src="..\..\imagenes\salir.png" alt="">
+                                                                        </div>
+                                                                        <div class="contenido">
+                                                                                Bruce Straley, creativo mejor reconocido por ser el director de Uncharted 2: Among Thieves y The Last of Us, abandonará Naughty Dog. Lo anterior lo hará después de haber colaborado en proyectos de la compañía por 18 años.
+                                                                                Straley fue el responsable de compartir esta noticia por medio de una publicación en el blog de Naughty Dog, sitio donde señaló que tomó esta decisión ya que en su año sabático se dio cuenta que sus intereses iban hacia otra dirección. Al percatarse optó por dar un paso al costado.
+                                                                        </div>
+                                                            </div>
+                                                        </div>
+                                                    </div>
+                                                </div>
+                                                <div class="bordeComentarioS"></div>
+                                                <div class="cdrComentario">
+                                                    
+                                                    <div class="avatarComentario">
+                                                        <img src="..\..\imagenes\akane.jpg" alt="">
+                                                    </div>
+                                                    <div class="comentarios">
+                                                        <div class="comentario">
+                                                            <div class="flechaComentario"></div>
+                                                            <div class="cuerpoComentario">
+                                                                    <div class="titulo">
+                                                                            <img class="mostrarComentarios" src="..\..\imagenes\flechaDn.png" alt="">
+                                                                            <span class="autorComentario">ambar trejo</span>
+                                                                            <span class="fechaComentario">30/09/2017</span>
+                                                                            <img class="cerrarComentario" src="..\..\imagenes\salir.png" alt="">
+                                                                        </div>
+                                                                        <div class="contenido">
+                                                                                Bruce Straley, creativo mejor reconocido por ser el director de Uncharted 2: Among Thieves y The Last of Us, abandonará Naughty Dog. Lo anterior lo hará después de haber colaborado en proyectos de la compañía por 18 años.
+                                                                                Straley fue el responsable de compartir esta noticia por medio de una publicación en el blog de Naughty Dog, sitio donde señaló que tomó esta decisión ya que en su año sabático se dio cuenta que sus intereses iban hacia otra dirección. Al percatarse optó por dar un paso al costado.
+                                                                        </div>
+                                                            </div>
+                                                        </div>
+                                                    </div>
+                                                </div>
+                                            </div>
+                                        </div>
+                                </div>
                             </div>
-                </div>
+                            <div class="bordeComentarioS"></div>
+                            <div class="cdrComentario">
+                                    
+                                    <div class="avatarComentario">
+                                        <img src="..\..\imagenes\akane.jpg" alt="">
+                                    </div>
+                                    <div class="comentarios">
+                                        <div class="comentario">
+                                            <div class="flechaComentario"></div>
+                                            <div class="cuerpoComentario">
+                                                    <div class="titulo">
+                                                            <img class="mostrarComentarios" src="..\..\imagenes\flechaDn.png" alt="">
+                                                            <span class="autorComentario">ambar trejo</span>
+                                                            <span class="fechaComentario">30/09/2017</span>
+                                                            <img class="cerrarComentario" src="..\..\imagenes\salir.png" alt="">
+                                                        </div>
+                                                        <div class="contenido">
+                                                                Bruce Straley, creativo mejor reconocido por ser el director de Uncharted 2: Among Thieves y The Last of Us, abandonará Naughty Dog. Lo anterior lo hará después de haber colaborado en proyectos de la compañía por 18 años.
+                                                                Straley fue el responsable de compartir esta noticia por medio de una publicación en el blog de Naughty Dog, sitio donde señaló que tomó esta decisión ya que en su año sabático se dio cuenta que sus intereses iban hacia otra dirección. Al percatarse optó por dar un paso al costado.
+                                                        </div>
+                                            </div>
+                                        </div>
+                                    </div>
+                            </div>
+                        </div>
             </div>
+
+                <div class="cdrComentario">
+                            <div class="bordeComentarioP"></div>
+                            <div class="avatarComentario">
+                                <img src="..\..\imagenes\ranma.jpg" alt="">
+                            </div>
+                            <div class="comentarios">
+                                <div class="comentario">
+                                    <div class="flechaComentario"></div>
+                                    <div class="cuerpoComentario">
+                                            <div class="titulo">
+                                                    <img class="mostrarComentarios" src="..\..\imagenes\flechaDn.png" alt="">
+                                                    <span class="autorComentario">esteban garo</span>
+                                                    <span class="fechaComentario">23/09/2017</span>
+                                                    <img class="cerrarComentario" src="..\..\imagenes\salir.png" alt="">
+                                                </div>
+                                                <div class="contenido">
+                                                        Bruce Straley, creativo mejor reconocido por ser el director de Uncharted 2: Among Thieves y The Last of Us, abandonará Naughty Dog. Lo anterior lo hará después de haber colaborado en proyectos de la compañía por 18 años.
+                                                        Straley fue el responsable de compartir esta noticia por medio de una publicación en el blog de Naughty Dog, sitio donde señaló que tomó esta decisión ya que en su año sabático se dio cuenta que sus intereses iban hacia otra dirección. Al percatarse optó por dar un paso al costado.
+                                                </div>
+                                    </div>
+                                </div>
+                                <div class="bordeComentarioS"></div>
+                                <div class="cdrComentario">
+                                    
+                                    <div class="avatarComentario">
+                                        <img src="..\..\imagenes\akane.jpg" alt="">
+                                    </div>
+                                    <div class="comentarios">
+                                        <div class="comentario">
+                                            <div class="flechaComentario"></div>
+                                            <div class="cuerpoComentario">
+                                                    <div class="titulo">
+                                                            <img class="mostrarComentarios" src="..\..\imagenes\flechaDn.png" alt="">
+                                                            <span class="autorComentario">ambar trejo</span>
+                                                            <span class="fechaComentario">30/09/2017</span>
+                                                            <img class="cerrarComentario" src="..\..\imagenes\salir.png" alt="">
+                                                        </div>
+                                                        <div class="contenido">
+                                                                Bruce Straley, creativo mejor reconocido por ser el director de Uncharted 2: Among Thieves y The Last of Us, abandonará Naughty Dog. Lo anterior lo hará después de haber colaborado en proyectos de la compañía por 18 años.
+                                                                Straley fue el responsable de compartir esta noticia por medio de una publicación en el blog de Naughty Dog, sitio donde señaló que tomó esta decisión ya que en su año sabático se dio cuenta que sus intereses iban hacia otra dirección. Al percatarse optó por dar un paso al costado.
+                                                        </div>
+                                            </div>
+                                        </div>
+                                    </div>
+                                </div>
+                                <div class="bordeComentarioS"></div>
+                                <div class="cdrComentario">
+                                        
+                                        <div class="avatarComentario">
+                                            <img src="..\..\imagenes\akane.jpg" alt="">
+                                        </div>
+                                        <div class="comentarios">
+                                            <div class="comentario">
+                                                <div class="flechaComentario"></div>
+                                                <div class="cuerpoComentario">
+                                                        <div class="titulo">
+                                                                <img class="mostrarComentarios" src="..\..\imagenes\flechaDn.png" alt="">
+                                                                <span class="autorComentario">ambar trejo</span>
+                                                                <span class="fechaComentario">30/09/2017</span>
+                                                                <img class="cerrarComentario" src="..\..\imagenes\salir.png" alt="">
+                                                            </div>
+                                                            <div class="contenido">
+                                                                    Bruce Straley, creativo mejor reconocido por ser el director de Uncharted 2: Among Thieves y The Last of Us, abandonará Naughty Dog. Lo anterior lo hará después de haber colaborado en proyectos de la compañía por 18 años.
+                                                                    Straley fue el responsable de compartir esta noticia por medio de una publicación en el blog de Naughty Dog, sitio donde señaló que tomó esta decisión ya que en su año sabático se dio cuenta que sus intereses iban hacia otra dirección. Al percatarse optó por dar un paso al costado.
+                                                            </div>
+                                                </div>
+                                            </div>
+                                        </div>
+                                </div>
+                            </div>
+                        </div>
+
         </div>
     </body>
 </html>
