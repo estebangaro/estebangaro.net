@@ -118,7 +118,33 @@
             .contenido{
                 text-align: justify;
             }
-        </style>
+            .contenido > textarea{
+                border: 0;
+                width: 100%;
+                resize: none;
+                height: 115px;
+                font-family: Arial, Helvetica, sans-serif;
+            }
+            .sombra{
+                box-shadow: 0px 0px 10px gray;
+            }
+            .btnPublicar{
+                width: 100%;
+                overflow: hidden;
+                text-align: right;
+            }
+            .btnPublicar > span{
+                width: 150px;
+                padding: 0.5em;
+                border: solid 2px white;
+                margin: 1em 0;
+                color: white;
+                text-align: center;
+                background-color: blue;
+                cursor: pointer;
+                font-weight: bolder;
+            }
+        </style>    
         <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.2.1/jquery.min.js"></script>
         <script>
             $(function(){
@@ -165,7 +191,24 @@
     </head>
     <body>
         <div class="center">          
-        
+            <div class="cdrComentario">
+                <div class="avatarComentario">
+                    <img src="..\..\imagenes\avatar.jpg" alt="">
+                </div>
+                <div class="comentarios">
+                    <div class="comentario">
+                        <div class="flechaComentario"></div>
+                        <div class="cuerpoComentario">
+                                    <div class="contenido sombra">
+                                        <textarea></textarea>                                            
+                                    </div>
+                        </div>
+                    </div>
+                </div>
+                <div class="btnPublicar">
+                    <span>Publicar</span>
+                </div>
+            </div>
             <div class="cdrComentario">
                 <div class="bordeComentarioP"></div>
                 <div class="avatarComentario">
@@ -307,7 +350,7 @@
                                         </div>
                                     </div>
                             </div>
-                        </div>
+                </div>
             </div>
 
                 <div class="cdrComentario">
