@@ -12,7 +12,9 @@
                 width: 80%;
                 margin: 0 auto;
             }
-
+            #comentarioModelo{
+                display: none;
+            }
             .cdrComentario{
                 width: 100%;
                 overflow: hidden;
@@ -128,10 +130,12 @@
             .sombra{
                 box-shadow: 0px 0px 10px gray;
             }
-            .btnPublicar{
+            .btnPublicar, .lblResponder{
                 width: 100%;
                 overflow: hidden;
                 text-align: right;
+                margin-top: 0.5em;
+                margin-bottom: 1em;
             }
             .btnPublicar > span{
                 display: inline-block;
@@ -142,8 +146,22 @@
                 color: white;
                 text-align: center;
                 background-color: blue;
-                cursor: pointer;
                 font-weight: bolder;
+                cursor: pointer;
+            }
+            .lblResponder > span, .lblResponder > img{
+                float: right;
+                margin-left: 0.5em;
+                cursor: pointer;
+            }
+            .lblResponder > span{
+                color: white;
+                font-size: 0.9em;                
+            }
+
+            .lblResponder > img{
+                width: 20px;
+                height: 20px;
             }
         </style>    
         <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.2.1/jquery.min.js"></script>
@@ -152,6 +170,33 @@
                 ajustaComponenteComentarios();
                 $(window).resize(ajustaComponenteComentarios);
             });
+
+            function registraComentario(comentarioValores){
+                var comentario = $('#comentarioModelo').clone(true);
+                estableceValoresComentario(comentario, comentarioValores);
+                if(comentario.esPrincipal){
+                    $('.center').append(
+                        comentario
+                    );
+                }else{
+                    // Añadir lógica para comentarios anidados.
+                }
+            }
+
+            function estableceValoresComentario(comentario, valores){
+                $('.avatarComentario', comentario)
+                    .attr('src', '..\..\imagenes\akane.jpg') // comentario.Avatar
+                    .attr('alt', 'avatar'); // comentario.AltAvatar
+                $('.autorComentario', comentario) // comentario.Autor
+                    .html('esteban garo');
+                $('.fechaComentario', comentario) // comentario.Fecha
+                    .html('07/10/2017');
+                $('.contenido', comentario) // Comentario.Contenido
+                    .html('Prueba de comentarios');
+                comentario
+                    .css('display', 'block')
+                    .attr('id', '');
+            }
 
             function ajustaComponenteComentarios(){
                 ajustaAnchoComentsCaja();
@@ -183,8 +228,10 @@
                     var anchoAvatar = $(this).parent().prev().outerWidth();
                     var anchoContenedor = $(this).parent().parent().innerWidth();
                     var anchoFlecha = $('.flechaComentario', $(this)).outerWidth();
-                    var porcentajeAncho = 100.00 - parseFloat(
-                        ((anchoAvatar + anchoFlecha) * 100) / anchoContenedor);
+                    var porcentajeAncho = anchoAvatar != null && anchoFlecha != null?
+                        100.00 - parseFloat(((anchoAvatar + anchoFlecha) * 100) / anchoContenedor):
+                        100;
+                        
                     $(this).parent().css('width', porcentajeAncho + '%');
                 });
             }
@@ -210,6 +257,31 @@
                     <span>Publicar</span>
                 </div>
             </div>
+            <div class="cdrComentario" id="comentarioModelo">                    
+                    <div class="avatarComentario">
+                        <img src="" alt="">
+                    </div>
+                    <div class="comentarios">
+                        <div class="comentario">
+                            <div class="flechaComentario"></div>
+                            <div class="cuerpoComentario">
+                                    <div class="titulo">
+                                            <img class="mostrarComentarios" src="..\..\imagenes\flechaDn.png" alt="">
+                                            <span class="autorComentario"></span>
+                                            <span class="fechaComentario"></span>
+                                            <img class="cerrarComentario" src="..\..\imagenes\salir.png" alt="">
+                                        </div>
+                                        <div class="contenido"></div>
+                            </div>
+                        </div>
+                        <div class="lblResponder">
+                                <img src="..\..\imagenes\responder.svg" alt="responder">
+                                <span>Responder</span>
+                        </div>
+                    </div>
+            </div>
+
+            <!--
             <div class="cdrComentario">
                 <div class="bordeComentarioP"></div>
                 <div class="avatarComentario">
@@ -230,6 +302,24 @@
                                                     Straley fue el responsable de compartir esta noticia por medio de una publicación en el blog de Naughty Dog, sitio donde señaló que tomó esta decisión ya que en su año sabático se dio cuenta que sus intereses iban hacia otra dirección. Al percatarse optó por dar un paso al costado.
                                             </div>
                                 </div>
+                            </div>
+                            <div class="lblResponder">
+                                    <img src="..\..\imagenes\cancelarrojo.svg" alt="responder">
+                                    <span>Cancelar</span>
+                            </div>
+                            <div class="cdrComentario">
+                                    <div class="comentarios">
+                                        <div class="comentario">
+                                            <div class="cuerpoComentario">
+                                                        <div class="contenido sombra">
+                                                            <textarea></textarea>                                            
+                                                        </div>
+                                            </div>
+                                        </div>
+                                    </div>
+                                    <div class="btnPublicar">
+                                        <span>Responder</span>
+                                    </div>
                             </div>
                             <div class="bordeComentarioS"></div>
                             <div class="cdrComentario">
@@ -375,9 +465,12 @@
                                                 </div>
                                     </div>
                                 </div>
+                                <div class="lblResponder">
+                                        <img src="..\..\imagenes\responder.svg" alt="responder">
+                                        <span>Responder</span>
+                                </div>
                                 <div class="bordeComentarioS"></div>
-                                <div class="cdrComentario">
-                                    
+                                <div class="cdrComentario">                                    
                                     <div class="avatarComentario">
                                         <img src="..\..\imagenes\akane.jpg" alt="">
                                     </div>
@@ -396,6 +489,10 @@
                                                                 Straley fue el responsable de compartir esta noticia por medio de una publicación en el blog de Naughty Dog, sitio donde señaló que tomó esta decisión ya que en su año sabático se dio cuenta que sus intereses iban hacia otra dirección. Al percatarse optó por dar un paso al costado.
                                                         </div>
                                             </div>
+                                        </div>
+                                        <div class="lblResponder">
+                                                <img src="..\..\imagenes\responder.svg" alt="responder">
+                                                <span>Responder</span>
                                         </div>
                                     </div>
                                 </div>
@@ -421,10 +518,14 @@
                                                             </div>
                                                 </div>
                                             </div>
+                                            <div class="lblResponder">
+                                                    <img src="..\..\imagenes\responder.svg" alt="responder">
+                                                    <span>Responder</span>
+                                            </div>
                                         </div>
                                 </div>
                             </div>
-                        </div>
+                        </div> -->
 
         </div>
     </body>
