@@ -28,6 +28,7 @@
                 border-style: solid;
                 border-color: white;
                 border-width: 1px;
+                display: none;
             }
             .bordeComentarioP{
                 position: absolute;
@@ -168,44 +169,73 @@
         <script>
             $(function(){
                 ajustaComponenteComentarios();
-                $(window).resize(ajustaComponenteComentarios);
+                $(window).resize(function(){
+                    ajustaComponenteComentarios();
+                });
+                enlazaEventos();
             });
+
+            function enlazaEventos(){
+                $('.btnPublicar').click(function(){
+                    btnPublicarManejador();
+                });
+            }
+
+            function btnPublicarManejador(){
+                    // Solicitar información de autor del comentario:
+                    // Nombre, email, verificación de no robot (re captcha).
+                    registraComentario(
+                        {
+                            EsPrincipal : true,
+                            Avatar : '..\\..\\imagenes\\akane.jpg',
+                            AltAvatar : 'avatar',
+                            Autor : 'Esteban GaRo',
+                            Fecha : '07/10/2017',
+                            Contenido : $('.contenido > textarea').val()
+                        }
+                    );
+            }
 
             function registraComentario(comentarioValores){
                 var comentario = $('#comentarioModelo').clone(true);
                 estableceValoresComentario(comentario, comentarioValores);
-                if(comentario.esPrincipal){
-                    $('.center').append(
-                        comentario
-                    );
+                if(comentarioValores.EsPrincipal){
+                    // Añadir a contenedor de comentarios.
+                    comentario.insertAfter('#comentarioPublicar');
                 }else{
                     // Añadir lógica para comentarios anidados.
                 }
+                ajustaComponenteComentarios(comentario); // Aplicar ajustes a elemento recién creado.
+                comentario.css('display', 'block');
             }
 
             function estableceValoresComentario(comentario, valores){
-                $('.avatarComentario', comentario)
-                    .attr('src', '..\..\imagenes\akane.jpg') // comentario.Avatar
-                    .attr('alt', 'avatar'); // comentario.AltAvatar
-                $('.autorComentario', comentario) // comentario.Autor
-                    .html('esteban garo');
-                $('.fechaComentario', comentario) // comentario.Fecha
-                    .html('07/10/2017');
-                $('.contenido', comentario) // Comentario.Contenido
-                    .html('Prueba de comentarios');
+                $('.avatarComentario > img', comentario)
+                    .attr('src', valores.Avatar) // '..\..\imagenes\akane.jpg'
+                    .attr('alt', valores.AltAvatar); // 'avatar'
+                $('.autorComentario', comentario) // 'esteban garo'
+                    .html(valores.Autor);
+                $('.fechaComentario', comentario) // '07/10/2017'
+                    .html(valores.Fecha);
+                $('.contenido', comentario) // 'Prueba de comentarios' 
+                    .html(valores.Contenido);
                 comentario
-                    .css('display', 'block')
                     .attr('id', '');
             }
 
-            function ajustaComponenteComentarios(){
-                ajustaAnchoComentsCaja();
-                ajustaFlechaComentsCaja();
-                ajustaAltoComentsComents();
+            function validaComentarios(comentario, selector){
+                return comentario == null? $(selector): $(selector, comentario);
             }
 
-            function ajustaAltoComentsComents(){
-                $('.cdrComentario > .comentarios > .cdrComentario:last-child').each(function(){
+            function ajustaComponenteComentarios(comentario){
+                ajustaAnchoComentsCaja(comentario);
+                ajustaFlechaComentsCaja(comentario);
+                ajustaAltoComentsComents(comentario);
+            }
+
+            function ajustaAltoComentsComents(comentario){
+                validaComentarios(comentario, '.cdrComentario > .comentarios > .cdrComentario:last-child')
+                .each(function(){
                     var altoCtdr = $(this).outerHeight();
                     var altoAvatar = $('.avatarComentario').outerHeight() / 2;
                     var despVertical = (altoCtdr-altoAvatar)*-1;
@@ -214,8 +244,9 @@
                 });
             }
 
-            function ajustaFlechaComentsCaja(){
-                $('.flechaComentario').each(function(){
+            function ajustaFlechaComentsCaja(comentario){
+                validaComentarios(comentario, '.flechaComentario')
+                .each(function(){
                     var altoAvatar = $(this).parent().parent().prev().outerHeight();
                     var desplazamientoV = (altoAvatar / 2) - ($(this).outerHeight() / 2);
                     var desplazamientoH = $(this).outerWidth() / 2 * -1;
@@ -223,8 +254,9 @@
                 });
             }
 
-            function ajustaAnchoComentsCaja(){
-                $('.comentario').each(function(){
+            function ajustaAnchoComentsCaja(comentario){
+                validaComentarios(comentario, '.comentario')
+                .each(function(){
                     var anchoAvatar = $(this).parent().prev().outerWidth();
                     var anchoContenedor = $(this).parent().parent().innerWidth();
                     var anchoFlecha = $('.flechaComentario', $(this)).outerWidth();
@@ -238,8 +270,9 @@
         </script>
     </head>
     <body>
-        <div class="center">          
-            <div class="cdrComentario">
+        <div class="center">    
+      
+            <div class="cdrComentario" id="comentarioPublicar">
                 <div class="avatarComentario">
                     <img src="..\..\imagenes\avatar.jpg" alt="">
                 </div>
@@ -257,9 +290,10 @@
                     <span>Publicar</span>
                 </div>
             </div>
-            <div class="cdrComentario" id="comentarioModelo">                    
+            <div class="cdrComentario" id="comentarioModelo">
+                    <div class="bordeComentarioP"></div>
                     <div class="avatarComentario">
-                        <img src="" alt="">
+                        <img src="..\..\imagenes\akane.jpg" alt="">
                     </div>
                     <div class="comentarios">
                         <div class="comentario">
@@ -525,8 +559,8 @@
                                         </div>
                                 </div>
                             </div>
-                        </div> -->
-
+                        </div>
+                    -->
         </div>
     </body>
 </html>
