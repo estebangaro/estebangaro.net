@@ -12,7 +12,7 @@
                 width: 80%;
                 margin: 0 auto;
             }
-            #comentarioModelo{
+            .comentarioModelo, .respuestaModelo{
                 display: none;
             }
             .cdrComentario{
@@ -177,36 +177,78 @@
 
             function enlazaEventos(){
                 $('.btnPublicar').click(function(){
-                    btnPublicarManejador();
+                    // Solicitar información de autor del comentario:
+                    // Nombre, email, verificación de no robot (re captcha).
+                    btnPublicarManejadorClic($(this));
+                });
+                $('.lblResponder').click(function(){
+                    lblResponderManejadorClic($(this));
                 });
             }
 
-            function btnPublicarManejador(){
-                    // Solicitar información de autor del comentario:
-                    // Nombre, email, verificación de no robot (re captcha).
+            function ajustaLblResponder(lblResponder, accion){
+                lblResponder.children('img')
+                    .attr('src', accion == "Responder"? 
+                        '..\\..\\imagenes\\cancelarrojo.svg': '..\\..\\imagenes\\responder.svg');
+                lblResponder.children('span')
+                    .html(accion == "Responder"? 
+                        'Cancelar': 'Responder');
+            }
+
+            function lblResponderManejadorClic(lblResponder){
+                var accion = lblResponder.children('span').text();
+                ajustaLblResponder(lblResponder, accion);
+                if(accion == "Responder"){
+                    var comentarioRespuesta = $('.respuestaModelo').first().clone(true);
+                    comentarioRespuesta.insertAfter(lblResponder);
+                    comentarioRespuesta.show();
+                }else{
+                    lblResponder.parent().children('.respuestaModelo').remove();
+                }
+                ajustaAltoComentsComents();
+            }
+
+            function btnPublicarManejadorClic(btnPublicar){
+                var accion = btnPublicar.children('span').text();
                     registraComentario(
                         {
-                            EsPrincipal : true,
+                            Accion : accion,
                             Avatar : '..\\..\\imagenes\\akane.jpg',
                             AltAvatar : 'avatar',
                             Autor : 'Esteban GaRo',
                             Fecha : '07/10/2017',
-                            Contenido : $('.contenido > textarea').val()
+                            Contenido : accion == "Publicar"?
+                                 $('.contenido > textarea').val():
+                                 btnPublicar.parent().find('textarea').val(),
+                            Boton: btnPublicar
                         }
                     );
             }
 
             function registraComentario(comentarioValores){
-                var comentario = $('#comentarioModelo').clone(true);
+                var comentario = $('.comentarioModelo').clone(true);
                 estableceValoresComentario(comentario, comentarioValores);
-                if(comentarioValores.EsPrincipal){
+                if(comentarioValores.Accion == "Publicar"){
                     // Añadir a contenedor de comentarios.
                     comentario.insertAfter('#comentarioPublicar');
                 }else{
-                    // Añadir lógica para comentarios anidados.
+                    comentarioValores.Boton.parent().replaceWith(comentario);
+                    $('<div class="bordeComentarioS"></div>')
+                        .insertBefore(comentario)
+                        .show();
+                    comentario.parent().parent()
+                        .children('.bordeComentarioP')
+                        .first()
+                        .show();
+                    ajustaLblResponder(comentario.parent().children('.lblResponder'), 'Cancelar');
+                    if(comentario.parents('.cdrComentario').length == 2){
+                        comentario.children('.comentarios').children('.lblResponder')
+                            .css('visibility', 'hidden');
+                    }
                 }
+                comentario.removeClass('comentarioModelo');
+                comentario.show();
                 ajustaComponenteComentarios(comentario); // Aplicar ajustes a elemento recién creado.
-                comentario.css('display', 'block');
             }
 
             function estableceValoresComentario(comentario, valores){
@@ -219,12 +261,12 @@
                     .html(valores.Fecha);
                 $('.contenido', comentario) // 'Prueba de comentarios' 
                     .html(valores.Contenido);
-                comentario
-                    .attr('id', '');
             }
 
-            function validaComentarios(comentario, selector){
-                return comentario == null? $(selector): $(selector, comentario);
+            function validaComentarios(comentario, selector, selector2){
+                return comentario == null || comentario == undefined? 
+                    $(selector): $(selector2 == null || selector2 == undefined?
+                    selector: selector2, comentario); 
             }
 
             function ajustaComponenteComentarios(comentario){
@@ -234,7 +276,9 @@
             }
 
             function ajustaAltoComentsComents(comentario){
-                validaComentarios(comentario, '.cdrComentario > .comentarios > .cdrComentario:last-child')
+                var ultimoComentario = validaComentarios(undefined,
+                    '.cdrComentario > .comentarios > .cdrComentario:last-child');
+                ultimoComentario
                 .each(function(){
                     var altoCtdr = $(this).outerHeight();
                     var altoAvatar = $('.avatarComentario').outerHeight() / 2;
@@ -290,7 +334,7 @@
                     <span>Publicar</span>
                 </div>
             </div>
-            <div class="cdrComentario" id="comentarioModelo">
+            <div class="cdrComentario comentarioModelo">
                     <div class="bordeComentarioP"></div>
                     <div class="avatarComentario">
                         <img src="..\..\imagenes\akane.jpg" alt="">
@@ -313,6 +357,20 @@
                                 <span>Responder</span>
                         </div>
                     </div>
+            </div>
+            <div class="cdrComentario respuestaModelo">
+                <div class="comentarios">
+                    <div class="comentario">
+                        <div class="cuerpoComentario">
+                            <div class="contenido sombra">
+                                <textarea></textarea>                                            
+                            </div>
+                        </div>
+                    </div>
+                </div>
+                <div class="btnPublicar">
+                    <span>Responder</span>
+                </div>
             </div>
 
             <!--
