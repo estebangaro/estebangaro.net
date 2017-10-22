@@ -15,6 +15,12 @@
                 $('.lblResponder').click(function(){
                     lblResponderManejadorClic($(this));
                 });
+                $('.mostrarComentarios').click(function(){
+                    muestraOcultaComentariosAnidados($(this));
+                });
+                $('.cerrarComentario').click(function(){
+                    $(this).siblings('.mostrarComentarios').first().click();
+                });
             }
 
             function ajustaLblResponder(lblResponder, accion){
@@ -33,6 +39,7 @@
                     var comentarioRespuesta = $('.respuestaModelo').first().clone(true);
                     comentarioRespuesta.insertAfter(lblResponder);
                     comentarioRespuesta.show();
+                    comentarioRespuesta.find('textarea').focus();
                 }else{
                     lblResponder.parent().children('.respuestaModelo').remove();
                 }
@@ -56,6 +63,45 @@
                     );
             }
 
+            function muestraOcultaComentariosAnidados(btnOcultaMuestra){
+                var comentarios = btnOcultaMuestra
+                    .parents('.comentarios')
+                    .first()
+                    .children('.cdrComentario');
+                if(comentarios.length > 0){
+                    var accion = comentarios.first().css('display') == 'none'? 'mostrar': 'ocultar';
+                    MuestraComentarios(comentarios, btnOcultaMuestra, accion);
+                    ajustaAltoComentsComents();
+                }
+            }
+
+            function MuestraComentarios(comentarios, btnOcultaMuestra, accion){
+                if(accion == 'ocultar'){
+                    comentarios.hide();
+                    btnOcultaMuestra.parents('.cdrComentario').first().children('.bordeComentarioP').first()
+                        .hide();
+                    btnOcultaMuestra.parent().siblings('.contenido').hide();
+                    btnOcultaMuestra.attr('src', btnOcultaMuestra.attr('src').replace("flechaU", "flechaDn")).parent()
+                        .addClass('comentarioOculto');
+                    btnOcultaMuestra.parents('.cdrComentario').first().children('.avatarComentario')
+                        .first().css('opacity', '0.5');
+                    btnOcultaMuestra.siblings('.cerrarComentario').show();
+                    btnOcultaMuestra.parents('.comentarios').first().children('.lblResponder').hide();
+                }else{
+                    comentarios.css('display', '');
+                    btnOcultaMuestra.parents('.cdrComentario').first().children('.bordeComentarioP').first()
+                        .css('display', '');
+                    btnOcultaMuestra.parent().siblings('.contenido').show();
+                    btnOcultaMuestra.attr('src', btnOcultaMuestra.attr('src').replace("flechaDn", "flechaU"))
+                        .parent().removeClass('comentarioOculto');
+                    btnOcultaMuestra.parents('.cdrComentario')
+                        .first().children('.avatarComentario').first()
+                        .css('opacity', '1');
+                    btnOcultaMuestra.siblings('.cerrarComentario').hide();
+                    btnOcultaMuestra.parents('.comentarios').first().children('.lblResponder').show();
+                }
+            }
+
             function registraComentario(comentarioValores){
                 var comentario = $('.comentarioModelo').clone(true);
                 estableceValoresComentario(comentario, comentarioValores);
@@ -66,7 +112,6 @@
                 }else{
                     comentarioValores.Boton.parent().replaceWith(comentario);                    
                     var bordeS = $('<div class="bordeComentarioS"></div>');
-                    ajustaDespComentsS(bordeS);
                     bordeS.insertBefore(comentario);
                     if(comentario.parent().parent()
                         .children('.bordeComentarioP').length == 0)
@@ -111,8 +156,10 @@
                 var anchoAvatar = $('.avatarComentario').outerWidth() * 0.75;
                 var altoAvatar = ($('.avatarComentario').outerHeight() / 2);
                 var marginTop = parseInt($('.cdrComentario').css('margin-top').replace("px", ""));
-                var bordertop = Math.round(parseFloat($('.comentario').css('border-width').replace("px","")));
-                var borderS = Math.round(parseFloat($('.bordeComentarioS').css('border-width').replace("px","")));
+                var estlo = $('.comentario').css('border-width');
+                var estilo2 = $('.bordeComentarioS').css('border-width');
+                var bordertop = 1;//parseFloat($('.comentario').css('border-width').replace("px",""));
+                var borderS = 1;//parseFloat($('.bordeComentarioS').css('border-width').replace("px",""));
                 if(bordeComentarioS == undefined)
                     bordeComentarioS = $('.bordeComentarioS');
                 bordeComentarioS
