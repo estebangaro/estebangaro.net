@@ -4,318 +4,18 @@
         <title>Componente comentarios</title>
         <meta charset="UTF-8" />
         <meta name="viewport" content="width=device-width, initial-scale=1" />
-        <style>
-            body{
-                background-color: black;
-            }
-            .center{
-                width: 80%;
-                margin: 0 auto;
-            }
-            .comentarioModelo, .respuestaModelo{
-                display: none;
-            }
-            .cdrComentario{
-                width: 100%;
-                overflow: hidden;
-                position: relative;
-                margin-top: 16px;
-            }
-            .cdrComentario:last-child{
-                margin-bottom: 0;
-            }
-            .bordeComentarioP, .bordeComentarioS{
-                border-style: solid;
-                border-color: white;
-                border-width: 1px;
-                display: none;
-            }
-            .bordeComentarioP{
-                position: absolute;
-                height: 100%;
-                top: 0;
-                /*DesplazamientoH = 50% H avatar*/
-                left: 30px;
-            }
-            .bordeComentarioS{
-                position: relative;
-                /*Ancho = 3/4% H avatar*/
-                width: 45px;
-                /*DesplazamientoV = 50% V avatar + 100% margin Ctdr + 100% borde Ctdr + 100% bordeComentarios*/
-                top: 48px;
-                /*DesplazamientoH = - 3/4% H avatar*/
-                left: -45px;
-            }
-            .avatarComentario, .comentarios, .comentario{
-                box-sizing: border-box;
-            }
-            .avatarComentario{
-                width: 60px;
-                height: 60px;
-                border-radius: 50%;
-                overflow: hidden;
-                position: relative;
-                float: left;
-            }
-            .avatarComentario > img{
-                width: 100%;
-                height: 100%;
-            }
-            .comentarios{
-                float:right;
-            }
-            .comentario, .flechaComentario, .cuerpoComentario{
-                background-color: white;
-                border: solid black 1px;
-                border-radius: 10px;
-            }
-            .comentario{
-                width: 100%;
-                position: relative;
-                padding: 0;
-            }
-            .flechaComentario{
-                width: 15px;
-                height: 15px;
-                position: absolute;
-                transform: rotate(45deg);
-                border-radius: 0;
-            }
-            .cuerpoComentario{
-                border:0;
-                position: relative;
-                top: 0px;
-                left: 0;
-                width: 100%;
-                height: 100%;
-                margin: 0;
-            }
-            .titulo, .contenido{
-                margin: 1em;
-            }
-            .titulo{
-                overflow: hidden;
-            }
-            .titulo > *{
-                margin-right: 0.5em;
-            }
-            .titulo > img{
-                width: 16px;
-                height: 16px;
-            }
-            .mostrarComentarios, .autorComentario{
-                float: left;
-            }
-            .autorComentario{
-                font-weight: bold;
-                color: red;
-                font-size: 1.1em;
-            }
-            .fechaComentario{
-                color: gray;
-            }
-            .cerrarComentario{
-                float: right;
-                margin: 0;
-            }
-            .contenido{
-                text-align: justify;
-            }
-            .contenido > textarea{
-                border: 0;
-                width: 100%;
-                resize: none;
-                height: 115px;
-                font-family: Arial, Helvetica, sans-serif;
-            }
-            .sombra{
-                box-shadow: 0px 0px 10px gray;
-            }
-            .btnPublicar, .lblResponder{
-                width: 100%;
-                overflow: hidden;
-                text-align: right;
-                margin-top: 0.5em;
-                margin-bottom: 1em;
-            }
-            .btnPublicar > span{
-                display: inline-block;
-                width: 150px;
-                padding: 0.5em;
-                border: solid 2px white;
-                margin: 1em 0;
-                color: white;
-                text-align: center;
-                background-color: blue;
-                font-weight: bolder;
-                cursor: pointer;
-            }
-            .lblResponder > span, .lblResponder > img{
-                float: right;
-                margin-left: 0.5em;
-                cursor: pointer;
-            }
-            .lblResponder > span{
-                color: white;
-                font-size: 0.9em;                
-            }
-
-            .lblResponder > img{
-                width: 20px;
-                height: 20px;
-            }
-        </style>    
+        <link rel="stylesheet" type="text/css" href="../../css/componente comentarios/comentarios.css">
         <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.2.1/jquery.min.js"></script>
+        <script src="../../javascript/componente comentarios/comentarios.js"></script>
         <script>
-            $(function(){
-                ajustaComponenteComentarios();
-                $(window).resize(function(){
-                    ajustaComponenteComentarios();
-                });
-                enlazaEventos();
-            });
-
-            function enlazaEventos(){
-                $('.btnPublicar').click(function(){
-                    // Solicitar información de autor del comentario:
-                    // Nombre, email, verificación de no robot (re captcha).
-                    btnPublicarManejadorClic($(this));
-                });
-                $('.lblResponder').click(function(){
-                    lblResponderManejadorClic($(this));
-                });
-            }
-
-            function ajustaLblResponder(lblResponder, accion){
-                lblResponder.children('img')
-                    .attr('src', accion == "Responder"? 
-                        '..\\..\\imagenes\\cancelarrojo.svg': '..\\..\\imagenes\\responder.svg');
-                lblResponder.children('span')
-                    .html(accion == "Responder"? 
-                        'Cancelar': 'Responder');
-            }
-
-            function lblResponderManejadorClic(lblResponder){
-                var accion = lblResponder.children('span').text();
-                ajustaLblResponder(lblResponder, accion);
-                if(accion == "Responder"){
-                    var comentarioRespuesta = $('.respuestaModelo').first().clone(true);
-                    comentarioRespuesta.insertAfter(lblResponder);
-                    comentarioRespuesta.show();
-                }else{
-                    lblResponder.parent().children('.respuestaModelo').remove();
-                }
-                ajustaAltoComentsComents();
-            }
-
-            function btnPublicarManejadorClic(btnPublicar){
-                var accion = btnPublicar.children('span').text();
-                    registraComentario(
-                        {
-                            Accion : accion,
-                            Avatar : '..\\..\\imagenes\\akane.jpg',
-                            AltAvatar : 'avatar',
-                            Autor : 'Esteban GaRo',
-                            Fecha : '07/10/2017',
-                            Contenido : accion == "Publicar"?
-                                 $('.contenido > textarea').val():
-                                 btnPublicar.parent().find('textarea').val(),
-                            Boton: btnPublicar
-                        }
-                    );
-            }
-
-            function registraComentario(comentarioValores){
-                var comentario = $('.comentarioModelo').clone(true);
-                estableceValoresComentario(comentario, comentarioValores);
-                if(comentarioValores.Accion == "Publicar"){
-                    // Añadir a contenedor de comentarios.
-                    comentario.insertAfter('#comentarioPublicar');
-                }else{
-                    comentarioValores.Boton.parent().replaceWith(comentario);
-                    $('<div class="bordeComentarioS"></div>')
-                        .insertBefore(comentario)
-                        .show();
-                    comentario.parent().parent()
-                        .children('.bordeComentarioP')
-                        .first()
-                        .show();
-                    ajustaLblResponder(comentario.parent().children('.lblResponder'), 'Cancelar');
-                    if(comentario.parents('.cdrComentario').length == 2){
-                        comentario.children('.comentarios').children('.lblResponder')
-                            .css('visibility', 'hidden');
-                    }
-                }
-                comentario.removeClass('comentarioModelo');
-                comentario.show();
-                ajustaComponenteComentarios(comentario); // Aplicar ajustes a elemento recién creado.
-            }
-
-            function estableceValoresComentario(comentario, valores){
-                $('.avatarComentario > img', comentario)
-                    .attr('src', valores.Avatar) // '..\..\imagenes\akane.jpg'
-                    .attr('alt', valores.AltAvatar); // 'avatar'
-                $('.autorComentario', comentario) // 'esteban garo'
-                    .html(valores.Autor);
-                $('.fechaComentario', comentario) // '07/10/2017'
-                    .html(valores.Fecha);
-                $('.contenido', comentario) // 'Prueba de comentarios' 
-                    .html(valores.Contenido);
-            }
-
-            function validaComentarios(comentario, selector, selector2){
-                return comentario == null || comentario == undefined? 
-                    $(selector): $(selector2 == null || selector2 == undefined?
-                    selector: selector2, comentario); 
-            }
-
-            function ajustaComponenteComentarios(comentario){
-                ajustaAnchoComentsCaja(comentario);
-                ajustaFlechaComentsCaja(comentario);
-                ajustaAltoComentsComents(comentario);
-            }
-
-            function ajustaAltoComentsComents(comentario){
-                var ultimoComentario = validaComentarios(undefined,
-                    '.cdrComentario > .comentarios > .cdrComentario:last-child');
-                ultimoComentario
-                .each(function(){
-                    var altoCtdr = $(this).outerHeight();
-                    var altoAvatar = $('.avatarComentario').outerHeight() / 2;
-                    var despVertical = (altoCtdr-altoAvatar)*-1;
-                    var bordeP = $(this).parent().parent().children('.bordeComentarioP');
-                    bordeP.css('top', despVertical + 'px');
-                });
-            }
-
-            function ajustaFlechaComentsCaja(comentario){
-                validaComentarios(comentario, '.flechaComentario')
-                .each(function(){
-                    var altoAvatar = $(this).parent().parent().prev().outerHeight();
-                    var desplazamientoV = (altoAvatar / 2) - ($(this).outerHeight() / 2);
-                    var desplazamientoH = $(this).outerWidth() / 2 * -1;
-                    $(this).css('top', desplazamientoV + 'px').css('left', desplazamientoH + 'px');
-                });
-            }
-
-            function ajustaAnchoComentsCaja(comentario){
-                validaComentarios(comentario, '.comentario')
-                .each(function(){
-                    var anchoAvatar = $(this).parent().prev().outerWidth();
-                    var anchoContenedor = $(this).parent().parent().innerWidth();
-                    var anchoFlecha = $('.flechaComentario', $(this)).outerWidth();
-                    var porcentajeAncho = anchoAvatar != null && anchoFlecha != null?
-                        100.00 - parseFloat(((anchoAvatar + anchoFlecha) * 100) / anchoContenedor):
-                        100;
-                        
-                    $(this).parent().css('width', porcentajeAncho + '%');
-                });
+            function demo(){
+                
             }
         </script>
     </head>
     <body>
         <div class="center">    
-      
+            <div class="bordeComentarioS oculto"></div>
             <div class="cdrComentario" id="comentarioPublicar">
                 <div class="avatarComentario">
                     <img src="..\..\imagenes\avatar.jpg" alt="">
@@ -335,7 +35,6 @@
                 </div>
             </div>
             <div class="cdrComentario comentarioModelo">
-                    <div class="bordeComentarioP"></div>
                     <div class="avatarComentario">
                         <img src="..\..\imagenes\akane.jpg" alt="">
                     </div>
@@ -344,10 +43,10 @@
                             <div class="flechaComentario"></div>
                             <div class="cuerpoComentario">
                                     <div class="titulo">
-                                            <img class="mostrarComentarios" src="..\..\imagenes\flechaDn.png" alt="">
+                                            <img class="mostrarComentarios" src="..\..\imagenes\flechaU.png" alt="">
                                             <span class="autorComentario"></span>
                                             <span class="fechaComentario"></span>
-                                            <img class="cerrarComentario" src="..\..\imagenes\salir.png" alt="">
+                                            <!-- <img class="cerrarComentario" src="..\..\imagenes\salir.png" alt=""> -->
                                         </div>
                                         <div class="contenido"></div>
                             </div>
