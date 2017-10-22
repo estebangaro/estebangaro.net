@@ -1,5 +1,7 @@
 body{
-    background-color: black;
+    background-image: url(../../imagenes/coment.jpg);
+    background-repeat: no-repeat;
+    background-size: cover;
 }
 
 .oculto{
@@ -54,8 +56,8 @@ body{
 .comentarios{
     float:right;
 }
-.comentario, .flechaComentario, .cuerpoComentario{
-    background-color: white;
+.comentario, .flechaComentario/*, .cuerpoComentario*/{
+    background-color: rgba(0, 0, 0, 0.5);
     border: solid black 1px;
     border-radius: 10px;
 }
@@ -63,6 +65,7 @@ body{
     width: 100%;
     position: relative;
     padding: 0;
+    color: whitesmoke;
 }
 .flechaComentario{
     /* width: 15px;
@@ -96,6 +99,9 @@ body{
 .mostrarComentarios, .autorComentario{
     float: left;
 }
+.mostrarComentarios, .cerrarComentario{
+    cursor: pointer;
+}
 .autorComentario{
     font-weight: bold;
     color: red;
@@ -106,6 +112,10 @@ body{
 .cerrarComentario{
     float: right;
     margin: 0;
+    display: none;
+}
+.comentarioOculto > span{
+    color: gray;
 }
 .contenido{
     text-align: justify;
@@ -116,6 +126,8 @@ body{
     resize: none;
     height: 115px;
     font-family: Arial, Helvetica, sans-serif;
+    outline: none;
+    background-color: transparent;
 }
 .sombra{
     box-shadow: 0px 0px 10px gray;
@@ -200,7 +212,7 @@ body{
     }
 
     .avatarComentario{
-        width: 5px;
+        width: 30px;
         visibility: hidden;
     }
 
@@ -212,7 +224,7 @@ body{
         width: 80px;
     }
 
-    .autorComentario, .fechaComentario{
+    .autorComentario, .fechaComentario, .cerrarComentario{
         font-size: 0.8em;
     }
 
