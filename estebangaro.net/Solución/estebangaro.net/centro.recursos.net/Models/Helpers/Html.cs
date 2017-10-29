@@ -148,5 +148,10 @@ namespace centro.recursos.net.Models.Helpers
             return new MvcHtmlString(encabezados + marcado);
         }
 
+        public static MvcHtmlString GeneraComentarios(this HtmlHelper helper, 
+            List<Comentario> comentarios)
+        {
+            return new MvcHtmlString(string.Empty);
+        }
     }
 }

@@ -242,6 +242,26 @@ namespace centro.recursos.net.Models.Repositorios
             return estado;
         }
 
+        public Respuesta<Comentario> GuardaComentario(Comentario comentario)
+        {
+            Respuesta<Comentario> estado;
+
+            try
+            {
+                dbContextoEF.Comentarios.Add(comentario);
+                dbContextoEF.SaveChanges();
+                estado = Respuesta<object>.GeneraRespuestaNoExcepcion<Comentario>(true, comentario);
+            }
+            catch (Exception ex)
+            {
+                estado = Respuesta<object>.
+                    GeneraRespuestaExcepcion<Comentario>(ex,
+                    NombreMetodo: "GaroNetDb.GuardaComentario(Comentario)");
+            }
+
+            return estado;
+        }
+
         #endregion
     }
 }
