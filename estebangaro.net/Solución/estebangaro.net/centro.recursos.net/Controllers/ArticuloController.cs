@@ -16,6 +16,7 @@ namespace centro.recursos.net.Controllers
             return View(viewName: id);
         }
 
+        [ChildActionOnly]
         public PartialViewResult _ConvertidorCodigo(string rutaCodigos, 
             string idArticulo = null)
         {
@@ -45,6 +46,13 @@ namespace centro.recursos.net.Controllers
                     GeneraRespuestaExcepcion<List<PalabraCodigo>>(palabrascodigo));
         
             return resultado;
+        }
+
+        [ChildActionOnly]
+        public PartialViewResult _Comentarios(string idArticulo)
+        {
+            // Recuperación de comentarios asociados a "articulo id".
+            return PartialView(new List<centro.recursos.net.Models.Entity_Framework.Comentario>());
         }
 
         public ActionResult DescargarCodigo(string archivo, int indice, string carpeta)

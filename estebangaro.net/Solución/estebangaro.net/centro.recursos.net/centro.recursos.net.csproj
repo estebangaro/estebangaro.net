@@ -54,6 +54,14 @@
       <HintPath>..\packages\Microsoft.CodeDom.Providers.DotNetCompilerPlatform.1.0.3\lib\net45\Microsoft.CodeDom.Providers.DotNetCompilerPlatform.dll</HintPath>
     </Reference>
     <Reference Include="Microsoft.CSharp" />
+    <Reference Include="Newtonsoft.Json, Version=6.0.0.0, Culture=neutral, PublicKeyToken=30ad4fe6b2a6aeed, processorArchitecture=MSIL">
+      <HintPath>..\packages\Newtonsoft.Json.6.0.4\lib\net45\Newtonsoft.Json.dll</HintPath>
+      <Private>True</Private>
+    </Reference>
+    <Reference Include="System.Net.Http" />
+    <Reference Include="System.Net.Http.Formatting, Version=5.2.3.0, Culture=neutral, PublicKeyToken=31bf3856ad364e35, processorArchitecture=MSIL">
+      <HintPath>..\packages\Microsoft.AspNet.WebApi.Client.5.2.3\lib\net45\System.Net.Http.Formatting.dll</HintPath>
+    </Reference>
     <Reference Include="System.Runtime.Serialization" />
     <Reference Include="System.Security" />
     <Reference Include="System.Web.DynamicData" />
@@ -65,6 +73,12 @@
     <Reference Include="System.Core" />
     <Reference Include="System.Data.DataSetExtensions" />
     <Reference Include="System.Web.Extensions" />
+    <Reference Include="System.Web.Http, Version=5.2.3.0, Culture=neutral, PublicKeyToken=31bf3856ad364e35, processorArchitecture=MSIL">
+      <HintPath>..\packages\Microsoft.AspNet.WebApi.Core.5.2.3\lib\net45\System.Web.Http.dll</HintPath>
+    </Reference>
+    <Reference Include="System.Web.Http.WebHost, Version=5.2.3.0, Culture=neutral, PublicKeyToken=31bf3856ad364e35, processorArchitecture=MSIL">
+      <HintPath>..\packages\Microsoft.AspNet.WebApi.WebHost.5.2.3\lib\net45\System.Web.Http.WebHost.dll</HintPath>
+    </Reference>
     <Reference Include="System.Xml.Linq" />
     <Reference Include="System.Drawing" />
     <Reference Include="System.Web" />
@@ -102,6 +116,7 @@
     <Content Include="Resources\css\autores.css" />
     <Content Include="Resources\css\buscar.css" />
     <Content Include="Resources\css\carrusel.css" />
+    <Content Include="Resources\css\comentarios.css" />
     <Content Include="Resources\css\visualizadorcodigo.css" />
     <Content Include="Resources\css\home.css" />
     <Content Include="Resources\css\menu.css" />
@@ -115,6 +130,14 @@
     <Content Include="Resources\imagenes\carrusel\boton_c3.png" />
     <Content Include="Resources\imagenes\carrusel\flecha2D.png" />
     <Content Include="Resources\imagenes\carrusel\flecha2I.png" />
+    <Content Include="Resources\imagenes\comentarios\akane.jpg" />
+    <Content Include="Resources\imagenes\comentarios\avatar.jpg" />
+    <Content Include="Resources\imagenes\comentarios\cancelarrojo.svg" />
+    <Content Include="Resources\imagenes\comentarios\flechaDn.png" />
+    <Content Include="Resources\imagenes\comentarios\flechaU.png" />
+    <Content Include="Resources\imagenes\comentarios\ranma.jpg" />
+    <Content Include="Resources\imagenes\comentarios\responder.svg" />
+    <Content Include="Resources\imagenes\comentarios\salir.png" />
     <Content Include="Resources\imagenes\home\fondo2.JPG" />
     <Content Include="Resources\imagenes\home\fondo4.jpg" />
     <Content Include="Resources\imagenes\home\fondo5.jpeg" />
@@ -136,6 +159,7 @@
     <Content Include="Resources\javascript\autores.js" />
     <Content Include="Resources\javascript\busqueda.js" />
     <Content Include="Resources\javascript\carrusel.js" />
+    <Content Include="Resources\javascript\comentarios.js" />
     <Content Include="Resources\javascript\home.js" />
     <Content Include="Resources\javascript\menu.js" />
     <Content Include="Resources\javascript\multimedia.js" />
@@ -145,7 +169,9 @@
   </ItemGroup>
   <ItemGroup>
     <Compile Include="App_Start\RouteConfig.cs" />
+    <Compile Include="App_Start\WebApiConfig.cs" />
     <Compile Include="Controllers\ArticuloController.cs" />
+    <Compile Include="Controllers\ComentarioController.cs" />
     <Compile Include="Controllers\ControladorBase.cs" />
     <Compile Include="Controllers\HomeController.cs" />
     <Compile Include="Global.asax.cs">
@@ -202,6 +228,8 @@
     <Content Include="Views\Shared\_SeccionesAutor.cshtml" />
     <Content Include="Views\Articulo\Delegados.cshtml" />
     <Content Include="Views\Shared\_ConvertidorCodigo.cshtml" />
+    <Content Include="Views\Articulo\LINQ.cshtml" />
+    <Content Include="Views\Shared\_Comentarios.cshtml" />
     <None Include="Web.Debug.config">
       <DependentUpon>Web.config</DependentUpon>
     </None>
