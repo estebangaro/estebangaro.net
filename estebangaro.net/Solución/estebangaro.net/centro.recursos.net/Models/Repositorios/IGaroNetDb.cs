@@ -24,6 +24,6 @@ namespace centro.recursos.net.Models.Repositorios
 
         Respuesta<List<ClasePersonalizada>> ObtenClasesPersonalizadasCodigo(string articuloId = null);
 
-        Respuesta<Comentario> GuardaComentario(Comentario comentario);
+        Respuesta<List<Comentario>> GuardaComentario(Comentario comentario);
     }
 }

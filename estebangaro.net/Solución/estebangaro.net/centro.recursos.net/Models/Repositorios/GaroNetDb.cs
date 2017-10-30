@@ -242,25 +242,73 @@ namespace centro.recursos.net.Models.Repositorios
             return estado;
         }
 
-        public Respuesta<Comentario> GuardaComentario(Comentario comentario)
+        public Respuesta<List<Comentario>> GuardaComentario(Comentario comentario)
         {
-            Respuesta<Comentario> estado;
+            Respuesta<List<Comentario>> estado;
 
             try
             {
+                string[] InfoCliente = comentario.Email.Split(new char[] { ';' }, StringSplitOptions.RemoveEmptyEntries);
+                comentario.Email = InfoCliente[0];
+                if (InfoCliente[1] == "0")
+                    dbContextoEF.ClientesArticulos.Add(new Cliente
+                    {
+                        Email = InfoCliente[0],
+                        Avatar = InfoCliente[2],
+                        Auditoria = new InfoRegistro { UsuarioCreacion = "WEB API"},
+                        Nombre = comentario.Auditoria.UsuarioCreacion
+                    });
                 dbContextoEF.Comentarios.Add(comentario);
                 dbContextoEF.SaveChanges();
-                estado = Respuesta<object>.GeneraRespuestaNoExcepcion<Comentario>(true, comentario);
+                comentario.Cliente = null;
+                estado = Respuesta<object>.GeneraRespuestaNoExcepcion<List<Comentario>>(true,
+                    ObtenComentarios(comentario.URI, int.Parse(InfoCliente[3]), nuevo: comentario));
             }
             catch (Exception ex)
             {
                 estado = Respuesta<object>.
-                    GeneraRespuestaExcepcion<Comentario>(ex,
+                    GeneraRespuestaExcepcion<List<Comentario>>(ex,
                     NombreMetodo: "GaroNetDb.GuardaComentario(Comentario)");
             }
 
             return estado;
         }
+
+        public List<Comentario> ObtenComentarios(string articulo, int idComentarioUltimoReciente,
+            COMENTARIOS tipo = COMENTARIOS.RECIENTES, Comentario nuevo = null)
+        {
+            dbContextoEF.Configuration.ProxyCreationEnabled = false;
+            Nullable<int> IdComentarioPadre = nuevo != null? nuevo.IdComentarioP: null;
+            List<Comentario> ComentariosRecientes;
+
+            try
+            {
+                ComentariosRecientes = tipo == COMENTARIOS.RECIENTES ?
+                                            (from comentario in dbContextoEF.Comentarios.Include(coment => coment.Cliente)
+                                             where comentario.URI == articulo &&
+                                             comentario.Id > idComentarioUltimoReciente && comentario.IdComentarioP == IdComentarioPadre
+                                             orderby comentario.Id ascending
+                                             select comentario)
+                                           .ToList() :
+                                           (from comentario in dbContextoEF.Comentarios.Include(coment => coment.Cliente)
+                                            where comentario.URI == articulo && comentario.Id < idComentarioUltimoReciente
+                                            orderby comentario.Id ascending
+                                            select comentario)
+                                           .ToList();
+
+                foreach(Comentario comentario in ComentariosRecientes)
+                {
+                    comentario.Cliente.Comentarios = null;
+                    comentario.ComentarioPadre = null;
+                }
+            }
+            catch
+            {
+                ComentariosRecientes = null;
+            }
+            return ComentariosRecientes;                            
+        }
+
 
         #endregion
     }

@@ -48,6 +48,7 @@
 
             function btnPublicarManejadorClic(btnPublicar){
                 var accion = btnPublicar.children('span').text();
+                var idComentario;
                     publicaComentario(
                         {
                             Accion : accion,
@@ -59,9 +60,18 @@
                                  $('.contenido > textarea').val():
                                  btnPublicar.parent().find('textarea').val(),
                             Boton: btnPublicar,
-                            Padre: accion == 'Publicar' ? null : btnPublicar.parent().parent().parent().attr('id')
+                            Padre: accion == 'Publicar' ? null : btnPublicar.parent().parent().parent().attr('id'),
+                            Email: 'estebangaro4@outlook.com;1;ranma.jpg;' +
+                                ((idComentario = obtenIdComentario(accion, btnPublicar)) == undefined? '0': idComentario)
                         }
                     );
+            }
+
+            function obtenIdComentario(accion, boton) {
+                return accion == 'Publicar' ? boton.parent().next().attr('id') :
+                    accion == 'Responder' ?
+                        boton.parent().parent().children('.cdrComentario').eq(1).attr('id') :
+                        '25';
             }
 
             function muestraOcultaComentariosAnidados(btnOcultaMuestra){
@@ -103,15 +113,17 @@
                 }
             }
 
-            function registraComentario(comentarioValores){
+            function registraComentario(comentarioValores, indice, tope){
                 var comentario = $('.comentarioModelo').clone(true);
                 estableceValoresComentario(comentario, comentarioValores);
                 if(comentarioValores.Accion == "Publicar"){
-                    // Añadir a contenedor de comentarios.
                     comentario.insertAfter('#comentarioPublicar');
                     $('.contenido > textarea').val('');
-                }else{
-                    comentarioValores.Boton.parent().replaceWith(comentario);                    
+                } else {
+                    if (indice == (tope - 1))
+                        comentarioValores.Boton.parent().replaceWith(comentario);
+                    else
+                        comentario.insertAfter(comentarioValores.Boton.parent());
                     var bordeS = $('<div class="bordeComentarioS"></div>');
                     bordeS.insertBefore(comentario);
                     if(comentario.parent().parent()
@@ -223,8 +235,10 @@ function publicaComentario(comentario) {
         data: JSON.stringify(comentarioBackEnd),
         success: function (data) {
             alert("El comentario, se ha almacenado correctamente");
-            comentario.Padre = data.Id
-            registraComentario(comentario);
+            $.each(data, function (index, value) {
+                configuraComentario(comentario, value);
+                registraComentario(comentario, index, data.length);
+            });
         },
         error: function (jqxhr, error, errorthrown) {
             alert("Ha fallado el almacenamiento del comentario: " + error + ", " + errorthrown);
@@ -232,11 +246,20 @@ function publicaComentario(comentario) {
     });
 }
 
+function configuraComentario(comentario, comentbackend) {
+    comentario.Avatar = '/Resources/imagenes/comentarios/' + comentbackend.Cliente.Avatar;
+    comentario.Autor = comentbackend.Cliente.Nombre;
+    comentario.Fecha = comentbackend.Auditoria.Creacion;
+    comentario.Contenido = comentbackend.Contenido;
+    comentario.Padre = comentbackend.Id;
+}
+
 function obtenComentarioBackEnd(comentario) {
     return {
         Contenido: comentario.Contenido,
         Auditoria: { UsuarioCreacion: comentario.Autor },
         IdComentarioP: comentario.Padre,
-        URI: window.location.pathname.toLowerCase()
+        URI: window.location.pathname.toLowerCase(),
+        Email: comentario.Email
     };
 }

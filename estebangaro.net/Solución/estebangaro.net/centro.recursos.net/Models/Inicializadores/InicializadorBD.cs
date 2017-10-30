@@ -20,7 +20,7 @@ namespace centro.recursos.net.Models.Inicializadores
             Articulo[] articulos =
             {
                 new Articulo{ Localizacion = "Ciudad de México", Titulo = "Lenguage Integrated Query",
-                    URI = "/APIs/LINQ", Auditoria = new InfoRegistro{ UsuarioCreacion = "estebangaro"} },
+                    URI = "/Articulo/CSharp/LINQ", Auditoria = new InfoRegistro{ UsuarioCreacion = "estebangaro"} },
                 new Articulo{ Localizacion = "Ciudad de México", Titulo = "LINQ to Objects",
                     URI = "/APIs/LINQ 2 Objects", Auditoria = new InfoRegistro{ UsuarioCreacion = "estebangaro"}},
                 new Articulo{ Localizacion = "Ciudad de México", Titulo = "LINQ to XML",

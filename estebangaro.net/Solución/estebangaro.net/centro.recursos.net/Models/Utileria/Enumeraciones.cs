@@ -10,6 +10,8 @@ namespace centro.recursos.net.Models.Utileria
 
     public enum LENGUAJE_CODIGO { CSHARP, SQL};
 
+    public enum COMENTARIOS { RECIENTES, ANTIGUOS };
+
     public static class Rutas
     {
         public static string RutaImagenesVisualizadorCodigo { get; } = ConfigurationManager.AppSettings["ImagenesVisualizadorCodigo"];

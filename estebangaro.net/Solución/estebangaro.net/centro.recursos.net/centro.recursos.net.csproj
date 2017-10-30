@@ -182,6 +182,7 @@
     <Compile Include="Models\Configuraciones Fluent API\BotonAvisoConfig.cs" />
     <Compile Include="Models\Configuraciones Fluent API\CategoriaPalabraCodigoConfig.cs" />
     <Compile Include="Models\Configuraciones Fluent API\ClasePersonalizadaConfig.cs" />
+    <Compile Include="Models\Configuraciones Fluent API\ClienteConfig.cs" />
     <Compile Include="Models\Configuraciones Fluent API\ComentarioConfig.cs" />
     <Compile Include="Models\Configuraciones Fluent API\InfoRegistroConfig.cs" />
     <Compile Include="Models\Configuraciones Fluent API\MultimediaConfig.cs" />
@@ -196,6 +197,7 @@
     <Compile Include="Models\Entity Framework\BotonAviso.cs" />
     <Compile Include="Models\Entity Framework\CategoriaPalabraCodigo.cs" />
     <Compile Include="Models\Entity Framework\ClasePersonalizada.cs" />
+    <Compile Include="Models\Entity Framework\Cliente.cs" />
     <Compile Include="Models\Entity Framework\Comentario.cs" />
     <Compile Include="Models\Entity Framework\GaroNETDbContexto.cs" />
     <Compile Include="Models\Entity Framework\InfoRegistro.cs" />

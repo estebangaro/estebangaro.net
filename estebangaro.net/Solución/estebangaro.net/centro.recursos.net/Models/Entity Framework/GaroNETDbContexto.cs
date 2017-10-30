@@ -25,6 +25,7 @@
         public virtual DbSet<PalabraCodigo> PalabrasCode { get; set; }
         public virtual DbSet<CategoriaPalabraCodigo> CategoriasPalabrasCode { get; set; }
         public virtual DbSet<ClasePersonalizada> ClasesPersonalizadasCode { get; set; }
+        public virtual DbSet<Cliente> ClientesArticulos { get; set; }
 
         protected override void OnModelCreating(DbModelBuilder modelBuilder)
         {
@@ -40,7 +41,8 @@
                 .Add(new MultimediaConfig())
                 .Add(new PalabraCodigoConfig())
                 .Add(new CategoriaPalabraCodigoConfig())
-                .Add(new ClasePersonalizadaConfig());
+                .Add(new ClasePersonalizadaConfig())
+                .Add(new ClienteConfig());
         }
     }
 }
