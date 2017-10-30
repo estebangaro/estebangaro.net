@@ -16,5 +16,7 @@ namespace centro.recursos.net.Models.Entity_Framework
         public virtual Comentario ComentarioPadre { get; set; }
         public string URI { get; set; }
         public virtual Articulo Articulo { get; set; }
+        public string Email { get; set; }
+        public virtual Cliente Cliente { get; set; }
     }
 }

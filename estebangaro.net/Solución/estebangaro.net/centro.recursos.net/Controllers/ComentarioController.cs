@@ -43,7 +43,7 @@ namespace centro.recursos.net.Controllers
 
         public HttpResponseMessage PostComentario(Comentario comentario)
         {
-            Respuesta<Comentario> GuardaComentarioEstado = Repositorio.GuardaComentario(comentario);
+            Respuesta<List<Comentario>> GuardaComentarioEstado = Repositorio.GuardaComentario(comentario);
 
             return GuardaComentarioEstado.Estado ? Request.CreateResponse(HttpStatusCode.Created,
                 GuardaComentarioEstado.Resultado) :

@@ -151,7 +151,13 @@ namespace centro.recursos.net.Models.Helpers
         public static MvcHtmlString GeneraComentarios(this HtmlHelper helper, 
             List<Comentario> comentarios)
         {
+
             return new MvcHtmlString(string.Empty);
+        }
+
+        private static XElement ObtenMarcado(Comentario comentario)
+        {
+            throw new NotImplementedException();
         }
     }
 }
