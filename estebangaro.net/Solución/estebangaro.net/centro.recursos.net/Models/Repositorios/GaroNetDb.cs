@@ -309,6 +309,51 @@ namespace centro.recursos.net.Models.Repositorios
             return ComentariosRecientes;                            
         }
 
+        public List<Comentario> ObtenComentariosV2(string articulo, int idComentarioUltimoReciente,
+            COMENTARIOS tipo = COMENTARIOS.RECIENTES, int? idComentarioPadre = null)
+        {
+            // Publicación de comentarios; registro de comentarios NIVEL 0. (Comentarios.Recientes, 
+            //  Comentario reciente = 0 ó > 0 y idComentarioPadre = null).
+            // Respuesta de comentarios; registro de comentarios NIVEL 1,2. (Comentarios.Recientes, 
+            //  Comentario reciente = 0 ó > 0 y idComentarioPadre <> 0).
+            // Obtención de comentarios antiguos; operación "Mostrar Más". (Comentarios.Antiguos, Comentario último > 0 y 
+            //  idComentarioPadre = null).
+
+            dbContextoEF.Configuration.ProxyCreationEnabled = false;
+            List<Comentario> comentarios;
+
+            try
+            {
+                comentarios =
+                    (from comentario in dbContextoEF.Comentarios
+                              .Include(coment => coment.Cliente).Include(coment => coment.Comentarios)
+                     where articulo == comentario.URI.ToLower() &&
+                        (tipo == COMENTARIOS.RECIENTES ? comentario.Id > idComentarioUltimoReciente :
+                           comentario.Id < idComentarioUltimoReciente)
+                     select comentario).ToList();
+
+                comentarios.ForEach(delegate (Comentario comentario)
+                {
+                    comentario.Cliente.Comentarios = null;
+                    comentario.ComentarioPadre = null;
+                });
+
+                comentarios = (from comentario in comentarios
+                               where comentario.IdComentarioP == idComentarioPadre
+                               select comentario).ToList();
+            }
+            catch
+            {
+                comentarios = null;
+            }
+            finally
+            {
+                dbContextoEF.Configuration.ProxyCreationEnabled = true;
+            }
+
+            return comentarios;
+        }
+
 
         #endregion
     }

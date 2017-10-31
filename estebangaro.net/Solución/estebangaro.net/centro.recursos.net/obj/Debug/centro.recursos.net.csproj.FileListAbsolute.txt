@@ -121,3 +121,11 @@ C:\Users\egarcia\Documents\GitHub\estebangaro.net\estebangaro.net\Solución\este
 C:\Users\egarcia\Documents\GitHub\estebangaro.net\estebangaro.net\Solución\estebangaro.net\centro.recursos.net\bin\System.Net.Http.Formatting.xml
 C:\Users\egarcia\Documents\GitHub\estebangaro.net\estebangaro.net\Solución\estebangaro.net\centro.recursos.net\bin\System.Web.Http.xml
 C:\Users\egarcia\Documents\GitHub\estebangaro.net\estebangaro.net\Solución\estebangaro.net\centro.recursos.net\bin\System.Web.Http.WebHost.xml
+C:\Users\esteb\Documents\GitHub\estebangaro.net\estebangaro.net\Solución\estebangaro.net\centro.recursos.net\bin\Newtonsoft.Json.dll
+C:\Users\esteb\Documents\GitHub\estebangaro.net\estebangaro.net\Solución\estebangaro.net\centro.recursos.net\bin\System.Net.Http.Formatting.dll
+C:\Users\esteb\Documents\GitHub\estebangaro.net\estebangaro.net\Solución\estebangaro.net\centro.recursos.net\bin\System.Web.Http.dll
+C:\Users\esteb\Documents\GitHub\estebangaro.net\estebangaro.net\Solución\estebangaro.net\centro.recursos.net\bin\System.Web.Http.WebHost.dll
+C:\Users\esteb\Documents\GitHub\estebangaro.net\estebangaro.net\Solución\estebangaro.net\centro.recursos.net\bin\Newtonsoft.Json.xml
+C:\Users\esteb\Documents\GitHub\estebangaro.net\estebangaro.net\Solución\estebangaro.net\centro.recursos.net\bin\System.Net.Http.Formatting.xml
+C:\Users\esteb\Documents\GitHub\estebangaro.net\estebangaro.net\Solución\estebangaro.net\centro.recursos.net\bin\System.Web.Http.xml
+C:\Users\esteb\Documents\GitHub\estebangaro.net\estebangaro.net\Solución\estebangaro.net\centro.recursos.net\bin\System.Web.Http.WebHost.xml
