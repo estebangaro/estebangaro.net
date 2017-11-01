@@ -55,9 +55,15 @@ namespace centro.recursos.net.Controllers
         // http://192.168.0.8:2510/api/comentario GET/HTTP 1.1
         public HttpResponseMessage GetComentariosV2()
         {
+            //var Comentarios = (Repositorio as GaroNetDb).ObtenComentariosV2(
+            //    articulo: "/articulo/csharp/linq", idComentarioUltimoReciente: 8,
+            //    tipo: COMENTARIOS.ANTIGUOS);
+
+            //var Comentarios = (Repositorio as GaroNetDb).ObtenComentariosV2(
+            //    articulo: "/articulo/csharp/linq", idComentarioUltimoReciente: 0);
+
             var Comentarios = (Repositorio as GaroNetDb).ObtenComentariosV2(
-                articulo: "/articulo/csharp/linq", idComentarioUltimoReciente: 0, 
-                idComentarioPadre: 6);
+                articulo: "/articulo/csharp/linq", idComentarioUltimoReciente: 8, idComentarioPadre: 6);
 
             return Comentarios != null ? Request.CreateResponse(HttpStatusCode.OK, Comentarios) :
                 Request.CreateResponse(HttpStatusCode.NoContent);

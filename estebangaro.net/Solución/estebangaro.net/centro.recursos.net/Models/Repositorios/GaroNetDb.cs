@@ -318,8 +318,6 @@ namespace centro.recursos.net.Models.Repositorios
             //  Comentario reciente = 0 ó > 0 y idComentarioPadre <> 0).
             // Obtención de comentarios antiguos; operación "Mostrar Más". (Comentarios.Antiguos, Comentario último > 0 y 
             //  idComentarioPadre = null).
-
-            dbContextoEF.Configuration.ProxyCreationEnabled = false;
             List<Comentario> comentarios;
 
             try
@@ -327,20 +325,17 @@ namespace centro.recursos.net.Models.Repositorios
                 comentarios =
                     (from comentario in dbContextoEF.Comentarios
                               .Include(coment => coment.Cliente).Include(coment => coment.Comentarios)
-                     where articulo == comentario.URI.ToLower() &&
-                        (tipo == COMENTARIOS.RECIENTES ? comentario.Id > idComentarioUltimoReciente :
+                     where articulo == comentario.URI.ToLower() && comentario.IdComentarioP == idComentarioPadre
+                        && (tipo == COMENTARIOS.RECIENTES ? comentario.Id > idComentarioUltimoReciente :
                            comentario.Id < idComentarioUltimoReciente)
-                     select comentario).ToList();
+                     select comentario).Take(5)
+                     .ToList();
 
-                comentarios.ForEach(delegate (Comentario comentario)
-                {
-                    comentario.Cliente.Comentarios = null;
-                    comentario.ComentarioPadre = null;
-                });
-
-                comentarios = (from comentario in comentarios
-                               where comentario.IdComentarioP == idComentarioPadre
-                               select comentario).ToList();
+                    for (int i = 0; i < comentarios.Count; i++)
+                    {
+                        Comentario ComentarioProxy = comentarios[i];
+                        comentarios[i] = RevierteYPreparaProxyComentario(ComentarioProxy);
+                    }
             }
             catch
             {
@@ -354,6 +349,39 @@ namespace centro.recursos.net.Models.Repositorios
             return comentarios;
         }
 
+        private Comentario RevierteYPreparaProxyComentario(Comentario comentario)
+        {
+            if (comentario.Comentarios != null && comentario.Comentarios.Count > 0)
+            {
+                comentario.Comentarios = comentario.Comentarios.ToList();
+                for (int i = 0; i < comentario.Comentarios.Count; i++)
+                {
+                    Comentario ComentarioProxy = ((List<Comentario>)(comentario.Comentarios))[i];
+                    ((List<Comentario>)(comentario.Comentarios))[i] = RevierteYPreparaProxyComentario(ComentarioProxy);
+                }
+            }
+
+            return new Comentario
+            {
+                Articulo = comentario.Articulo,
+                Auditoria = comentario.Auditoria,
+                Cliente = new Cliente
+                {
+                    Auditoria = comentario.Cliente.Auditoria,
+                    Avatar = comentario.Cliente.Avatar,
+                    Nombre = comentario.Cliente.Nombre,
+                    Email = comentario.Cliente.Email,
+                    Comentarios = null
+                },
+                ComentarioPadre = null,
+                Comentarios = comentario.Comentarios,
+                Contenido = comentario.Contenido,
+                Email = comentario.Email,
+                Id = comentario.Id,
+                IdComentarioP = comentario.IdComentarioP,
+                URI = comentario.URI
+            };
+        }
 
         #endregion
     }
