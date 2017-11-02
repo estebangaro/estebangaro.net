@@ -59,11 +59,11 @@ namespace centro.recursos.net.Controllers
             //    articulo: "/articulo/csharp/linq", idComentarioUltimoReciente: 8,
             //    tipo: COMENTARIOS.ANTIGUOS);
 
-            //var Comentarios = (Repositorio as GaroNetDb).ObtenComentariosV2(
-            //    articulo: "/articulo/csharp/linq", idComentarioUltimoReciente: 0);
-
             var Comentarios = (Repositorio as GaroNetDb).ObtenComentariosV2(
-                articulo: "/articulo/csharp/linq", idComentarioUltimoReciente: 8, idComentarioPadre: 6);
+                articulo: "/articulo/csharp/linq", idComentarioUltimoReciente: 0);
+
+            //var Comentarios = (Repositorio as GaroNetDb).ObtenComentariosV2(
+            //    articulo: "/articulo/csharp/linq", idComentarioUltimoReciente: 8, idComentarioPadre: 6);
 
             return Comentarios != null ? Request.CreateResponse(HttpStatusCode.OK, Comentarios) :
                 Request.CreateResponse(HttpStatusCode.NoContent);
