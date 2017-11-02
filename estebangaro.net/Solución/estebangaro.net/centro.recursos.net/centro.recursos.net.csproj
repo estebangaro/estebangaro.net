@@ -164,6 +164,7 @@
     <Content Include="Resources\javascript\menu.js" />
     <Content Include="Resources\javascript\multimedia.js" />
     <Content Include="Resources\javascript\noticias.js" />
+    <Content Include="Resources\javascript\Test\comentarios.js" />
     <Content Include="Resources\javascript\visualizadorcodigo.js" />
     <Content Include="Web.config" />
   </ItemGroup>
@@ -174,6 +175,7 @@
     <Compile Include="Controllers\ComentarioController.cs" />
     <Compile Include="Controllers\ControladorBase.cs" />
     <Compile Include="Controllers\HomeController.cs" />
+    <Compile Include="Controllers\TestController.cs" />
     <Compile Include="Global.asax.cs">
       <DependentUpon>Global.asax</DependentUpon>
     </Compile>
@@ -232,6 +234,7 @@
     <Content Include="Views\Shared\_ConvertidorCodigo.cshtml" />
     <Content Include="Views\Articulo\LINQ.cshtml" />
     <Content Include="Views\Shared\_Comentarios.cshtml" />
+    <Content Include="Views\Test\Comentario.cshtml" />
     <None Include="Web.Debug.config">
       <DependentUpon>Web.config</DependentUpon>
     </None>
@@ -257,7 +260,7 @@
           <AutoAssignPort>True</AutoAssignPort>
           <DevelopmentServerPort>54868</DevelopmentServerPort>
           <DevelopmentServerVPath>/</DevelopmentServerVPath>
-          <IISUrl>http://192.168.0.8:2510/</IISUrl>
+          <IISUrl>http://192.168.0.7:2510/</IISUrl>
           <NTLMAuthentication>False</NTLMAuthentication>
           <UseCustomServer>False</UseCustomServer>
           <CustomServerUrl>

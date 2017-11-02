@@ -10,7 +10,8 @@
                 $('.btnPublicar').click(function(){
                     // Solicitar información de autor del comentario:
                     // Nombre, email, verificación de no robot (re captcha).
-                    btnPublicarManejadorClic($(this));
+                    // btnPublicarManejadorClic($(this));
+                    testObtenMarcado();
                 });
                 $('.lblResponder').click(function(){
                     lblResponderManejadorClic($(this));
@@ -25,8 +26,8 @@
 
             function ajustaLblResponder(lblResponder, accion){
                 lblResponder.children('img')
-                    .attr('src', accion == "Responder" ? 
-                        '/Resources/imagenes/comentarios/cancelarrojo.svg' : '/Resources/imagenes/comentarios/responder.svg');
+                    .attr('src', accion == "Responder"? 
+                        '..\\..\\imagenes\\cancelarrojo.svg': '..\\..\\imagenes\\responder.svg');
                 lblResponder.children('span')
                     .html(accion == "Responder"? 
                         'Cancelar': 'Responder');
@@ -48,30 +49,19 @@
 
             function btnPublicarManejadorClic(btnPublicar){
                 var accion = btnPublicar.children('span').text();
-                var idComentario;
-                    publicaComentario(
+                    registraComentario(
                         {
                             Accion : accion,
-                            Avatar: '/Resources/imagenes/comentarios/akane.jpg',
+                            Avatar : '..\\..\\imagenes\\akane.jpg',
                             AltAvatar : 'avatar',
                             Autor : 'Esteban GaRo',
                             Fecha : '07/10/2017',
                             Contenido : accion == "Publicar"?
                                  $('.contenido > textarea').val():
                                  btnPublicar.parent().find('textarea').val(),
-                            Boton: btnPublicar,
-                            Padre: accion == 'Publicar' ? null : btnPublicar.parent().parent().parent().attr('id'),
-                            Email: 'estebangaro4@outlook.com;1;ranma.jpg;' +
-                                ((idComentario = obtenIdComentario(accion, btnPublicar)) == undefined? '0': idComentario)
+                            Boton: btnPublicar
                         }
                     );
-            }
-
-            function obtenIdComentario(accion, boton) {
-                return accion == 'Publicar' ? boton.parent().next().attr('id') :
-                    accion == 'Responder' ?
-                        boton.parent().parent().children('.cdrComentario').eq(1).attr('id') :
-                        '25';
             }
 
             function muestraOcultaComentariosAnidados(btnOcultaMuestra){
@@ -113,17 +103,15 @@
                 }
             }
 
-            function registraComentario(comentarioValores, indice, tope){
+            function registraComentario(comentarioValores){
                 var comentario = $('.comentarioModelo').clone(true);
                 estableceValoresComentario(comentario, comentarioValores);
                 if(comentarioValores.Accion == "Publicar"){
+                    // Añadir a contenedor de comentarios.
                     comentario.insertAfter('#comentarioPublicar');
                     $('.contenido > textarea').val('');
-                } else {
-                    if (indice == (tope - 1))
-                        comentarioValores.Boton.parent().replaceWith(comentario);
-                    else
-                        comentario.insertAfter(comentarioValores.Boton.parent());
+                }else{
+                    comentarioValores.Boton.parent().replaceWith(comentario);                    
                     var bordeS = $('<div class="bordeComentarioS"></div>');
                     bordeS.insertBefore(comentario);
                     if(comentario.parent().parent()
@@ -135,8 +123,7 @@
                             .css('visibility', 'hidden');
                     }
                 }
-                comentario.removeClass('comentarioModelo')
-                    .attr('id', comentarioValores.Padre);
+                comentario.removeClass('comentarioModelo');
                 comentario.show();
                 ajustaComponenteComentarios(comentario); // Aplicar ajustes a elemento recién creado.
             }
@@ -225,75 +212,56 @@
                 });
             }
 
-function publicaComentario(comentario) {
-    var comentarioBackEnd = obtenComentarioBackEnd(comentario);
-    $.ajax({
-        type: 'POST',
-        url: '/api/Comentario',
-        contentType: 'application/json; charset=utf-8',
-        dataType: 'json',
-        data: JSON.stringify(comentarioBackEnd),
-        success: function (data) {
-            alert("El comentario, se ha almacenado correctamente");
-            $.each(data, function (index, value) {
-                configuraComentario(comentario, value);
-                registraComentario(comentario, index, data.length);
-            });
-        },
-        error: function (jqxhr, error, errorthrown) {
-            alert("Ha fallado el almacenamiento del comentario: " + error + ", " + errorthrown);
-        }
-    });
-}
+            function obtenMarcado(comentario, nivel){
+                var ctdrComentario = $('.comentarioModelo').clone(true);
+                cargaInfoComentario(comentario, ctdrComentario, nivel);
+            
+                if(comentario.Comentarios != null && comentario.Comentarios.length > 0){
+                    $.each(comentario.Comentarios, function(index, value){
+                        var ctdrComentarioHijo = obtenMarcado(value, nivel + 1);
+                        $('.comentarios', ctdrComentario)
+                            .first()
+                            .append(ctdrComentarioHijo);
+                        $('<div class="bordeComentarioS"></div>').insertBefore(ctdrComentarioHijo);
+                    });
+                    ctdrComentario.prepend($('<div class="bordeComentarioP"></div>'));
+                }
+            
+                return ctdrComentario;
+            }
+            
+            function cargaInfoComentario(comentario, comentarioElemento, nivel){
+                $('.avatarComentario > img', comentarioElemento)
+                    .attr('src', '../../imagenes/' + comentario.Cliente.Avatar);
+                $('.autorComentario', comentarioElemento)
+                    .text(comentario.Cliente.Nombre);
+                $('.fechaComentario', comentarioElemento)
+                    .text(comentario.Auditoria.Creacion);
+                $('.contenido', comentarioElemento)
+                    .text(comentario.Contenido);
+                comentarioElemento
+                    .removeClass('comentarioModelo')
+                    .attr('id', comentario.Id);
+                if(nivel == 2){
+                    $('.lblResponder', comentarioElemento)
+                        .hide();
+                }
+            }
 
-function configuraComentario(comentario, comentbackend) {
-    comentario.Avatar = '/Resources/imagenes/comentarios/' + comentbackend.Cliente.Avatar;
-    comentario.Autor = comentbackend.Cliente.Nombre;
-    comentario.Fecha = comentbackend.Auditoria.Creacion;
-    comentario.Contenido = comentbackend.Contenido;
-    comentario.Padre = comentbackend.Id;
-}
-
-function obtenComentarioBackEnd(comentario) {
-    return {
-        Contenido: comentario.Contenido,
-        Auditoria: { UsuarioCreacion: comentario.Autor },
-        IdComentarioP: comentario.Padre,
-        URI: window.location.pathname.toLowerCase(),
-        Email: comentario.Email
-    };
-}
-
-function obtenMarcado(comentario, nivel){
-    var ctdrComentario = $('.comentarioModelo').clone(true);
-    cargaInfoComentario(comentario, ctdrComentario, nivel);
-
-    if(comentario.Comentarios != null && comentario.Comentarios.lenght > 0){
-        $.each(comentario.Comentarios, function(index, value){
-            var ctdrComentarioHijo = obtenMarcado(value, nivel + 1);
-            $('.comentarios', ctdrComentario)
-                .append(ctdrComentarioHijo);
-            $('<div class="bordeComentarioS"></div>').insertBefore(ctdrComentarioHijo);
-        });
-        ctdrComentario.prepend($('<div class="bordeComentarioP"></div>'));
-    }
-
-    return ctdrComentario;
-}
-
-function cargaInfoComentario(comentario, comentarioElemento, nivel){
-    $('.avatarComentario > img', comentarioElemento)
-        .attr('src', '/Resources/imagenes/comentarios/' + comentario.Cliente.Avatar);
-    $('.autorComentario', comentarioElemento)
-        .text(comentario.Cliente.Nombre);
-    $('.fechaComentario', comentarioElemento)
-        .text(comentario.Auditoria.Creacion);
-    $('.contenido', comentarioElemento)
-        .text(comentario.Contenido);
-    comentarioElemento.removeClass('comentarioModelo');
-    if(nivel > 0){
-        $('.lblResponder', comentarioElemento)
-            .hide();
-    }
-}
-
+            function testObtenMarcado(){
+                $.ajax({
+                    type: 'GET',
+                    url: 'http://192.168.0.7:2510/comentario/obtenerv2/all',
+                    contentType: 'application/json; charset=utf-8',
+                    success: function(data){
+                        $.each(data, function(index, value){
+                                var ctdrComentarioElemento =
+                                    obtenMarcado(value, 0);
+                                $('body').append(ctdrComentarioElemento);
+                        });
+                    },
+                    error: function(error){
+                        alert("Ha fallado el consumo de WEB API");
+                    }
+                });
+            }

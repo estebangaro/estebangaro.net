@@ -10,7 +10,8 @@
                 $('.btnPublicar').click(function(){
                     // Solicitar información de autor del comentario:
                     // Nombre, email, verificación de no robot (re captcha).
-                    btnPublicarManejadorClic($(this));
+                    // btnPublicarManejadorClic($(this));
+                    testObtenMarcado();
                 });
                 $('.lblResponder').click(function(){
                     lblResponderManejadorClic($(this));
@@ -208,5 +209,58 @@
                         100;
                         
                     $(this).parent().css('width', porcentajeAncho + '%');
+                });
+            }
+
+            function obtenMarcado(comentario, nivel){
+                var ctdrComentario = $('.comentarioModelo').clone(true);
+                cargaInfoComentario(comentario, ctdrComentario, nivel);
+            
+                if(comentario.Comentarios != null && comentario.Comentarios.length > 0){
+                    $.each(comentario.Comentarios, function(index, value){
+                        var ctdrComentarioHijo = obtenMarcado(value, nivel + 1);
+                        $('.comentarios', ctdrComentario)
+                            .append(ctdrComentarioHijo);
+                        $('<div class="bordeComentarioS"></div>').insertBefore(ctdrComentarioHijo);
+                    });
+                    ctdrComentario.prepend($('<div class="bordeComentarioP"></div>'));
+                }
+            
+                return ctdrComentario;
+            }
+            
+            function cargaInfoComentario(comentario, comentarioElemento, nivel){
+                $('.avatarComentario > img', comentarioElemento)
+                    .attr('src', '/Resources/imagenes/comentarios/' + comentario.Cliente.Avatar);
+                $('.autorComentario', comentarioElemento)
+                    .text(comentario.Cliente.Nombre);
+                $('.fechaComentario', comentarioElemento)
+                    .text(comentario.Auditoria.Creacion);
+                $('.contenido', comentarioElemento)
+                    .text(comentario.Contenido);
+                comentarioElemento.removeClass('comentarioModelo');
+                if(nivel > 0){
+                    $('.lblResponder', comentarioElemento)
+                        .hide();
+                }
+            }
+
+            function testObtenMarcado(){
+                $.ajax({
+                    type: 'GET',
+                    url: 'http://192.168.0.7:2510/comentario/obtenerv2/all',
+                    contentType: 'application/json; charset=utf-8',
+                    success: function(data){
+                        $.each(data, function(index, value){
+                            if(index == 0){
+                                var ctdrComentarioElemento =
+                                    obtenMarcado(value);
+                                $('body').append(ctdrComentarioElemento);
+                            }
+                        });
+                    },
+                    error: function(error){
+                        alert("Ha fallado el consumo de WEB API");
+                    }
                 });
             }
