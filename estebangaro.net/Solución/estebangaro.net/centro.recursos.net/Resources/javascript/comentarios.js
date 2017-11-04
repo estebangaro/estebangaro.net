@@ -1,5 +1,5 @@
             $(function(){
-                ajustaComponenteComentarios();
+                cargaComentarios();
                 $(window).resize(function(){
                     ajustaComponenteComentarios();
                 });
@@ -57,7 +57,7 @@
                             Autor : 'Esteban GaRo',
                             Fecha : '07/10/2017',
                             Contenido : accion == "Publicar"?
-                                 $('.contenido > textarea').val():
+                                 $('#comentarioPublicar .contenido > textarea').val():
                                  btnPublicar.parent().find('textarea').val(),
                             Boton: btnPublicar,
                             Padre: accion == 'Publicar' ? null : btnPublicar.parent().parent().parent().attr('id'),
@@ -71,7 +71,7 @@
                 return accion == 'Publicar' ? boton.parent().next().attr('id') :
                     accion == 'Responder' ?
                         boton.parent().parent().children('.cdrComentario').eq(1).attr('id') :
-                        '25';
+                        undefined;
             }
 
             function muestraOcultaComentariosAnidados(btnOcultaMuestra){
@@ -227,6 +227,7 @@
 
 function publicaComentario(comentario) {
     var comentarioBackEnd = obtenComentarioBackEnd(comentario);
+    var nivel, comentarioPadreLbl, ctdrComentario;
     $.ajax({
         type: 'POST',
         url: '/api/Comentario',
@@ -235,10 +236,32 @@ function publicaComentario(comentario) {
         data: JSON.stringify(comentarioBackEnd),
         success: function (data) {
             alert("El comentario, se ha almacenado correctamente");
-            $.each(data, function (index, value) {
-                configuraComentario(comentario, value);
-                registraComentario(comentario, index, data.length);
+            $.each(data.Comentarios, function (index, value) {
+                // configuraComentario(comentario, value);
+                // registraComentario(comentario, index, data.length);
+                nivel = nivel == undefined? value.IdComentarioP == undefined? 0: 
+                    $('#' + value.IdComentarioP).parents('.cdrComentario').length + 1: 
+                    nivel;
+                ctdrComentario = obtenMarcado(value, nivel);
+                if(comentario.Accion == "Publicar"){
+                    ctdrComentario.insertAfter($('#comentarioPublicar'));
+                }else{
+                    if(index > 0){
+                        comentarioPadreLbl = comentarioPadreLbl == undefined?
+                            $('#' + value.IdComentarioP).find('.lblResponder').first(): comentarioPadreLbl;
+                        ctdrComentario.insertAfter(comentarioPadreLbl);
+                    }else{
+                        comentario.Boton.parent().replaceWith(ctdrComentario);
+                    }
+                    $('<div class="bordeComentarioS"></div>').insertBefore(ctdrComentario);
+                }
             });
+            if(nivel > 0){ ajustaLblResponder(ctdrComentario.parent()
+                .children('.lblResponder'), 'Cancelar');
+                if(ctdrComentario.parent().parent().children('.bordeComentarioP').length == 0)
+                    ctdrComentario.parent().parent().prepend($('<div class="bordeComentarioP"></div>'));
+            }
+            ajustaComponenteComentarios();
         },
         error: function (jqxhr, error, errorthrown) {
             alert("Ha fallado el almacenamiento del comentario: " + error + ", " + errorthrown);
@@ -264,24 +287,27 @@ function obtenComentarioBackEnd(comentario) {
     };
 }
 
-function obtenMarcado(comentario, nivel){
+function obtenMarcado(comentario, nivel) {
     var ctdrComentario = $('.comentarioModelo').clone(true);
     cargaInfoComentario(comentario, ctdrComentario, nivel);
 
-    if(comentario.Comentarios != null && comentario.Comentarios.lenght > 0){
-        $.each(comentario.Comentarios, function(index, value){
-            var ctdrComentarioHijo = obtenMarcado(value, nivel + 1);
+    if (comentario.Comentarios != null && comentario.Comentarios.length > 0) {
+        //$.each(comentario.Comentarios, function (index, value) {
+        for(var i = comentario.Comentarios.length - 1; i >= 0; i--){
+            var ctdrComentarioHijo = obtenMarcado(comentario.Comentarios[i], nivel + 1);
             $('.comentarios', ctdrComentario)
+                .first()
                 .append(ctdrComentarioHijo);
             $('<div class="bordeComentarioS"></div>').insertBefore(ctdrComentarioHijo);
-        });
+        }
+        //});
         ctdrComentario.prepend($('<div class="bordeComentarioP"></div>'));
     }
 
     return ctdrComentario;
 }
 
-function cargaInfoComentario(comentario, comentarioElemento, nivel){
+function cargaInfoComentario(comentario, comentarioElemento, nivel) {
     $('.avatarComentario > img', comentarioElemento)
         .attr('src', '/Resources/imagenes/comentarios/' + comentario.Cliente.Avatar);
     $('.autorComentario', comentarioElemento)
@@ -290,10 +316,31 @@ function cargaInfoComentario(comentario, comentarioElemento, nivel){
         .text(comentario.Auditoria.Creacion);
     $('.contenido', comentarioElemento)
         .text(comentario.Contenido);
-    comentarioElemento.removeClass('comentarioModelo');
-    if(nivel > 0){
+    comentarioElemento
+        .removeClass('comentarioModelo')
+        .attr('id', comentario.Id);
+    if (nivel == 2) {
         $('.lblResponder', comentarioElemento)
             .hide();
     }
+}
+
+function cargaComentarios() {
+    $.ajax({
+        type: 'GET',
+        url: '/api/comentario/' + window.location.pathname.toLowerCase().substring(1).replace(/\//g, "-"),
+        contentType: 'application/json; charset=utf-8',
+        success: function (data) {
+            $.each(data.Comentarios, function (index, value) {
+                var ctdrComentarioElemento =
+                    obtenMarcado(value, 0);
+                $('.center').append(ctdrComentarioElemento);
+            });
+            ajustaComponenteComentarios();
+        },
+        error: function (error) {
+            alert("Ha fallado el consumo de WEB API");
+        }
+    });
 }
 

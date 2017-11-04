@@ -242,9 +242,9 @@ namespace centro.recursos.net.Models.Repositorios
             return estado;
         }
 
-        public Respuesta<List<Comentario>> GuardaComentario(Comentario comentario)
+        public Respuesta<Tuple<List<Comentario>, int>> GuardaComentario(Comentario comentario)
         {
-            Respuesta<List<Comentario>> estado;
+            Respuesta<Tuple<List<Comentario>, int>> estado;
 
             try
             {
@@ -260,93 +260,109 @@ namespace centro.recursos.net.Models.Repositorios
                     });
                 dbContextoEF.Comentarios.Add(comentario);
                 dbContextoEF.SaveChanges();
-                comentario.Cliente = null;
-                estado = Respuesta<object>.GeneraRespuestaNoExcepcion<List<Comentario>>(true,
-                    ObtenComentarios(comentario.URI, int.Parse(InfoCliente[3]), nuevo: comentario));
+
+                estado = ObtenComentarios(comentario.URI, int.Parse(InfoCliente[3]),
+                    idComentarioPadre: comentario.IdComentarioP);
             }
             catch (Exception ex)
             {
                 estado = Respuesta<object>.
-                    GeneraRespuestaExcepcion<List<Comentario>>(ex,
+                    GeneraRespuestaExcepcion<Tuple<List<Comentario>, int>>(ex,
                     NombreMetodo: "GaroNetDb.GuardaComentario(Comentario)");
             }
 
             return estado;
         }
 
-        public List<Comentario> ObtenComentarios(string articulo, int idComentarioUltimoReciente,
-            COMENTARIOS tipo = COMENTARIOS.RECIENTES, Comentario nuevo = null)
-        {
-            dbContextoEF.Configuration.ProxyCreationEnabled = false;
-            Nullable<int> IdComentarioPadre = nuevo != null? nuevo.IdComentarioP: null;
-            List<Comentario> ComentariosRecientes;
+        //public List<Comentario> ObtenComentarios(string articulo, int idComentarioUltimoReciente,
+        //    COMENTARIOS tipo = COMENTARIOS.RECIENTES, Comentario nuevo = null)
+        //{
+        //    dbContextoEF.Configuration.ProxyCreationEnabled = false;
+        //    Nullable<int> IdComentarioPadre = nuevo != null? nuevo.IdComentarioP: null;
+        //    List<Comentario> ComentariosRecientes;
 
-            try
-            {
-                ComentariosRecientes = tipo == COMENTARIOS.RECIENTES ?
-                                            (from comentario in dbContextoEF.Comentarios.Include(coment => coment.Cliente)
-                                             where comentario.URI == articulo &&
-                                             comentario.Id > idComentarioUltimoReciente && comentario.IdComentarioP == IdComentarioPadre
-                                             orderby comentario.Id ascending
-                                             select comentario)
-                                           .ToList() :
-                                           (from comentario in dbContextoEF.Comentarios.Include(coment => coment.Cliente)
-                                            where comentario.URI == articulo && comentario.Id < idComentarioUltimoReciente
-                                            orderby comentario.Id ascending
-                                            select comentario)
-                                           .ToList();
+        //    try
+        //    {
+        //        ComentariosRecientes = tipo == COMENTARIOS.RECIENTES ?
+        //                                    (from comentario in dbContextoEF.Comentarios.Include(coment => coment.Cliente)
+        //                                     where comentario.URI == articulo &&
+        //                                     comentario.Id > idComentarioUltimoReciente && comentario.IdComentarioP == IdComentarioPadre
+        //                                     orderby comentario.Id ascending
+        //                                     select comentario)
+        //                                   .ToList() :
+        //                                   (from comentario in dbContextoEF.Comentarios.Include(coment => coment.Cliente)
+        //                                    where comentario.URI == articulo && comentario.Id < idComentarioUltimoReciente
+        //                                    orderby comentario.Id ascending
+        //                                    select comentario)
+        //                                   .ToList();
 
-                foreach(Comentario comentario in ComentariosRecientes)
-                {
-                    comentario.Cliente.Comentarios = null;
-                    comentario.ComentarioPadre = null;
-                }
-            }
-            catch
-            {
-                ComentariosRecientes = null;
-            }
-            return ComentariosRecientes;                            
-        }
+        //        foreach(Comentario comentario in ComentariosRecientes)
+        //        {
+        //            comentario.Cliente.Comentarios = null;
+        //            comentario.ComentarioPadre = null;
+        //        }
+        //    }
+        //    catch
+        //    {
+        //        ComentariosRecientes = null;
+        //    }
+        //    return ComentariosRecientes;                            
+        //}
 
-        public List<Comentario> ObtenComentariosV2(string articulo, int idComentarioUltimoReciente,
-            COMENTARIOS tipo = COMENTARIOS.RECIENTES, int? idComentarioPadre = null)
+        public Respuesta<Tuple<List<Comentario>, int>> ObtenComentarios(string articulo, int idComentarioUltimoReciente = 0,
+            COMENTARIOS tipo = COMENTARIOS.RECIENTES, int? idComentarioPadre = null, int? numeroComentarios = null)
         {
             // Publicación de comentarios; registro de comentarios NIVEL 0. (Comentarios.Recientes, 
-            //  Comentario reciente = 0 ó > 0 y idComentarioPadre = null).
+            //  Comentario reciente = 0 ó > 0, idComentarioPadre = null y numeroComentarios = null).
             // Respuesta de comentarios; registro de comentarios NIVEL 1,2. (Comentarios.Recientes, 
-            //  Comentario reciente = 0 ó > 0 y idComentarioPadre <> 0).
-            // Obtención de comentarios antiguos; operación "Mostrar Más". (Comentarios.Antiguos, Comentario último > 0 y 
-            //  idComentarioPadre = null).
+            //  Comentario reciente = 0 ó > 0, idComentarioPadre > 0 y numeroComentarios = null).
+            // Obtención de comentarios antiguos; operación "Mostrar Más". (Comentarios.Antiguos, Comentario último > 0,
+            //  idComentarioPadre = null y numeroComentarios = null).
+            // Carga incial de coentarios. (Comentarios.Recientes, Comentario reciente = 0, idComentarioPadre = null y 
+            //  numeroComentarios > 0)
             List<Comentario> comentarios;
-
+            IQueryable<Comentario> consulta;
+            int cuenta;
+            Respuesta<Tuple<List<Comentario>, int>> estado;
             try
             {
-                comentarios =
-                    (from comentario in dbContextoEF.Comentarios
+                consulta = from comentario in dbContextoEF.Comentarios
                               .Include(coment => coment.Cliente).Include(coment => coment.Comentarios)
-                     where articulo == comentario.URI.ToLower() && comentario.IdComentarioP == idComentarioPadre
-                        && (tipo == COMENTARIOS.RECIENTES ? comentario.Id > idComentarioUltimoReciente :
-                           comentario.Id < idComentarioUltimoReciente)
-                     select comentario).Take(5)
-                     .ToList();
+                           where articulo == comentario.URI.ToLower() && comentario.IdComentarioP == idComentarioPadre
+                              && (tipo == COMENTARIOS.RECIENTES ? comentario.Id > idComentarioUltimoReciente :
+                                 comentario.Id < idComentarioUltimoReciente)
+                           select comentario;
 
-                    for (int i = 0; i < comentarios.Count; i++)
-                    {
-                        Comentario ComentarioProxy = comentarios[i];
-                        comentarios[i] = RevierteYPreparaProxyComentario(ComentarioProxy);
-                    }
+                comentarios = tipo == COMENTARIOS.ANTIGUOS ? consulta.Take(ConfiguracionesApp.NumeroComentariosAntiguos).ToList() :
+                    tipo == COMENTARIOS.RECIENTES ? !numeroComentarios.HasValue ? consulta.ToList() :
+                        consulta.OrderByDescending(coment => coment.Id).Take(numeroComentarios.Value).ToList() : null;
+                if (comentarios == null)
+                    throw new NotImplementedException("No se tiene soporte para el tipo de comentario especificado");
+
+                cuenta = tipo == COMENTARIOS.ANTIGUOS ? consulta.Count() : comentarios.Count;
+
+                for (int i = 0; i < comentarios.Count; i++)
+                {
+                    Comentario ComentarioProxy = comentarios[i];
+                    comentarios[i] = RevierteYPreparaProxyComentario(ComentarioProxy);
+                }
+
+                estado = Respuesta<object>.GeneraRespuestaNoExcepcion<Tuple<List<Comentario>, int>>(true, 
+                    new Tuple<List<Comentario>, int>(comentarios, cuenta));
             }
-            catch
+            catch(Exception ex)
             {
-                comentarios = null;
+                estado = Respuesta<object>.
+                    GeneraRespuestaExcepcion<Tuple<List<Comentario>, int>>(ex,
+                    NombreMetodo: "GaroNetDb.ObtenComentarios(string, int = 0,COMENTARIOS = COMENTARIOS.RECIENTES, " +
+                        "int? = null, int?  = null)");
             }
             finally
             {
                 dbContextoEF.Configuration.ProxyCreationEnabled = true;
             }
 
-            return comentarios;
+            return estado;
         }
 
         private Comentario RevierteYPreparaProxyComentario(Comentario comentario)

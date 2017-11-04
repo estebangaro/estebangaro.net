@@ -19,4 +19,10 @@ namespace centro.recursos.net.Models.Utileria
         public static string RutaImagenesNoticias { get; } = ConfigurationManager.AppSettings["ImagenesNoticias"];
         public static string RutaCodigoArticulos { get; } = ConfigurationManager.AppSettings["codigoArticulos"];
     }
+
+    public static class ConfiguracionesApp
+    {
+        public static int NumeroComentariosAntiguos { get; } = int.Parse(ConfigurationManager.AppSettings["NumeroComentAntiguos"] ?? "0");
+        public static int NumeroComentariosInicial { get; } = int.Parse(ConfigurationManager.AppSettings["NumeroComentInicial"] ?? "0");
+    }
 }
