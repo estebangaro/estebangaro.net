@@ -166,7 +166,9 @@
     <Content Include="Resources\javascript\noticias.js" />
     <Content Include="Resources\javascript\Test\comentarios.js" />
     <Content Include="Resources\javascript\visualizadorcodigo.js" />
-    <Content Include="Web.config" />
+    <Content Include="Web.config">
+      <SubType>Designer</SubType>
+    </Content>
   </ItemGroup>
   <ItemGroup>
     <Compile Include="App_Start\RouteConfig.cs" />
@@ -260,7 +262,7 @@
           <AutoAssignPort>True</AutoAssignPort>
           <DevelopmentServerPort>54868</DevelopmentServerPort>
           <DevelopmentServerVPath>/</DevelopmentServerVPath>
-          <IISUrl>http://192.168.0.7:2510/</IISUrl>
+          <IISUrl>http://192.168.0.8:2510/</IISUrl>
           <NTLMAuthentication>False</NTLMAuthentication>
           <UseCustomServer>False</UseCustomServer>
           <CustomServerUrl>

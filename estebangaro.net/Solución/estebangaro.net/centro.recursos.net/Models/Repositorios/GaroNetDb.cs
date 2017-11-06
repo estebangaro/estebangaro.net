@@ -333,7 +333,10 @@ namespace centro.recursos.net.Models.Repositorios
                                  comentario.Id < idComentarioUltimoReciente)
                            select comentario;
 
-                comentarios = tipo == COMENTARIOS.ANTIGUOS ? consulta.Take(ConfiguracionesApp.NumeroComentariosAntiguos).ToList() :
+                comentarios = tipo == COMENTARIOS.ANTIGUOS ? consulta
+                    .OrderByDescending(coment => coment.Id)
+                    .Take(ConfiguracionesApp.NumeroComentariosAntiguos)
+                    .ToList():
                     tipo == COMENTARIOS.RECIENTES ? !numeroComentarios.HasValue ? consulta.ToList() :
                         consulta.OrderByDescending(coment => coment.Id).Take(numeroComentarios.Value).ToList() : null;
                 if (comentarios == null)
