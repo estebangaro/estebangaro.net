@@ -5,6 +5,20 @@ body{
     background-color:blue;
 }
 
+.mostrarMasComentarios{
+    text-align: center;
+    border-style: solid;
+    border-width:  1px;
+    border-color: white;
+    background-color: white;
+    padding: 0.5em 0;
+    cursor: pointer;
+}
+
+.mostrarMasComentarios > span{
+    color: violet;
+}
+
 .oculto{
     display: none;
 }
@@ -159,7 +173,7 @@ body{
 }
 
 @media screen and (min-width: 1025px){
-    .center{
+    .CtdrComentarios, .mostrarMasComentarios {
         width: 80%;
         margin: 0 auto;
     }
@@ -179,7 +193,7 @@ body{
 }
 
 @media screen and (min-width: 600px) and (max-width: 1025px) {
-    .center{
+    .CtdrComentarios, .mostrarMasComentarios {
         width: 90%;
         margin: 0 auto;
     }
@@ -199,7 +213,7 @@ body{
 }
 
 @media screen and (min-width: 100px) and (max-width: 600px){
-    .center{
+    .CtdrComentarios, .mostrarMasComentarios {
         width: 100%;
     }
 

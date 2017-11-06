@@ -1,62 +1,63 @@
 ﻿@using centro.recursos.net.Models.Helpers
 @model List<centro.recursos.net.Models.Entity_Framework.Comentario>
 
-
-<div class="bordeComentarioS oculto"></div>
-<div class="cdrComentario comentarioModelo">
-            <div class="avatarComentario">
-                <img src="~/Resources/imagenes/comentarios/akane.jpg" alt="Avatar cliente" />
-            </div>
-            <div class="comentarios">
-                <div class="comentario">
-                    <div class="flechaComentario"></div>
-                    <div class="cuerpoComentario">
-                        <div class="titulo">
-                            <img class="mostrarComentarios" src="~/Resources/imagenes/comentarios/flechaU.png" 
-                                 alt="Flecha ocultar"/>
-                            <span class="autorComentario"></span>
-                            <span class="fechaComentario"></span>
-                            <span class="cerrarComentario">Mostrar comentario</span>
-                        </div>
-                        <div class="contenido"></div>
+<div class="CtdrComentarios">
+    <div class="bordeComentarioS oculto"></div>
+    <div class="cdrComentario comentarioModelo">
+        <div class="avatarComentario">
+            <img src="~/Resources/imagenes/comentarios/akane.jpg" alt="Avatar cliente" />
+        </div>
+        <div class="comentarios">
+            <div class="comentario">
+                <div class="flechaComentario"></div>
+                <div class="cuerpoComentario">
+                    <div class="titulo">
+                        <img class="mostrarComentarios" src="~/Resources/imagenes/comentarios/flechaU.png"
+                             alt="Flecha ocultar" />
+                        <span class="autorComentario"></span>
+                        <span class="fechaComentario"></span>
+                        <span class="cerrarComentario">Mostrar comentario</span>
                     </div>
-                </div>
-                <div class="lblResponder">
-                    <img src="~/Resources/imagenes/comentarios/responder.svg" alt="responder"/>
-                    <span>Responder</span>
+                    <div class="contenido"></div>
                 </div>
             </div>
-</div>
-<div class="cdrComentario respuestaModelo">
-            <div class="comentarios">
-                <div class="comentario">
-                    <div class="cuerpoComentario">
-                        <div class="contenido sombra">
-                            <textarea></textarea>
-                        </div>
-                    </div>
-                </div>
-            </div>
-            <div class="btnPublicar">
+            <div class="lblResponder">
+                <img src="~/Resources/imagenes/comentarios/responder.svg" alt="responder" />
                 <span>Responder</span>
             </div>
         </div>
-<div class="cdrComentario" id="comentarioPublicar">
-    <div class="avatarComentario">
-        <img src="~/Resources/imagenes/comentarios/akane.jpg" alt="Avatar cliente" />
     </div>
-    <div class="comentarios">
-        <div class="comentario">
-            <div class="flechaComentario"></div>
-            <div class="cuerpoComentario">
-                <div class="contenido sombra">
-                    <textarea></textarea>
+    <div class="cdrComentario respuestaModelo">
+        <div class="comentarios">
+            <div class="comentario">
+                <div class="cuerpoComentario">
+                    <div class="contenido sombra">
+                        <textarea></textarea>
+                    </div>
                 </div>
             </div>
         </div>
+        <div class="btnPublicar">
+            <span>Responder</span>
+        </div>
     </div>
-    <div class="btnPublicar">
-        <span>Publicar</span>
+    <div class="cdrComentario" id="comentarioPublicar">
+        <div class="avatarComentario">
+            <img src="~/Resources/imagenes/comentarios/akane.jpg" alt="Avatar cliente" />
+        </div>
+        <div class="comentarios">
+            <div class="comentario">
+                <div class="flechaComentario"></div>
+                <div class="cuerpoComentario">
+                    <div class="contenido sombra">
+                        <textarea></textarea>
+                    </div>
+                </div>
+            </div>
+        </div>
+        <div class="btnPublicar">
+            <span>Publicar</span>
+        </div>
     </div>
 </div>
-
+<div class="mostrarMasComentarios"><span>Mostrar Más</span></div>

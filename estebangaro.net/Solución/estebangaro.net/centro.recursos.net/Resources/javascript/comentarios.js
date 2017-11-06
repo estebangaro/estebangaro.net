@@ -21,6 +21,9 @@
                 $('.cerrarComentario').click(function(){
                     $(this).siblings('.mostrarComentarios').first().click();
                 });
+                $('.mostrarMasComentarios').click(function(){
+                    cargaComentarios('antiguos');
+                });
             }
 
             function ajustaLblResponder(lblResponder, accion){
@@ -71,7 +74,9 @@
                 return accion == 'Publicar' ? boton.parent().next().attr('id') :
                     accion == 'Responder' ?
                         boton.parent().parent().children('.cdrComentario').eq(1).attr('id') :
-                        undefined;
+                    accion == 'MostrarMas'?
+                        $('.CtdrComentarios > .cdrComentario:last-child').attr('id'):
+                    undefined;
             }
 
             function muestraOcultaComentariosAnidados(btnOcultaMuestra){
@@ -225,9 +230,53 @@
                 });
             }
 
+function registraPublicacion(ctdrComentario){
+    ctdrComentario.insertAfter($('#comentarioPublicar'));
+}
+
+function registraRespuesta(ctdrComentario, indice, comentarioPadreLbl, 
+    comentarioBackEnd, Boton){
+    if(indice > 0){
+        comentarioPadreLbl = comentarioPadreLbl == undefined?
+            $('#' + comentarioBackEnd.IdComentarioP).find('.lblResponder').first(): comentarioPadreLbl;
+        ctdrComentario.insertAfter(comentarioPadreLbl);
+    }else{
+        Boton.parent().replaceWith(ctdrComentario);
+    }
+    $('<div class="bordeComentarioS"></div>').insertBefore(ctdrComentario);
+}
+
+function sonComentariosAnidados(nivel, ctdrComentario){
+    if(nivel > 0){ ajustaLblResponder(ctdrComentario.parent()
+        .children('.lblResponder'), 'Cancelar');
+        if(ctdrComentario.parent().parent().children('.bordeComentarioP').length == 0)
+            ctdrComentario.parent().parent().prepend($('<div class="bordeComentarioP"></div>'));
+    }
+}
+
+function procesaComentarios(comentarios, comentario){
+    var nivel, comentarioPadreLbl, ctdrComentario;
+    alert("El comentario, se ha almacenado correctamente");
+    $.each(comentarios, function (index, value) {
+        nivel = nivel == undefined? value.IdComentarioP == undefined? 0: 
+            $('#' + value.IdComentarioP).parents('.cdrComentario').length + 1: 
+            nivel;
+        ctdrComentario = obtenMarcado(value, nivel);
+        if(comentario.Accion == "Publicar"){
+            registraPublicacion(ctdrComentario);
+        }else if(comentario.Accion == "Responder"){
+            registraRespuesta(ctdrComentario, index, comentarioPadreLbl, 
+                value, comentario.Boton);
+        }else{
+            alert("No es posible procesar el comentario, bajo la acción especificada.");
+        }
+    });
+    sonComentariosAnidados(nivel, ctdrComentario);
+    ajustaComponenteComentarios();
+}
+
 function publicaComentario(comentario) {
     var comentarioBackEnd = obtenComentarioBackEnd(comentario);
-    var nivel, comentarioPadreLbl, ctdrComentario;
     $.ajax({
         type: 'POST',
         url: '/api/Comentario',
@@ -235,33 +284,8 @@ function publicaComentario(comentario) {
         dataType: 'json',
         data: JSON.stringify(comentarioBackEnd),
         success: function (data) {
-            alert("El comentario, se ha almacenado correctamente");
-            $.each(data.Comentarios, function (index, value) {
-                // configuraComentario(comentario, value);
-                // registraComentario(comentario, index, data.length);
-                nivel = nivel == undefined? value.IdComentarioP == undefined? 0: 
-                    $('#' + value.IdComentarioP).parents('.cdrComentario').length + 1: 
-                    nivel;
-                ctdrComentario = obtenMarcado(value, nivel);
-                if(comentario.Accion == "Publicar"){
-                    ctdrComentario.insertAfter($('#comentarioPublicar'));
-                }else{
-                    if(index > 0){
-                        comentarioPadreLbl = comentarioPadreLbl == undefined?
-                            $('#' + value.IdComentarioP).find('.lblResponder').first(): comentarioPadreLbl;
-                        ctdrComentario.insertAfter(comentarioPadreLbl);
-                    }else{
-                        comentario.Boton.parent().replaceWith(ctdrComentario);
-                    }
-                    $('<div class="bordeComentarioS"></div>').insertBefore(ctdrComentario);
-                }
-            });
-            if(nivel > 0){ ajustaLblResponder(ctdrComentario.parent()
-                .children('.lblResponder'), 'Cancelar');
-                if(ctdrComentario.parent().parent().children('.bordeComentarioP').length == 0)
-                    ctdrComentario.parent().parent().prepend($('<div class="bordeComentarioP"></div>'));
-            }
-            ajustaComponenteComentarios();
+            procesaComentarios(data.Comentarios, comentario);
+            $('#comentarioPublicar .contenido > textarea').val('');
         },
         error: function (jqxhr, error, errorthrown) {
             alert("Ha fallado el almacenamiento del comentario: " + error + ", " + errorthrown);
@@ -292,7 +316,6 @@ function obtenMarcado(comentario, nivel) {
     cargaInfoComentario(comentario, ctdrComentario, nivel);
 
     if (comentario.Comentarios != null && comentario.Comentarios.length > 0) {
-        //$.each(comentario.Comentarios, function (index, value) {
         for(var i = comentario.Comentarios.length - 1; i >= 0; i--){
             var ctdrComentarioHijo = obtenMarcado(comentario.Comentarios[i], nivel + 1);
             $('.comentarios', ctdrComentario)
@@ -300,7 +323,6 @@ function obtenMarcado(comentario, nivel) {
                 .append(ctdrComentarioHijo);
             $('<div class="bordeComentarioS"></div>').insertBefore(ctdrComentarioHijo);
         }
-        //});
         ctdrComentario.prepend($('<div class="bordeComentarioP"></div>'));
     }
 
@@ -313,7 +335,7 @@ function cargaInfoComentario(comentario, comentarioElemento, nivel) {
     $('.autorComentario', comentarioElemento)
         .text(comentario.Cliente.Nombre);
     $('.fechaComentario', comentarioElemento)
-        .text(comentario.Auditoria.Creacion);
+        .text(muestraHoraFormato(comentario.Auditoria.Creacion));
     $('.contenido', comentarioElemento)
         .text(comentario.Contenido);
     comentarioElemento
@@ -321,20 +343,27 @@ function cargaInfoComentario(comentario, comentarioElemento, nivel) {
         .attr('id', comentario.Id);
     if (nivel == 2) {
         $('.lblResponder', comentarioElemento)
-            .hide();
+            .css('visibility', 'hidden');
     }
 }
 
-function cargaComentarios() {
+function cargaComentarios(tipo = "recientes") {
+    var ids = obtenIdComentario('MostrarMas');
     $.ajax({
         type: 'GET',
-        url: '/api/comentario/' + window.location.pathname.toLowerCase().substring(1).replace(/\//g, "-"),
+        url: '/api/comentario',
         contentType: 'application/json; charset=utf-8',
+        dataType: 'json',
+        data: {id: window.location.pathname.toLowerCase().substring(1).replace(/\//g, "-"),
+            tipo: tipo,
+            ultimoantiguo: tipo != "recientes"? 
+            obtenIdComentario('MostrarMas'): 0
+        },
         success: function (data) {
             $.each(data.Comentarios, function (index, value) {
                 var ctdrComentarioElemento =
                     obtenMarcado(value, 0);
-                $('.center').append(ctdrComentarioElemento);
+                $('.CtdrComentarios').append(ctdrComentarioElemento);
             });
             ajustaComponenteComentarios();
         },
@@ -342,5 +371,70 @@ function cargaComentarios() {
             alert("Ha fallado el consumo de WEB API");
         }
     });
+}
+
+function diferenciaHrsFecha(fecha){
+    var ahora = new Date();
+    var diferencia = -1;
+    var unidad = 'h';
+    if(ahora.getDate() == fecha.getDate() && ahora.getMonth() == fecha.getMonth() 
+        && ahora.getFullYear() == fecha.getFullYear()){
+            var segundosAhora = obtenSegundosHora(ahora);
+            var segundosFecha = obtenSegundosHora(fecha);
+            diferencia = obtenParteTiempoSegundos(segundosAhora - segundosFecha, 'h');
+            if(diferencia == 0){
+                diferencia = obtenParteTiempoSegundos(segundosAhora - segundosFecha, 'm');
+                if(diferencia == 0){
+                    diferencia = segundosAhora - segundosFecha;
+                    unidad = 's';
+                }
+                else
+                    unidad = 'm';
+            }
+    }
+
+    return {diferencia: diferencia, unidad: unidad};
+}
+
+function obtenSegundosHora(fecha){
+    return (fecha.getHours() * 60 * 60) + (fecha.getMinutes() * 60) + fecha.getSeconds();
+}
+
+function obtenParteTiempoSegundos(segundos, parte){
+    return parte == "h"? parseInt(segundos/(60*60)): 
+        parte == "m"? parseInt(segundos/60):
+        segundos;
+}
+
+function muestraHoraFormato(fecha){
+    var formatoFecha = "";
+    if(fecha != undefined){
+        try{
+            var FechaObj = new Date(fecha);
+            var diferenciaHrs = diferenciaHrsFecha(FechaObj);
+            formatoFecha = diferenciaHrs.diferencia == -1? muestraFechaFormatoMX(FechaObj):
+                diferenciaHrs.diferencia == 0? "Hace un momento":
+                "Hace " + diferenciaHrs.diferencia + 
+                (diferenciaHrs.unidad == 'h'? diferenciaHrs.diferencia > 1? " horas": " hora":
+                    diferenciaHrs.unidad == 'm'? diferenciaHrs.diferencia > 1? " minutos": " minuto":
+                    diferenciaHrs.diferencia > 1? " segundos": " segundo");
+        }catch(ex){
+            formatoFecha = "No disponible";
+        }
+    }
+    return formatoFecha;
+}
+
+function muestraFechaFormatoMX(FechaObj){
+    return ajustaNumerosCeros(FechaObj.getDate()) + "/"
+        + "/" + ajustaNumerosCeros(FechaObj.getMonth() + 1) + "/" + FechaObj.getFullYear()
+        + " " + ajustaNumerosCeros(FechaObj.getHours() % 12) + ":" + ajustaNumerosCeros(FechaObj.getMinutes())
+        + ":" + ajustaNumerosCeros(FechaObj.getSeconds());
+}
+
+function ajustaNumerosCeros(numero, longitud = 2){
+    var ceros = "";
+    for(var i = 0; i < longitud; i++) ceros += "0";
+    return (ceros + numero).substr(longitud*-1, longitud);
 }
 

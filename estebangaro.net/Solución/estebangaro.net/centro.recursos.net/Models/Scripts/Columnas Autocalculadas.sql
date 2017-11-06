@@ -207,7 +207,7 @@ ALTER TABLE [Configuracion].[PalabrasCodigo]
 ADD CONSTRAINT default_PalabrasCodigo DEFAULT GETDATE() FOR [Fecha Creacion];
 GO
 GO
-CREATE TRIGGER actualizaFechaMod_CategoriasPalabrasCodigo
+CREATE TRIGGER actualizaFechaMod_PalabrasCodigo
 ON [Configuracion].[PalabrasCodigo]
 AFTER UPDATE AS  
 BEGIN
