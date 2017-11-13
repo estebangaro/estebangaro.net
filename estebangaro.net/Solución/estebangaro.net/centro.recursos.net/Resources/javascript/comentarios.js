@@ -360,6 +360,9 @@ function cargaComentarios(tipo = "recientes") {
             obtenIdComentario('MostrarMas'): 0
         },
         success: function (data) {
+            if(data.Cuenta <= _topeComentarios){
+                $('.mostrarMasComentarios').hide();
+            }
             $.each(data.Comentarios, function (index, value) {
                 var ctdrComentarioElemento =
                     obtenMarcado(value, 0);

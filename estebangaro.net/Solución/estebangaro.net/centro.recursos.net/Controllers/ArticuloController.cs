@@ -2,6 +2,7 @@
 using centro.recursos.net.Models.Utileria;
 using System;
 using System.Collections.Generic;
+using System.Configuration;
 using System.Linq;
 using System.Web;
 using System.Web.Mvc;
@@ -52,6 +53,7 @@ namespace centro.recursos.net.Controllers
         public PartialViewResult _Comentarios(string idArticulo)
         {
             // Recuperación de comentarios asociados a "articulo id".
+            ViewBag.TopeComentarios = ConfigurationManager.AppSettings["NumeroComentAntiguos"];
             return PartialView(new List<centro.recursos.net.Models.Entity_Framework.Comentario>());
         }
 

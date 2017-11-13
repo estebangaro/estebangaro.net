@@ -342,7 +342,8 @@ namespace centro.recursos.net.Models.Repositorios
                 if (comentarios == null)
                     throw new NotImplementedException("No se tiene soporte para el tipo de comentario especificado");
 
-                cuenta = tipo == COMENTARIOS.ANTIGUOS ? consulta.Count() : comentarios.Count;
+                //cuenta = tipo == COMENTARIOS.ANTIGUOS ? consulta.Count() : comentarios.Count;
+                cuenta = consulta.Count();
 
                 for (int i = 0; i < comentarios.Count; i++)
                 {
