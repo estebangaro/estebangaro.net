@@ -8,7 +8,7 @@
         #popupG{
             background-color: rgba(0,0, 0, 0.5);
             position: fixed;
-            transition: top 1s cubic-bezier(0.175, 0.885, 0.32, 1.275);
+            /* transition: top 1s cubic-bezier(0.175, 0.885, 0.32, 1.275); */
             width: 100%;
             height: 100%;
             top: -100%;
@@ -20,7 +20,6 @@
             top:50%;
             left: 50%;
             box-shadow: 0 0 15px black;
-
             /*margin-top, margin-left: en función del alto/ancho de modal*/
         }
         #popupG_preguntas > .icono, #popupG_preguntas > .titulo{
@@ -62,16 +61,18 @@
         #popupG_preguntas > .botones > .boton > span{
             display: inline-block;
             padding: 0.3em 1em;
-            color: aquamarine;
-            background-color: black;
-            margin: 0 0.5em;
+            color: blueviolet;
+            margin: 0.5em;
             cursor: pointer;
             transition: transform 0.3s cubic-bezier(0.175, 0.885, 0.32, 1.275);
+            border-radius: 5px;
+            box-shadow: -10px 10px 10px rgba(0, 0, 0, 0.5);
         }
         #popupG_preguntas > .botones > .boton > span:hover{
             transform: scale(1.2,1.2);
         }
-        #popupG_preguntas > .botones> .flecha, #popupG_preguntas{
+        #popupG_preguntas > .botones> .flecha, #popupG_preguntas,
+        #popupG_preguntas > .botones > .boton > span{
             background-color: aliceblue;
         }
         #popupG_preguntas > .botones > .flecha{
@@ -93,21 +94,101 @@
             height: 20px;
             cursor: pointer;
         }
+        #popupG_formulario, #popupG_OK, #popupG_preguntas{
+            display: none;
+        }
     </style>
     <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.2.1/jquery.min.js"></script>
     <script>
         $(function(){
-            $('#popupG_formulario').click(muestraOcultaPopupg);
-            $('#popupG_preguntas > .cerrar').click(muestraOcultaPopupg);
+            $('#popupG .cerrar').click(function(){
+                cerrarPopupG($(this));
+            });
+            $('button').click(pruebaPopupG);
         });
-        function muestraOcultaPopupg(){
+
+        function pruebaPopupG(){
+            mostrarPopupG({
+                Icono: 'OK',
+                Titulo: 'Publicar Comentario',
+                Contenido: '¡El comentario se ha añadido correctamente!',
+                Botones: [{Etiqueta: 'Aceptar', Manejador: function(){
+                    alert('Evento click botón aceptar');
+                }}, {Etiqueta: 'Salir', Manejador: Salir},
+                {Etiqueta: 'Nada'}]
+            });
+        }
+
+        function Salir(){
+            alert('Evento click botón Salir');
+        }
+
+        // Configuración:
+        // Icono : Cadena texto [OK, PREGUNTA, ADVERTENCIA, ERROR]
+        // Titulo: Cadena texto ['ATENCIÓN'].
+        // Contenido: Cadena texto ['El mensaje se ha guardado correctamente'].
+        // Botones: array JS [{Etiqueta: 'Aceptar', Manejador: function(){}},...]
+        function mostrarPopupG(configuracion, 
+            esConfirmacion = true){
+            var popupG = esConfirmacion? $('#popupG_preguntas'): $('#popupG_preguntas');
+            if(esConfirmacion){
+                EstablecePopupG(
+                    popupG,
+                    {
+                        Icono: obtenIcono(configuracion.Icono),
+                        Titulo: $('<span/>').text(configuracion.Titulo),
+                        Contenido: $('<span/>').text(configuracion.Contenido),
+                        Botones: obtenBotones(configuracion.Botones)
+                    }
+                );
                 centraPopupG();
-                var g = $('#popupG').css('top').replace('px', '');
-                if(g == '0')
-                    $('#popupG').css('top', '-100%');
-                else
-                    $('#popupG').css('top', '0');
+                popupG.show();
+                popupG.parent().animate({top: '0'}, 1000);
             }
+        }
+
+        function obtenBotones(arregloBtns){
+            var btn, btnObj;
+            var btnElemento = $('<div class="boton"/>');
+            for(var llave in arregloBtns){
+                btnObj = arregloBtns[llave];
+                btn = $('<span/>').text(btnObj.Etiqueta)
+                .attr('class', llave)
+                .click(function(){
+                    $('#popupG_preguntas > .cerrar').click();
+                    var index = parseInt($(this).attr('class'));
+                    if(arregloBtns[index].Manejador != undefined)
+                        arregloBtns[index].Manejador();
+                });
+                btnElemento.append(btn);
+            }
+
+            return btnElemento;
+        }
+
+        function obtenIcono(etiqueta){
+            if(etiqueta.toUpperCase() == 'OK')
+                return $('#popupG_OK').clone().css('display', 'inline');
+            else
+                return $('#popupG_OK').clone().css('display', 'inline');
+        }
+
+        function cerrarPopupG(btnCerrar){
+            var popupG = btnCerrar.parent();
+            popupG.parent().animate({top: '-100%'}, 1000, function(){
+                EstablecePopupG(popupG, {titulo: '', contenido: '', botones: '', icono: ''});
+                popupG.hide();
+            });
+        }
+
+        function EstablecePopupG(popup, elementos){
+            var llave;
+            for(var i in elementos){
+                llave = i.toLowerCase();
+                $('.' + llave, popup).html(elementos[i]);
+            }
+        }
+
         function centraPopupG(){
             var ancho = $('#popupG_preguntas').outerWidth() / 2;
             var alto = $('#popupG_preguntas').outerHeight() / 2;
@@ -119,11 +200,12 @@
     </script>
 </head>
 <body>
+    <button type="">Mostrar popup</button>
     <div id="popupG">
-    <div id="popupG_preguntas">
+    <!-- <div id="popupG_preguntas">
         <img src="..\..\imagenes\salir.png" class="cerrar" />
         <div class="icono">
-            <img src="..\..\imagenes\okicono.png" class="cerrar" />
+            <img src="..\..\imagenes\okicono.png" />
         </div>
         <p class="titulo">
             <span>Publicar Comentario</span>
@@ -135,11 +217,22 @@
             <div class="boton">
                 <span>Clic a mi!</span>
                 <span>Clic a mi!</span>
+                <span>Clic a mi!</span>
+                <span>Clic a mi!</span>
             </div>
             <div class="flecha"></div>
         </div>
+    </div> -->
+    <img src="..\..\imagenes\okicono.png" id="popupG_OK" />
+        <div id="popupG_preguntas">
+            <img src="..\..\imagenes\salir.png" class="cerrar" />
+            <div class="icono"></div>
+            <p class="titulo"></p>
+            <div class="contenido"></div>
+            <div class="botones"></div>
+            <div class="flecha"></div>
+        </div>
+        <div id="popupG_formulario">Mostrar popUp!</div>
     </div>
-    </div>
-    <div id="popupG_formulario">Mostrar popUp!</div>
 </body>
 </html>
