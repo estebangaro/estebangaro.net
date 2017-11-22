@@ -18,6 +18,7 @@ namespace centro.recursos.net.Models.Utileria
         public static string RutaImagenesMenu { get; } = ConfigurationManager.AppSettings["ImagenesMenu"];
         public static string RutaImagenesNoticias { get; } = ConfigurationManager.AppSettings["ImagenesNoticias"];
         public static string RutaCodigoArticulos { get; } = ConfigurationManager.AppSettings["codigoArticulos"];
+        public static string RutaPlantillasHtml { get; } = ConfigurationManager.AppSettings["PlantillasHtml"];
     }
 
     public static class ConfiguracionesApp

@@ -14,6 +14,9 @@ namespace centro.recursos.net.Controllers
         // GET: Articulo
         public ActionResult CSharp(string id)
         {
+            ViewBag.Title = id;
+            ViewBag.URI = $"/CSharp/{id}";
+
             return View(viewName: id);
         }
 

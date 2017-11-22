@@ -51,20 +51,55 @@
 
             function btnPublicarManejadorClic(btnPublicar){
                 var accion = btnPublicar.children('span').text();
+                mostrarPopupG({
+                    Icono: 'MSJ',
+                    Titulo: '¡Agradezco tu comentario!',
+                    Contenido: obtenInputs(),
+                    Botones: [{Etiqueta: accion, Manejador: function(datosPopUpG){
+                        btnPublicarManejadorClicOK(btnPublicar, obtenObjDatosPopUp(datosPopUpG));
+                    }}]
+                });
+            }
+
+            function obtenObjDatosPopUp(datosPopUpG){
+                var uriAvatar = obtenAvatar($('div.avatar', datosPopUpG));
+                var datosPopUp = {
+                    Avatar: uriAvatar,
+                    Autor: $('input', datosPopUpG).eq(1).val(),
+                    Email: $('input', datosPopUpG).eq(0).val(),
+                    AvatarNombre: obtenNombreURI(uriAvatar),
+                    EstatusCliente: 1
+                };
+
+                return datosPopUp;
+            }
+
+            function obtenAvatar(avatar){
+                var avatarURI = $('div > div > img', avatar).eq(popupG_index).attr('src');
+                return avatarURI;
+            }
+
+            function obtenNombreURI(uri){
+                return uri.substring(uri.lastIndexOf('/') + 1);
+            }
+
+            function btnPublicarManejadorClicOK(btnPublicar, datosPopUp){
+                var accion = btnPublicar.children('span').text();
                 var idComentario;
                     publicaComentario(
                         {
                             Accion : accion,
-                            Avatar: '/Resources/imagenes/comentarios/akane.jpg',
+                            Avatar: datosPopUp.Avatar, // '/Resources/imagenes/comentarios/akane.jpg',
                             AltAvatar : 'avatar',
-                            Autor : 'Esteban GaRo',
-                            Fecha : '07/10/2017',
+                            Autor : datosPopUp.Autor, // 'Esteban GaRo',
+                            Fecha : '',
                             Contenido : accion == "Publicar"?
                                  $('#comentarioPublicar .contenido > textarea').val():
                                  btnPublicar.parent().find('textarea').val(),
                             Boton: btnPublicar,
                             Padre: accion == 'Publicar' ? null : btnPublicar.parent().parent().parent().attr('id'),
-                            Email: 'estebangaro4@outlook.com;1;ranma.jpg;' +
+                            Email: datosPopUp.Email + ';' + datosPopUp.EstatusCliente + ';' + datosPopUp.AvatarNombre + ';' +
+                                // 'estebangaro4@outlook.com;1;ranma.jpg;' +
                                 ((idComentario = obtenIdComentario(accion, btnPublicar)) == undefined? '0': idComentario)
                         }
                     );
@@ -256,7 +291,7 @@ function sonComentariosAnidados(nivel, ctdrComentario){
 
 function procesaComentarios(comentarios, comentario){
     var nivel, comentarioPadreLbl, ctdrComentario;
-    alert("El comentario, se ha almacenado correctamente");
+    // alert("El comentario, se ha almacenado correctamente");
     $.each(comentarios, function (index, value) {
         nivel = nivel == undefined? value.IdComentarioP == undefined? 0: 
             $('#' + value.IdComentarioP).parents('.cdrComentario').length + 1: 
@@ -429,7 +464,7 @@ function muestraHoraFormato(fecha){
 }
 
 function muestraFechaFormatoMX(FechaObj){
-    return ajustaNumerosCeros(FechaObj.getDate()) + "/"
+    return ajustaNumerosCeros(FechaObj.getDate())
         + "/" + ajustaNumerosCeros(FechaObj.getMonth() + 1) + "/" + FechaObj.getFullYear()
         + " " + ajustaNumerosCeros(FechaObj.getHours() % 12) + ":" + ajustaNumerosCeros(FechaObj.getMinutes())
         + ":" + ajustaNumerosCeros(FechaObj.getSeconds());

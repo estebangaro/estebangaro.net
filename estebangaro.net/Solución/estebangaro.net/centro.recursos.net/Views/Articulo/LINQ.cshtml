@@ -1,21 +1,24 @@
-﻿@model centro.recursos.net.Models.Entity_Framework.Articulo
-
-@{
-    Layout = null;
+﻿@{ 
+    Layout = "~/Views/Shared/_LayoutArticulo.cshtml";
 }
-
-<!DOCTYPE html>
-
-<html>
-<head>
-    <title>LINQ</title>
-    <meta charset="UTF-8" />
-    <meta name="viewport" content="width=device-width, initial-scale=1" />
-    <link href="~/Resources/css/comentarios.css" rel="stylesheet" />
-    <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.2.1/jquery.min.js"></script>
-    <script src="~/Resources/javascript/comentarios.js"></script>
-</head>
-<body>
-        @Html.Action("_Comentarios", new { IdArticulo = "/CSharp/LINQ"})
-</body>
-</html>
+<div id="SeccionVisualizadorCodigos">
+    <div id="delegedosCodigoFuente_1" class="codigoFuente">
+        @Html.Action("_ConvertidorCodigo", "Articulo",
+                new { rutaCodigos = "MVC", idArticulo = "/Frameworks/Entity Framework" })
+    </div>
+</div>
+@section Styles{ 
+    <style>
+        #delegedosCodigoFuente_1 {
+            width: 80%;
+            margin: 0 auto;
+        }
+        #SeccionVisualizadorCodigos {
+            position: relative;
+            width: 100%;
+            background-image: url('../../Resources/imagenes/home/fondo5.jpeg');
+            background-size: contain;
+            padding: 1em 0;
+        }
+    </style>
+}
