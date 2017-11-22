@@ -113,10 +113,12 @@
   <ItemGroup>
     <Content Include="Global.asax" />
     <Content Include="Models\Scripts\Columnas Autocalculadas.sql" />
+    <Content Include="Resources\css\articulo.css" />
     <Content Include="Resources\css\autores.css" />
     <Content Include="Resources\css\buscar.css" />
     <Content Include="Resources\css\carrusel.css" />
     <Content Include="Resources\css\comentarios.css" />
+    <Content Include="Resources\css\popupG.css" />
     <Content Include="Resources\css\visualizadorcodigo.css" />
     <Content Include="Resources\css\home.css" />
     <Content Include="Resources\css\menu.css" />
@@ -155,7 +157,12 @@
     <Content Include="Resources\imagenes\noticias\asp.png" />
     <Content Include="Resources\imagenes\noticias\entity.png" />
     <Content Include="Resources\imagenes\noticias\mysql.png" />
+    <Content Include="Resources\imagenes\popupG\flechaD.png" />
+    <Content Include="Resources\imagenes\popupG\flechaI.png" />
+    <Content Include="Resources\imagenes\popupG\msjicono.png" />
+    <Content Include="Resources\imagenes\popupG\okicono.png" />
     <Content Include="Resources\imagenes\visualizadorcodigo\download.png" />
+    <Content Include="Resources\javascript\articulo.js" />
     <Content Include="Resources\javascript\autores.js" />
     <Content Include="Resources\javascript\busqueda.js" />
     <Content Include="Resources\javascript\carrusel.js" />
@@ -164,8 +171,10 @@
     <Content Include="Resources\javascript\menu.js" />
     <Content Include="Resources\javascript\multimedia.js" />
     <Content Include="Resources\javascript\noticias.js" />
+    <Content Include="Resources\javascript\popupG.js" />
     <Content Include="Resources\javascript\Test\comentarios.js" />
     <Content Include="Resources\javascript\visualizadorcodigo.js" />
+    <Content Include="Resources\plantillas\popupG.html" />
     <Content Include="Web.config">
       <SubType>Designer</SubType>
     </Content>
@@ -237,6 +246,8 @@
     <Content Include="Views\Articulo\LINQ.cshtml" />
     <Content Include="Views\Shared\_Comentarios.cshtml" />
     <Content Include="Views\Test\Comentario.cshtml" />
+    <Content Include="Views\Shared\_LayoutArticulo.cshtml" />
+    <Content Include="Views\Articulo\LINQ - Copia.cshtml" />
     <None Include="Web.Debug.config">
       <DependentUpon>Web.config</DependentUpon>
     </None>
@@ -262,7 +273,7 @@
           <AutoAssignPort>True</AutoAssignPort>
           <DevelopmentServerPort>54868</DevelopmentServerPort>
           <DevelopmentServerVPath>/</DevelopmentServerVPath>
-          <IISUrl>http://192.168.0.7:2510/</IISUrl>
+          <IISUrl>http://192.168.0.3:2510/</IISUrl>
           <NTLMAuthentication>False</NTLMAuthentication>
           <UseCustomServer>False</UseCustomServer>
           <CustomServerUrl>

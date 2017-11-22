@@ -1,0 +1,37 @@
+﻿@using centro.recursos.net.Models.Helpers;
+<!DOCTYPE html>
+
+<html>
+<head>
+    <meta name="viewport" content="width=device-width" />
+    <title>@ViewBag.Title</title>
+    <link href="~/Resources/css/popupG.css" rel="stylesheet" />
+    <link href="~/Resources/css/menu.css" rel="stylesheet" />
+    <link href="~/Resources/css/buscar.css" rel="stylesheet" />
+    <link href="~/Resources/css/visualizadorcodigo.css" rel="stylesheet" />
+    <link href="~/Resources/css/comentarios.css" rel="stylesheet" />
+    <link href="~/Resources/css/articulo.css" rel="stylesheet" />
+    <link href="~/Resources/css/home.css" rel="stylesheet" />
+    <link href="~/Resources/css/autores.css" rel="stylesheet" />
+    @RenderSection("Styles", required: false)
+    <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.2.1/jquery.min.js"></script>
+    <script src="~/Resources/javascript/popupG.js"></script>
+    <script src="~/Resources/javascript/menu.js"></script>
+    <script src="~/Resources/javascript/busqueda.js"></script>
+    <script src="~/Resources/javascript/visualizadorcodigo.js"></script>
+    <script src="~/Resources/javascript/comentarios.js"></script>
+    <script src="~/Resources/javascript/articulo.js"></script>
+    <script src="~/Resources/javascript/home.js"></script>
+    @RenderSection("Scripts", required: false)
+</head>
+<body>
+    @Html.Action("_Menu", "Home")
+    <div id="SeccionArticulo">
+        @RenderBody()
+        <div class="SeccionComentarios">
+            @Html.Action("_Comentarios", "Articulo", new { IdArticulo = ViewBag.URI })
+        </div>
+    </div>
+        @Html.GeneraPopUpG()
+</body>
+</html>

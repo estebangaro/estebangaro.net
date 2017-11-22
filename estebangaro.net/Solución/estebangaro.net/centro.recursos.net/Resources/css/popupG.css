@@ -1,0 +1,161 @@
+#popupG{
+    background-color: rgba(0,0, 0, 0.5);
+    position: fixed;
+    /* transition: top 1s cubic-bezier(0.175, 0.885, 0.32, 1.275); */
+    width: 100%;
+    height: 100%;
+    top: -100%;
+    left: 0;
+}
+#popupG_preguntas{
+    width: 350px;
+    position: absolute;
+    top:50%;
+    left: 50%;
+    box-shadow: 0 0 15px black;
+}
+#popupG_preguntas > .icono, #popupG_preguntas > .titulo{
+    width: 100%;
+    text-align: center;
+    margin: 0.5em 0;
+}
+#popupG_preguntas > .icono > img{
+    width: 35px;
+    height: 35px;
+}
+#popupG_preguntas > .titulo > span{
+    font-weight: bold;
+    font-size: 1.2em;
+}
+#popupG_preguntas > .contenido{
+    width: 80%;
+    margin: 0.5em auto;
+    text-align: center;
+}
+#popupG_preguntas > .contenido > span{
+    font-size: 0.9em;
+    font-family: 'Lucida Sans', 'Lucida Sans Regular', 'Lucida Grande', 'Lucida Sans Unicode', Geneva, Verdana, sans-serif;
+}
+#popupG_preguntas > .botones, #popupG_preguntas{
+    border-radius: 10px;
+}
+#popupG_preguntas > .botones{
+    width: 100%;
+    padding: 2em 0;
+    background-color: blueviolet;
+    position: relative;
+    border-top-left-radius: 0;
+    border-top-right-radius: 0;
+}
+#popupG_preguntas > .botones > .boton{
+    text-align: center;
+}
+#popupG_preguntas > .botones > .boton > span{
+    display: inline-block;
+    padding: 0.3em 1em;
+    color: blueviolet;
+    margin: 0.5em;
+    cursor: pointer;
+    transition: transform 0.3s cubic-bezier(0.175, 0.885, 0.32, 1.275);
+    border-radius: 5px;
+    box-shadow: -10px 10px 10px rgba(0, 0, 0, 0.5);
+}
+#popupG_preguntas > .botones > .boton > span:hover{
+    transform: scale(1.2,1.2);
+}
+#popupG_preguntas > .botones> .flecha, #popupG_preguntas,
+#popupG_preguntas > .botones > .boton > span{
+    background-color: aliceblue;
+}
+#popupG_preguntas > .botones > .flecha{
+    width: 20px;
+    height: 20px;
+    position: absolute;
+    top: -10px;
+    left: 50%;
+    margin-left: -10px;
+    transform: rotate(45deg);
+}
+#popupG_preguntas > .cerrar{
+    position: absolute;
+    right: 0;
+    top:0;
+    margin-top: -10px;
+    margin-right: -10px;
+    width: 20px;
+    height: 20px;
+    cursor: pointer;
+}
+/* Estilos de popupG_preguntas Formulario */
+#popupG_preguntas .campos, #popupG_preguntas .campos .avatar{
+    width: 100%;
+}
+#popupG_preguntas .campos input{
+    width: 100%;
+    border-radius: 5px;
+    border: solid 1px gray;
+    font-size: 1em;
+    padding: 0.5em;
+    display: inline-block;
+    box-sizing: border-box;
+}
+#popupG_preguntas .campos input:focus{
+    box-shadow: -10px 10px 10px rgba(0, 0, 0, 0.5);
+}
+#popupG_preguntas .campos .avatar{
+    overflow: hidden;
+    position: relative;
+}
+#popupG_preguntas .campos .avatar > div{
+    /*En función del número de avatars disponible*/
+    width: 300%;
+    overflow: hidden;
+    position: relative;
+    transition: left 1s cubic-bezier(0.175, 0.885, 0.32, 1.275);
+    left: 0;
+}
+#popupG_preguntas .campos .avatar  > img{
+    width: 22px;
+    height: 22px;
+    position: absolute;
+    top: 50%;
+    margin-top: -11px;
+    cursor: pointer;
+    opacity: 0;
+    visibility: hidden;
+    transition: all 1s cubic-bezier(0.175, 0.885, 0.32, 1.275);
+}
+#popupG_preguntas .campos .avatar:hover > img{
+    opacity: 1;
+    visibility: visible;
+}
+#popupG_preguntas .campos .avatar  > img:hover{
+    transition: all 0.5s cubic-bezier(0.175, 0.885, 0.32, 1.275);
+    margin-left: 0.5em;
+    margin-right: 0.5em;
+    transform: scale(1.2,1.2);
+}
+#popupG_preguntas .campos .avatar > img.flechaI{
+    left:0;
+}
+#popupG_preguntas .campos .avatar > img.flechaD{
+    right:0;
+}
+#popupG_preguntas .campos .avatar > div > div{
+    /* Porcentaje de ancho en función del número de avatars disponibles */
+    width: 33.33%;
+    box-sizing: border-box;
+    float: left;
+    text-align: center;
+}
+#popupG_preguntas .campos .avatar > div > div > img{
+    margin: 0.5em 0;
+    width: 60px;
+    height: 60px;
+    border-radius: 50%;
+    border: solid black 0.5px;
+}
+/* Fin */
+.popupG_icono, #popupG_preguntas{
+    display: none;
+}

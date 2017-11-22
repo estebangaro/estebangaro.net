@@ -148,6 +148,15 @@ namespace centro.recursos.net.Models.Helpers
             return new MvcHtmlString(encabezados + marcado);
         }
 
+        public static MvcHtmlString GeneraPopUpG(this HtmlHelper helper)
+        {
+            string carpetaPlantillas = Utileria.Rutas.RutaPlantillasHtml;
+            string rutaPlantilla = $"{helper.ViewContext.HttpContext.Server.MapPath("~")}{carpetaPlantillas}/popupG.html";
+            XElement popupGElement = XElement.Load(rutaPlantilla);
+
+            return new MvcHtmlString(popupGElement.ToString());
+        }
+
         public static MvcHtmlString GeneraComentarios(this HtmlHelper helper, 
             List<Comentario> comentarios)
         {
