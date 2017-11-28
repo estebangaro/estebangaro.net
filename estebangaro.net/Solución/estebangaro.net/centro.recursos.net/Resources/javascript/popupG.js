@@ -1,31 +1,13 @@
-        var popupG_index = 0;
-        var popupG_avatarCuenta = 3;
+        var popupG_cerrarBandera;
         $(function(){
             // Para fines de diseño de formulario
             centraPopupG();
             $('#popupG .cerrar').click(function(){
-                cerrarPopupG($(this));
+                cerrarPopupG();
             });
             $('button.popupG_confirmacion').click(pruebaPopupG);
             $('button.popupG_formulario').click(pruebaPopupGFormulario);
-            $('#popupG_Campos > .avatar > img').click(function(){
-                desplazarAvatar($(this).attr('class'));
-            });
         });
-
-        function desplazarAvatar(sentido){
-            // Determinar el valor de desplazamiento, en función del índice del avatar seleccionado:
-            // Desplazamiento = (indiceAvatarSeleccionado * -100) + 'px';
-            var avatarVentana = $('#popupG_preguntas .campos .avatar > div');
-            popupG_index += (sentido == 'flechaD'? 1: -1);
-
-            if(popupG_index == popupG_avatarCuenta)
-                popupG_index = 0;
-            else if(popupG_index < 0)
-                popupG_index = popupG_avatarCuenta - 1;
-
-            avatarVentana.css('left', (popupG_index * -100) + '%');
-        }
 
         function pruebaPopupG(){
             mostrarPopupG({
@@ -57,18 +39,16 @@
         // Titulo: Cadena texto ['ATENCIÓN'].
         // Contenido: Cadena texto ['El mensaje se ha guardado correctamente'].
         // Botones: array JS [{Etiqueta: 'Aceptar', Manejador: function(){}},...]
-        function mostrarPopupG(configuracion, 
-            esConfirmacion = true){
+        function mostrarPopupG(configuracion){
+            popupG_cerrarBandera = false;
             var popupG = $('#popupG_preguntas');
                 EstablecePopupG(
                     popupG,
                     {
                         Icono: obtenIcono(configuracion.Icono),
-                        Titulo: $('<span/>').text(configuracion.Titulo),
-                        Contenido: configuracion.Contenido.length == undefined? 
-                            $('<span/>').text(configuracion.Contenido):
-                            configuracion.Contenido,
-                        Botones: obtenBotones(configuracion.Botones)
+                        Titulo: configuracion.Titulo,
+                        Contenido: configuracion.Contenido,
+                        Botones: configuracion.Botones
                     }
                 );
                 centraPopupG();
@@ -76,24 +56,28 @@
                 popupG.parent().animate({top: '0'}, 1000);
         }
 
-        function obtenBotones(arregloBtns){
-            var btn, btnObj;
-            var btnElemento = $('<div class="boton"/>');
-            for(var llave in arregloBtns){
-                btnObj = arregloBtns[llave];
-                btn = $('<span/>').text(btnObj.Etiqueta)
-                .attr('class', llave)
-                .click(function(){
-                    var camposPopupG = $('#popupG_preguntas .campos').clone(true);
-                    $('#popupG_preguntas > .cerrar').click();
-                    var index = parseInt($(this).attr('class'));
-                    if(arregloBtns[index].Manejador != undefined)
-                        arregloBtns[index].Manejador(camposPopupG);
-                });
-                btnElemento.append(btn);
+        function mostrarEsperaPopUpG(estado, contenedor){
+            if(contenedor == undefined){
+                if(estado){
+                    mostrarPopupG({
+                        Icono: 'LOAD',
+                        Titulo: 'CARGANDO',
+                        Contenido: $('<span>Espere un momento por favor</span>'),
+                        Botones: ''
+                    });
+                }else{
+                    cerrarPopupG();
+                }   
+            }else{
+                if(estado){
+                    var esperaPopUpG = $('<div></div>')
+                        .append(obtenIcono('LOAD'))
+                        .addClass('popupG_espera');
+                    $(contenedor).append(esperaPopUpG);
+                }else{
+                    $(contenedor + ' > .popupG_espera').remove();
+                }
             }
-
-            return btnElemento;
         }
 
         function obtenIcono(etiqueta){
@@ -101,19 +85,20 @@
                 return $('#popupG_OK').clone().removeClass('popupG_icono');
             else if(etiqueta.toUpperCase() == 'MSJ')
                 return $('#popupG_MSJ').clone().removeClass('popupG_icono');
+            else if(etiqueta.toUpperCase() == 'LOAD')
+                return $('#popupG_LOAD').clone().removeClass('popupG_icono');
             else
                 return '';
         }
 
-        function obtenInputs(){
-            return $('#popupG_Campos').clone(true).removeClass('popupG_icono').attr('id', '');
-        }
-
-        function cerrarPopupG(btnCerrar){
-            var popupG = btnCerrar.parent();
+        function cerrarPopupG(){
+            popupG_cerrarBandera = true;
+            var popupG = $('#popupG_preguntas');
             popupG.parent().animate({top: '-100%'}, 1000, function(){
-                EstablecePopupG(popupG, {titulo: '', contenido: '', botones: '', icono: ''});
-                popupG.hide();
+                if(popupG_cerrarBandera){
+                    EstablecePopupG(popupG, {titulo: '', contenido: '', botones: '', icono: ''});
+                    popupG.hide();
+                }
             });
         }
 
@@ -122,6 +107,8 @@
             for(var i in elementos){
                 llave = i.toLowerCase();
                 $('.' + llave, popup).html(elementos[i]);
+                if(llave == 'botones')
+                    $('.' + llave, popup).append($('<div class="flecha"></div>'));
                 if(elementos[i] == '')
                     $('.' + llave, popup).hide();
                 else

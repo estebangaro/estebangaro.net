@@ -1,3 +1,7 @@
+var popupG_index = 0;
+var popupG_avatarCuenta = 3;
+var popupG_ultimoCorreo = '';
+
             $(function(){
                 cargaComentarios();
                 $(window).resize(function(){
@@ -8,7 +12,6 @@
 
             function enlazaEventos(){
                 $('.btnPublicar').click(function(){
-                    // Solicitar información de autor del comentario:
                     // Nombre, email, verificación de no robot (re captcha).
                     btnPublicarManejadorClic($(this));
                 });
@@ -23,6 +26,15 @@
                 });
                 $('.mostrarMasComentarios').click(function(){
                     cargaComentarios('antiguos');
+                });
+                $('#popupG_Campos > .avatar > img').click(function(){
+                    desplazarAvatar($(this).attr('class'));
+                });
+                $('.campos > p:first-child > input').blur(function(){
+                    consultaCliente(false);
+                });
+                $('.campos > p:first-child > input').focus(function(){
+                    $('#popupG_preguntas .botones span').removeClass('habilitado').addClass('deshabilitado');
                 });
             }
 
@@ -49,26 +61,179 @@
                 ajustaAltoComentsComents();
             }
 
-            function btnPublicarManejadorClic(btnPublicar){
-                var accion = btnPublicar.children('span').text();
-                mostrarPopupG({
+            function muestraPopUpGFormComentarios(btnPublicar, accion){
+                muestraPopUpGComentarios({
                     Icono: 'MSJ',
                     Titulo: '¡Agradezco tu comentario!',
                     Contenido: obtenInputs(),
                     Botones: [{Etiqueta: accion, Manejador: function(datosPopUpG){
                         btnPublicarManejadorClicOK(btnPublicar, obtenObjDatosPopUp(datosPopUpG));
-                    }}]
+                    }, Habilitado: false, CerrarAlEjecutar: true}]
                 });
+                $('.campos > p:first-child > input').focus();
+            }
+
+            function btnPublicarManejadorClic(btnPublicar){
+                popupG_ultimoCorreo = '';
+                var accion = btnPublicar.children('span').text();
+                var usuarioComents = consultaClienteEnSesion();
+                if(usuarioComents == undefined){
+                    muestraPopUpGFormComentarios(btnPublicar, accion);
+                }else{
+                    muestraPopUpGComentarios({
+                        Icono: 'OK',
+                        Titulo: 'Confirmar',
+                        Contenido: '¿ Continuar comentando como ' + usuarioComents.Email + ' ?',
+                        Botones: [{Etiqueta: '¡Es correcto!', Manejador: function(datosPopUpG){
+                            btnPublicarManejadorClicOK(btnPublicar, usuarioComents);
+                        }, Habilitado: true, CerrarAlEjecutar: true}, 
+                        {Etiqueta: '¡Soy otra persona!', Manejador: function(datosPopUpG){
+                            muestraPopUpGFormComentarios(btnPublicar, accion);
+                        }, Habilitado: true, CerrarAlEjecutar: false}],
+                        BotonesEstado: false
+                    });
+                }
+            }
+
+            function desplazarAvatar(sentido){
+                var avatarVentana = $('#popupG_preguntas .campos .avatar > div');
+                popupG_index += (sentido == 'flechaD'? 1: -1);
+            
+                if(popupG_index == popupG_avatarCuenta)
+                    popupG_index = 0;
+                else if(popupG_index < 0)
+                    popupG_index = popupG_avatarCuenta - 1;
+            
+                avatarVentana.css('left', (popupG_index * -100) + '%');
+            }
+
+            function muestraPopUpGComentarios(configuracion){
+                mostrarPopupG({
+                    Icono: configuracion.Icono,
+                    Titulo: $('<span/>').text(configuracion.Titulo),
+                    Contenido: configuracion.Contenido.length == undefined? 
+                        $('<span/>').text(configuracion.Contenido):
+                        configuracion.Contenido,
+                    Botones: obtenBotones(configuracion.Botones)
+                });
+            }
+
+            function obtenBotones(arregloBtns){
+                var btn, btnObj;
+                var btnElemento = $('<div class="boton"/>');
+                for(var llave in arregloBtns){
+                    btnObj = arregloBtns[llave];
+                    btn = $('<span/>').text(btnObj.Etiqueta)
+                    .addClass(llave + (btnObj.Habilitado? ' habilitado': ' deshabilitado'))
+                    .click(function(){
+                        if(!$(this).hasClass('deshabilitado')){
+                            var camposPopupG = $('#popupG_preguntas .campos').clone(true);
+                            var index = parseInt($(this).attr('class'));
+                            if(arregloBtns[index].CerrarAlEjecutar) 
+                                $('#popupG_preguntas > .cerrar').click();
+                            if(arregloBtns[index].Manejador != undefined)
+                                arregloBtns[index].Manejador(camposPopupG);
+                        }
+                    });
+                    btnElemento.append(btn);
+                }
+            
+                return btnElemento;
+            }
+
+            function obtenInputs(){
+                return $('#popupG_Campos').clone(true).removeClass('popupG_icono').attr('id', '');
+            }
+
+            function consultaClienteEnSesion(){
+                if (typeof(Storage) !== "undefined") {
+                    var usuarioComents = sessionStorage.getItem('_comentsGaroNet_User');
+                    if(usuarioComents != undefined)
+                        usuarioComents = JSON.parse(usuarioComents);
+                    
+                    return usuarioComents;
+                }
+                return undefined;
+            }
+
+            function almacenaClienteEnSesion(Cliente){
+                // Implementación de almacenamiento WEB.
+                if (typeof(Storage) !== "undefined") {
+                    Cliente.EstatusCliente = '1';
+                    sessionStorage.setItem('_comentsGaroNet_User', JSON.stringify(Cliente));
+                } 
+            }
+
+            function consultaClientePrevio(emailActual){
+                return emailActual.toLowerCase() != popupG_ultimoCorreo;
+            }
+
+            function estableceFormPredeterminado(){
+                estableceInputsPopupGFormulario({Estado:false, Cliente:undefined});
+                $('#popupG_preguntas .campos .avatar').removeClass('habilitado');
+                $('#popupG_preguntas .botones span').removeClass('habilitado').addClass('deshabilitado');
+                popupG_ultimoCorreo = '';
+            }
+
+            function consultaClienteEmail(email){
+                mostrarEsperaPopUpG(true, '#popupG_preguntas');
+                $.ajax({
+                    type: 'GaroClientes',
+                    url: '/api/Cliente/?id=' + email,
+                    contentType: 'application/json; charset=utf-8',
+                    success: function(data){
+                        mostrarEsperaPopUpG(false, '#popupG_preguntas');
+                        estableceInputsPopupGFormulario(data);
+                    },
+                    error: function(err){
+                        mostrarEsperaPopUpG(false, '#popupG_preguntas');
+                        alert('Ha fallado la consulta de cliente');
+                    }
+                });
+            }
+
+            function consultaCliente(){
+            var emailActual = $('#popupG_preguntas .campos input').eq(0).val();
+            if(emailActual != ''){
+            if(consultaClientePrevio(emailActual)){
+                consultaClienteEmail(emailActual);
+            }else{
+                $('#popupG_preguntas .botones span').removeClass('deshabilitado').addClass('habilitado');
+            }
+            }else{
+                estableceFormPredeterminado();
+            }                  
+            }
+
+            function estableceInputsPopupGFormulario(respuesta){
+                var camposPopUpG = $('#popupG_preguntas .campos');
+                $('input', camposPopUpG).eq(0)
+                    // .val(respuesta.Estado ? Cliente.Email: '')
+                    .prop('disabled', respuesta.Estado); // Email
+                $('input', camposPopUpG).eq(1)
+                    .val(respuesta.Estado ? respuesta.Cliente.Nombre: '')
+                    .prop('disabled', respuesta.Estado); // Autor
+                popupG_index = respuesta.Estado ? $('.avatar img[src="/Resources/imagenes/comentarios/'+ respuesta.Cliente.Avatar + '"]', 
+                    camposPopUpG).parent()
+                    .index() - 1: popupG_avatarCuenta - 1;
+                if(respuesta.Estado)
+                    $('#popupG_preguntas .campos .avatar').removeClass('habilitado');
+                else
+                    $('#popupG_preguntas .campos .avatar').addClass('habilitado');
+                if(popupG_index < 0)
+                    popupG_index = popupG_avatarCuenta - 1;
+                desplazarAvatar('flechaD');
+                $('#popupG_preguntas .botones span').removeClass('deshabilitado').addClass('habilitado');
+                popupG_ultimoCorreo = $('input', camposPopUpG).eq(0).val();
             }
 
             function obtenObjDatosPopUp(datosPopUpG){
                 var uriAvatar = obtenAvatar($('div.avatar', datosPopUpG));
                 var datosPopUp = {
-                    Avatar: uriAvatar,
                     Autor: $('input', datosPopUpG).eq(1).val(),
                     Email: $('input', datosPopUpG).eq(0).val(),
                     AvatarNombre: obtenNombreURI(uriAvatar),
-                    EstatusCliente: 1
+                    EstatusCliente: $('input', datosPopUpG).eq(0).prop('disabled')? '1': '0'
                 };
 
                 return datosPopUp;
@@ -89,18 +254,15 @@
                     publicaComentario(
                         {
                             Accion : accion,
-                            Avatar: datosPopUp.Avatar, // '/Resources/imagenes/comentarios/akane.jpg',
-                            AltAvatar : 'avatar',
-                            Autor : datosPopUp.Autor, // 'Esteban GaRo',
-                            Fecha : '',
+                            Autor : datosPopUp.Autor,
                             Contenido : accion == "Publicar"?
                                  $('#comentarioPublicar .contenido > textarea').val():
                                  btnPublicar.parent().find('textarea').val(),
                             Boton: btnPublicar,
                             Padre: accion == 'Publicar' ? null : btnPublicar.parent().parent().parent().attr('id'),
                             Email: datosPopUp.Email + ';' + datosPopUp.EstatusCliente + ';' + datosPopUp.AvatarNombre + ';' +
-                                // 'estebangaro4@outlook.com;1;ranma.jpg;' +
-                                ((idComentario = obtenIdComentario(accion, btnPublicar)) == undefined? '0': idComentario)
+                                ((idComentario = obtenIdComentario(accion, btnPublicar)) == undefined? '0': idComentario),
+                            PopupGCliente: datosPopUp
                         }
                     );
             }
@@ -151,46 +313,6 @@
                     btnOcultaMuestra.siblings('.cerrarComentario').hide();
                     btnOcultaMuestra.parents('.comentarios').first().children('.lblResponder').show();
                 }
-            }
-
-            function registraComentario(comentarioValores, indice, tope){
-                var comentario = $('.comentarioModelo').clone(true);
-                estableceValoresComentario(comentario, comentarioValores);
-                if(comentarioValores.Accion == "Publicar"){
-                    comentario.insertAfter('#comentarioPublicar');
-                    $('.contenido > textarea').val('');
-                } else {
-                    if (indice == (tope - 1))
-                        comentarioValores.Boton.parent().replaceWith(comentario);
-                    else
-                        comentario.insertAfter(comentarioValores.Boton.parent());
-                    var bordeS = $('<div class="bordeComentarioS"></div>');
-                    bordeS.insertBefore(comentario);
-                    if(comentario.parent().parent()
-                        .children('.bordeComentarioP').length == 0)
-                        comentario.parent().parent().prepend($('<div class="bordeComentarioP"></div>'));
-                    ajustaLblResponder(comentario.parent().children('.lblResponder'), 'Cancelar');
-                    if(comentario.parents('.cdrComentario').length == 2){
-                        comentario.children('.comentarios').children('.lblResponder')
-                            .css('visibility', 'hidden');
-                    }
-                }
-                comentario.removeClass('comentarioModelo')
-                    .attr('id', comentarioValores.Padre);
-                comentario.show();
-                ajustaComponenteComentarios(comentario); // Aplicar ajustes a elemento recién creado.
-            }
-
-            function estableceValoresComentario(comentario, valores){
-                $('.avatarComentario > img', comentario)
-                    .attr('src', valores.Avatar) // '..\..\imagenes\akane.jpg'
-                    .attr('alt', valores.AltAvatar); // 'avatar'
-                $('.autorComentario', comentario) // 'esteban garo'
-                    .html(valores.Autor);
-                $('.fechaComentario', comentario) // '07/10/2017'
-                    .html(valores.Fecha);
-                $('.contenido', comentario) // 'Prueba de comentarios' 
-                    .html(valores.Contenido);
             }
 
             function validaComentarios(comentario, selector, selector2){
@@ -291,7 +413,6 @@ function sonComentariosAnidados(nivel, ctdrComentario){
 
 function procesaComentarios(comentarios, comentario){
     var nivel, comentarioPadreLbl, ctdrComentario;
-    // alert("El comentario, se ha almacenado correctamente");
     $.each(comentarios, function (index, value) {
         nivel = nivel == undefined? value.IdComentarioP == undefined? 0: 
             $('#' + value.IdComentarioP).parents('.cdrComentario').length + 1: 
@@ -319,6 +440,7 @@ function publicaComentario(comentario) {
         dataType: 'json',
         data: JSON.stringify(comentarioBackEnd),
         success: function (data) {
+            almacenaClienteEnSesion(comentario.PopupGCliente);
             procesaComentarios(data.Comentarios, comentario);
             $('#comentarioPublicar .contenido > textarea').val('');
         },
