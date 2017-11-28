@@ -11,37 +11,8 @@ using System.Web.Http;
 
 namespace centro.recursos.net.Controllers
 {
-    public class ComentarioController : ApiController
+    public class ComentarioController : ApiBase
     {
-        #region Propiedades
-
-        protected Models.Repositorios.IGaroNetDb Repositorio { get; set; }
-        public string CadenaConexion
-        {
-            get
-            {
-                string amb = ConfigurationManager.AppSettings["ambiente"];
-                amb = string.IsNullOrEmpty(amb) ? "dev" : amb;
-                return $"GaroNETDbContexto_{amb}";
-            }
-        }
-
-        #endregion
-
-        #region Contructores
-
-        public ComentarioController()
-        {
-            Repositorio = new Models.Repositorios.GaroNetDb(CadenaConexion);
-        }
-
-        public ComentarioController(Models.Repositorios.IGaroNetDb repositorio)
-        {
-            Repositorio = repositorio;
-        }
-
-        #endregion
-
         public HttpResponseMessage GetComentarios(string id, string tipo, int ultimoantiguo)
         {
             string Url = $"/{id.Replace("-", "/")}";

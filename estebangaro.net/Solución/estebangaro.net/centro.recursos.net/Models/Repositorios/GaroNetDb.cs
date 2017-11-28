@@ -274,41 +274,6 @@ namespace centro.recursos.net.Models.Repositorios
             return estado;
         }
 
-        //public List<Comentario> ObtenComentarios(string articulo, int idComentarioUltimoReciente,
-        //    COMENTARIOS tipo = COMENTARIOS.RECIENTES, Comentario nuevo = null)
-        //{
-        //    dbContextoEF.Configuration.ProxyCreationEnabled = false;
-        //    Nullable<int> IdComentarioPadre = nuevo != null? nuevo.IdComentarioP: null;
-        //    List<Comentario> ComentariosRecientes;
-
-        //    try
-        //    {
-        //        ComentariosRecientes = tipo == COMENTARIOS.RECIENTES ?
-        //                                    (from comentario in dbContextoEF.Comentarios.Include(coment => coment.Cliente)
-        //                                     where comentario.URI == articulo &&
-        //                                     comentario.Id > idComentarioUltimoReciente && comentario.IdComentarioP == IdComentarioPadre
-        //                                     orderby comentario.Id ascending
-        //                                     select comentario)
-        //                                   .ToList() :
-        //                                   (from comentario in dbContextoEF.Comentarios.Include(coment => coment.Cliente)
-        //                                    where comentario.URI == articulo && comentario.Id < idComentarioUltimoReciente
-        //                                    orderby comentario.Id ascending
-        //                                    select comentario)
-        //                                   .ToList();
-
-        //        foreach(Comentario comentario in ComentariosRecientes)
-        //        {
-        //            comentario.Cliente.Comentarios = null;
-        //            comentario.ComentarioPadre = null;
-        //        }
-        //    }
-        //    catch
-        //    {
-        //        ComentariosRecientes = null;
-        //    }
-        //    return ComentariosRecientes;                            
-        //}
-
         public Respuesta<Tuple<List<Comentario>, int>> ObtenComentarios(string articulo, int idComentarioUltimoReciente = 0,
             COMENTARIOS tipo = COMENTARIOS.RECIENTES, int? idComentarioPadre = null, int? numeroComentarios = null)
         {
@@ -401,6 +366,28 @@ namespace centro.recursos.net.Models.Repositorios
                 IdComentarioP = comentario.IdComentarioP,
                 URI = comentario.URI
             };
+        }
+
+        public Respuesta<Cliente> ObtenCliente(string email)
+        {
+            dbContextoEF.Configuration.ProxyCreationEnabled = false;
+            Respuesta<Cliente> estado;
+
+            try
+            {
+                var cliente = dbContextoEF.ClientesArticulos
+                    .FirstOrDefault(client => client.Email == email);
+
+                estado = Respuesta<object>.GeneraRespuestaNoExcepcion<Cliente>(true, cliente);
+            }
+            catch (Exception ex)
+            {
+                estado = Respuesta<object>.
+                    GeneraRespuestaExcepcion<Cliente>(ex,
+                    NombreMetodo: "GaroNetDb.ObtenCliente(string)");
+            }
+
+            return estado;
         }
 
         #endregion

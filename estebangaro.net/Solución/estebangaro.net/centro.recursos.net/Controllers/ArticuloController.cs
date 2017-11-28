@@ -52,14 +52,6 @@ namespace centro.recursos.net.Controllers
             return resultado;
         }
 
-        [ChildActionOnly]
-        public PartialViewResult _Comentarios(string idArticulo)
-        {
-            // Recuperación de comentarios asociados a "articulo id".
-            ViewBag.TopeComentarios = ConfigurationManager.AppSettings["NumeroComentAntiguos"];
-            return PartialView(new List<centro.recursos.net.Models.Entity_Framework.Comentario>());
-        }
-
         public ActionResult DescargarCodigo(string archivo, int indice, string carpeta)
         {
             // carpeta = MVC
@@ -71,6 +63,14 @@ namespace centro.recursos.net.Controllers
             var Resultado = GeneraArchivoRespuesta(rutaArchivo, archivo);
 
             return Resultado;
+        }
+
+        [ChildActionOnly]
+        public PartialViewResult _Comentarios(string idArticulo)
+        {
+            // Recuperación de comentarios asociados a "articulo id".
+            ViewBag.TopeComentarios = ConfigurationManager.AppSettings["NumeroComentAntiguos"];
+            return PartialView(new List<centro.recursos.net.Models.Entity_Framework.Comentario>());
         }
     }
 }

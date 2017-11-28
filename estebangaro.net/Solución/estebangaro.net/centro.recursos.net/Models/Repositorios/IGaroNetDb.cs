@@ -28,5 +28,7 @@ namespace centro.recursos.net.Models.Repositorios
 
         Respuesta<Tuple<List<Comentario>, int>> ObtenComentarios(string articulo, int idComentarioUltimoReciente = 0,
             COMENTARIOS tipo = COMENTARIOS.RECIENTES, int? idComentarioPadre = null, int? numeroComentarios = null);
+
+        Respuesta<Cliente> ObtenCliente(string email);
     }
 }
