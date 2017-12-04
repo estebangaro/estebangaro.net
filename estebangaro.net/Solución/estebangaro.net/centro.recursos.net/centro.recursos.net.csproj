@@ -132,12 +132,13 @@
     <Content Include="Resources\imagenes\carrusel\boton_c3.png" />
     <Content Include="Resources\imagenes\carrusel\flecha2D.png" />
     <Content Include="Resources\imagenes\carrusel\flecha2I.png" />
-    <Content Include="Resources\imagenes\comentarios\akane.jpg" />
-    <Content Include="Resources\imagenes\comentarios\avatar.jpg" />
+    <Content Include="Resources\imagenes\comentarios\avatars\akane.jpg" />
+    <Content Include="Resources\imagenes\comentarios\avatars\avatar.jpg" />
+    <Content Include="Resources\imagenes\comentarios\avatars\githubicono.png" />
     <Content Include="Resources\imagenes\comentarios\cancelarrojo.svg" />
     <Content Include="Resources\imagenes\comentarios\flechaDn.png" />
     <Content Include="Resources\imagenes\comentarios\flechaU.png" />
-    <Content Include="Resources\imagenes\comentarios\ranma.jpg" />
+    <Content Include="Resources\imagenes\comentarios\avatars\ranma.jpg" />
     <Content Include="Resources\imagenes\comentarios\responder.svg" />
     <Content Include="Resources\imagenes\comentarios\salir.png" />
     <Content Include="Resources\imagenes\home\fondo2.JPG" />

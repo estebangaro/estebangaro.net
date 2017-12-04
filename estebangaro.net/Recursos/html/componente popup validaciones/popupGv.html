@@ -1,0 +1,75 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8" />
+    <title>popup Garo validaciones</title>
+    <style>
+        .popupGv_validacion{
+            position: absolute;
+            width: 250px;
+            /* En función de posición de elemento. */
+            top: 50%;
+            left: 50%;
+            border-radius: 10px;
+            border: solid blueviolet 1px;
+            box-shadow: 10px 10px 10px gray;
+        }
+        .popupGv_validacion > .Titulo, .popupGv_validacion > .Contenido{
+            width: 100%;
+            padding: 0.5em 0;
+        }
+        .popupGv_validacion > .Titulo{
+            text-align: center;
+        }
+        .popupGv_validacion > .Titulo > span{
+            font-size: 1.1em;
+            color: black;
+        }
+        .popupGv_validacion > .Contenido, .popupGv_validacion > .Flecha{
+            background-color: blue;
+        }
+        .popupGv_validacion > .Contenido{
+            border-bottom-left-radius: 10px;
+            border-bottom-right-radius: 10px;
+        }
+        .popupGv_validacion > .Contenido > span{
+            font-size: 1em;
+            color: whitesmoke;
+            position: relative;
+            z-index: 1;
+            display: inline-block;
+            margin-left: 0.5em;
+            margin-right: 0.5em;
+        }
+        .popupGv_validacion > .Cerrar{
+            position: absolute;
+            right: 0;
+            top: 0;
+            width: 18px;
+            height: 18px;
+            margin-right: -9px;
+            margin-top: -9px;
+            cursor: pointer;
+        }
+        .popupGv_validacion > .Flecha{
+            position: absolute;
+            top: 50%;
+            left: 0;
+            width: 18px;
+            height: 18px;
+            margin-top: -9px;
+            margin-left: -9px;
+            transform: rotate(45deg);
+        }
+    </style>
+</head>
+<body>
+    <div class="popupGv_validacion">
+        <div class="Titulo"><span>Verificar formato</span></div>
+        <div class="Contenido"><span>Se ha introducido una cadena de texto con formato inválido, caracteres 
+            permitidos [a-zA-Z0-9...]</span></div>
+        <img class="Cerrar" src="..\..\imagenes\salir.png" alt="Salir">
+        <div class="Flecha"></div>
+    </div>
+</body>
+</html>

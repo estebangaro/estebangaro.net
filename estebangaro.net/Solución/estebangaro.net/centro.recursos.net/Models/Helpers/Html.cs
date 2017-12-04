@@ -8,6 +8,8 @@ using System.Web;
 using System.Web.Mvc;
 using System.Xml.Linq;
 using centro.recursos.net.Models.Utileria;
+using System.Text.RegularExpressions;
+using System.Drawing;
 
 namespace centro.recursos.net.Models.Helpers
 {
@@ -44,7 +46,7 @@ namespace centro.recursos.net.Models.Helpers
                 }
                 _elemento = new XElement(_esSuperMenu ? "nav" : "li",
                     _esSuperMenu ? new XElement("span", opcion.Descripcion,
-                        new XElement("img", new XAttribute("src", $"{Rutas.RutaImagenesMenu}/flecha.png"))) :
+                        new XElement("img", new XAttribute("src", $"{Rutas.ImagenesMenu}/flecha.png"))) :
                         new XElement("span", opcion.Descripcion),
                     new XElement("ul", _elementosHijo));
             }
@@ -110,7 +112,7 @@ namespace centro.recursos.net.Models.Helpers
                    new XElement("p",
                        new XElement("img",
                            new XAttribute("src",
-                                $"{Rutas.RutaImagenesNoticias}/{noticia.Imagen}")),
+                                $"{Rutas.ImagenesNoticias}/{noticia.Imagen}")),
                        new XAttribute("class", "imagenBNR")),
                    new XElement("p",
                        new XElement("a",
@@ -126,7 +128,7 @@ namespace centro.recursos.net.Models.Helpers
         {
             int indice = 1;
             string marcado = string.Empty, encabezados = string.Empty;
-            string rutaCodigo = $"{helper.ViewContext.HttpContext.Server.MapPath("~")}{Rutas.RutaCodigoArticulos}/{nombreCarpeta}";
+            string rutaCodigo = $"{helper.ViewContext.HttpContext.Server.MapPath("~")}{Rutas.CodigoArticulos}/{nombreCarpeta}";
             ConvertidorCodigoAHTML convertidor = 
                 new ConvertidorCodigoAHTML(palabrasCodigo, clasesPersonalizadas);
 
@@ -140,7 +142,7 @@ namespace centro.recursos.net.Models.Helpers
                     marcado += $"<div class=\"ctdrCodigo\"><pre>{convertidor.ObtenHTML(contenido)}</pre></div>";
             }
             encabezados += $"<a><img src=" +
-                $"\"{Rutas.RutaImagenesVisualizadorCodigo}/download.png\" title=\"Descargar\" class=\"descargarCodigo\"></img></a>";
+                $"\"{Rutas.ImagenesVisualizadorCodigo}/download.png\" title=\"Descargar\" class=\"descargarCodigo\"></img></a>";
             encabezados += $"<input type=\"hidden\" value=\"{nombreCarpeta}\"/>";
             encabezados = $"<div class=\"EnzdosCodigoFuente\">{encabezados}</div>";
             marcado = $"<div class=\"CdrCodigoFuente\">{marcado}</div>";
@@ -148,16 +150,32 @@ namespace centro.recursos.net.Models.Helpers
             return new MvcHtmlString(encabezados + marcado);
         }
 
-        public static MvcHtmlString GeneraComentarios(this HtmlHelper helper, 
-            List<Comentario> comentarios)
+        public static MvcHtmlString GeneraImagenesAvatarsComentarios(this HtmlHelper helper, 
+            FileInfo[] imagenesAvatar)
         {
+            XElement divCdrAvatars = new XElement("div");
+            XElement[] htmlAvatars = imagenesAvatar
+                .OrderBy(delegate (FileInfo infoArchivo)
+                {
+                    Image bitmapObj = new Bitmap(infoArchivo.FullName);
+                    // ID = 270 => Metadato de título de imagen.
+                    var tituloPropiedad = bitmapObj.PropertyItems.FirstOrDefault(prop => prop.Id == 270);
+                    string titulo = tituloPropiedad != null ?
+                        System.Text.ASCIIEncoding.ASCII.GetString(tituloPropiedad.Value) :
+                        infoArchivo.Name;
+              
+                    return titulo;
+                })
+                .Select(infoImagen => $"{infoImagen.Name}")
+                .Select(delegate (string nombreArchivoAvatar)
+                {
+                    XElement avatar = new XElement("img");
+                    avatar.Add(new XAttribute("src", $"{Rutas.ImagenesAvatarsComentarios}/{nombreArchivoAvatar}"));
+                    return new XElement("div", avatar);
+                }).ToArray();
+            divCdrAvatars.Add(htmlAvatars);
 
-            return new MvcHtmlString(string.Empty);
-        }
-
-        private static XElement ObtenMarcado(Comentario comentario)
-        {
-            throw new NotImplementedException();
+            return new MvcHtmlString(divCdrAvatars.ToString());
         }
     }
 }
