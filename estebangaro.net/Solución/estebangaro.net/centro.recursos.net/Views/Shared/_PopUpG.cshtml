@@ -1,18 +1,21 @@
-﻿<div id="popupG">
+﻿@using centro.recursos.net.Models.Helpers;
+
+<div id="popupG">
     <img src="/Resources/imagenes/popupG/okicono.png" id="popupG_OK" class="popupG_icono" />
     <img src="/Resources/imagenes/popupG/msjicono.png" id="popupG_MSJ" class="popupG_icono" />
     <img src="~/Resources/imagenes/popupG/loading.gif" id="popupG_LOAD" class="popupG_icono" />
     <!-- Plantilla de formulario de campos para componente comentarios. -->
     <!--No introducir elementos hijo antes de input "Correo electrónico"-->
+    <script>
+        var popupG_avatarCuenta = @ViewBag.NumeroAvatars;
+        var popupG_index = 0;
+        var popupG_ultimoCorreo = '';
+    </script>
     <div id="popupG_Campos" class="campos popupG_icono">
         <p><input type="text" placeholder="Correo electrónico" /></p>
         <p><input type="text" placeholder="Nombre" /></p>
         <div class="avatar">
-            <div>
-                <div><img src="/Resources/imagenes/comentarios/avatar.jpg" /></div>
-                <div><img src="/Resources/imagenes/comentarios/akane.jpg" /></div>
-                <div><img src="/Resources/imagenes/comentarios/ranma.jpg" /></div>
-            </div>
+            @Html.GeneraImagenesAvatarsComentarios(Model as FileInfo[])
             <img src="/Resources/imagenes/popupG/flechaI.png" class="flechaI" />
             <img src="/Resources/imagenes/popupG/flechaD.png" class="flechaD" />
         </div>

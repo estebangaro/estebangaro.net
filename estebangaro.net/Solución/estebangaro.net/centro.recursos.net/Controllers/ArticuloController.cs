@@ -59,7 +59,7 @@ namespace centro.recursos.net.Controllers
             // indice = 1
             string[] infoArchivo = archivo.Split('.');
             string nombreArchivo = $"{indice.ToString("D2")}@{infoArchivo[0]}@{infoArchivo[1]}.txt";
-            string rutaArchivo = $"{Server.MapPath("~")}{Rutas.RutaCodigoArticulos}/{carpeta}/{nombreArchivo}";
+            string rutaArchivo = $"{Server.MapPath("~")}{Rutas.CodigoArticulos}/{carpeta}/{nombreArchivo}";
             var Resultado = GeneraArchivoRespuesta(rutaArchivo, archivo);
 
             return Resultado;
@@ -69,8 +69,28 @@ namespace centro.recursos.net.Controllers
         public PartialViewResult _Comentarios(string idArticulo)
         {
             // Recuperación de comentarios asociados a "articulo id".
-            ViewBag.TopeComentarios = ConfigurationManager.AppSettings["NumeroComentAntiguos"];
+            ViewBag.TopeComentarios = ConfiguracionesApp.NumeroComentariosAntiguos;
+            ViewBag.RutaImagenesComentarios = Rutas.ImagenesComentarios;
+            ViewBag.RutaImagenesAvatars = Rutas.ImagenesAvatarsComentarios;
+            ViewBag.AnidamientoMaxComentarios = ConfiguracionesApp.NumeroComentariosAnidados;
+            ViewBag.UnidadStorageClienteComentarios = ConfiguracionesApp.UnidadStorageClienteComentarios;
+            ViewBag.TiempoStorageClienteComentarios = ConfiguracionesApp.TiempoStorageClienteComentarios;
+            ViewBag.AlmacenamientoWeb = ConfiguracionesApp.TipoAlmacenamientoWeb == "sesion" ? 1 :
+                ConfiguracionesApp.TipoAlmacenamientoWeb == "local" ? 0 : -1;
+
             return PartialView(new List<centro.recursos.net.Models.Entity_Framework.Comentario>());
+        }
+
+        [ChildActionOnly]
+        public PartialViewResult _PopUpG()
+        {
+            string rutaAvatars = $"{Server.MapPath("~")}" +
+                $"{Rutas.ImagenesAvatarsComentarios}";
+            System.IO.DirectoryInfo carpetaAvatars = new System.IO.DirectoryInfo(rutaAvatars);
+            System.IO.FileInfo[] imagenes = carpetaAvatars.GetFiles();
+            ViewBag.NumeroAvatars = imagenes.Count();
+
+            return PartialView(imagenes);
         }
     }
 }

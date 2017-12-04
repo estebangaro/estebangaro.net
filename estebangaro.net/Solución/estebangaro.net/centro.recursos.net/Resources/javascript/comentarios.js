@@ -1,14 +1,23 @@
-var popupG_index = 0;
-var popupG_avatarCuenta = 3;
-var popupG_ultimoCorreo = '';
-
             $(function(){
                 cargaComentarios();
+                ajustaCtdrAvatars();
                 $(window).resize(function(){
                     ajustaComponenteComentarios();
                 });
                 enlazaEventos();
             });
+
+            function ajustaCtdrAvatars(){
+                var divs = $('#popupG_preguntas .campos .avatar > div > div');
+                var divs2 = $('#popupG_preguntas .campos .avatar > div');
+
+                $('#popupG_Campos .avatar > div > div').css(
+                    'width', (100 / popupG_avatarCuenta) + '%'
+                );
+                $('#popupG_Campos .avatar > div').css(
+                    'width', (100 * popupG_avatarCuenta) + '%'
+                );
+            }
 
             function enlazaEventos(){
                 $('.btnPublicar').click(function(){
@@ -40,8 +49,8 @@ var popupG_ultimoCorreo = '';
 
             function ajustaLblResponder(lblResponder, accion){
                 lblResponder.children('img')
-                    .attr('src', accion == "Responder" ? 
-                        '/Resources/imagenes/comentarios/cancelarrojo.svg' : '/Resources/imagenes/comentarios/responder.svg');
+                    .attr('src', _rutaImagenesComentarios + 
+                        (accion == "Responder" ? '/cancelarrojo.svg' : '/responder.svg'));
                 lblResponder.children('span')
                     .html(accion == "Responder"? 
                         'Cancelar': 'Responder');
@@ -146,21 +155,42 @@ var popupG_ultimoCorreo = '';
             }
 
             function consultaClienteEnSesion(){
-                if (typeof(Storage) !== "undefined") {
-                    var usuarioComents = sessionStorage.getItem('_comentsGaroNet_User');
-                    if(usuarioComents != undefined)
-                        usuarioComents = JSON.parse(usuarioComents);
-                    
-                    return usuarioComents;
+                var usuario = undefined;
+                if (typeof(Storage) !== "undefined" && _tipoAlmacenamientoWeb != -1) {
+                    if(_tipoAlmacenamientoWeb == 1){ // Implementación de almacenamiento WEB SESSION.
+                        usuario = sessionStorage.getItem('_comentsGaroNet_User');
+                    }else if(_tipoAlmacenamientoWeb == 0){ // Implementación de almacenamiento WEB LOCAL.
+                        usuario = localStorage.getItem('_comentsGaroNet_User');
+                    }
+                    if(usuario != undefined){
+                        usuario = ValidaCaducidadUsuario(usuario);
+                    }
                 }
-                return undefined;
+
+                return usuario;
+            }
+
+            function ValidaCaducidadUsuario(usuario){
+                var objUsuario = JSON.parse(usuario);
+            
+                return _tipoAlmacenamientoWeb == 0? 
+                    obtenDiferenciaFecha(new Date(), new Date(objUsuario.FechaRegistro),
+                        _unidadAlmacenamientoCliente) > 
+                        _tiempoAlmacenamientoSesionCliente ?
+                    undefined: objUsuario: objUsuario;
+                    
             }
 
             function almacenaClienteEnSesion(Cliente){
-                // Implementación de almacenamiento WEB.
-                if (typeof(Storage) !== "undefined") {
+                if (typeof(Storage) !== "undefined" && _tipoAlmacenamientoWeb != -1) {
                     Cliente.EstatusCliente = '1';
-                    sessionStorage.setItem('_comentsGaroNet_User', JSON.stringify(Cliente));
+                    Cliente.FechaRegistro = new Date();
+                    var usuario = JSON.stringify(Cliente);
+                    if(_tipoAlmacenamientoWeb == 1){ // Implementación de almacenamiento WEB SESSION.
+                        sessionStorage.setItem('_comentsGaroNet_User', usuario);
+                    }else if(_tipoAlmacenamientoWeb == 0){ // Implementación de almacenamiento WEB LOCAL.
+                        localStorage.setItem('_comentsGaroNet_User', usuario);
+                    }
                 } 
             }
 
@@ -213,7 +243,7 @@ var popupG_ultimoCorreo = '';
                 $('input', camposPopUpG).eq(1)
                     .val(respuesta.Estado ? respuesta.Cliente.Nombre: '')
                     .prop('disabled', respuesta.Estado); // Autor
-                popupG_index = respuesta.Estado ? $('.avatar img[src="/Resources/imagenes/comentarios/'+ respuesta.Cliente.Avatar + '"]', 
+                popupG_index = respuesta.Estado ? $('.avatar img[src="' + _rutaImagenesAvatars + '/' + respuesta.Cliente.Avatar + '"]', 
                     camposPopUpG).parent()
                     .index() - 1: popupG_avatarCuenta - 1;
                 if(respuesta.Estado)
@@ -451,7 +481,7 @@ function publicaComentario(comentario) {
 }
 
 function configuraComentario(comentario, comentbackend) {
-    comentario.Avatar = '/Resources/imagenes/comentarios/' + comentbackend.Cliente.Avatar;
+    comentario.Avatar = _rutaImagenesAvatars + '/' + comentbackend.Cliente.Avatar;
     comentario.Autor = comentbackend.Cliente.Nombre;
     comentario.Fecha = comentbackend.Auditoria.Creacion;
     comentario.Contenido = comentbackend.Contenido;
@@ -488,7 +518,7 @@ function obtenMarcado(comentario, nivel) {
 
 function cargaInfoComentario(comentario, comentarioElemento, nivel) {
     $('.avatarComentario > img', comentarioElemento)
-        .attr('src', '/Resources/imagenes/comentarios/' + comentario.Cliente.Avatar);
+        .attr('src', _rutaImagenesAvatars + '/' + comentario.Cliente.Avatar);
     $('.autorComentario', comentarioElemento)
         .text(comentario.Cliente.Nombre);
     $('.fechaComentario', comentarioElemento)
@@ -498,7 +528,7 @@ function cargaInfoComentario(comentario, comentarioElemento, nivel) {
     comentarioElemento
         .removeClass('comentarioModelo')
         .attr('id', comentario.Id);
-    if (nivel == 2) {
+    if (nivel >= _nivelAnidamientoMaxComentarios) {
         $('.lblResponder', comentarioElemento)
             .css('visibility', 'hidden');
     }
@@ -564,6 +594,20 @@ function obtenParteTiempoSegundos(segundos, parte){
     return parte == "h"? parseInt(segundos/(60*60)): 
         parte == "m"? parseInt(segundos/60):
         segundos;
+}
+
+function obtenDiferenciaFecha(fecha1, fecha2, unidad = "hr"){
+    var diferenciaMs = fecha1 - fecha2;
+    var fecha1s = fecha1.toString();
+    var fecha2s = fecha2.toString();
+    var diferencia = parseInt(
+        unidad == "d"? diferenciaMs / (1000 * 60 * 60 * 24):
+        unidad == "hr"? diferenciaMs / (1000 * 60 * 60):
+        unidad == "m"? diferenciaMs / (1000 * 60):
+        unidad == "s"? diferenciaMs / (1000):
+        diferenciaMs);
+
+    return diferencia;
 }
 
 function muestraHoraFormato(fecha){

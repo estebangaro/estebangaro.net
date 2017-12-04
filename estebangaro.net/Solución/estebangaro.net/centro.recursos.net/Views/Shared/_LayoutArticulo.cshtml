@@ -32,6 +32,6 @@
             @Html.Action("_Comentarios", "Articulo", new { IdArticulo = ViewBag.URI })
         </div>
     </div>
-        @Html.Partial("_PopUpG")
+        @Html.Action("_PopUpG", "Articulo")
 </body>
 </html>

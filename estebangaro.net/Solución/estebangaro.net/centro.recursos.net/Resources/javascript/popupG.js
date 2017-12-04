@@ -1,7 +1,7 @@
         var popupG_cerrarBandera;
         $(function(){
             // Para fines de diseño de formulario
-            centraPopupG();
+            // centraPopupG();
             $('#popupG .cerrar').click(function(){
                 cerrarPopupG();
             });

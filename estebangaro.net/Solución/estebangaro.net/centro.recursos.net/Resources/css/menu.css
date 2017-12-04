@@ -146,6 +146,7 @@
         right: 0;
         background-color: transparent;
         transition: all cubic-bezier(0.215, 0.610, 0.355, 1) 1s;
+        display:none;
     }
     #contenedorMenu nav ul {
         /* visibility: visible; */
@@ -179,6 +180,7 @@
 @media screen and (min-width: 100px) and (max-width: 600px) {
     #agrupadorOpciones > div {
         width: 100%;
+        display:none;
     }
 
     #fondoMenu {

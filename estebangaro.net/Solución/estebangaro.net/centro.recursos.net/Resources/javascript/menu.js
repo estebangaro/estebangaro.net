@@ -15,7 +15,7 @@ $(function() {
                 'visibility': 'visible',
                 'opacity': '1'
             });
-            $('#agrupadorOpciones>div').css({ 'background-color': 'rgba(2, 2, 2, 0.8)' });
+            $('#agrupadorOpciones>div').css({ 'background-color': 'rgba(2, 2, 2, 0.8)', display: 'block' });
             $(this).attr('src', '/Resources/imagenes/menu/cerrar.png');
         } else {
             $('#agrupadorOpciones nav').css({
@@ -26,7 +26,7 @@ $(function() {
                 'visibility': 'hidden',
                 'max-height': '0'
             });
-            $('#agrupadorOpciones>div').css({ 'background-color': 'transparent' });
+            $('#agrupadorOpciones>div').css({ 'background-color': 'transparent', display: 'none' });
             $(this).attr('src', '/Resources/imagenes/menu/icono_menu_2.png');
         }
     });

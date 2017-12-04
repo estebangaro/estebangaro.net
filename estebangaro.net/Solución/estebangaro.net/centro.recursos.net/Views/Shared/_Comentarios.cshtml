@@ -3,13 +3,19 @@
 
 <script>
     var _topeComentarios = @ViewBag.TopeComentarios;
+    var _rutaImagenesComentarios = "@ViewBag.RutaImagenesComentarios";
+    var _rutaImagenesAvatars = "@ViewBag.RutaImagenesAvatars";
+    var _nivelAnidamientoMaxComentarios = @ViewBag.AnidamientoMaxComentarios;
+    var _unidadAlmacenamientoCliente = "@ViewBag.UnidadStorageClienteComentarios";
+    var _tiempoAlmacenamientoSesionCliente = @ViewBag.TiempoStorageClienteComentarios;
+    var _tipoAlmacenamientoWeb = @ViewBag.AlmacenamientoWeb;
 </script>
 <div id="fondoCtdrComentarios">
     <div class="CtdrComentarios">
         <div class="bordeComentarioS oculto"></div>
         <div class="cdrComentario comentarioModelo">
             <div class="avatarComentario">
-                <img src="~/Resources/imagenes/comentarios/avatar.jpg" alt="Avatar cliente" />
+                <img src="" alt="" />
             </div>
             <div class="comentarios">
                 <div class="comentario">
@@ -47,7 +53,7 @@
         </div>
         <div class="cdrComentario" id="comentarioPublicar">
             <div class="avatarComentario">
-                <img src="~/Resources/imagenes/comentarios/avatar.jpg" alt="Avatar cliente" />
+                <img src="~/Resources/imagenes/comentarios/avatars/avatar.jpg" alt="Avatar cliente"/>
             </div>
             <div class="comentarios">
                 <div class="comentario">

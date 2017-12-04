@@ -14,16 +14,22 @@ namespace centro.recursos.net.Models.Utileria
 
     public static class Rutas
     {
-        public static string RutaImagenesVisualizadorCodigo { get; } = ConfigurationManager.AppSettings["ImagenesVisualizadorCodigo"];
-        public static string RutaImagenesMenu { get; } = ConfigurationManager.AppSettings["ImagenesMenu"];
-        public static string RutaImagenesNoticias { get; } = ConfigurationManager.AppSettings["ImagenesNoticias"];
-        public static string RutaCodigoArticulos { get; } = ConfigurationManager.AppSettings["codigoArticulos"];
-        public static string RutaPlantillasHtml { get; } = ConfigurationManager.AppSettings["PlantillasHtml"];
+        public static string ImagenesVisualizadorCodigo { get; } = ConfigurationManager.AppSettings["ImagenesVisualizadorCodigo"];
+        public static string ImagenesMenu { get; } = ConfigurationManager.AppSettings["ImagenesMenu"];
+        public static string ImagenesNoticias { get; } = ConfigurationManager.AppSettings["ImagenesNoticias"];
+        public static string CodigoArticulos { get; } = ConfigurationManager.AppSettings["codigoArticulos"];
+        public static string PlantillasHtml { get; } = ConfigurationManager.AppSettings["PlantillasHtml"];
+        public static string ImagenesAvatarsComentarios { get; } = ConfigurationManager.AppSettings["ImagenesAvatarComentarios"];
+        public static string ImagenesComentarios { get; } = ConfigurationManager.AppSettings["ImagenesComentarios"];
     }
 
     public static class ConfiguracionesApp
     {
         public static int NumeroComentariosAntiguos { get; } = int.Parse(ConfigurationManager.AppSettings["NumeroComentAntiguos"] ?? "0");
         public static int NumeroComentariosInicial { get; } = int.Parse(ConfigurationManager.AppSettings["NumeroComentInicial"] ?? "0");
+        public static int NumeroComentariosAnidados { get; } = int.Parse(ConfigurationManager.AppSettings["NumeroComentariosAnidados"] ?? "0");
+        public static string UnidadStorageClienteComentarios { get; } = ConfigurationManager.AppSettings["UnidadStorageClienteComentarios"].ToLower();
+        public static int TiempoStorageClienteComentarios { get; } = int.Parse(ConfigurationManager.AppSettings["TiempoStorageClienteComentarios"] ?? "0");
+        public static string TipoAlmacenamientoWeb { get; } = ConfigurationManager.AppSettings["AlmacenamientoWeb"].ToLower();
     }
 }
