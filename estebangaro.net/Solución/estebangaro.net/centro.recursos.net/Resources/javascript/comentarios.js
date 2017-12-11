@@ -19,10 +19,13 @@
                 );
             }
 
+
+
             function enlazaEventos(){
                 $('.btnPublicar').click(function(){
                     // Nombre, email, verificación de no robot (re captcha).
-                    btnPublicarManejadorClic($(this));
+                    if(validaComentario($(this)))
+                        btnPublicarManejadorClic($(this));
                 });
                 $('.lblResponder').click(function(){
                     lblResponderManejadorClic($(this));
@@ -276,6 +279,30 @@
 
             function obtenNombreURI(uri){
                 return uri.substring(uri.lastIndexOf('/') + 1);
+            }
+
+            function validaComentario(btnPublicar){
+                var accion = btnPublicar.children('span').text();
+                var elemento, comentario;
+                elemento = accion == "Publicar" ? 
+                        $('#comentarioPublicar .contenido > textarea'):
+                        elemento = btnPublicar.parent().find('textarea');
+                comentario = elemento.val();
+                var estado = validaElementoPopupGv({
+                    EsRequerido: {Valor: true, Titulo: 'Campo Obligatorio', 
+                        Descripcion: 'Favor de introducir un comentario'},
+                    LongitudMinima: {Valor: 2, Titulo: '¡Atención!',
+                        Descripcion: 'La longitud mínina es de 2 caracteres'},
+                    LongitudMaxima: {Valor: 500, Titulo: '¡Atención!',
+                        Descripcion: 'La longitud máxima es de 500 caracteres'},
+                    Patron: {Valor: /^[A-Z a-z0-9_-ñ\.\wáéíóú,*\(\)\[\]\{\}\"\!\¡\'\;\+\-\#\$\%\&\/\¿\?\=\:@]+$/,
+                        Titulo: 'Verificar Formato',
+                        Descripcion: 'Caracteres permitidos: A-Z a-z0-9_-ñ.áéíóú,*()[]{}"!¡\';+-#$%&/¿?=:@'},
+                    Elemento: elemento,
+                    Valor: comentario
+                });
+
+                return estado;
             }
 
             function btnPublicarManejadorClicOK(btnPublicar, datosPopUp){
