@@ -119,6 +119,7 @@
     <Content Include="Resources\css\carrusel.css" />
     <Content Include="Resources\css\comentarios.css" />
     <Content Include="Resources\css\popupG.css" />
+    <Content Include="Resources\css\popupGv.css" />
     <Content Include="Resources\css\visualizadorcodigo.css" />
     <Content Include="Resources\css\home.css" />
     <Content Include="Resources\css\menu.css" />
@@ -174,6 +175,7 @@
     <Content Include="Resources\javascript\multimedia.js" />
     <Content Include="Resources\javascript\noticias.js" />
     <Content Include="Resources\javascript\popupG.js" />
+    <Content Include="Resources\javascript\popupGv.js" />
     <Content Include="Resources\javascript\visualizadorcodigo.js" />
     <Content Include="Web.config">
       <SubType>Designer</SubType>
@@ -251,6 +253,7 @@
     <Content Include="Views\Shared\_LayoutArticulo.cshtml" />
     <Content Include="Views\Articulo\LINQ - Copia.cshtml" />
     <Content Include="Views\Shared\_PopUpG.cshtml" />
+    <Content Include="Views\Shared\_PopupGv.cshtml" />
     <None Include="Web.Debug.config">
       <DependentUpon>Web.config</DependentUpon>
     </None>
