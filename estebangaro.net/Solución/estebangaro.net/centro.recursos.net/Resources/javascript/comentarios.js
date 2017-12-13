@@ -19,8 +19,6 @@
                 );
             }
 
-
-
             function enlazaEventos(){
                 $('.btnPublicar').click(function(){
                     // Nombre, email, verificación de no robot (re captcha).
@@ -29,6 +27,7 @@
                 });
                 $('.lblResponder').click(function(){
                     lblResponderManejadorClic($(this));
+                    posicionaResizePopupGv();
                 });
                 $('.mostrarComentarios').click(function(){
                     muestraOcultaComentariosAnidados($(this));
@@ -43,7 +42,8 @@
                     desplazarAvatar($(this).attr('class'));
                 });
                 $('.campos > p:first-child > input').blur(function(){
-                    consultaCliente(false);
+                    if(validaEmailComentarios($(this), $(this).val()))
+                        consultaCliente();
                 });
                 $('.campos > p:first-child > input').focus(function(){
                     $('#popupG_preguntas .botones span').removeClass('habilitado').addClass('deshabilitado');
@@ -68,7 +68,9 @@
                     comentarioRespuesta.show();
                     comentarioRespuesta.find('textarea').focus();
                 }else{
-                    lblResponder.parent().children('.respuestaModelo').remove();
+                    var respuestaModelo = lblResponder.parent().children('.respuestaModelo');
+                    respuestaModelo.find('textarea').focus(); //Para cerrar popupgv (si aplica).
+                    respuestaModelo.remove();
                 }
                 ajustaAltoComentsComents();
             }
@@ -79,10 +81,54 @@
                     Titulo: '¡Agradezco tu comentario!',
                     Contenido: obtenInputs(),
                     Botones: [{Etiqueta: accion, Manejador: function(datosPopUpG){
-                        btnPublicarManejadorClicOK(btnPublicar, obtenObjDatosPopUp(datosPopUpG));
-                    }, Habilitado: false, CerrarAlEjecutar: true}]
+                        if(validaCamposFormularioPopupG(datosPopUpG))
+                            btnPublicarManejadorClicOK(btnPublicar, obtenObjDatosPopUp(datosPopUpG));
+                    }, Habilitado: false, CerrarAlEjecutar: false}]
                 });
                 $('.campos > p:first-child > input').focus();
+            }
+
+            function validaCamposFormularioPopupG(datosPopUpG){
+                var objDatosPopUpG = obtenObjDatosPopUp(datosPopUpG);
+                var elementosInput = $('input', datosPopUpG);
+                var emailElemento = elementosInput.eq(0);
+                var nombreElemento = elementosInput.eq(1);
+                var estadoE = validaEmailComentarios(emailElemento, objDatosPopUpG.Email);
+                var estadoN = validaNombreComentarios(nombreElemento, objDatosPopUpG.Autor);
+
+                return estadoE && estadoN;
+            }
+
+            function validaNombreComentarios(elemento, nombre){
+                return validaElementoPopupGv({
+                    EsRequerido: {Valor: true, Titulo: 'Campo Obligatorio', 
+                        Descripcion: 'Favor de introducir tu nombre'},
+                    LongitudMinima: {Valor: 2, Titulo: '¡Atención!',
+                        Descripcion: 'La longitud mínina es de 2 caracteres'},
+                    LongitudMaxima: {Valor: 60, Titulo: '¡Atención!',
+                        Descripcion: 'La longitud máxima es de 60 caracteres'},
+                    Patron: {Valor: /^[A-Z a-z0-9_-ñ\.\wáéíóú@]+$/,
+                        Titulo: 'Verificar Formato',
+                        Descripcion: 'Caracteres permitidos: A-Z a-z 0-9_-ñ.áéíóú@'},
+                    Elemento: elemento,
+                    Valor: nombre
+                });
+            }
+
+            function validaEmailComentarios(elemento, email){
+                return validaElementoPopupGv({
+                    EsRequerido: {Valor: true, Titulo: 'Campo Obligatorio', 
+                        Descripcion: 'Favor de introducir una cuenta de correo electrónico'},
+                    LongitudMinima: {Valor: 5, Titulo: '¡Atención!',
+                        Descripcion: 'La longitud mínina es de 5 caracteres'},
+                    LongitudMaxima: {Valor: 255, Titulo: '¡Atención!',
+                        Descripcion: 'La longitud máxima es de 255 caracteres'},
+                    Patron: {Valor: /^[\.A-Za-z0-9_-]+@[A-Za-z0-9_-]+(\.[A-Za-z0-9_-]+)*$/,
+                        Titulo: 'Verificar Formato',
+                        Descripcion: 'Favor de introducir una cuenta de correo electrónico válida'},
+                    Elemento: elemento,
+                    Valor: email
+                });
             }
 
             function btnPublicarManejadorClic(btnPublicar){
@@ -98,7 +144,7 @@
                         Contenido: '¿ Continuar comentando como ' + usuarioComents.Email + ' ?',
                         Botones: [{Etiqueta: '¡Es correcto!', Manejador: function(datosPopUpG){
                             btnPublicarManejadorClicOK(btnPublicar, usuarioComents);
-                        }, Habilitado: true, CerrarAlEjecutar: true}, 
+                        }, Habilitado: true, CerrarAlEjecutar: false}, 
                         {Etiqueta: '¡Soy otra persona!', Manejador: function(datosPopUpG){
                             muestraPopUpGFormComentarios(btnPublicar, accion);
                         }, Habilitado: true, CerrarAlEjecutar: false}],
@@ -139,8 +185,10 @@
                     .addClass(llave + (btnObj.Habilitado? ' habilitado': ' deshabilitado'))
                     .click(function(){
                         if(!$(this).hasClass('deshabilitado')){
-                            var camposPopupG = $('#popupG_preguntas .campos').clone(true);
                             var index = parseInt($(this).attr('class'));
+                            var camposPopupG = arregloBtns[index].CerrarAlEjecutar ?
+                                $('#popupG_preguntas .campos').clone(true): 
+                                $('#popupG_preguntas .campos');
                             if(arregloBtns[index].CerrarAlEjecutar) 
                                 $('#popupG_preguntas > .cerrar').click();
                             if(arregloBtns[index].Manejador != undefined)
@@ -198,7 +246,7 @@
             }
 
             function consultaClientePrevio(emailActual){
-                return emailActual.toLowerCase() != popupG_ultimoCorreo;
+                return emailActual != popupG_ultimoCorreo;
             }
 
             function estableceFormPredeterminado(){
@@ -226,7 +274,7 @@
             }
 
             function consultaCliente(){
-            var emailActual = $('#popupG_preguntas .campos input').eq(0).val();
+            var emailActual = $('#popupG_preguntas .campos input').eq(0).val().toLowerCase();
             if(emailActual != ''){
             if(consultaClientePrevio(emailActual)){
                 consultaClienteEmail(emailActual);
@@ -264,7 +312,7 @@
                 var uriAvatar = obtenAvatar($('div.avatar', datosPopUpG));
                 var datosPopUp = {
                     Autor: $('input', datosPopUpG).eq(1).val(),
-                    Email: $('input', datosPopUpG).eq(0).val(),
+                    Email: $('input', datosPopUpG).eq(0).val().toLowerCase(),
                     AvatarNombre: obtenNombreURI(uriAvatar),
                     EstatusCliente: $('input', datosPopUpG).eq(0).prop('disabled')? '1': '0'
                 };
@@ -489,6 +537,7 @@ function procesaComentarios(comentarios, comentario){
 }
 
 function publicaComentario(comentario) {
+    mostrarEsperaPopUpG(true, '#popupG_preguntas');
     var comentarioBackEnd = obtenComentarioBackEnd(comentario);
     $.ajax({
         type: 'POST',
@@ -497,11 +546,14 @@ function publicaComentario(comentario) {
         dataType: 'json',
         data: JSON.stringify(comentarioBackEnd),
         success: function (data) {
+            mostrarEsperaPopUpG(false, '#popupG_preguntas');
+            cerrarPopupG();
             almacenaClienteEnSesion(comentario.PopupGCliente);
             procesaComentarios(data.Comentarios, comentario);
             $('#comentarioPublicar .contenido > textarea').val('');
         },
         error: function (jqxhr, error, errorthrown) {
+            mostrarEsperaPopUpG(false, '#popupG_preguntas');
             alert("Ha fallado el almacenamiento del comentario: " + error + ", " + errorthrown);
         }
     });
@@ -608,7 +660,7 @@ function diferenciaHrsFecha(fecha){
                 else
                     unidad = 'm';
             }
-    }
+        }
 
     return {diferencia: diferencia, unidad: unidad};
 }

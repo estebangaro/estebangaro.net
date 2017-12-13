@@ -7,6 +7,7 @@
             });
             $('button.popupG_confirmacion').click(pruebaPopupG);
             $('button.popupG_formulario').click(pruebaPopupGFormulario);
+            $(window).resize(centraPopupG);
         });
 
         function pruebaPopupG(){
@@ -40,6 +41,7 @@
         // Contenido: Cadena texto ['El mensaje se ha guardado correctamente'].
         // Botones: array JS [{Etiqueta: 'Aceptar', Manejador: function(){}},...]
         function mostrarPopupG(configuracion){
+            $('body').css('overflow', 'hidden');
             popupG_cerrarBandera = false;
             var popupG = $('#popupG_preguntas');
                 EstablecePopupG(
@@ -92,8 +94,13 @@
         }
 
         function cerrarPopupG(){
+            $('body').css('overflow', 'auto');
             popupG_cerrarBandera = true;
             var popupG = $('#popupG_preguntas');
+            $('input', popupG).each(function(){
+                if(!validaDesconocido($(this).attr('popupGv')))
+                    $(this).focus();
+            });
             popupG.parent().animate({top: '-100%'}, 1000, function(){
                 if(popupG_cerrarBandera){
                     EstablecePopupG(popupG, {titulo: '', contenido: '', botones: '', icono: ''});

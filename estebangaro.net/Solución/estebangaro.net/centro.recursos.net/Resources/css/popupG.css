@@ -8,7 +8,6 @@
     left: 0;
 }
 #popupG_preguntas{
-    width: 350px;
     position: absolute;
     top:50%;
     left: 50%;
@@ -19,33 +18,20 @@
     text-align: center;
     margin: 0.5em 0;
 }
-#popupG_preguntas > .icono > img, .popupG_espera > img{
-    width: 35px;
-    height: 35px;
-}
 #popupG_preguntas > .titulo > span{
     font-weight: bold;
-    font-size: 1.2em;
 }
 #popupG_preguntas > .contenido{
-    width: 80%;
-    margin: 0.5em auto;
     text-align: center;
 }
 #popupG_preguntas > .contenido > span{
-    font-size: 0.9em;
     font-family: 'Lucida Sans', 'Lucida Sans Regular', 'Lucida Grande', 'Lucida Sans Unicode', Geneva, Verdana, sans-serif;
-}
-#popupG_preguntas > .botones, #popupG_preguntas{
-    border-radius: 10px;
 }
 #popupG_preguntas > .botones{
     width: 100%;
     padding: 2em 0;
     background-color: blueviolet;
     position: relative;
-    border-top-left-radius: 0;
-    border-top-right-radius: 0;
 }
 #popupG_preguntas > .botones > .boton{
     text-align: center;
@@ -75,22 +61,11 @@
     background-color: aliceblue;
 }
 #popupG_preguntas > .botones > .flecha{
-    width: 20px;
-    height: 20px;
     position: absolute;
-    top: -10px;
-    left: 50%;
-    margin-left: -10px;
     transform: rotate(45deg);
 }
 #popupG_preguntas > .cerrar{
     position: absolute;
-    right: 0;
-    top:0;
-    margin-top: -10px;
-    margin-right: -10px;
-    width: 20px;
-    height: 20px;
     cursor: pointer;
 }
 /* Estilos de popupG_preguntas Formulario */
@@ -122,11 +97,7 @@
     left: 0;
 }
 #popupG_preguntas .campos .avatar  > img{
-    width: 22px;
-    height: 22px;
     position: absolute;
-    top: 50%;
-    margin-top: -11px;
     cursor: pointer;
     opacity: 0;
     visibility: hidden;
@@ -149,8 +120,6 @@
     right:0;
 }
 #popupG_preguntas .campos .avatar > div > div{
-    /* Porcentaje de ancho en función del número de avatars disponibles */
-    /* width: 25%; */
     box-sizing: border-box;
     float: left;
     text-align: center;
@@ -176,11 +145,162 @@
     position: absolute;
     top: 50%;
     left: 50%;
-    /* Dimensiones en función de longitud de iconos */
-    margin-left: -17.5px;
-    margin-top: -17.5px;
 }
 /* Fin */
 .popupG_icono, #popupG_preguntas{
     display: none;
+}
+
+@media screen and (min-width: 1025px){
+    #popupG_preguntas{
+        width: 350px;
+    }
+    #popupG_preguntas > .icono > img, .popupG_espera > img{
+        width: 35px;
+        height: 35px;
+    }
+    #popupG_preguntas > .titulo > span{
+        font-size: 1.2em;
+    }
+    #popupG_preguntas > .contenido{
+        width: 80%;
+        margin: 0.5em auto;
+    }
+    #popupG_preguntas > .contenido > span{
+        font-size: 0.9em;
+    }
+    #popupG_preguntas > .botones, #popupG_preguntas{
+        border-radius: 10px;
+        border-top-left-radius: 0;
+        border-top-right-radius: 0;
+    }
+    #popupG_preguntas > .botones > .flecha{
+        width: 20px;
+        height: 20px;
+        top: -10px;
+        left: 50%;
+        margin-left: -10px;
+    }
+    #popupG_preguntas > .cerrar{
+        right: 0;
+        top:0;
+        margin-top: -10px;
+        margin-right: -10px;
+        width: 20px;
+        height: 20px;
+    }
+    #popupG_preguntas .campos .avatar  > img{
+        width: 22px;
+        height: 22px;
+        top: 50%;
+        margin-top: -11px;
+    }
+    .popupG_espera > img{
+        /* Dimensiones en función de longitud de iconos */
+        margin-left: -17.5px;
+        margin-top: -17.5px;
+    }
+}
+
+@media screen and (min-width: 600px) and (max-width: 1025px) {
+    #popupG_preguntas{
+        width: 300px;
+    }
+    #popupG_preguntas > .icono > img, .popupG_espera > img{
+        width: 30px;
+        height: 30px;
+    }
+    #popupG_preguntas > .titulo > span{
+        font-size: 1em;
+    }
+    #popupG_preguntas > .contenido{
+        width: 90%;
+        margin: 0.5em auto;
+    }
+    #popupG_preguntas > .contenido > span{
+        font-size: 0.8em;
+    }
+    #popupG_preguntas > .botones, #popupG_preguntas{
+        border-radius: 8px;
+        border-top-left-radius: 0;
+        border-top-right-radius: 0;
+    }
+    #popupG_preguntas > .botones > .flecha{
+        width: 18px;
+        height: 18px;
+        top: -9px;
+        left: 50%;
+        margin-left: -9px;
+    }
+    #popupG_preguntas > .cerrar{
+        right: 0;
+        top:0;
+        margin-top: -9px;
+        margin-right: -9px;
+        width: 18px;
+        height: 18px;
+    }
+    #popupG_preguntas .campos .avatar  > img{
+        width: 20px;
+        height: 20px;
+        top: 50%;
+        margin-top: -10px;
+    }
+    .popupG_espera > img{
+        /* Dimensiones en función de longitud de iconos */
+        margin-left: -15px;
+        margin-top: -15px;
+    }
+}
+
+@media screen and (min-width: 100px) and (max-width: 600px){
+    #popupG_preguntas{
+        width: 90%;
+        margin: 0 auto;
+    }
+    #popupG_preguntas > .icono > img, .popupG_espera > img{
+        width: 30px;
+        height: 30px;
+    }
+    #popupG_preguntas > .titulo > span{
+        font-size: 0.8em;
+    }
+    #popupG_preguntas > .contenido{
+        width: 90%;
+        margin: 0.5em auto;
+    }
+    #popupG_preguntas > .contenido > span{
+        font-size: 0.7em;
+    }
+    #popupG_preguntas > .botones, #popupG_preguntas{
+        border-radius: 8px;
+        border-top-left-radius: 0;
+        border-top-right-radius: 0;
+    }
+    #popupG_preguntas > .botones > .flecha{
+        width: 15px;
+        height: 15px;
+        top: -7.5px;
+        left: 50%;
+        margin-left: -7.5px;
+    }
+    #popupG_preguntas > .cerrar{
+        right: 0;
+        top:0;
+        margin-top: -7.5px;
+        margin-right: -7.5px;
+        width: 15px;
+        height: 15px;
+    }
+    #popupG_preguntas .campos .avatar  > img{
+        width: 18px;
+        height: 18px;
+        top: 50%;
+        margin-top: -9px;
+    }
+    .popupG_espera > img{
+        /* Dimensiones en función de longitud de iconos */
+        margin-left: -15px;
+        margin-top: -15px;
+    }
 }
