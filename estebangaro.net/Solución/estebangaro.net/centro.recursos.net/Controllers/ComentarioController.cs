@@ -27,6 +27,7 @@ namespace centro.recursos.net.Controllers
 
         public HttpResponseMessage PostComentario(Comentario comentario)
         {
+            System.Threading.Thread.Sleep(2000);
             Respuesta<Tuple<List<Comentario>, int>> GuardaComentarioEstado =
                 Repositorio.GuardaComentario(comentario);
 

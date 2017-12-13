@@ -3,6 +3,7 @@
             $('.popupGv_validacion > .Cerrar').click(function(){
                 cerrarPopupGv(obtenIndicePopupGv($(this).parent().attr('id')));
             });
+            $(window).resize(posicionaResizePopupGv);
         });
 
         // ValidacionP: {Funcion, {}, string}
@@ -14,6 +15,7 @@
         // Valor: cadena.
         function validaElementoPopupGv(val){
             var estado = true;
+            if(validaDesconocido(val.Elemento.attr('popupGv'))){
             if(validaDesconocido(val.ValidacionP)){
                 if(!validaDesconocido(val.EsRequerido) && val.EsRequerido.Valor){
                     if(!validaCadenaDesconocida(val.Valor)){
@@ -48,6 +50,8 @@
                         descripcion: val.ValidacionP.Descripcion
                     });
             }
+        }else
+            estado = false;
 
             return estado;
         }
@@ -70,9 +74,10 @@
         }
 
         function muestraPopupGv(estadoValidacion){
+            var esNuevo = validaDesconocido(estadoValidacion.popupGv);
             var posicionInicial = obtenPosicionPopupGv(estadoValidacion.elemento);
-            var popupGv = creaPopupGv(estadoValidacion);
-            posicionaPopupGv(popupGv, posicionInicial);
+            var popupGv = esNuevo? creaPopupGv(estadoValidacion): estadoValidacion.popupGv;
+            posicionaPopupGv(popupGv, posicionInicial, esNuevo);
 
             return false;
         }
@@ -87,15 +92,16 @@
         function focoPopupGv(elemento){
             elemento = $(elemento.target);
             var indicePopupGv = elemento.attr('popupGv');
-            $('#popupGv_validacion_' + indicePopupGv).remove();
+            var popupgv = $('#popupGv_validacion_' + indicePopupGv);
+            popupgv.remove();
             limpiaElemento(indicePopupGv, elemento);
         }
 
         function limpiaElemento(indice, elemento){
-            if($('input[popupGv="' + indice + '"]').length > 0)
+            /* if($('input[popupGv="' + indice + '"]').length > 0)
                 elemento.val('');
             else
-                elemento.empty();
+                elemento.empty(); */
             elemento.removeAttr('popupGv');
             elemento.off('focusin', focoPopupGv);
         }
@@ -110,8 +116,7 @@
             var altoElemento = elemento.outerHeight();
 
             return { top: posicionElemento.top + (altoElemento / 2), 
-                left: posicionElemento.left + anchoElemento + 11 };
-            // +11: Ancho/2 Flecha + 5 px de margen.
+                left: posicionElemento.left + anchoElemento };
         }
 
         function creaPopupGv(configuracion){
@@ -131,13 +136,27 @@
             return ultimopgv.length > 0? obtenIndicePopupGv(ultimopgv.attr('id')) + 1: 0;
         }
 
-        function posicionaPopupGv(popup, posicion){
+        function posicionaPopupGv(popup, posicion, esNuevo){
             var altoPopupGv;
+            var anchoVentana = $(window).width();
+            var anchoPopupGv = $('.popupGv_validacion').outerWidth();
+            // +11: Ancho/2 Flecha + 5 px de margen.
+            var despHorizontal = (anchoPopupGv + posicion.left >= anchoVentana)? 
+                (-11 - anchoPopupGv): 11;
             popup.css({
                 top: posicion.top,
-                left: posicion.left,
+                left: posicion.left + despHorizontal,
                 display: 'block'
-            }).appendTo($('body'));
+            });
+            if(esNuevo)
+                popup.appendTo($('body'));
             altoPopupGv = popup.outerHeight();
             popup.css('margin-top', (altoPopupGv / -2) + 'px',);
+        }
+
+        function posicionaResizePopupGv(){
+            $('[popupGv]').each(function(){
+                var popupGv = $('#popupGv_validacion_' + $(this).attr('popupGv'));
+                muestraPopupGv({elemento: $(this), popupGv: popupGv});
+            });
         }
