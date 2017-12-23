@@ -1,0 +1,97 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8" />
+    <title>Info Articulo</title>
+    <style>
+        #InfoArticulo{
+            /*width: 100%;*/
+            width: 80%;
+            margin: 0 auto;
+            padding: 1em 0;
+            border-bottom: solid greenyellow 2px;
+        }
+        #InfoArticulo > p{
+            text-align: center;
+        }
+        #InfoArticulo > .Titulo, #InfoArticulo > .Descripcion{
+            margin: 0;
+            color: grey;
+        }
+        #InfoArticulo > .Titulo{
+            font-size: 3em;
+            font-family: 'Lucida Sans', 'Lucida Sans Regular', 'Lucida Grande', 'Lucida Sans Unicode', Geneva, Verdana, sans-serif;
+        }
+        #InfoArticulo > .Descripcion{
+            font-size: 1.3em;
+        }
+        #InfoArticulo > .Imagen, #InfoArticulo > .Autor{
+            width: 100%;
+        }
+        #InfoArticulo > .Imagen{
+            height: 250px;
+        }
+        #InfoArticulo > .Imagen > img{
+            /*width: 100%;*/
+            height: 100%;
+        }
+        #InfoArticulo > .Autor{
+            overflow: hidden;
+            margin: 0.5em 0;
+        }
+        #InfoArticulo > .Autor > *, #InfoArticulo > .Autor > .Fecha > *{
+            float: left;
+        }
+        #InfoArticulo > .Autor > img{
+            width: 48px;
+            height: 48px;
+            border-radius: 50%;
+        }
+        #InfoArticulo > .Autor > img, #InfoArticulo > .Autor > .Nombre, #InfoArticulo > .Autor > .Fecha{
+            margin-left: 0.5em;
+        }
+        #InfoArticulo > .Autor > .Nombre > span{
+            color: cornflowerblue;
+            text-decoration-line: underline;
+            cursor: pointer;
+        }
+        #InfoArticulo > .Autor > .Nombre > span:first-child{
+            font-weight: bold;
+            text-decoration-line: none;
+            cursor: default;
+        }
+        #InfoArticulo > .Autor > .Fecha{
+            overflow: hidden;
+        }
+        #InfoArticulo > .Autor > .Fecha > span, #InfoArticulo > .Autor > .Nombre > span:first-child{
+            color: gray;
+        }
+        #InfoArticulo > .Autor > .Fecha > img{
+            width: 18px;
+            height: 20px;
+        }
+    </style>
+</head>
+<body>
+    <div id="InfoArticulo">
+        <p class="Titulo">LINQ (Lenguage Integrated Query)</p>
+        <p class="Descripcion">Conoce que es LINQ y cómo puede incluirse en tus proyectos.</p>
+        <p class="Imagen">
+            <img src="https://docs.microsoft.com/en-us/dotnet/csharp/programming-guide/concepts/linq/media/linq_flow1.png" alt="" />
+        </p>
+        <div class="Autor">
+            <img src="..\..\imagenes\garo.jpg" alt="autor1" class="Imagen" />
+            <img src="..\..\imagenes\garo.jpg" alt="autor2" class="Imagen" />
+            <p class="Nombre">
+                <span>Por </span>
+                <span>Esteban GaRo</span>
+                <span>, Ambar Trejo</span>
+            </p>
+            <p class="Fecha">
+                <img src="..\..\imagenes\tiempo.svg" alt="iconoReloj">
+                <span class="FechaPub">17/12/2017</span>
+            </p>
+        </div>
+    </div>
+</body>
+</html>

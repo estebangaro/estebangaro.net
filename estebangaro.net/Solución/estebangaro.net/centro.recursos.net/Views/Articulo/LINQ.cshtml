@@ -1,24 +1,16 @@
 ﻿@{ 
     Layout = "~/Views/Shared/_LayoutArticulo.cshtml";
 }
-<div id="SeccionVisualizadorCodigos">
-    <div id="delegedosCodigoFuente_1" class="codigoFuente">
-        @Html.Action("_ConvertidorCodigo", "Articulo",
-                new { rutaCodigos = "MVC", idArticulo = "/Frameworks/Entity Framework" })
-    </div>
+
+<div id="delegedosCodigoFuente_1" class="codigoFuente">
+    @Html.Action("_ConvertidorCodigo", "Articulo",
+                 new { rutaCodigos = "MVC", idArticulo = "/Frameworks/Entity Framework" })
 </div>
 @section Styles{ 
     <style>
-        #delegedosCodigoFuente_1 {
-            width: 80%;
-            margin: 0 auto;
-        }
-        #SeccionVisualizadorCodigos {
-            position: relative;
+        .codigoFuente {
             width: 100%;
-            background-image: url('../../Resources/imagenes/home/fondo5.jpeg');
-            background-size: contain;
-            padding: 1em 0;
+            margin: 1em 0;
         }
     </style>
 }

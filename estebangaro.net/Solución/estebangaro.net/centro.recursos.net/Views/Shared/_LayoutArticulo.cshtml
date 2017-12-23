@@ -29,7 +29,10 @@
 <body>
     @Html.Action("_Menu", "Home")
     <div id="SeccionArticulo">
-        @RenderBody()
+        <div class="SeccionContenido">
+
+            @RenderBody()
+        </div>
         <div class="SeccionComentarios">
             @Html.Action("_Comentarios", "Articulo", new { IdArticulo = ViewBag.URI })
         </div>
