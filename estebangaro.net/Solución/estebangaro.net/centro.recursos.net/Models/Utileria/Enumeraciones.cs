@@ -21,6 +21,7 @@ namespace centro.recursos.net.Models.Utileria
         public static string PlantillasHtml { get; } = ConfigurationManager.AppSettings["PlantillasHtml"];
         public static string ImagenesAvatarsComentarios { get; } = ConfigurationManager.AppSettings["ImagenesAvatarComentarios"];
         public static string ImagenesComentarios { get; } = ConfigurationManager.AppSettings["ImagenesComentarios"];
+        public static string ImagenesAutores { get; } = ConfigurationManager.AppSettings["ImagenesAutores"];
     }
 
     public static class ConfiguracionesApp

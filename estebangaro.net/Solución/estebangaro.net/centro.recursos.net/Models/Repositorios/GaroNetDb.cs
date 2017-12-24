@@ -127,6 +127,34 @@ namespace centro.recursos.net.Models.Repositorios
             return estado;
         }
 
+        public Respuesta<Articulo> ObtenInfoArticulo(string articuloId)
+        {
+            Respuesta<Articulo> estado;
+
+            try
+            {
+                Articulo articuloInformacion = dbContextoEF.Articulos
+                    .Include(articulo => articulo.Noticias)
+                    .FirstOrDefault(articulo => articulo.URI.ToLower() == articuloId);
+
+                if(articuloInformacion != null)
+                    estado = Respuesta<object>.GeneraRespuestaNoExcepcion<Articulo>(true, articuloInformacion);
+                else
+                    estado = Respuesta<object>.
+                        GeneraRespuestaNoExcepcion<Articulo>(false, null,
+                        detalle: "Tenemos problemas para recuperar la información de artículo, intentalo mas tarde",
+                        iconoCliente: ICONOS_RESPUESTA.ADVERTENCIA);
+            }
+            catch (Exception ex)
+            {
+                estado = Respuesta<object>.
+                    GeneraRespuestaExcepcion<Articulo>(ex,
+                    NombreMetodo: "GaroNetDb.ObtenInfoArticulo(string)");
+            }
+
+            return estado;
+        }
+
         public Respuesta<List<Multimedia>> ObtenMultimedia()
         {
             dbContextoEF.Configuration.ProxyCreationEnabled = false;

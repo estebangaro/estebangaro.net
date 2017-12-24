@@ -177,5 +177,90 @@ namespace centro.recursos.net.Models.Helpers
 
             return new MvcHtmlString(divCdrAvatars.ToString());
         }
+
+        public static MvcHtmlString ObtenArticuloInformacion(this HtmlHelper helper, Articulo articulo)
+        {
+            string rutaPlantilla = $"{helper.ViewContext.HttpContext.Server.MapPath("~")}" +
+                $"{Rutas.PlantillasHtml}/InfoArticulo.html";
+            XElement infoArticuloHTML = XElement.Load(rutaPlantilla);
+
+            EstableceValorElemento(infoArticuloHTML, "p", "class", "Titulo", articulo.Titulo);
+            EstableceValorElemento(infoArticuloHTML, "p", "class", "Descripcion", articulo.Noticias.First().Descripcion);
+            EstableceValorElemento(infoArticuloHTML, "img", "id", "imagenInfoArticulo",
+                $"{Rutas.ImagenesNoticias}/{articulo.Noticias.First().Imagen}", "src");
+            EstableceValorElemento(infoArticuloHTML, "span", "class", "FechaPub",
+                articulo.Auditoria.Creacion.Value.ToShortDateString());
+            try
+            {
+                ObtenElemento(infoArticuloHTML, "div", "class", "Autor")
+                    .AddFirst(ObtenMarcadoImagen(articulo.Autores.ToList()));
+                ObtenElemento(infoArticuloHTML, "p", "class", "Nombre")
+                    .Add(ObtenMarcado(articulo.Autores.ToList()));
+            }
+            catch { }
+
+            return new MvcHtmlString(infoArticuloHTML.ToString());
+        }
+
+        private static bool EstableceValorElemento(XElement elemento,
+            string nombreElemento, string nombreAtributo, 
+            string valorAtributo, string valor, 
+            string atributo = null)
+        {
+            bool estado;
+
+            try
+            {
+                XElement elementoHTML = ObtenElemento(elemento, nombreElemento, nombreAtributo, valorAtributo);
+
+                if (string.IsNullOrEmpty(atributo))
+                    elementoHTML.Add(new XText(valor));
+                else
+                    elementoHTML.Add(new XAttribute(atributo, valor));
+                estado = true;
+            }
+            catch
+            {
+                estado = false;
+            }
+
+            return estado;
+        }
+
+        private static XElement ObtenElemento(XElement elemento,
+            string nombreElemento, string nombreAtributo,
+            string valorAtributo)
+        {
+            return elemento.Descendants(nombreElemento)
+                    .First(delegate (XElement Elemento)
+                    {
+                        XAttribute atributo = Elemento.Attribute(nombreAtributo);
+                        return atributo != null ? atributo.Value == valorAtributo : false;
+                    });
+        }
+
+        private static XElement[] ObtenMarcadoImagen(List<Autor> autores)
+        {
+            return autores
+                .Select(autorEntidad => new XElement("img", 
+                    new XAttribute("class", "Imagen"),
+                    new XAttribute("src", $"{Rutas.ImagenesAutores}/{autorEntidad.Imagen}")))
+                .ToArray();
+        }
+
+        private static XElement[] ObtenMarcado(List<Autor> autores)
+        {
+            int numAutores = autores.Count;
+            return autores
+                .Select(delegate (Autor autorEntidad, int numeroAutor)
+                {
+                    string nombreAutor = $"{autorEntidad.Nombre} {autorEntidad.Apellido}";
+                    return new XElement("span",
+                        new XText(numeroAutor == 0 ? nombreAutor :
+                            (numeroAutor + 1) == numAutores ? $"y {nombreAutor}" :
+                            $", {nombreAutor}"));
+                }).ToArray();
+        }
+
     }
 }

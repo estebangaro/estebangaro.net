@@ -15,9 +15,13 @@ namespace centro.recursos.net.Controllers
         public ActionResult CSharp(string id)
         {
             ViewBag.Title = id;
-            ViewBag.URI = $"/CSharp/{id}";
+            Respuesta<Articulo> articuloInfo = 
+                Repositorio.ObtenInfoArticulo(Request.Path.ToLower());
 
-            return View(viewName: id);
+            if (articuloInfo.Estado)
+                return View(viewName: id, model: articuloInfo.Resultado);
+            else
+                return View(viewName: "Error", model: articuloInfo.Detalle);
         }
 
         [ChildActionOnly]
@@ -66,7 +70,7 @@ namespace centro.recursos.net.Controllers
         }
 
         [ChildActionOnly]
-        public PartialViewResult _Comentarios(string idArticulo)
+        public PartialViewResult _Comentarios()
         {
             // Recuperación de comentarios asociados a "articulo id".
             ViewBag.TopeComentarios = ConfiguracionesApp.NumeroComentariosAntiguos;

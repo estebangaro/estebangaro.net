@@ -118,6 +118,7 @@
     <Content Include="Resources\css\buscar.css" />
     <Content Include="Resources\css\carrusel.css" />
     <Content Include="Resources\css\comentarios.css" />
+    <Content Include="Resources\css\infoarticulo.css" />
     <Content Include="Resources\css\popupG.css" />
     <Content Include="Resources\css\popupGv.css" />
     <Content Include="Resources\css\visualizadorcodigo.css" />
@@ -127,6 +128,7 @@
     <Content Include="Resources\css\noticias.css" />
     <Content Include="Resources\imagenes\autores\facebook-icon.png" />
     <Content Include="Resources\imagenes\autores\garo.jpg" />
+    <Content Include="Resources\imagenes\autores\jacky.jpg" />
     <Content Include="Resources\imagenes\autores\linkedin-icon.png" />
     <Content Include="Resources\imagenes\autores\twitter-icon.png" />
     <Content Include="Resources\imagenes\carrusel\boton_c1.png" />
@@ -148,6 +150,7 @@
     <Content Include="Resources\imagenes\home\fondo5.jpg" />
     <Content Include="Resources\imagenes\home\fondo6.jpg" />
     <Content Include="Resources\imagenes\home\fondo7.jpg" />
+    <Content Include="Resources\imagenes\infoarticulo\tiempo.svg" />
     <Content Include="Resources\imagenes\menu\busqueda.png" />
     <Content Include="Resources\imagenes\menu\cerrar.png" />
     <Content Include="Resources\imagenes\menu\flecha.png" />
@@ -158,6 +161,7 @@
     <Content Include="Resources\imagenes\noticias\ajax.png" />
     <Content Include="Resources\imagenes\noticias\asp.png" />
     <Content Include="Resources\imagenes\noticias\entity.png" />
+    <Content Include="Resources\imagenes\noticias\linq_1.PNG" />
     <Content Include="Resources\imagenes\noticias\mysql.png" />
     <Content Include="Resources\imagenes\popupG\flechaD.png" />
     <Content Include="Resources\imagenes\popupG\flechaI.png" />
@@ -177,6 +181,7 @@
     <Content Include="Resources\javascript\popupG.js" />
     <Content Include="Resources\javascript\popupGv.js" />
     <Content Include="Resources\javascript\visualizadorcodigo.js" />
+    <Content Include="Resources\plantillas\InfoArticulo.html" />
     <Content Include="Web.config">
       <SubType>Designer</SubType>
     </Content>
@@ -279,7 +284,7 @@
           <AutoAssignPort>True</AutoAssignPort>
           <DevelopmentServerPort>54868</DevelopmentServerPort>
           <DevelopmentServerVPath>/</DevelopmentServerVPath>
-          <IISUrl>http://192.168.0.8:2510/</IISUrl>
+          <IISUrl>http://localhost:5680</IISUrl>
           <NTLMAuthentication>False</NTLMAuthentication>
           <UseCustomServer>False</UseCustomServer>
           <CustomServerUrl>

@@ -1,0 +1,87 @@
+#InfoArticulo {
+    /*width: 100%;*/
+    width: 80%;
+    margin: 0 auto;
+    padding: 1em 0;
+}
+
+#InfoArticulo>p {
+    text-align: center;
+}
+
+#InfoArticulo>.Titulo,
+#InfoArticulo>.Descripcion {
+    margin: 0;
+    color: grey;
+}
+
+#InfoArticulo>.Titulo {
+    font-size: 3em;
+    font-family: 'Lucida Sans', 'Lucida Sans Regular', 'Lucida Grande', 'Lucida Sans Unicode', Geneva, Verdana, sans-serif;
+}
+
+#InfoArticulo>.Descripcion {
+    font-size: 1.3em;
+}
+
+#InfoArticulo>.Imagen,
+#InfoArticulo>.Autor {
+    width: 100%;
+}
+
+#InfoArticulo>.Imagen {
+    height: 250px;
+}
+
+#InfoArticulo>.Imagen>img {
+    height: 100%;
+}
+
+#InfoArticulo>.Autor {
+    overflow: hidden;
+    margin: 0.5em 0;
+}
+
+#InfoArticulo>.Autor>*,
+#InfoArticulo>.Autor>.Fecha>* {
+    float: left;
+}
+
+#InfoArticulo>.Autor>img {
+    width: 48px;
+    height: 48px;
+    border-radius: 50%;
+    cursor: pointer;
+}
+
+#InfoArticulo>.Autor>img,
+#InfoArticulo>.Autor>.Nombre,
+#InfoArticulo>.Autor>.Fecha {
+    margin-left: 0.5em;
+}
+
+#InfoArticulo>.Autor>.Nombre>span {
+    color: cornflowerblue;
+    text-decoration-line: underline;
+    cursor: pointer;
+}
+
+#InfoArticulo>.Autor>.Nombre>span:first-child {
+    font-weight: bold;
+    text-decoration-line: none;
+    cursor: default;
+}
+
+#InfoArticulo>.Autor>.Fecha {
+    overflow: hidden;
+}
+
+#InfoArticulo>.Autor>.Fecha>span,
+#InfoArticulo>.Autor>.Nombre>span:first-child {
+    color: gray;
+}
+
+#InfoArticulo>.Autor>.Fecha>img {
+    width: 18px;
+    height: 20px;
+}
