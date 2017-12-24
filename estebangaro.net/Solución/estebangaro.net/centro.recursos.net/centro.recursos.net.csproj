@@ -256,7 +256,6 @@
     <Content Include="Views\Shared\_Comentarios.cshtml" />
     <Content Include="Views\Test\Comentario.cshtml" />
     <Content Include="Views\Shared\_LayoutArticulo.cshtml" />
-    <Content Include="Views\Articulo\LINQ - Copia.cshtml" />
     <Content Include="Views\Shared\_PopUpG.cshtml" />
     <Content Include="Views\Shared\_PopupGv.cshtml" />
     <None Include="Web.Debug.config">

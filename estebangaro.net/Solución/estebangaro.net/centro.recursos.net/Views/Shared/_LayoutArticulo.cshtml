@@ -29,10 +29,13 @@
 </head>
 <body>
     @Html.Action("_Menu", "Home")
+    <div class="FondoSeccionContenidoFijo"></div>
     <div id="SeccionArticulo">
-        <div class="SeccionContenido">
-            @Html.ObtenArticuloInformacion(Model as centro.recursos.net.Models.Entity_Framework.Articulo)
-            @RenderBody()
+        <div class="FondoSeccionContenido">
+            <div class="SeccionContenido">
+                @Html.ObtenArticuloInformacion(Model as centro.recursos.net.Models.Entity_Framework.Articulo)
+                @RenderBody()
+            </div>
         </div>
         <div class="SeccionComentarios">
             @Html.Action("_Comentarios", "Articulo")
