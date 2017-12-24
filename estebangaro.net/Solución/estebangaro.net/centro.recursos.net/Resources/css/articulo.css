@@ -1,11 +1,28 @@
-﻿#SeccionArticulo {
+﻿#fondoMenu {
     position: absolute;
+}
+
+.FondoSeccionContenidoFijo {
+    position: fixed;
+    height: 100%;
+}
+
+#SeccionArticulo {
+    position: absolute;
+}
+
+.FondoSeccionContenidoFijo,
+#SeccionArticulo {
     top: 0;
     left: 0;
     width: 100%;
 }
 
-#SeccionArticulo>.SeccionContenido {
+#SeccionArticulo>.FondoSeccionContenido {
+    width: 100%;
+}
+
+#SeccionArticulo>.FondoSeccionContenido>.SeccionContenido {
     width: 80%;
     margin: 0 auto;
 }
@@ -14,4 +31,16 @@
     padding: 1em 0;
     position: relative;
     width: 100%;
+}
+
+@media screen and (min-width: 600px) and (max-width: 1025px) {
+    #SeccionArticulo>.FondoSeccionContenido>.SeccionContenido {
+        width: 90%;
+    }
+}
+
+@media screen and (min-width: 100px) and (max-width: 600px) {
+    #SeccionArticulo>.FondoSeccionContenido>.SeccionContenido {
+        width: 95%;
+    }
 }

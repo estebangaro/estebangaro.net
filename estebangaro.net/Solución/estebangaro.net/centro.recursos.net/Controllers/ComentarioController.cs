@@ -15,6 +15,7 @@ namespace centro.recursos.net.Controllers
     {
         public HttpResponseMessage GetComentarios(string id, string tipo, int ultimoantiguo)
         {
+            System.Threading.Thread.Sleep(2000);
             string Url = $"/{id.Replace("-", "/")}";
             var Consulta = tipo == "recientes" ? Repositorio.ObtenComentarios(Url
                 , numeroComentarios: ConfiguracionesApp.NumeroComentariosInicial) :
@@ -27,7 +28,6 @@ namespace centro.recursos.net.Controllers
 
         public HttpResponseMessage PostComentario(Comentario comentario)
         {
-            System.Threading.Thread.Sleep(2000);
             Respuesta<Tuple<List<Comentario>, int>> GuardaComentarioEstado =
                 Repositorio.GuardaComentario(comentario);
 
@@ -38,26 +38,6 @@ namespace centro.recursos.net.Controllers
                     Cuenta = GuardaComentarioEstado.Resultado.Item2
                 }) :
                 Request.CreateResponse(HttpStatusCode.Conflict);
-        }
-
-        [Route("comentario/obtenerv2/all")]
-        // http://192.168.0.8:2510/api/comentario GET/HTTP 1.1
-        public HttpResponseMessage GetComentariosV2()
-        {
-
-            //var Comentarios = (Repositorio as GaroNetDb).ObtenComentarios(
-            //    articulo: "/articulo/csharp/linq", idComentarioUltimoReciente: 8,
-            //    tipo: COMENTARIOS.ANTIGUOS);
-
-            var Comentarios = (Repositorio as GaroNetDb).ObtenComentarios(
-                articulo: "/articulo/csharp/linq", idComentarioUltimoReciente: 0);
-
-            //var Comentarios = (Repositorio as GaroNetDb).ObtenComentarios(
-            //    articulo: "/articulo/csharp/linq", idComentarioUltimoReciente: 8, idComentarioPadre: 6);
-
-            return Comentarios.Estado ? Request.CreateResponse(HttpStatusCode.OK,
-                    new { Comentarios = Comentarios.Resultado.Item1, Cuenta = Comentarios.Resultado.Item2 }) :
-                Request.CreateResponse(HttpStatusCode.NoContent);
         }
     }
 }

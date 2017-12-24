@@ -1,7 +1,6 @@
 ﻿@{ 
     Layout = "~/Views/Shared/_LayoutArticulo.cshtml";
 }
-
 <div id="delegedosCodigoFuente_1" class="codigoFuente">
     @Html.Action("_ConvertidorCodigo", "Articulo",
                  new { rutaCodigos = "MVC", idArticulo = "/Frameworks/Entity Framework" })
@@ -13,21 +12,29 @@
             margin: 1em 0;
         }
         #InfoArticulo {
-            border-bottom: solid blue 2px;
+            border-bottom: solid white 2px;
+        }    
+        #InfoArticulo > .Imagen > img {
+            border-radius: 10px;
+            border: solid 2px black;
         }
-
-            #InfoArticulo > .Imagen > img {
-                border-radius: 10px;
-                border: solid 2px black;
-                width: 800px;
-            }
-        #SeccionArticulo {
+        .FondoSeccionContenidoFijo {
             background-image: url('https://www.fondosgratis.mx/imagenItem/11537/1366/nasa-theandromedagalaxym31spyralgalaxy.jpg');
-            background-color: rgba(255, 255, 255, 0.5);
         }
-            #SeccionArticulo > .SeccionComentarios {
-                background-color: black;
-                background-image: url('https://www.fondosgratis.mx/imagenItem/15199/1366/wallpaper-840174.jpg');
-            }
+        #SeccionArticulo > .SeccionComentarios, #SeccionArticulo > .FondoSeccionContenido,
+            #fondoMenu {
+            background-color: rgba(0,0,0,0.7);
+        }
+        #InfoArticulo > .Titulo,
+        #InfoArticulo > .Descripcion{
+            color: whitesmoke;
+        }
+        #InfoArticulo > .Autor > .Nombre > span {
+            color: lawngreen;
+        }
+        #InfoArticulo > .Autor > .Fecha > span,
+        #InfoArticulo > .Autor > .Nombre > span:first-child {
+            color: white;
+        }
     </style>
 }
