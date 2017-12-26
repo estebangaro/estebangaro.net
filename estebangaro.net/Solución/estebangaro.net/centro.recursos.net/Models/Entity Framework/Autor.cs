@@ -12,6 +12,7 @@ namespace centro.recursos.net.Models.Entity_Framework
         public string Apellido { get; set; }
         public string ApellidoM { get; set; }
         public DateTime Nacimiento { get; set; }
+        public string Email { get; set; }
         public InfoRegistro Auditoria { get; set; }
         public string Imagen { get; set; }
         public bool Estado { get; set; }
@@ -20,5 +21,6 @@ namespace centro.recursos.net.Models.Entity_Framework
         public int IdPuesto { get; set; }
         public virtual Puesto Puesto { get; set; }
         public virtual ICollection<Articulo> Articulos { get; set; }
+        public virtual ICollection<RedSocial> RedesSociales { get; set; }
     }
 }

@@ -150,6 +150,9 @@
     <Content Include="Resources\imagenes\home\fondo5.jpg" />
     <Content Include="Resources\imagenes\home\fondo6.jpg" />
     <Content Include="Resources\imagenes\home\fondo7.jpg" />
+    <Content Include="Resources\imagenes\infoarticulo\icono_fb.png" />
+    <Content Include="Resources\imagenes\infoarticulo\icono_lnk.png" />
+    <Content Include="Resources\imagenes\infoarticulo\icono_tw.png" />
     <Content Include="Resources\imagenes\infoarticulo\tiempo.svg" />
     <Content Include="Resources\imagenes\menu\busqueda.png" />
     <Content Include="Resources\imagenes\menu\cerrar.png" />
@@ -165,6 +168,10 @@
     <Content Include="Resources\imagenes\noticias\mysql.png" />
     <Content Include="Resources\imagenes\popupG\flechaD.png" />
     <Content Include="Resources\imagenes\popupG\flechaI.png" />
+    <Content Include="Resources\imagenes\popupG\icono_autor.svg" />
+    <Content Include="Resources\imagenes\popupG\icono_c.png" />
+    <Content Include="Resources\imagenes\popupG\icono_correo.svg" />
+    <Content Include="Resources\imagenes\popupG\icono_t.png" />
     <Content Include="Resources\imagenes\popupG\loading.gif" />
     <Content Include="Resources\imagenes\popupG\msjicono.png" />
     <Content Include="Resources\imagenes\popupG\okicono.png" />
@@ -191,6 +198,7 @@
     <Compile Include="App_Start\WebApiConfig.cs" />
     <Compile Include="Controllers\ApiBase.cs" />
     <Compile Include="Controllers\ArticuloController.cs" />
+    <Compile Include="Controllers\AutorController.cs" />
     <Compile Include="Controllers\ClienteController.cs" />
     <Compile Include="Controllers\ComentarioController.cs" />
     <Compile Include="Controllers\ControladorBase.cs" />
@@ -212,6 +220,8 @@
     <Compile Include="Models\Configuraciones Fluent API\OpcionMenuConfig.cs" />
     <Compile Include="Models\Configuraciones Fluent API\PalabraCodigoConfig.cs" />
     <Compile Include="Models\Configuraciones Fluent API\PuestoConfig.cs" />
+    <Compile Include="Models\Configuraciones Fluent API\RedSocialConfig.cs" />
+    <Compile Include="Models\Configuraciones Fluent API\TagConfig.cs" />
     <Compile Include="Models\Entity Framework\Articulo.cs" />
     <Compile Include="Models\Entity Framework\Autor.cs" />
     <Compile Include="Models\Entity Framework\AvisoCarrusel.cs" />
@@ -228,6 +238,8 @@
     <Compile Include="Models\Entity Framework\OpcionMenu.cs" />
     <Compile Include="Models\Entity Framework\PalabraCodigo.cs" />
     <Compile Include="Models\Entity Framework\Puesto.cs" />
+    <Compile Include="Models\Entity Framework\RedSocial.cs" />
+    <Compile Include="Models\Entity Framework\Tag.cs" />
     <Compile Include="Models\Helpers\Html.cs" />
     <Compile Include="Models\Inicializadores\InicializadorBD.cs" />
     <Compile Include="Models\Repositorios\GaroNetDb.cs" />

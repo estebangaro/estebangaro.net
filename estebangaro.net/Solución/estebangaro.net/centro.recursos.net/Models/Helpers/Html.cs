@@ -258,7 +258,8 @@ namespace centro.recursos.net.Models.Helpers
                     return new XElement("span",
                         new XText(numeroAutor == 0 ? nombreAutor :
                             (numeroAutor + 1) == numAutores ? $"y {nombreAutor}" :
-                            $", {nombreAutor}"));
+                            $", {nombreAutor}"),
+                        new XAttribute("id", autorEntidad.Id));
                 }).ToArray();
         }
 

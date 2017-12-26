@@ -77,7 +77,19 @@ namespace centro.recursos.net.Models.Inicializadores
                     Estado = true, Imagen = "garo.jpg", Nacimiento = new DateTime(1991, 09, 25), Nombre = "Esteban",
                     Puesto = new Puesto{ Auditoria = new InfoRegistro { UsuarioCreacion = "estebangaro"},
                         Descripcion = "Desarrollador .NET en Financiera Contigo", Nombre = "Desarrollador .NET",
-                        Inicio = new DateTime(2016, 01, 18) }, Orden = 1 }
+                        Inicio = new DateTime(2016, 01, 18) }, Orden = 1, Email = "estebangaro@outlook.com" }
+            };
+            RedSocial[] redes =
+            {
+                new RedSocial{Auditoria = new InfoRegistro { UsuarioCreacion = "estebangaro"},
+                Autor = autores[0], Descripcion = "Facebook personal", Icono = "icono_fb.png",
+                URI = "https://www.facebook.com/esteban.garo.1", Visible = true},
+                new RedSocial{Auditoria = new InfoRegistro { UsuarioCreacion = "estebangaro"},
+                Autor = autores[0], Descripcion = "Twitter personal", Icono = "icono_tw.png",
+                URI = "https://twitter.com/estebangaro", Visible = true},
+                new RedSocial{Auditoria = new InfoRegistro { UsuarioCreacion = "estebangaro"},
+                Autor = autores[0], Descripcion = "Perfil Linkedin", Icono = "icono_lnk.png",
+                URI = "https://www.linkedin.com/in/estebangaro", Visible = true}
             };
             OpcionMenu[] opcionesP =
             {
@@ -295,6 +307,7 @@ namespace centro.recursos.net.Models.Inicializadores
             contexto.Articulos.AddRange(articulos);
             contexto.ClasesPersonalizadasCode.AddRange(clasesPersonalizadas);
             contexto.Autores.AddRange(autores);
+            contexto.RedesSociales.AddRange(redes);
             contexto.OpcionesMenu.AddRange(opcionesP);
             contexto.OpcionesMenu.AddRange(subOpciones1);
             contexto.OpcionesMenu.AddRange(subOpciones2);

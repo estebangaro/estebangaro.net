@@ -89,6 +89,8 @@
                 return $('#popupG_MSJ').clone().removeClass('popupG_icono');
             else if(etiqueta.toUpperCase() == 'LOAD')
                 return $('#popupG_LOAD').clone().removeClass('popupG_icono');
+            else if(etiqueta.toUpperCase() == 'AUTOR')
+                return $('#popupG_AUTOR').clone().removeClass('popupG_icono');
             else
                 return '';
         }

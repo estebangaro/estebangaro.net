@@ -418,6 +418,54 @@ namespace centro.recursos.net.Models.Repositorios
             return estado;
         }
 
+        public Respuesta<Autor> ObtenAutor(int id)
+        {
+            dbContextoEF.Configuration.ProxyCreationEnabled = false;
+            Respuesta<Autor> estado;
+
+            try
+            {
+                var autor = dbContextoEF.Autores
+                    .Include(_autor => _autor.Puesto)
+                    .Include(_autor => _autor.RedesSociales)
+                    .FirstOrDefault(_autor => _autor.Id == id);
+
+                estado = Respuesta<object>.GeneraRespuestaNoExcepcion<Autor>(true,
+                    LimpiaYPreparaAutorEnDependencias(autor));
+            }
+            catch (Exception ex)
+            {
+                estado = Respuesta<object>.
+                    GeneraRespuestaExcepcion<Autor>(ex,
+                    NombreMetodo: "GaroNetDb.ObtenAutor(id)");
+            }
+
+            return estado;
+        }
+
+        private Autor LimpiaYPreparaAutorEnDependencias(Autor autor)
+        {
+            if (autor != null)
+            {
+                if (autor.Puesto != null)
+                {
+                    autor.Puesto.Autores = null;
+                    autor.Puesto.Auditoria = null;
+                }
+                if (autor.RedesSociales != null)
+                {
+                    foreach (RedSocial red in autor.RedesSociales)
+                    {
+                        red.Auditoria = null;
+                        red.Autor = null;
+                    }
+                    autor.RedesSociales = autor.RedesSociales.Where(red => red.Visible).ToList();
+                }
+            }
+
+            return autor;
+        }   
+
         #endregion
     }
 }
