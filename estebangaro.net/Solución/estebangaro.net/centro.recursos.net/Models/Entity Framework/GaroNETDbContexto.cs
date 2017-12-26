@@ -26,6 +26,8 @@
         public virtual DbSet<CategoriaPalabraCodigo> CategoriasPalabrasCode { get; set; }
         public virtual DbSet<ClasePersonalizada> ClasesPersonalizadasCode { get; set; }
         public virtual DbSet<Cliente> ClientesArticulos { get; set; }
+        public virtual DbSet<RedSocial> RedesSociales { get; set; }
+        public virtual DbSet<Tag> Tags { get; set; }
 
         protected override void OnModelCreating(DbModelBuilder modelBuilder)
         {
@@ -42,7 +44,9 @@
                 .Add(new PalabraCodigoConfig())
                 .Add(new CategoriaPalabraCodigoConfig())
                 .Add(new ClasePersonalizadaConfig())
-                .Add(new ClienteConfig());
+                .Add(new ClienteConfig())
+                .Add(new RedSocialConfig())
+                .Add(new TagConfig());
         }
     }
 }

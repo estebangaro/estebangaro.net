@@ -19,5 +19,6 @@ namespace centro.recursos.net.Models.Entity_Framework
         public virtual ICollection<OpcionMenu> OpcionesMenu { get; set; }
         public virtual ICollection<Multimedia> Multimedia { get; set; }
         public virtual ICollection<ClasePersonalizada> Clases { get; set; }
+        public virtual ICollection<Tag> Etiquetas { get; set; }
     }
 }

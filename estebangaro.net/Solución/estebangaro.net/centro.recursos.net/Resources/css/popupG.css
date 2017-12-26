@@ -52,9 +52,10 @@
     border-radius: 5px;
     box-shadow: -10px 10px 10px rgba(0, 0, 0, 0.5);
 }
-#popupG_preguntas > .botones > .boton > span.habilitado:hover{
-    transform: scale(1.2,1.2);
-}
+    #popupG_preguntas > .botones > .boton > span.habilitado:hover,
+    #popupG_preguntas > .botones > .boton > a > img:hover {
+        transform: scale(1.2,1.2);
+    }
 
 #popupG_preguntas > .botones> .flecha, #popupG_preguntas,
 #popupG_preguntas > .botones > .boton > span{
@@ -151,7 +152,64 @@
     display: none;
 }
 
-@media screen and (min-width: 1025px){
+    #popupG_preguntas > .contenido > .autor {
+        width: 100%;
+        margin: 1em 0;
+    }
+
+        #popupG_preguntas > .contenido > .autor > img {
+            width: 68px;
+            height: 68px;
+            border-radius: 50%;
+        }
+
+        #popupG_preguntas > .contenido > .autor > div {
+            background-color: blueviolet;
+            overflow: hidden;
+            text-align: left;
+            margin: 0.6em 0;
+            position: relative;
+            z-index: 1;
+            border-radius: 15px;
+            border: solid 2px black;
+        }
+
+            #popupG_preguntas > .contenido > .autor > div > span {
+                color: white;
+                display: inline-block;
+            }
+
+            #popupG_preguntas > .contenido > .autor > div > p {
+                float: left;
+                overflow: hidden;
+                text-align: center;
+                background-color: aliceblue;
+                margin: 0;
+                margin-right: 0.5em;
+            }
+
+                #popupG_preguntas > .contenido > .autor > div > span,
+                #popupG_preguntas > .contenido > .autor > div > p > img {
+                    margin: 0.3em;
+                }
+
+                #popupG_preguntas > .contenido > .autor > div > p > img {
+                    width: 22px;
+                    height: 22px;
+                }
+
+    #popupG_preguntas > .botones > .boton > a > img {
+        width: 42px;
+        height: 42px;
+        cursor: pointer;
+        transition: transform 0.3s cubic-bezier(0.175, 0.885, 0.32, 1.275);
+    }
+
+#popupG_Autor img{
+    display:none;
+}
+
+@media screen and (min-width: 1025px) {
     #popupG_preguntas{
         width: 350px;
     }

@@ -32,5 +32,7 @@ namespace centro.recursos.net.Models.Repositorios
             COMENTARIOS tipo = COMENTARIOS.RECIENTES, int? idComentarioPadre = null, int? numeroComentarios = null);
 
         Respuesta<Cliente> ObtenCliente(string email);
+
+        Respuesta<Autor> ObtenAutor(int id);
     }
 }

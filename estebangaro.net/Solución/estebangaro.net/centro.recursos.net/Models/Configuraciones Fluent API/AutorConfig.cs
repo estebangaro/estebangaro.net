@@ -28,6 +28,11 @@ namespace centro.recursos.net.Models.Configuraciones_Fluent_API
                 .HasMaxLength(60)
                 .IsOptional();
 
+            Property(autor => autor.Email)
+                .IsUnicode()
+                .HasMaxLength(255)
+                .IsRequired();
+
             Property(a => a.Nacimiento)
                 .IsRequired()
                 .HasColumnType("date");
