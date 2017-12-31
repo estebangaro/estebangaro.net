@@ -464,7 +464,36 @@ namespace centro.recursos.net.Models.Repositorios
             }
 
             return autor;
-        }   
+        }
+
+        public Respuesta<List<Articulo>> ObtenArticulos(string busqueda)
+        {
+            dbContextoEF.Configuration.ProxyCreationEnabled = false;
+            Respuesta<List<Articulo>> estado;
+            List<string> tags = busqueda.Split(new char[] { ' ' }, StringSplitOptions.RemoveEmptyEntries)
+                .Select(tag => tag.Trim().ToLower()).ToList();
+            
+            try
+            {
+                var articulos = dbContextoEF.Tags
+                    .Include(etiqueta => etiqueta.Articulos)
+                    .Where(etiqueta => tags.Contains(etiqueta.Etiqueta.ToLower()))
+                    .SelectMany(etiqueta => etiqueta.Articulos)
+                    .Distinct()
+                    .ToList();
+
+                estado = Respuesta<object>.GeneraRespuestaNoExcepcion<List<Articulo>>(true,
+                    articulos);
+            }
+            catch (Exception ex)
+            {
+                estado = Respuesta<object>.
+                    GeneraRespuestaExcepcion<List<Articulo>>(ex,
+                    NombreMetodo: "GaroNetDb.ObtenArticulos(string)");
+            }
+
+            return estado;
+        }
 
         #endregion
     }

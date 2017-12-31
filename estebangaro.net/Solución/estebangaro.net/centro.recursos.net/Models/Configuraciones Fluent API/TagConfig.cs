@@ -31,9 +31,9 @@ namespace centro.recursos.net.Models.Configuraciones_Fluent_API
             HasMany(tag => tag.Articulos)
                 .WithMany(articulo => articulo.Etiquetas)
                 .Map(config =>
-                    config.MapLeftKey("ArticuloId")
-                        .MapRightKey("TagId")
-                        .ToTable("ArticulosEtiquetas"));
+                    config.MapLeftKey("TagId")
+                        .MapRightKey("ArticuloId")
+                        .ToTable("EtiquetasArticulos"));
         }
     }
 }
