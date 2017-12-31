@@ -15,17 +15,27 @@ namespace centro.recursos.net.Controllers
         {
             var Consulta = Repositorio.ObtenAutor(id);
             HttpResponseMessage Respuesta = Consulta.Estado ? Request.CreateResponse(HttpStatusCode.OK,
-                new { Estado = Consulta.Resultado != null, Autor = Consulta.Resultado,
-                    Edad = 26
+                new
+                {
+                    Estado = Consulta.Resultado != null,
+                    Autor = Consulta.Resultado,
+                    Edad = Consulta.Resultado != null ? Models.Utileria.Utileria.CalculaEdad(Consulta.Resultado.Nacimiento) :
+                        0
                 }) :
                 Request.CreateResponse(HttpStatusCode.Conflict);
 
             return Respuesta;
         }
 
-        private int CalculaEdad(DateTime nacimiento)
+        [Route("Articulo/Busqueda/{busqueda}")]
+        [AcceptVerbs("GaroArticulos")]
+        public HttpResponseMessage ObtenArticulosPorEtiquetas(string busqueda)
         {
-            throw new NotImplementedException();
+            var Consulta = Repositorio.ObtenArticulos(busqueda);
+            HttpResponseMessage Respuesta = Consulta.Estado ? Request.CreateResponse(HttpStatusCode.OK,
+                Consulta.Resultado) : Request.CreateResponse(HttpStatusCode.Conflict);
+
+            return Respuesta;
         }
     }
 }

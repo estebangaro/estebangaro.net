@@ -33,4 +33,18 @@ namespace centro.recursos.net.Models.Utileria
         public static int TiempoStorageClienteComentarios { get; } = int.Parse(ConfigurationManager.AppSettings["TiempoStorageClienteComentarios"] ?? "0");
         public static string TipoAlmacenamientoWeb { get; } = ConfigurationManager.AppSettings["AlmacenamientoWeb"].ToLower();
     }
+
+    public static class Utileria
+    {
+        public static int CalculaEdad(DateTime nacimiento)
+        {
+            DateTime dia = DateTime.Today;
+            int anios = dia.Year - nacimiento.Year;
+
+            return dia.Year > nacimiento.Year ?
+                dia.Month < nacimiento.Month ? anios - 1 :
+                dia.Month > nacimiento.Month || dia.Day >= nacimiento.Day ? anios :
+                anios - 1 : 0;
+        }
+    }
 }

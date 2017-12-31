@@ -1,3 +1,4 @@
+var _infoarticulo_autores = [];
 $(function(){
     ajustaPaddingSeccionArt();
     $(window).resize(function(){
@@ -12,7 +13,7 @@ function ajustaPaddingSeccionArt(){
 }
 
 function enlazaEventosArt(){
-    $('#InfoArticulo > .Autor > .Nombre > span').click(function(){
+    $('#InfoArticulo > .Autor > .Nombre > span[id]').click(function(){
         consultaAutor($(this).attr('id'));
     });
 }
@@ -25,7 +26,7 @@ function muestraInfoAutor(autorEntidad, edad){
 
     plantillaAutor.children().first().attr('src', rutaImgAutor + autorEntidad.Imagen);
     $('div > span', plantillaAutor).eq(0)
-        .text(edad);
+        .text(edad + ' años');
     $('div > span', plantillaAutor).eq(1)
         .text(autorEntidad.Puesto.Descripcion);
     $('div > span', plantillaAutor).eq(2)
@@ -54,23 +55,40 @@ function obtenBotonesAutor(redes){
     return btnElemento;
 }
 
+function obtenConsultaPrevAutor(id){
+    var estado = false;
+    for(var indice in _infoarticulo_autores){
+        if(_infoarticulo_autores[indice].Id == id){
+            muestraInfoAutor(_infoarticulo_autores[indice], 
+                _infoarticulo_autores[indice].EdadAutor);
+            estado = true;
+        }
+    }
+    return estado;
+}
+
 function consultaAutor(id) {
-    // mostrarEsperaPopUpG(true, '#popupG_preguntas');
+    if(!obtenConsultaPrevAutor(id)){
+    mostrarEsperaPopUpG(true, '.Autor');
     $.ajax({
         type: 'GaroAutores',
         url: '/api/Autor/' + id,
         contentType: 'application/json; charset=utf-8',
         success: function(data) {
-            // mostrarEsperaPopUpG(false, '#popupG_preguntas');
-            if(data.Estado)
+            mostrarEsperaPopUpG(false, '.Autor');
+            if(data.Estado){
                 muestraInfoAutor(data.Autor, data.Edad);
+                data.Autor.EdadAutor = data.Edad;
+                _infoarticulo_autores[_infoarticulo_autores.length] = data.Autor;
+            }
             else
                 alert('Sin coincidencia de búsqueda');
         },
         error: function(err) {
-            // mostrarEsperaPopUpG(false, '#popupG_preguntas');
+            mostrarEsperaPopUpG(false, '.Autor');
             alert('Ha fallado la consulta de Autor');
         }
     });
+    }
 }
 
