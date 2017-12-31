@@ -3,7 +3,6 @@ $(function() {
 });
 
 function configBtnBusquedaCUI() {
-    // Configuración de Botón de búsqueda (añadiendo manejo de evento).
     $('#ctdrCampoBusqueda img').click(function(e) {
         e.stopPropagation();
         var _ancho = $('#ctdrCampoBusqueda input').css('width');
@@ -18,10 +17,10 @@ function configBtnBusquedaCUI() {
         if(_ancho != '0px' && _ancho != '0' && _ancho != '2px' &&
             $('#ctdrCampoBusqueda input').val() != undefined && 
                 $('#ctdrCampoBusqueda input').val() != '') {
-                alert("Buscar artículos");
+                ConsultaArticulos($('#ctdrCampoBusqueda input').val());
             }
     });
-    // Configuración de Campo de búsqueda (añadiendo manejo de evento).
+    
     $('#ctdrCampoBusqueda input').click(function(e) {
         if (validaEjecucionBtnBusqueda()) {
             e.stopPropagation();
@@ -29,6 +28,23 @@ function configBtnBusquedaCUI() {
     }).keydown(function(e){
         if(e.which == 13){
             $('#ctdrCampoBusqueda img').click();
+        }
+    });
+}
+
+function ConsultaArticulos(busqueda){
+    mostrarEsperaPopUpG(true, '#ctdrCampoBusqueda');
+    $.ajax({
+        type: 'GaroArticulos',
+        url: '/Articulo/Busqueda/' + busqueda,
+        contentType: 'application/json; charset=utf-8',
+        success: function(articulos){
+            mostrarEsperaPopUpG(false, '#ctdrCampoBusqueda');
+            mostrarPopupR(articulos, busqueda);
+        },
+        error: function(error){
+            mostrarEsperaPopUpG(false, '#ctdrCampoBusqueda');
+            alert('Ha fallado la consulta de articulos');
         }
     });
 }
@@ -59,9 +75,6 @@ function animaCampoBusqueda(estado) {
 
 function ajustaBtnBusqueda() {
     if (validaEjecucionBtnBusqueda()) {
-        //if (_componenteUI_btnBusqueda)
-            animaCampoBusqueda(false);
-        //else
-        //    _componenteUI_btnBusqueda = true;
+        animaCampoBusqueda(false);
     }
 }

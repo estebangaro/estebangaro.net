@@ -7,7 +7,7 @@
 <html>
 
 <head>
-    <title>estebangaro.net</title>
+    <title>garonet.com</title>
     <meta charset="UTF-8" />
     <meta name="viewport" content="width=device-width, initial-scale=1" />
     <link href="~/Resources/css/menu.css" rel="stylesheet" />
@@ -17,7 +17,11 @@
     <link href="~/Resources/css/noticias.css" rel="stylesheet" />
     <link href="~/Resources/css/multimedia.css" rel="stylesheet" />
     <link href="~/Resources/css/autores.css" rel="stylesheet" />
-    <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.2.1/jquery.min.js"></script>
+    <link href="~/Resources/css/popupG.css" rel="stylesheet" />
+    <link href="~/Resources/css/popupGr.css" rel="stylesheet" />
+    <script src="~/Scripts/jquery-3.2.1.min.js"></script>
+    <script src="~/Resources/javascript/popupG.js"></script>
+    <script src="~/Resources/javascript/popupGr.js"></script>
     <script src="~/Resources/javascript/home.js"></script>
     <script src="~/Resources/javascript/busqueda.js"></script>
     <script src="~/Resources/javascript/menu.js"></script>
@@ -63,11 +67,13 @@
                 <span>Powered by Microsoft ASP .NET MVC</span>
             </p>
             <p>
-                <img src="~/Resources/imagenes/autores/twitter-icon.png" />                
-                <img src="~/Resources/imagenes/autores/facebook-icon.png" />                
+                <img src="~/Resources/imagenes/autores/twitter-icon.png" />
+                <img src="~/Resources/imagenes/autores/facebook-icon.png" />
                 <img src="~/Resources/imagenes/autores/linkedin-icon.png" />
             </p>
         </div>
     </div>
+    @Html.Action("_PopUpG", "Articulo")
+    @Html.Partial("_PopupGr")
 </body>
 </html>

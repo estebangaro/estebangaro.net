@@ -466,30 +466,37 @@ namespace centro.recursos.net.Models.Repositorios
             return autor;
         }
 
-        public Respuesta<List<Articulo>> ObtenArticulos(string busqueda)
+        public Respuesta<List<ArticuloBusqueda>> ObtenArticulos(string busqueda)
         {
             dbContextoEF.Configuration.ProxyCreationEnabled = false;
-            Respuesta<List<Articulo>> estado;
+            Respuesta<List<ArticuloBusqueda>> estado;
             List<string> tags = busqueda.Split(new char[] { ' ' }, StringSplitOptions.RemoveEmptyEntries)
                 .Select(tag => tag.Trim().ToLower()).ToList();
-            
+
             try
             {
-                var articulos = dbContextoEF.Tags
+                var ArticuloBusquedas = dbContextoEF.Tags
                     .Include(etiqueta => etiqueta.Articulos)
                     .Where(etiqueta => tags.Contains(etiqueta.Etiqueta.ToLower()))
                     .SelectMany(etiqueta => etiqueta.Articulos)
                     .Distinct()
-                    .ToList();
+                    .Include(articulo => articulo.Noticias)
+                    .AsEnumerable()
+                    .Select(articulo => new ArticuloBusqueda
+                    {
+                        Descripcion = articulo.Noticias.Last().Descripcion,
+                        Titulo = articulo.Titulo,
+                        URI = articulo.URI
+                    }).ToList();
 
-                estado = Respuesta<object>.GeneraRespuestaNoExcepcion<List<Articulo>>(true,
-                    articulos);
+                estado = Respuesta<object>.GeneraRespuestaNoExcepcion<List<ArticuloBusqueda>>(true,
+                    ArticuloBusquedas);
             }
             catch (Exception ex)
             {
                 estado = Respuesta<object>.
-                    GeneraRespuestaExcepcion<List<Articulo>>(ex,
-                    NombreMetodo: "GaroNetDb.ObtenArticulos(string)");
+                    GeneraRespuestaExcepcion<List<ArticuloBusqueda>>(ex,
+                    NombreMetodo: "GaroNetDb.ObtenArticuloBusquedas(string)");
             }
 
             return estado;

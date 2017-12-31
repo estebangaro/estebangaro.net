@@ -120,6 +120,7 @@
     <Content Include="Resources\css\comentarios.css" />
     <Content Include="Resources\css\infoarticulo.css" />
     <Content Include="Resources\css\popupG.css" />
+    <Content Include="Resources\css\popupGr.css" />
     <Content Include="Resources\css\popupGv.css" />
     <Content Include="Resources\css\visualizadorcodigo.css" />
     <Content Include="Resources\css\home.css" />
@@ -186,9 +187,15 @@
     <Content Include="Resources\javascript\multimedia.js" />
     <Content Include="Resources\javascript\noticias.js" />
     <Content Include="Resources\javascript\popupG.js" />
+    <Content Include="Resources\javascript\popupGr.js" />
     <Content Include="Resources\javascript\popupGv.js" />
     <Content Include="Resources\javascript\visualizadorcodigo.js" />
     <Content Include="Resources\plantillas\InfoArticulo.html" />
+    <None Include="Scripts\jquery-3.2.1.intellisense.js" />
+    <Content Include="Scripts\jquery-3.2.1.js" />
+    <Content Include="Scripts\jquery-3.2.1.min.js" />
+    <Content Include="Scripts\jquery-3.2.1.slim.js" />
+    <Content Include="Scripts\jquery-3.2.1.slim.min.js" />
     <Content Include="Web.config">
       <SubType>Designer</SubType>
     </Content>
@@ -244,6 +251,7 @@
     <Compile Include="Models\Inicializadores\InicializadorBD.cs" />
     <Compile Include="Models\Repositorios\GaroNetDb.cs" />
     <Compile Include="Models\Repositorios\IGaroNetDb.cs" />
+    <Compile Include="Models\Utileria\ArticuloBusqueda.cs" />
     <Compile Include="Models\Utileria\ConvertidorCodigoAHTML.cs" />
     <Compile Include="Models\Utileria\Enumeraciones.cs" />
     <Compile Include="Models\Utileria\LectorArchivos.cs" />
@@ -270,6 +278,9 @@
     <Content Include="Views\Shared\_LayoutArticulo.cshtml" />
     <Content Include="Views\Shared\_PopUpG.cshtml" />
     <Content Include="Views\Shared\_PopupGv.cshtml" />
+    <Content Include="Views\Shared\_PopUpGr.cshtml" />
+    <Content Include="Scripts\jquery-3.2.1.slim.min.map" />
+    <Content Include="Scripts\jquery-3.2.1.min.map" />
     <None Include="Web.Debug.config">
       <DependentUpon>Web.config</DependentUpon>
     </None>
