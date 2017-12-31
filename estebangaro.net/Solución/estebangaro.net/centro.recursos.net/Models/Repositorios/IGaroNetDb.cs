@@ -35,6 +35,6 @@ namespace centro.recursos.net.Models.Repositorios
 
         Respuesta<Autor> ObtenAutor(int id);
 
-        Respuesta<List<Articulo>> ObtenArticulos(string busqueda);
+        Respuesta<List<ArticuloBusqueda>> ObtenArticulos(string busqueda);
     }
 }

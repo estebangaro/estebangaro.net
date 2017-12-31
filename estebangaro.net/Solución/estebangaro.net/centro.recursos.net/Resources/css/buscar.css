@@ -2,6 +2,7 @@
         overflow: hidden;
         border-radius: 6px;
         padding: 5px;
+        position: relative;
     }
     
     #ctdrCampoBusqueda img,

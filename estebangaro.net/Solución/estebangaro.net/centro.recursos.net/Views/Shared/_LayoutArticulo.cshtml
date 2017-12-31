@@ -14,9 +14,10 @@
     <link href="~/Resources/css/home.css" rel="stylesheet" />
     <link href="~/Resources/css/autores.css" rel="stylesheet" />
     <link href="~/Resources/css/popupGv.css" rel="stylesheet" />
+    <link href="~/Resources/css/popupGr.css" rel="stylesheet" />
     <link href="~/Resources/css/infoarticulo.css" rel="stylesheet" />
     @RenderSection("Styles", required: false)
-    <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.2.1/jquery.min.js"></script>
+    <script src="~/Scripts/jquery-3.2.1.min.js"></script>
     <script src="~/Resources/javascript/popupG.js"></script>
     <script src="~/Resources/javascript/menu.js"></script>
     <script src="~/Resources/javascript/busqueda.js"></script>
@@ -25,6 +26,7 @@
     <script src="~/Resources/javascript/articulo.js"></script>
     <script src="~/Resources/javascript/home.js"></script>
     <script src="~/Resources/javascript/popupGv.js"></script>
+    <script src="~/Resources/javascript/popupGr.js"></script>
     @RenderSection("Scripts", required: false)
 </head>
 <body>
@@ -43,5 +45,6 @@
     </div>
     @Html.Action("_PopUpG", "Articulo")
     @Html.Partial("_PopupGv")
+    @Html.Partial("_PopupGr")
 </body>
 </html>
