@@ -502,6 +502,36 @@ namespace centro.recursos.net.Models.Repositorios
             return estado;
         }
 
+        public Respuesta<List<Articulo>> ObtenArticulosRelacionados(string articuloId)
+        {
+            dbContextoEF.Configuration.ProxyCreationEnabled = false;
+            Respuesta<List<Articulo>> estado;
+
+            try
+            {
+                var ArticulosRelacionados = (from articulo in dbContextoEF.Articulos.Include(art => art.Etiquetas)
+                                             where articulo.URI.ToLower() == articuloId
+                                             from etiquetaArt in articulo.Etiquetas
+                                             join etiqueta in dbContextoEF.Tags.Include(art => art.Articulos)
+                                                 on etiquetaArt.Etiqueta equals etiqueta.Etiqueta
+                                             from articuloResult in etiqueta.Articulos
+                                             where articuloResult.URI.ToLower() != articuloId
+                                             select articuloResult).Distinct()
+                                            .ToList();
+                                            
+                estado = Respuesta<object>.GeneraRespuestaNoExcepcion<List<Articulo>>(true,
+                    ArticulosRelacionados);
+            }
+            catch (Exception ex)
+            {
+                estado = Respuesta<object>.
+                    GeneraRespuestaExcepcion<List<Articulo>>(ex,
+                    NombreMetodo: "GaroNetDb.ObtenArticulosRelacionados(string)");
+            }
+
+            return estado;
+        }
+
         #endregion
     }
 }
