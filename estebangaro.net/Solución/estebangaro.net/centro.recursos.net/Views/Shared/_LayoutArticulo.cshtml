@@ -1,4 +1,6 @@
-﻿@using centro.recursos.net.Models.Helpers;
+﻿@model centro.recursos.net.Models.Utileria.ArticuloInfo
+@using centro.recursos.net.Models.Helpers
+
 <!DOCTYPE html>
 
 <html>
@@ -16,6 +18,7 @@
     <link href="~/Resources/css/popupGv.css" rel="stylesheet" />
     <link href="~/Resources/css/popupGr.css" rel="stylesheet" />
     <link href="~/Resources/css/infoarticulo.css" rel="stylesheet" />
+    <link href="~/Resources/css/artRelacionados.css" rel="stylesheet" />
     @RenderSection("Styles", required: false)
     <script src="~/Scripts/jquery-3.2.1.min.js"></script>
     <script src="~/Resources/javascript/popupG.js"></script>
@@ -27,6 +30,7 @@
     <script src="~/Resources/javascript/home.js"></script>
     <script src="~/Resources/javascript/popupGv.js"></script>
     <script src="~/Resources/javascript/popupGr.js"></script>
+    <script src="~/Resources/javascript/artRelacionados.js"></script>
     @RenderSection("Scripts", required: false)
 </head>
 <body>
@@ -35,12 +39,31 @@
     <div id="SeccionArticulo">
         <div class="FondoSeccionContenido">
             <div class="SeccionContenido">
-                @Html.ObtenArticuloInformacion(Model as centro.recursos.net.Models.Entity_Framework.Articulo)
+                @Html.ObtenArticuloInformacion(Model.Articulo)
                 @RenderBody()
             </div>
         </div>
         <div class="SeccionComentarios">
             @Html.Action("_Comentarios", "Articulo")
+        </div>
+    </div>
+    <div id="dialogMsjArtRelGContenedor">
+        <div id="dialogMsjArtRelG">
+            <img src="/Resources/imagenes/comentarios/salir.png" class="cerrar" />
+            <div class="Flecha">
+                <img src="~/Resources/imagenes/carrusel/flecha3D.png" />
+            </div>
+            <p class="Titulo">Art&iacute;culos Relacionados</p>
+            <div class="Contenido">
+                <table>
+                    <tbody>
+                        @foreach(var articulo in Model.ArticulosRelacionados)
+                        {
+                            <tr><td><a href="@articulo.URI">@articulo.Titulo</a></td></tr>
+                        }
+                    </tbody>
+                </table>
+            </div>
         </div>
     </div>
     @Html.Action("_PopUpG", "Articulo")

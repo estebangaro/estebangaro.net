@@ -17,9 +17,15 @@ namespace centro.recursos.net.Controllers
             ViewBag.Title = id;
             Respuesta<Articulo> articuloInfo = 
                 Repositorio.ObtenInfoArticulo(Request.Path.ToLower());
+            Respuesta<List<Articulo>> articulosRel =
+                Repositorio.ObtenArticulosRelacionados(Request.Path.ToLower());
 
-            if (articuloInfo.Estado)
-                return View(viewName: id, model: articuloInfo.Resultado);
+            if (articuloInfo.Estado && articulosRel.Estado)
+                return View(viewName: id, model: new ArticuloInfo
+                {
+                    Articulo = articuloInfo.Resultado,
+                    ArticulosRelacionados = articulosRel.Resultado
+                });
             else
                 return View(viewName: "Error", model: articuloInfo.Detalle);
         }
