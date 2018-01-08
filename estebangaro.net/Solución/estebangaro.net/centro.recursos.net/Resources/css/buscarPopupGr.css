@@ -1,0 +1,26 @@
+#buscarPopupGr {
+    overflow: hidden;
+    border-radius: 6px;
+    padding: 5px;
+    position: relative;
+    display: inline-block;
+    margin-top: 0;
+    width: 90%;
+    border: 0.5px solid blue;
+    border-radius: 10px;
+}
+
+#buscarPopupGr img,
+#buscarPopupGr input {
+    float: right;
+    height: 36px;
+    box-sizing: border-box;
+}
+
+#buscarPopupGr input {
+    width: 80%;
+    background-color: transparent;
+    color: black;
+    border: 0;
+    outline: none;
+}

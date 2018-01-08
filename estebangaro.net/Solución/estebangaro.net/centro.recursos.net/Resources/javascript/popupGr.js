@@ -1,6 +1,14 @@
         $(function(){
+            $('#agrupadorOpciones > div').append($('<nav></nav>').html($('<span></span>').text('Buscar')));
             $('#popupGr .cerrar').click(function(){
                 cerrarPopupR($(this));
+            });
+            $('#agrupadorOpciones>div>nav:last-child').click(function(){
+                mostrarPopupRBusqueda();
+                $('.iconoMenu').click();
+            });
+            $(window).resize(function(){
+                centraPopupR();
             });
         });
 
@@ -15,6 +23,7 @@
         }
 
         function cerrarPopupR(btnCerrar){
+            $('body').css('overflow', 'auto');
             var popupG = btnCerrar.parent();
             popupG.parent().css({left: '-100%'});
         }
@@ -29,6 +38,7 @@
         }
 
         function mostrarPopupR(resultados, busqueda){
+            $('body').css('overflow', 'hidden');
             var articulos = resultados.length;
             var link1 = resultados.length > 1? ["han"," artículos"]: ["ha"," artículo"];
             $('#popupGr table > tbody').html('');
@@ -47,6 +57,16 @@
                     )));
             });
             enlazaEvtsArt();
+            centraPopupR();
+            $('#popupGr').parent().css('left', '0');
+        }
+
+        function mostrarPopupRBusqueda(){
+            $('body').css('overflow', 'hidden');
+            $('#buscarPopupGr > input').val('').focus();
+            $('#ctdrCampoBusqueda input').val('');
+            $('#popupGr table > tbody').html('');
+            $('#popupGr .Contenido > p').html('');
             centraPopupR();
             $('#popupGr').parent().css('left', '0');
         }
