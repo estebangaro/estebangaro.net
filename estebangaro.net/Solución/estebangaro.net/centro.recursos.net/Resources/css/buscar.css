@@ -15,8 +15,6 @@
     #ctdrCampoBusqueda input {
         border: 0;
         outline: none;
-        background-color: transparent;
-        color: white;
     }
     
     @media screen and (min-width: 1025px) {
@@ -30,6 +28,8 @@
         #ctdrCampoBusqueda input {
             width: 0px;
             transition: all cubic-bezier(0.175, 0.885, 0.32, 1.275) 2s;
+            background-color: transparent;
+            color: white;
         }
     }
     
@@ -46,6 +46,8 @@
         }
         #ctdrCampoBusqueda input {
             width: 200px;
+            background-color: transparent;
+            color: white;
         }
     }
     

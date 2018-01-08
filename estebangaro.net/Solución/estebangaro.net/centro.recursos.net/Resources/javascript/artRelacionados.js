@@ -6,21 +6,25 @@ $(function(){
             $(this).parent().hide();
         }
         else{
-            $(this).parents('#dialogMsjArtRelG').css('left', '-100%');
+            var anchoCtdr = $(this).parents('#dialogMsjArtRelG').outerWidth() * -1;
+            $(this).parents('#dialogMsjArtRelG').css('left', anchoCtdr + 'px');
             $('#dialogMsjArtRelG > .Flecha').show();
             $(this).hide();
         }
     });
 
     centraPopupR();
+    $(window).resize(function(){
+        centraPopupR();
+    });
 
     function obtenNombreURI(uri) {
         return uri.substring(uri.lastIndexOf('/') + 1);
     }
 
     function centraPopupR(){
-        var alto = $('#dialogMsjArtRelGContenedor').outerHeight() / 2;
-        $('#dialogMsjArtRelGContenedor').css({
+        var alto = $('#dialogMsjArtRelG').outerHeight() / 2;
+        $('#dialogMsjArtRelG').css({
             'margin-top': (-1 * alto) + 'px'
         });
     }

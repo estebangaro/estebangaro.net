@@ -20,6 +20,17 @@ function configBtnBusquedaCUI() {
                 ConsultaArticulos($('#ctdrCampoBusqueda input').val());
             }
     });
+
+    $('#buscarPopupGr img').click(function(){
+        if($('#buscarPopupGr input').val() != '')
+            ConsultaArticulos($('#buscarPopupGr input').val());
+    });
+
+    $('#buscarPopupGr input').keydown(function(e){
+        if(e.which == 13){
+            $('#buscarPopupGr img').click();
+        }
+    });
     
     $('#ctdrCampoBusqueda input').click(function(e) {
         if (validaEjecucionBtnBusqueda()) {

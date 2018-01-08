@@ -5,6 +5,7 @@ $(function() {
     $(window).resize(function() {
         $('.styleVerifica').attr('style', '');
         $('.styleVerifica *').attr('style', '');
+        $('body').attr('style', '');
     });
 });
 
