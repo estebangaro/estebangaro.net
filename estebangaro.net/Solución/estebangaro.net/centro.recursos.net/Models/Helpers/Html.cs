@@ -186,8 +186,6 @@ namespace centro.recursos.net.Models.Helpers
 
             EstableceValorElemento(infoArticuloHTML, "p", "class", "Titulo", articulo.Titulo);
             EstableceValorElemento(infoArticuloHTML, "p", "class", "Descripcion", articulo.Noticias.Last().Descripcion);
-            EstableceValorElemento(infoArticuloHTML, "img", "id", "imagenInfoArticulo",
-                $"{Rutas.ImagenesNoticias}/{articulo.Noticias.First().Imagen}", "src");
             EstableceValorElemento(infoArticuloHTML, "span", "class", "FechaPub",
                 articulo.Auditoria.Creacion.Value.ToShortDateString());
             try

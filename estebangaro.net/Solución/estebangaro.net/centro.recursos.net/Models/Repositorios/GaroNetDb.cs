@@ -134,6 +134,7 @@ namespace centro.recursos.net.Models.Repositorios
             try
             {
                 Articulo articuloInformacion = dbContextoEF.Articulos
+                    .Include(articulo => articulo.Autores)
                     .Include(articulo => articulo.Noticias)
                     .FirstOrDefault(articulo => articulo.URI.ToLower() == articuloId);
 

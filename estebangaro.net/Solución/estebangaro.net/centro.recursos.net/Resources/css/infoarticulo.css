@@ -27,14 +27,15 @@
     width: 100%;
 }
 
-#InfoArticulo>.Imagen {
+/* #InfoArticulo>.Imagen {
     height: 250px;
-}
+} */
 
-#InfoArticulo>.Imagen>img {
+/* #InfoArticulo>.Imagen>div {
     height: 100%;
     width: 800px;
-}
+    margin: 0 auto;
+} */
 
 #InfoArticulo>.Autor {
     overflow: hidden;
@@ -81,7 +82,7 @@
 }
 
 @media screen and (min-width: 600px) and (max-width: 1025px) {
-    #InfoArticulo>.Imagen>img {
+    #InfoArticulo>.Imagen>div {
         width: 100%;
     }
     #InfoArticulo>.Titulo {
@@ -103,7 +104,7 @@
 }
 
 @media screen and (min-width: 100px) and (max-width: 600px) {
-    #InfoArticulo>.Imagen>img {
+    #InfoArticulo>.Imagen>div {
         width: 100%;
     }
     #InfoArticulo>.Titulo {
