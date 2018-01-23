@@ -6,21 +6,29 @@
                  new { rutaCodigos = "MVC", idArticulo = "/Frameworks/Entity Framework" })
 </div>
 @section Styles{ 
-    <style>
+<style>
         .codigoFuente {
             width: 100%;
             margin: 1em 0;
         }
         #InfoArticulo {
             border-bottom: solid white 2px;
-        }    
-        #InfoArticulo > .Imagen > img {
-            border-radius: 10px;
-            border: solid 2px black;
         }
-        .FondoSeccionContenidoFijo {
-            background-image: url('https://www.fondosgratis.mx/imagenItem/11537/1366/nasa-theandromedagalaxym31spyralgalaxy.jpg');
-        }
+        #InfoArticulo > .Imagen > div {
+                border-radius: 10px;
+                border: solid 2px black;
+                background-image: url('../../Resources/imagenes/noticias/linq_1.PNG');
+                background-repeat: no-repeat;
+                height: 149px;
+                width: 655px;
+                margin: 0 auto;
+            }
+    .FondoSeccionContenidoFijo {
+        background-image: url('../../Resources/imagenes/home/milky-way-2695569_1920.jpg');
+        background-image: url('../../Resources/imagenes/home/computer-3036166_1920.jpg');
+        background-repeat: no-repeat;
+        background-size: cover;
+    }
             #fondoMenu {
             background-color: transparent;
         }
@@ -35,5 +43,18 @@
         #InfoArticulo > .Autor > .Nombre > span:first-child {
             color: white;
         }
-    </style>
+
+        @@media screen and (min-width: 600px) and (max-width: 1025px) {
+    #InfoArticulo>.Imagen>div {
+        width: 100%;
+        background-size: contain;
+    }
+    }
+    @@media screen and (min-width: 100px) and (max-width: 600px) {
+    #InfoArticulo>.Imagen>div {
+        width: 100%;
+        background-size: contain;
+    }
+    }
+</style>
 }

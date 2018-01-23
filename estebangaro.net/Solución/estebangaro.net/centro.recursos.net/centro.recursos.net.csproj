@@ -147,12 +147,14 @@
     <Content Include="Resources\imagenes\comentarios\avatars\ranma.jpg" />
     <Content Include="Resources\imagenes\comentarios\responder.svg" />
     <Content Include="Resources\imagenes\comentarios\salir.png" />
+    <Content Include="Resources\imagenes\home\computer-3036166_1920.jpg" />
     <Content Include="Resources\imagenes\home\fondo2.JPG" />
     <Content Include="Resources\imagenes\home\fondo4.jpg" />
     <Content Include="Resources\imagenes\home\fondo5.jpeg" />
     <Content Include="Resources\imagenes\home\fondo5.jpg" />
     <Content Include="Resources\imagenes\home\fondo6.jpg" />
     <Content Include="Resources\imagenes\home\fondo7.jpg" />
+    <Content Include="Resources\imagenes\home\milky-way-2695569_1920.jpg" />
     <Content Include="Resources\imagenes\infoarticulo\icono_fb.png" />
     <Content Include="Resources\imagenes\infoarticulo\icono_lnk.png" />
     <Content Include="Resources\imagenes\infoarticulo\icono_tw.png" />
