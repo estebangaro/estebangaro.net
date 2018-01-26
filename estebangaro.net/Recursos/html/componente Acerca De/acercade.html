@@ -1,0 +1,119 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8" />
+    <title>Acerca De</title>
+    <style>
+        #FondoAcercaDeG{
+            position: fixed;
+            top: 0;
+            left: 0;
+            width: 100%;
+            height: 100%;
+            background-color: rgba(0, 0, 125, 0.5);
+        }
+        #AcercaDeG{
+            position: absolute;
+            top: 50%;
+            left: 50%;
+            width: 600px;
+            margin-top: -250px;
+            margin-left: -300px;
+        }
+        #AcercaDeG .cerrar{
+            position: absolute;
+            right: 0;
+            top: 0;
+            margin-right: -11px;
+            margin-top: -11px;
+            width: 22px;
+            height: 22px;
+            cursor: pointer;
+        }
+        #AcercaDeG > .botonH, #AcercaDeG > .botonV{
+            background-color: cadetblue;
+            position: absolute;
+        }
+        #AcercaDeG > .botonH{
+            width: 100%;
+            height: 22px;
+            left: 0;
+            display: none;
+        }
+        #AcercaDeG > .botonV{
+            height: 100%;
+            width: 22px;
+            top: 0;
+            display: none;
+        }
+        #AcercaDeG > .Izq{
+            left: 0;
+        }
+        #AcercaDeG > .Der{
+            right: 0;
+        }
+        #AcercaDeG > .Sup{
+            top: 0;
+        }
+        #AcercaDeG > .Inf{
+            bottom: 0;
+        }
+        #AcercaDeG > .seccion{
+            width: 100%;
+            text-align: center;
+        }
+        #AcercaDeG > .seccion > .tabs{
+            overflow: hidden;
+            position: relative;
+            z-index: 1;
+        }
+        #AcercaDeG > .seccion > .tabs > .tab{
+            float: left;
+            border-left: solid 2px blue;
+            border-top: solid 2px blue;
+            padding: 0.2em 0.5em;
+            margin:0;
+            cursor: pointer;
+            box-sizing: border-box;
+        }
+        #AcercaDeG > .seccion > .tabs > .tab:nth-child(2){
+            border-bottom: solid 2px whitesmoke;
+            background-color: whitesmoke;
+        }
+        #AcercaDeG > .seccion > .tabs > .tab:last-child{
+            border-right: solid 2px blue;
+        }
+        #AcercaDeG > .seccion > .contenido{
+            border: solid blue 2px;
+            height: 500px;
+            position: relative;
+            /*Se define desplazamiento vertical en función del ancho en pixeles de los bordes.*/
+            margin-top: -2px;
+            background-color: whitesmoke;
+        }
+    </style>
+</head>
+<body>
+    <div id="FondoAcercaDeG">
+        <div id="AcercaDeG">
+            <div class="seccion" id="Autor">
+                <div class="tabs">
+                    <div class="tab">¿Qui&eacute;n Soy?</div>
+                    <div class="tab">Habilidades</div>
+                    <div class="tab">Experiencia</div>
+                    <div class="tab">Proyectos</div>
+                    <div class="tab">Contactame</div>
+                </div>
+                <div class="contenido">
+                        <img src="..\..\imagenes\salir.png" class="cerrar" />
+                </div>
+            </div>
+            <!-- <div class="seccion" id="Aplicacion"></div> -->
+            <div class="botonH Sup"></div>
+            <div class="botonH Inf"></div>
+            <div class="botonV Izq"></div>
+            <div class="botonV Der"></div>
+        </div>
+    </div>
+</body>
+</html>
