@@ -1,10 +1,11 @@
 <!DOCTYPE html>
 <html lang="en">
+
 <head>
     <meta charset="UTF-8" />
     <title>Acerca De</title>
     <style>
-        #FondoAcercaDeG{
+        #FondoAcercaDeG {
             position: fixed;
             top: 0;
             left: 0;
@@ -12,7 +13,8 @@
             height: 100%;
             background-color: rgba(0, 0, 125, 0.5);
         }
-        #AcercaDeG{
+        
+        #AcercaDeG {
             position: absolute;
             top: 50%;
             left: 50%;
@@ -20,7 +22,8 @@
             margin-top: -250px;
             margin-left: -300px;
         }
-        #AcercaDeG .cerrar{
+        
+        #AcercaDeG .cerrar {
             position: absolute;
             right: 0;
             top: 0;
@@ -30,81 +33,104 @@
             height: 22px;
             cursor: pointer;
         }
-        #AcercaDeG > .botonH, #AcercaDeG > .botonV{
+        
+        #AcercaDeG>.botonH,
+        #AcercaDeG>.botonV {
             background-color: cadetblue;
             position: absolute;
         }
-        #AcercaDeG > .botonH{
+        
+        #AcercaDeG>.botonH {
             width: 100%;
             height: 22px;
             left: 0;
             text-align: center;
             cursor: pointer;
         }
-        #AcercaDeG > .botonV{
+        
+        #AcercaDeG>.botonV {
             height: 100%;
             width: 22px;
             top: 0;
             display: none;
         }
-        #AcercaDeG > .Izq{
+        
+        #AcercaDeG>.Izq {
             left: 0;
         }
-        #AcercaDeG > .Der{
+        
+        #AcercaDeG>.Der {
             right: 0;
         }
-        #AcercaDeG > .Sup{
+        
+        #AcercaDeG>.Sup {
             top: 0;
             display: none;
         }
-        #AcercaDeG > .Inf{
+        
+        #AcercaDeG>.Inf {
             /*Se define desplazamiento en función del número de pixeles de altura*/
             bottom: -22px;
         }
-        #AcercaDeG > .seccion{
+        
+        #AcercaDeG>.seccion {
             width: 100%;
             /*transition: all 1s cubic-bezier(0.39, 0.575, 0.565, 1);*/
         }
-        #AcercaDeG > .oculta{
+        
+        #AcercaDeG>.oculta {
             position: absolute;
-            top:0;
+            top: 0;
             left: 0;
             visibility: hidden;
             opacity: 0;
         }
-        #AcercaDeG > .seccion > .tabs{
+        
+        #AcercaDeG>.seccion>.tabs {
             overflow: hidden;
             position: relative;
             z-index: 1;
         }
-        #AcercaDeG > .seccion > .tabs > .tab, 
-        #AcercaDeG > .seccion > .contenido{
+        
+        #AcercaDeG>.seccion>.tabs>.tab,
+        #AcercaDeG>.seccion>.contenido {
             border: solid rgb(102, 0, 102) 2px;
         }
-        #AcercaDeG > .seccion > .tabs > .tab{
+        
+        #AcercaDeG>.seccion>.tabs>.tab {
             float: left;
             border-right-width: 0;
             border-bottom-width: 0;
             padding: 0.2em 0.5em;
-            margin:0;
+            margin: 0;
             cursor: pointer;
             box-sizing: border-box;
         }
-        #AcercaDeG > .seccion > .tabs > .tab:nth-child(1){
+        
+        #AcercaDeG>#Acerca_De_Creador.seccion>.tabs>.tab:nth-child(1) {
             border-bottom-width: 2px;
             border-bottom-color: rgb(255, 0, 0);
             background-color: rgb(255, 0, 0);
         }
-        #AcercaDeG > .seccion > .tabs > .tab:last-child{
+        
+        #AcercaDeG>#Acerca_De_GaRo_nET.seccion>.tabs>.tab:nth-child(1) {
+            border-bottom-width: 2px;
+            border-bottom-color: rgb(0, 255, 0);
+            background-color: rgb(0, 255, 0);
+        }
+        
+        #AcercaDeG>.seccion>.tabs>.tab:last-child {
             border-right-width: 2px;
         }
-        #AcercaDeG > .seccion > .contenido{
+        
+        #AcercaDeG>.seccion>.contenido {
             height: 500px;
             position: relative;
             /*Se define desplazamiento vertical en función del ancho en pixeles de los bordes.*/
             margin-top: -2px;
         }
-        #AcercaDeG > .seccion > .contenido > div{
+        
+        #AcercaDeG>.seccion>.contenido>div {
             position: absolute;
             top: 0;
             left: 0;
@@ -115,66 +141,84 @@
             opacity: 0;
             transition: all 2s cubic-bezier(0.19, 1, 0.22, 1);
         }
-        #AcercaDeG > .seccion > .contenido > div:first-child{
+        
+        #AcercaDeG>.seccion>.contenido>div:first-child {
             visibility: visible;
             opacity: 1;
         }
     </style>
     <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.2.1/jquery.min.js"></script>
     <script>
-        $(function(){
+        $(function() {
             /*Declaración e inicialización de variables "globales"*/
-            var tabPropiedadesSeleccionado = {'background-color': 'rgb(255, 0, 0)', 
-                'border-bottom-width': '2px', 'border-bottom-color': 'rgb(255, 0, 0)'};
-            var tabPropiedadesDeseleccionado = {'background-color': 'inherit', 
-                'border-bottom-width': '0', 'border-bottom-color': 'inherit'};
-            var seccionPropiedadesSeleccionada = {'visibility':'visible', 'opacity':'1'};
-            var seccionPropiedadesDeseleccionada = {'visibility':'hidden', 'opacity':'0'};
+            var tabPropiedadesSeleccionado = {
+                'background-color': 'rgb(255, 0, 0)',
+                'border-bottom-width': '2px',
+                'border-bottom-color': 'rgb(255, 0, 0)'
+            };
+            var tabPropiedadesDeseleccionado = {
+                'background-color': 'inherit',
+                'border-bottom-width': '0',
+                'border-bottom-color': 'inherit'
+            };
+            var seccionPropiedadesSeleccionada = {
+                'visibility': 'visible',
+                'opacity': '1'
+            };
+            var seccionPropiedadesDeseleccionada = {
+                'visibility': 'hidden',
+                'opacity': '0'
+            };
 
             /*Invocación predeterminadas de funciones.*/
             AjustaAcercaDe();
             enlazaEventosAcercaDe();
 
             /*Declaración y definición de funciones*/
-            function enlazaEventosAcercaDe(){
-                $('#AcercaDeG > .seccion > .tabs > .tab').click(function(){
+            function enlazaEventosAcercaDe() {
+                $('#AcercaDeG > .seccion > .tabs > .tab').click(function() {
                     refrescaTabs($(this));
                 });
-                $('div[class="botonH Inf"]').click(function(){
+                $('div[class="botonH Inf"]').click(function() {
                     cambiaSeccion($(this));
                 });
             }
-            function AjustaAcercaDe(){
+
+            function AjustaAcercaDe() {
                 centrarTabs();
                 centrarAcercaDe();
                 ajustaEtiquetaAcercaDe($('div[class="botonH Inf"]'));
             }
-            function ajustaEtiquetaAcercaDe(boton){
+
+            function ajustaEtiquetaAcercaDe(boton) {
                 var siguienteSeccion = obtenSiguienteSeccion();
                 boton.text(siguienteSeccion.attr('id').replace(/_/g, " "));
             }
-            function obtenSiguienteSeccion(){
+
+            function obtenSiguienteSeccion() {
                 var seccionesAcercaDeG = $('#AcercaDeG > .seccion');
-                var acercaDeSeccionSeleccionada = obtenElementoSeleccionado('opacity', 
-                    seccionPropiedadesSeleccionada['opacity'], 
+                var acercaDeSeccionSeleccionada = obtenElementoSeleccionado('opacity',
+                    seccionPropiedadesSeleccionada['opacity'],
                     seccionesAcercaDeG);
                 var noSeccionSeleccionada = acercaDeSeccionSeleccionada.index();
-                var noSeccionSiguiente = (noSeccionSeleccionada + 1) < seccionesAcercaDeG.length?
-                    noSeccionSeleccionada + 1: 0;
+                var noSeccionSiguiente = (noSeccionSeleccionada + 1) < seccionesAcercaDeG.length ?
+                    noSeccionSeleccionada + 1 : 0;
 
                 return seccionesAcercaDeG.eq(noSeccionSiguiente);
             }
-            function centrarTabs(){
-                $('#AcercaDeG > .seccion > .tabs').each(function(index, elem){
+
+            function centrarTabs() {
+                $('#AcercaDeG > .seccion > .tabs').each(function(index, elem) {
                     var anchoTabs = 0;
                     var anchoAcercaDe = $('#AcercaDeG').outerWidth();
-                    $(this).children().each(function(){
+                    $(this).children().each(function() {
                         anchoTabs += $(this).outerWidth();
                     });
                     $(this).css('margin-left', ((anchoAcercaDe / 2) - (anchoTabs / 2)) + 'px');
                 });
             }
-            function centrarAcercaDe(){
+
+            function centrarAcercaDe() {
                 var alto = $('#AcercaDeG').outerHeight() * -1;
                 var ancho = $('#AcercaDeG').outerWidth() * -1;
                 $('AcercaDeG').css({
@@ -182,75 +226,72 @@
                     'margin-left': (ancho / 2) + 'px'
                 });
             }
-            function refrescaTabs(tabElemento){
+
+            function refrescaTabs(tabElemento) {
                 var seccionElemento = obtenSeccionXTab(tabElemento);
-                var tabSeleccionada = obtenElementoSeleccionado('background-color', 
-                    tabPropiedadesSeleccionado['background-color'], 
+                var tabSeleccionada = obtenElementoSeleccionado('background-color',
+                    tabPropiedadesSeleccionado['background-color'],
                     tabElemento.parent().children());
 
-                if(tabElemento != tabSeleccionada){
+                if (tabElemento.text() != tabSeleccionada.text()) {
                     var seccionSeleccionada = obtenSeccionXTab(tabSeleccionada);
-                    tabPropiedadesSeleccionado['background-color'] = 
-                    tabPropiedadesSeleccionado['border-bottom-color'] =
-                        seccionElemento.css('background-color'); 
-                    
+                    tabPropiedadesSeleccionado['background-color'] =
+                        tabPropiedadesSeleccionado['border-bottom-color'] =
+                        seccionElemento.css('background-color');
+
                     estilaElemento(tabPropiedadesDeseleccionado, tabSeleccionada);
                     estilaElemento(seccionPropiedadesDeseleccionada, seccionSeleccionada);
                     estilaElemento(tabPropiedadesSeleccionado, tabElemento);
                     estilaElemento(seccionPropiedadesSeleccionada, seccionElemento);
                 }
             }
-            function estilaElemento(Propiedades, Elemento){
+
+            function estilaElemento(Propiedades, Elemento) {
                 Elemento.css(Propiedades);
             }
-            function obtenElementoSeleccionado(propiedad, valor, tabs){
+
+            function obtenElementoSeleccionado(propiedad, valor, tabs, esIgualdadOperador = true) {
                 var seleccionado = undefined;
-                tabs.each(function(){
-                    if(seleccionado == undefined){
+                tabs.each(function() {
+                    if (seleccionado == undefined) {
                         var valorProp = $(this).css(propiedad);
-                        if(valorProp == valor)
+                        if (esIgualdadOperador ? valorProp == valor : valorProp != valor)
                             seleccionado = $(this);
                     }
                 });
                 return seleccionado;
             }
-            function obtenSeccionXTab(tab){
+
+            function obtenSeccionXTab(tab) {
                 var noTab = tab.index();
                 return tab.parent().next().children().eq(noTab);
             }
-            function cambiaSeccion(seccionElemento){
+
+            function cambiaSeccion(seccionElemento) {
                 var idSeccionElemento = seccionElemento.text().replace(/ /g, "_");
                 var acercaDeSeccionElemento = $('#' + idSeccionElemento);
-                var acercaDeSeccionSeleccionada = obtenElementoSeleccionado('opacity', 
-                    seccionPropiedadesSeleccionada['opacity'], 
+                var acercaDeSeccionSeleccionada = obtenElementoSeleccionado('opacity',
+                    seccionPropiedadesSeleccionada['opacity'],
                     $('#AcercaDeG > .seccion'));
                 estilaElemento(seccionPropiedadesSeleccionada, acercaDeSeccionElemento);
                 estilaElemento(seccionPropiedadesDeseleccionada, acercaDeSeccionSeleccionada);
+
                 ajustaEtiquetaAcercaDe(seccionElemento);
 
-                var tabPrevSeleccionada = obtenTabPrevSeleccionada(
-                    $('.tabs > .tab', acercaDeSeccionElemento)
+                var tabPrevSeleccionada = obtenElementoSeleccionado(
+                    'background-color', 'rgba(0, 0, 0, 0)',
+                    $('.tabs > .tab', acercaDeSeccionElemento), false
                 );
-                tabPropiedadesSeleccionado['background-color'] = 
-                tabPropiedadesSeleccionado['border-bottom-color'] =
+                tabPropiedadesSeleccionado['background-color'] =
+                    tabPropiedadesSeleccionado['border-bottom-color'] =
                     tabPrevSeleccionada.css('background-color');
 
                 refrescaTabs($('.tabs > .tab:first-child', acercaDeSeccionElemento));
             }
-            function obtenTabPrevSeleccionada(tabs){
-                var seleccionado = undefined;
-                tabs.each(function(){
-                    if(seleccionado == undefined){
-                        var valorProp = $(this).css('background-color');
-                        if(valorProp != 'rgba(0, 0, 0, 0)')
-                            seleccionado = $(this);
-                    }
-                });
-                return seleccionado;
-            }
         });
     </script>
 </head>
+
 <body>
     <div id="FondoAcercaDeG">
         <div id="AcercaDeG">
@@ -292,4 +333,5 @@
         </div>
     </div>
 </body>
+
 </html>
