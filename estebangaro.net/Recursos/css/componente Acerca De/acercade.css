@@ -1,0 +1,144 @@
+#FondoAcercaDeG {
+    position: fixed;
+    top: 0;
+    left: 0;
+    width: 100%;
+    height: 100%;
+    background-color: rgba(0, 0, 125, 0.5);
+}
+
+#AcercaDeG {
+    position: absolute;
+    top: 50%;
+    left: 50%;
+    width: 600px;
+    margin-top: -250px;
+    margin-left: -300px;
+    overflow: hidden;
+}
+
+#AcercaDeG .cerrar {
+    position: absolute;
+    right: 0;
+    top: 0;
+    width: 22px;
+    height: 22px;
+    cursor: pointer;
+}
+
+#AcercaDeG>.botonH,
+#AcercaDeG>.botonV {
+    background-color: cadetblue;
+    position: absolute;
+}
+
+#AcercaDeG>.botonH {
+    width: 100%;
+    height: 22px;
+    left: 0;
+    text-align: center;
+    cursor: pointer;
+}
+
+#AcercaDeG>.botonV {
+    height: 100%;
+    width: 22px;
+    top: 0;
+    display: none;
+}
+
+#AcercaDeG>.Izq {
+    left: 0;
+}
+
+#AcercaDeG>.Der {
+    right: 0;
+}
+
+#AcercaDeG>.Sup {
+    top: 0;
+    display: none;
+}
+
+#AcercaDeG>.Inf {
+    /*Se define desplazamiento en función del número de pixeles de altura*/
+    bottom: 0;
+}
+
+#AcercaDeG>.seccion {
+    width: 100%;
+}
+
+#AcercaDeG>#Acerca_De_Creador.seccion {
+    position: relative;
+    top: 0;
+    left: 0;
+}
+
+#AcercaDeG>#Acerca_De_GaRo_nET.seccion {
+    position: absolute;
+    /*Calcular desplazamiento vertical mediante secuencia de comandos.*/
+    /*top: 0;*/
+    left: 0;
+}
+
+#AcercaDeG>.seccion>.tabs {
+    overflow: hidden;
+    position: relative;
+    z-index: 1;
+}
+
+#AcercaDeG>.seccion>.tabs>.tab,
+#AcercaDeG>.seccion>.contenido {
+    border: solid rgb(102, 0, 102) 2px;
+}
+
+#AcercaDeG>.seccion>.tabs>.tab {
+    float: left;
+    border-right-width: 0;
+    border-bottom-width: 0;
+    padding: 0.2em 0.5em;
+    margin: 0;
+    cursor: pointer;
+    box-sizing: border-box;
+}
+
+#AcercaDeG>#Acerca_De_Creador.seccion>.tabs>.tab:nth-child(1) {
+    border-bottom-width: 2px;
+    border-bottom-color: rgb(255, 0, 0);
+    background-color: rgb(255, 0, 0);
+}
+
+#AcercaDeG>#Acerca_De_GaRo_nET.seccion>.tabs>.tab:nth-child(1) {
+    border-bottom-width: 2px;
+    border-bottom-color: rgb(0, 255, 0);
+    background-color: rgb(0, 255, 0);
+}
+
+#AcercaDeG>.seccion>.tabs>.tab:last-child {
+    border-right-width: 2px;
+}
+
+#AcercaDeG>.seccion>.contenido {
+    height: 500px;
+    position: relative;
+    /*Se define desplazamiento vertical en función del ancho en pixeles de los bordes.*/
+    margin-top: -2px;
+}
+
+#AcercaDeG>.seccion>.contenido>div {
+    position: absolute;
+    top: 0;
+    left: 0;
+    width: 100%;
+    height: 100%;
+    overflow: auto;
+    visibility: hidden;
+    opacity: 0;
+    transition: all 2s cubic-bezier(0.19, 1, 0.22, 1);
+}
+
+#AcercaDeG>.seccion>.contenido>div:first-child {
+    visibility: visible;
+    opacity: 1;
+}
