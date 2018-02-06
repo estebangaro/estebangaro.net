@@ -5,36 +5,158 @@
     <meta charset="UTF-8" />
     <title>Acerca De</title>
     <link rel="stylesheet" href="..\..\css\componente Acerca De\acercade.css">
-    <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.2.1/jquery.min.js"></script>
+    <script src="jquery-3.2.1.min.js"></script>
     <script src="..\..\javascript\componente Acerca De\acercade.js"></script>
 </head>
 
 <body>
     <div id="FondoAcercaDeG">
         <div id="AcercaDeG">
-            <div class="seccion" id="Acerca_De_Creador">
+            <div class="seccion primera" id="Acerca_De_Esteban">
                 <div class="tabs">
                     <div class="tab">¿Qui&eacute;n Soy?</div>
-                    <div class="tab">Habilidades</div>
-                    <div class="tab">Experiencia</div>
-                    <div class="tab">Proyectos</div>
-                    <div class="tab">Contactame</div>
+                    <div class="tab" style="color: inherit">Habilidades</div>
+                    <div class="tab" style="color: inherit">Experiencia</div>
+                    <div class="tab" style="color: inherit">Proyectos</div>
+                    <div class="tab" style="color: inherit">Contactame</div>
                 </div>
                 <div class="contenido">
-                    <div style="background-color: rgb(255,0,0);"></div>
-                    <div style="background-color: rgb(0,0,255);"></div>
+                    <div>
+                        <div id="Biografia">
+                            <img src="..\..\imagenes\garo.jpg" alt="">
+                            <div class="Descripcion">
+                                <p>Luis Esteban cuenta con mas de 2 años de experiencia en el desarrollo de software con el .NET Framework de Microsoft, estudió la carrera de Ingeniería en Comunicaciones y Electrónica en la ESIME Unidad Culhuacán del IPN
+                                    eligiendo la especialidad de Computación en 8vo y 9no semestre.</p>
+                                <p>Se encuentra en constante documentación sobre nuevos frameworks y tecnologías de desarrollo .NET, con el objetivo de elegir las mejores herramientas disponibles acorde a las necesidades de los proyectos, asegurando el mejor
+                                    rendimiento y respuesta de los mismos.</p>
+                            </div>
+                        </div>
+                    </div>
+                    <div>
+                        <div id="Habilidades">
+                            <table>
+                                <thead>
+                                    <tr>
+                                        <th>Frameworks .NET</th>
+                                        <th>ASP .NET Web Forms</th>
+                                        <th>
+                                            <div style="background-color:green"></div>
+                                        </th>
+                                    </tr>
+                                </thead>
+                                <tbody>
+                                    <tr>
+                                        <td></td>
+                                        <td>ASP .NET MVC</td>
+                                        <td>
+                                            <div style="background-color:green"></div>
+                                        </td>
+                                    </tr>
+                                    <tr>
+                                        <td></td>
+                                        <td>ASP .NET WEB API</td>
+                                        <td>
+                                            <div style="background-color:gold"></div>
+                                        </td>
+                                    </tr>
+                                    <tr>
+                                        <td></td>
+                                        <td>Windows Forms</td>
+                                        <td>
+                                            <div style="background-color:green"></div>
+                                        </td>
+                                    </tr>
+                                    <tr>
+                                        <td></td>
+                                        <td>Entity Framework</td>
+                                        <td>
+                                            <div style="background-color:gold"></div>
+                                        </td>
+                                    </tr>
+                                    <tr>
+                                        <td></td>
+                                        <td>LINQ</td>
+                                        <td>
+                                            <div style="background-color:green"></div>
+                                        </td>
+                                    </tr>
+                                </tbody>
+                            </table>
+                            <table>
+                                <thead>
+                                    <tr>
+                                        <th>Tecnologías WEB</th>
+                                        <th>HTML 5</th>
+                                        <th>
+                                            <div style="background-color:green"></div>
+                                        </th>
+                                    </tr>
+                                </thead>
+                                <tbody>
+                                    <tr>
+                                        <td></td>
+                                        <td>CSS3</td>
+                                        <td>
+                                            <div style="background-color:green"></div>
+                                        </td>
+                                    </tr>
+                                    <tr>
+                                        <td></td>
+                                        <td>JavaScript</td>
+                                        <td>
+                                            <div style="background-color:gold"></div>
+                                        </td>
+                                    </tr>
+                                    <tr>
+                                        <td></td>
+                                        <td>jQuery</td>
+                                        <td>
+                                            <div style="background-color:gold"></div>
+                                        </td>
+                                    </tr>
+                                </tbody>
+                            </table>
+                            <table>
+                                <thead>
+                                    <tr>
+                                        <th>BDs</th>
+                                        <th>SQL SERVER 2008-2014</th>
+                                        <th>
+                                            <div style="background-color:green"></div>
+                                        </th>
+                                    </tr>
+                                </thead>
+                                <tbody>
+                                    <tr>
+                                        <td></td>
+                                        <td>Oracle XE 11G</td>
+                                        <td>
+                                            <div style="background-color:red"></div>
+                                        </td>
+                                    </tr>
+                                    <tr>
+                                        <td></td>
+                                        <td>MYSQL</td>
+                                        <td>
+                                            <div style="background-color:gold"></div>
+                                        </td>
+                                    </tr>
+                                </tbody>
+                            </table>
+                        </div>
+                    </div>
                     <div style="background-color: rgb(0,255,0);"></div>
                     <div style="background-color: rgb(255,255,0);"></div>
                     <div style="background-color: rgb(255,204,255);"></div>
                     <img src="..\..\imagenes\cerrarC.png" class="cerrar" />
                 </div>
             </div>
-            <div class="seccion oculta" id="Acerca_De_GaRo_nET">
+            <div class="seccion segunda" id="Acerca_De_GaRo_NET">
                 <div class="tabs">
                     <div class="tab">Presentación</div>
-                    <div class="tab">Objetivos</div>
-                    <div class="tab">Tecnologías empleadas</div>
-                    <div class="tab">Unete al equipo</div>
+                    <div class="tab tabDeseleccionada">Objetivos</div>
+                    <div class="tab tabDeseleccionada">Tecnologías empleadas</div>
+                    <div class="tab tabDeseleccionada">Unete al equipo</div>
                 </div>
                 <div class="contenido">
                     <div style="background-color: rgb(0,255,0);"></div>
@@ -43,10 +165,21 @@
                     <img src="..\..\imagenes\cerrarC.png" class="cerrar" />
                 </div>
             </div>
-            <div class="botonH Sup"></div>
-            <div class="botonH Inf">Acerca de GaRo NET</div>
-            <div class="botonV Izq"></div>
-            <div class="botonV Der"></div>
+            <!-- <div class="botonH Sup"></div> -->
+            <div class="botonH Inf"></div>
+            <div class="botonV Izq">
+                <div class="etiquetaV">
+                    <span>C</span><span>o</span><span>n</span><span>t</span><span>a</span>
+                    <span>c</span><span>t</span><span>a</span><span>c</span><span>t</span><span>a</span>
+                    <span>m</span><span>e</span>
+                </div>
+            </div>
+            <div class="botonV Der">
+                <div class="etiquetaV">
+                    <span>H</span><span>a</span><span>b</span><span>i</span><span>l</span>
+                    <span>i</span><span>d</span><span>a</span><span>d</span><span>e</span><span>s</span>
+                </div>
+            </div>
         </div>
     </div>
 </body>
