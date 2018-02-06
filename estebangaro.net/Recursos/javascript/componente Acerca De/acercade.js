@@ -1,14 +1,15 @@
         $(function() {
             /*Declaración e inicialización de variables "globales"*/
             var tabPropiedadesSeleccionado = {
-                'background-color': 'rgb(255, 0, 0)',
+                'background-color': 'rgb(0, 0, 0)',
                 'border-bottom-width': '2px',
-                'border-bottom-color': 'rgb(255, 0, 0)'
+                'border-bottom-color': 'rgb(0, 0, 0)'
             };
             var tabPropiedadesDeseleccionado = {
                 'background-color': 'inherit',
                 'border-bottom-width': '0',
-                'border-bottom-color': 'inherit'
+                'border-bottom-color': 'inherit',
+                'color': 'inherit'
             };
             var seccionPropiedadesSeleccionada = {
                 'visibility': 'visible',
@@ -35,14 +36,68 @@
                 $('div[class="botonH Inf"]').on('click', function() {
                     cambiaSeccion($(this));
                 });
+                $('.botonV').on('click', function() {
+                    BtnVertical_Clic($(this));
+                });
             }
 
             function AjustaAcercaDe() {
+                ajustaEtiquetaBtnVertical();
                 centrarTabs();
                 centrarAcercaDe();
+                actualizaEtiquetaBtnVertical();
                 ajustaEtiquetaAcercaDe($('div[class="botonH Inf"]'),
                     $('#AcercaDeG > .seccion').eq(1));
                 desplazaSeccion2AcercaDe();
+            }
+
+            function ajustaEtiquetaBtnVertical() {
+                $('.etiquetaV').each(function() {
+                    var altoEtiqueta = $(this).outerHeight() * -1;
+                    $(this).css('margin-top', (altoEtiqueta / 2) + 'px');
+                });
+            }
+
+            function BtnVertical_Clic(btn) {
+                var noTabSel = parseInt(btn.attr('id').substring(btn.attr('id').indexOf('_') + 1));
+                var seccionSeleccionada = obtenElementoSeleccionado('top',
+                    seccionAcercaDeSeleccionada['top'], $('#AcercaDeG > .seccion'));
+                var tabsSeccionSeleccionada = $('.tabs > .tab', seccionSeleccionada);
+                tabsSeccionSeleccionada.eq(noTabSel).click();
+            }
+
+            function actualizaEtiquetaBtnVertical() {
+                var seccionSeleccionada = obtenElementoSeleccionado('top',
+                    seccionAcercaDeSeleccionada['top'], $('#AcercaDeG > .seccion'));
+                var tabsSeccionSeleccionada = $('.tabs > .tab', seccionSeleccionada);
+                var tabSeleccionada = obtenElementoSeleccionado('background-color',
+                    tabPropiedadesSeleccionado['background-color'],
+                    tabsSeccionSeleccionada);
+                var noTab = tabSeleccionada.index();
+                var tabPrevia = tabsSeccionSeleccionada.eq(
+                    (noTab - 1) < 0 ? tabsSeccionSeleccionada.length - 1 : noTab - 1
+                );
+                var tabSiguiente = tabsSeccionSeleccionada.eq(
+                    (noTab + 1) == tabsSeccionSeleccionada.length ? 0 : noTab + 1
+                );
+                $('#AcercaDeG div[class="botonV Izq"] > div.etiquetaV').
+                html(convierteTextoASpan(tabPrevia.text())).parent().
+                attr('id', 'etiquetaV_' + tabPrevia.index());
+                $('#AcercaDeG div[class="botonV Der"] > div.etiquetaV').
+                html(convierteTextoASpan(tabSiguiente.text())).parent().
+                attr('id', 'etiquetaV_' + tabSiguiente.index());
+                ajustaEtiquetaBtnVertical();
+            }
+
+            function convierteTextoASpan(texto) {
+                var htmlSpans = '';
+                for (var i = 0; i < texto.length; i++)
+                    if (texto[i] != ' ')
+                        htmlSpans += '<span>' + texto[i] + '</span>';
+                    else
+                        htmlSpans += '<span style="color:transparent">' + 'a' + '</span>';
+
+                return htmlSpans;
             }
 
             function desplazaSeccion2AcercaDe() {
@@ -52,7 +107,11 @@
             }
 
             function ajustaEtiquetaAcercaDe(boton, siguienteSeccion) {
-                boton.text(siguienteSeccion.attr('id').replace(/_/g, " "));
+                boton.html(
+                    '<span>' +
+                    siguienteSeccion.attr('id').replace(/_/g, " ") +
+                    '</span>'
+                );
             }
 
             function centrarTabs() {
@@ -87,8 +146,15 @@
                         tabPropiedadesSeleccionado['border-bottom-color'] =
                         seccionElemento.css('background-color');
 
+                    seccionElemento.on("transitionend",
+                        function(e) {
+                            actualizaEtiquetaBtnVertical();
+                            $(this).off("transitionend");
+                        });
+                    tabSeleccionada.attr('style', '');
                     estilaElemento(tabPropiedadesDeseleccionado, tabSeleccionada);
                     estilaElemento(seccionPropiedadesDeseleccionada, seccionSeleccionada);
+                    tabElemento.attr('style', '');
                     estilaElemento(tabPropiedadesSeleccionado, tabElemento);
                     estilaElemento(seccionPropiedadesSeleccionada, seccionElemento);
                 }
@@ -141,6 +207,7 @@
                         $('div[class="botonH Inf"]').off('click');
                     },
                     function() { // Post animación
+                        actualizaEtiquetaBtnVertical();
                         ajustaEtiquetaAcercaDe(botonSeccion, acercaDeSeccionSeleccionada);
                         $('div[class="botonH Inf"]').on('click', function() {
                             cambiaSeccion($(this));

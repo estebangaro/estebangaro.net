@@ -19,7 +19,7 @@
 
 #AcercaDeG .cerrar {
     position: absolute;
-    right: 0;
+    left: 0;
     top: 0;
     width: 22px;
     height: 22px;
@@ -28,7 +28,6 @@
 
 #AcercaDeG>.botonH,
 #AcercaDeG>.botonV {
-    background-color: cadetblue;
     position: absolute;
 }
 
@@ -40,11 +39,28 @@
     cursor: pointer;
 }
 
+#AcercaDeG>.botonH>span {
+    padding: 0 1em;
+    background-color: rgba(255, 255, 255, 0.5);
+}
+
 #AcercaDeG>.botonV {
     height: 100%;
-    width: 22px;
+    width: 20px;
     top: 0;
+    background-color: rgba(255, 255, 255, 0.5);
     display: none;
+}
+
+#AcercaDeG>.botonV>.etiquetaV {
+    position: relative;
+    top: 50%;
+    cursor: pointer;
+}
+
+#AcercaDeG>.botonV>.etiquetaV>span {
+    display: block;
+    text-align: center;
 }
 
 #AcercaDeG>.Izq {
@@ -61,7 +77,6 @@
 }
 
 #AcercaDeG>.Inf {
-    /*Se define desplazamiento en función del número de pixeles de altura*/
     bottom: 0;
 }
 
@@ -69,13 +84,13 @@
     width: 100%;
 }
 
-#AcercaDeG>#Acerca_De_Creador.seccion {
+#AcercaDeG>.primera.seccion {
     position: relative;
     top: 0;
     left: 0;
 }
 
-#AcercaDeG>#Acerca_De_GaRo_nET.seccion {
+#AcercaDeG>.segunda.seccion {
     position: absolute;
     /*Calcular desplazamiento vertical mediante secuencia de comandos.*/
     /*top: 0;*/
@@ -103,13 +118,13 @@
     box-sizing: border-box;
 }
 
-#AcercaDeG>#Acerca_De_Creador.seccion>.tabs>.tab:nth-child(1) {
+#AcercaDeG>.primera.seccion>.tabs>.tab:nth-child(1) {
     border-bottom-width: 2px;
-    border-bottom-color: rgb(255, 0, 0);
-    background-color: rgb(255, 0, 0);
+    border-bottom-color: rgb(0, 0, 0);
+    background-color: rgb(0, 0, 0);
 }
 
-#AcercaDeG>#Acerca_De_GaRo_nET.seccion>.tabs>.tab:nth-child(1) {
+#AcercaDeG>.segunda.seccion>.tabs>.tab:nth-child(1) {
     border-bottom-width: 2px;
     border-bottom-color: rgb(0, 255, 0);
     background-color: rgb(0, 255, 0);
@@ -120,10 +135,10 @@
 }
 
 #AcercaDeG>.seccion>.contenido {
-    height: 500px;
     position: relative;
     /*Se define desplazamiento vertical en función del ancho en pixeles de los bordes.*/
     margin-top: -2px;
+    height: 500px;
 }
 
 #AcercaDeG>.seccion>.contenido>div {
@@ -138,7 +153,112 @@
     transition: all 2s cubic-bezier(0.19, 1, 0.22, 1);
 }
 
+#AcercaDeG>.primera.seccion>.contenido>div:nth-child(1) {
+    background-color: rgb(0, 0, 0);
+}
+
+#AcercaDeG>.primera.seccion>.tabs>.tab:first-child {
+    color: orange;
+}
+
+#AcercaDeG>.primera.seccion>.contenido>div:nth-child(2) {
+    background-color: rgb(0, 0, 77);
+    background-repeat: no-repeat;
+    background-image: url('../../imagenes/netframework.svg'), url('../../imagenes/sqlserver.png'), url('../../imagenes/mysql.png');
+    background-size: 250px 250px, 150px 93px, 100px 51px;
+    background-position: 0 50%, 90% 10%, 90% 90%;
+}
+
+#AcercaDeG>.primera.seccion>.tabs>.tab:nth-child(2) {
+    color: lightgrey;
+}
+
+#AcercaDeG>.seccion>.contenido>div>div {
+    margin: 22px;
+}
+
 #AcercaDeG>.seccion>.contenido>div:first-child {
     visibility: visible;
     opacity: 1;
+}
+
+#Biografia {
+    overflow: hidden;
+    position: relative;
+}
+
+#Biografia>img {
+    width: 200px;
+    height: 201px;
+    border-radius: 50%;
+    margin: 0 auto;
+    display: block;
+}
+
+#Biografia>.Descripcion {
+    border: solid 2px orange;
+    margin-top: 1em;
+    color: azure;
+    border-radius: 10px;
+}
+
+#Biografia>.Descripcion>p {
+    text-justify: distribute;
+}
+
+#Habilidades>table {
+    border-collapse: collapse;
+    width: 100%;
+    margin-top: 1em;
+}
+
+#Habilidades>table th {
+    text-align: left;
+    font-weight: normal;
+}
+
+#Habilidades>table td,
+#Habilidades>table th {
+    padding: 0.5em 0.5em;
+}
+
+#Habilidades>table tr {
+    color: lightgrey;
+}
+
+#Habilidades>table>tbody>tr>td,
+#Habilidades>table>thead>tr>th {
+    background-color: rgba(0, 0, 0, 0.5);
+    border-bottom: solid 1px lightgrey;
+}
+
+#Habilidades>table>tbody>tr>td:first-child {
+    background-color: transparent;
+    border-bottom: 0;
+}
+
+#Habilidades>table>tbody>tr:last-child>td {
+    border-bottom: 0;
+}
+
+#Habilidades>table>thead>tr>th:first-child {
+    color: gray;
+    width: 220px;
+}
+
+#Habilidades>table>thead>tr>th:nth-child(2) {
+    width: 250px;
+}
+
+#Habilidades>table>tbody>tr>td>div,
+#Habilidades>table>thead>tr>th>div {
+    width: 20px;
+    border-radius: 50%;
+    height: 20px;
+    margin: 0 auto;
+}
+
+#Habilidades>table>thead>tr>th:first-child {
+    background-color: rgba(0, 0, 0, 0.8);
+    border-bottom: 0;
 }
