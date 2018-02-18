@@ -5,7 +5,9 @@
     <meta charset="UTF-8" />
     <title>Acerca De</title>
     <link rel="stylesheet" href="..\..\css\componente Acerca De\acercade.css">
+    <link href="..\..\css\componente Acerca De\jquery-ui.css" rel="stylesheet" />
     <script src="jquery-3.2.1.min.js"></script>
+    <script src="..\..\javascript\componente Acerca De\jquery-ui.js"></script>
     <script src="..\..\javascript\componente Acerca De\acercade.js"></script>
 </head>
 
@@ -17,7 +19,6 @@
                     <div class="tab">¿Qui&eacute;n Soy?</div>
                     <div class="tab" style="color: inherit">Habilidades</div>
                     <div class="tab" style="color: inherit">Experiencia</div>
-                    <div class="tab" style="color: inherit">Proyectos</div>
                     <div class="tab" style="color: inherit">Contactame</div>
                 </div>
                 <div class="contenido">
@@ -145,9 +146,74 @@
                             </table>
                         </div>
                     </div>
-                    <div style="background-color: rgb(0,255,0);"></div>
-                    <div style="background-color: rgb(255,255,0);"></div>
-                    <div style="background-color: rgb(255,204,255);"></div>
+                    <div style="background-color: rgba(0,0,0,0.5);">
+                        <div id="jqueryUI_acordion">
+                            <h3>Financiera Contigo (Contigo)</h3>
+                            <div>
+                                <ul>
+                                    <!--<li><img src="../../imagenes/web.png" title="Sitio WEB" /><a target="_blank" href="https://www.fcontigo.com/">https://www.fcontigo.com/</a></li>-->
+                                    <li><img src="../../imagenes/reloj.png" title="Tiempo laborando" /><span>5/2017 - 02/2018 (9 meses)</span></li>
+                                    <li><img src="../../imagenes/corbata.png" title="Puesto" /><span>Desarrollador .NET Jr</span></li>
+                                    <li>
+                                        <img src="../../imagenes/actividades.png" title="Actividades" /><span>Actividades destacadas</span>
+                                        <ul>
+                                            <li><span>Diseño, desarrollo, implementación y mantenimiento en aplicaciones WEB (WEB FORMS).</span></li>
+                                            <li><span>Diseño, desarrollo e implementación en aplicaciones para escritorio de windows (Windows Forms).</span></li>
+                                            <li><span>Diseño, desarrollo e implementación en Servicios WEB ASP .NET.</span></li>
+                                            <li><span>Elaboración de documentación (requerimientos, documentación de código fuente, etc).</span></li>
+                                        </ul>
+                                    </li>
+                                </ul>
+                            </div>
+                            <h3>TasiSoftware (tasisfot)</h3>
+                            <div>
+                                <ul>
+                                    <!--<li><img src="../../imagenes/web.png" title="Sitio WEB" /><a target="_blank" href="http://www.tasisoft.com/">http://www.tasisoft.com/</a></li>-->
+                                    <li><img src="../../imagenes/reloj.png" title="Tiempo laborando" /><span>01/2016 - 05/2017 (1 año 5 meses)</span></li>
+                                    <li><img src="../../imagenes/corbata.png" title="Puesto" /><span>Desarrollador .NET Jr</span></li>
+                                    <li>
+                                        <img src="../../imagenes/actividades.png" title="Actividades" /><span>Actividades destacadas</span>
+                                        <ul>
+                                            <li><span>Diseño, desarrollo, implementación y mantenimiento de aplicaciones WEB (WEB FORMS - MVC).</span></li>
+                                            <li><span>Diseño, desarrollo e implementación de aplicaciones para escritorio de windows (Windows Forms).</span></li>
+                                            <li><span>Diseño, desarrollo e implementación de servicios windows.</span></li>
+                                            <li><span>Elaboración de documentación (requerimientos, documentación de código fuente, etc).</span></li>
+                                        </ul>
+                                    </li>
+                                </ul>
+                            </div>
+                        </div>
+                        <script>
+                            $("#jqueryUI_acordion").accordion();
+                            $("#jqueryUI_acordion>div>ul>li").tooltip();
+                        </script>
+                    </div>
+                    <div style="background-color: rgba(255,255,255,0.5);">
+                        <div id="frmContactoGr">
+                            <div class="campos">
+                                <div>
+                                    <div class="campo">
+                                        <img src="../../imagenes/nombre.png" class="icono" />
+                                        <input type="text" class="campoTxt" placeholder="Nombre" />
+                                    </div>
+                                </div>
+                                <div class="campo">
+                                    <img src="../../imagenes/correo.png" class="icono" />
+                                    <input type="text" class="campoTxt" placeholder="Correo Electrónico" />
+                                </div>
+                                <div class="campo">
+                                    <img src="../../imagenes/ciudad.png" class="icono" />
+                                    <input type="text" class="campoTxt" placeholder="Ciudad" />
+                                </div>
+                                <div class="campo">
+                                    <img src="../../imagenes/email.png" class="icono" />
+                                    <input type="text" class="campoTxt" placeholder="Asunto mensaje" />
+                                </div>
+                            </div>
+                            <textarea name="" id="" placeholder="Contenido"></textarea>
+                            <span class="botonenviar">Enviar</span>
+                        </div>
+                    </div>
                     <img src="..\..\imagenes\cerrarC.png" class="cerrar" />
                 </div>
             </div>
@@ -166,7 +232,10 @@
                 </div>
             </div>
             <!-- <div class="botonH Sup"></div> -->
-            <div class="botonH Inf"></div>
+            <div class="botonH Inf">
+                <p><img src="../../imagenes/seccion3.png" /></p>
+                <span></span>
+            </div>
             <div class="botonV Izq">
                 <div class="etiquetaV">
                     <span>C</span><span>o</span><span>n</span><span>t</span><span>a</span>

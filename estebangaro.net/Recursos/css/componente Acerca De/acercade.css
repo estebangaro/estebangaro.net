@@ -33,13 +33,23 @@
 
 #AcercaDeG>.botonH {
     width: 100%;
-    height: 22px;
+    height: 62px;
     left: 0;
     text-align: center;
     cursor: pointer;
 }
 
+#AcercaDeG>.botonH>p {
+    margin: 0;
+}
+
+#AcercaDeG>.botonH img {
+    width: 32px;
+    height: 32px;
+}
+
 #AcercaDeG>.botonH>span {
+    display: inline-block;
     padding: 0 1em;
     background-color: rgba(255, 255, 255, 0.5);
 }
@@ -77,7 +87,17 @@
 }
 
 #AcercaDeG>.Inf {
+    bottom: -30px;
+    transition: 1s all cubic-bezier(0.075, 0.82, 0.165, 1);
+}
+
+#AcercaDeG>.Inf:hover {
     bottom: 0;
+}
+
+#AcercaDeG>.Inf:hover img {
+    visibility: hidden;
+    opacity: 0;
 }
 
 #AcercaDeG>.seccion {
@@ -173,8 +193,12 @@
     color: lightgrey;
 }
 
+#AcercaDeG>.primera.seccion>.tabs>.tab:nth-child(3) {
+    color: whitesmoke;
+}
+
 #AcercaDeG>.seccion>.contenido>div>div {
-    margin: 22px;
+    margin: 22px auto;
 }
 
 #AcercaDeG>.seccion>.contenido>div:first-child {
@@ -185,6 +209,7 @@
 #Biografia {
     overflow: hidden;
     position: relative;
+    width: 90%;
 }
 
 #Biografia>img {
@@ -199,11 +224,16 @@
     border: solid 2px orange;
     margin-top: 1em;
     color: azure;
+    padding: 0 0.5em;
     border-radius: 10px;
 }
 
 #Biografia>.Descripcion>p {
-    text-justify: distribute;
+    text-align: justify;
+}
+
+#Habilidades {
+    width: 90%;
 }
 
 #Habilidades>table {
@@ -261,4 +291,81 @@
 #Habilidades>table>thead>tr>th:first-child {
     background-color: rgba(0, 0, 0, 0.8);
     border-bottom: 0;
+}
+
+#jqueryUI_acordion {
+    font-family: 'Gill Sans', 'Gill Sans MT', Calibri, 'Trebuchet MS', sans-serif;
+    width: 90%;
+    margin: 0 auto;
+}
+
+#jqueryUI_acordion>div>ul {
+    list-style: none;
+}
+
+#jqueryUI_acordion>div>ul>li {
+    overflow: hidden;
+}
+
+#jqueryUI_acordion>div>ul>li img {
+    width: 22px;
+    height: 22px;
+    margin-right: 0.8em;
+    float: left;
+}
+
+#frmContactoGr {
+    width: 350px;
+    text-align: center;
+    border: solid gray 2px;
+    padding: 1em 0;
+    margin: 0 auto;
+    border-radius: 10px;
+    background-color: white;
+}
+
+#frmContactoGr .campo {
+    padding-bottom: 0.5em;
+    border-bottom: gray 2px solid;
+    overflow: hidden;
+    display: inline-block;
+    margin-top: 1em;
+}
+
+#frmContactoGr .campo>img,
+#frmContactoGr .campo>input {
+    float: left;
+}
+
+#frmContactoGr .campo>input {
+    width: 300px;
+    border: none;
+    height: 21px;
+    background-color: transparent;
+}
+
+#frmContactoGr .campo>img {
+    width: 21px;
+    height: 21px;
+    margin-right: 0.5em;
+}
+
+#frmContactoGr>textarea {
+    width: 80%;
+    margin-top: 1em;
+    border: solid 2px gray;
+    resize: none;
+    padding-bottom: 0.5em;
+    height: 100px;
+    background-color: transparent;
+}
+
+#frmContactoGr>.botonenviar {
+    display: inline-block;
+    border-radius: 10px;
+    padding: 0.5em 1em;
+    background-color: dodgerblue;
+    color: white;
+    margin: 1em 0;
+    cursor: pointer;
 }
