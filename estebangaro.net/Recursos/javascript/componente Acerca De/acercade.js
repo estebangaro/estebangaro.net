@@ -107,11 +107,14 @@
             }
 
             function ajustaEtiquetaAcercaDe(boton, siguienteSeccion) {
+                $('span', boton).text(siguienteSeccion.attr('id').replace(/_/g, " "));
+                /*
                 boton.html(
+                    '<p><img src="../../imagenes/seccion.png"/></p>' +
                     '<span>' +
                     siguienteSeccion.attr('id').replace(/_/g, " ") +
                     '</span>'
-                );
+                );*/
             }
 
             function centrarTabs() {
@@ -192,7 +195,7 @@
             }
 
             function cambiaSeccion(botonSeccion) {
-                var idSeccionElemento = botonSeccion.text().replace(/ /g, "_");
+                var idSeccionElemento = $('span', botonSeccion).text().replace(/ /g, "_");
                 var acercaDeSeccionElemento = $('#' + idSeccionElemento);
                 var acercaDeSeccionSeleccionada = obtenElementoSeleccionado('top',
                     seccionAcercaDeSeleccionada['top'], $('#AcercaDeG > .seccion'));

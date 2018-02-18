@@ -1,0 +1,85 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8" />
+    <title>Prueba componente UI Acordion</title>
+    <link href="..\..\css\componente Acerca De\jquery-ui.css" rel="stylesheet" />
+    <!--<script src="..\..\javascript\componente Acerca De\jquery.js"></script>-->
+    <script src="jquery-3.2.1.min.js"></script>
+    <script src="..\..\javascript\componente Acerca De\jquery-ui.js"></script>
+    <style>
+        #jqueryUI_acordion {
+            font-family: 'Gill Sans', 'Gill Sans MT', Calibri, 'Trebuchet MS', sans-serif;
+            width: 90%;
+            margin: 0 auto;
+        }
+        
+        #jqueryUI_acordion>div>ul {
+            list-style: none;
+        }
+        
+        #jqueryUI_acordion>div>ul>li {
+            overflow: hidden;
+        }
+        
+        #jqueryUI_acordion>div>ul>li img {
+            width: 22px;
+            height: 22px;
+            margin-right: 0.8em;
+            float: left;
+        }
+    </style>
+    <script>
+        $(function() {
+            $('#jqueryUI_acordion>h3').hover(function() {
+                $(this).click();
+            });
+        });
+    </script>
+</head>
+
+<body>
+    <div id="jqueryUI_acordion">
+        <h3>TasiSoftware (tasisfot))</h3>
+        <div>
+            <ul>
+                <li><img src="../../imagenes/web.png" title="Sitio WEB" /><a target="_blank" href="http://www.tasisoft.com/">http://www.tasisoft.com/</a></li>
+                <li><img src="../../imagenes/reloj.png" title="Tiempo laborando" /><span>01/2016 - 05/2017 (1 año 5 meses)</span></li>
+                <li><img src="../../imagenes/corbata.png" title="Puesto" /><span>Desarrollador .NET Jr</span></li>
+                <li>
+                    <img src="../../imagenes/actividades.png" title="Actividades" /><span>Actividades destacadas</span>
+                    <ul>
+                        <li><span>Diseño, desarrollo, implementación y mantenimiento de aplicaciones WEB (WEB FORMS - MVC).</span></li>
+                        <li><span>Diseño, desarrollo e implementación de aplicaciones para escritorio de windows (Windows Forms).</span></li>
+                        <li><span>Diseño, desarrollo e implementación de servicios windows.</span></li>
+                        <li><span>Elaboración de documentación (requerimientos, documentación de código fuente, etc).</span></li>
+                    </ul>
+                </li>
+            </ul>
+        </div>
+        <h3>Financiera Contigo</h3>
+        <div>
+            <ul>
+                <li><img src="../../imagenes/web.png" title="Sitio WEB" /><a target="_blank" href="https://www.fcontigo.com/">https://www.fcontigo.com/</a></li>
+                <li><img src="../../imagenes/reloj.png" title="Tiempo laborando" /><span>5/2017 - 02/2018 (9 meses)</span></li>
+                <li><img src="../../imagenes/corbata.png" title="Puesto" /><span>Desarrollador .NET Jr</span></li>
+                <li>
+                    <img src="../../imagenes/actividades.png" title="Actividades" /><span>Actividades destacadas</span>
+                    <ul>
+                        <li><span>Diseño, desarrollo, implementación y mantenimiento en aplicaciones WEB (WEB FORMS).</span></li>
+                        <li><span>Diseño, desarrollo e implementación en aplicaciones para escritorio de windows (Windows Forms).</span></li>
+                        <li><span>Diseño, desarrollo e implementación en Servicios WEB ASP .NET.</span></li>
+                        <li><span>Elaboración de documentación (requerimientos, documentación de código fuente, etc).</span></li>
+                    </ul>
+                </li>
+            </ul>
+        </div>
+    </div>
+    <script>
+        $("#jqueryUI_acordion").accordion();
+        $("#jqueryUI_acordion>div>ul>li").tooltip();
+    </script>
+</body>
+
+</html>

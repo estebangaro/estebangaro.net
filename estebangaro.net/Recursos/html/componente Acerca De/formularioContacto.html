@@ -1,0 +1,91 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8" />
+    <title>Formulario contacto.</title>
+    <style>
+        #frmContactoGr {
+            width: 350px;
+            text-align: center;
+            border: solid gray 2px;
+            padding: 1em 0;
+            margin: 0 auto;
+            border-radius: 10px;
+            background-color: rgba(255, 255, 255, 0.5)
+        }
+        
+        #frmContactoGr .campo {
+            padding-bottom: 0.5em;
+            border-bottom: gray 2px solid;
+            overflow: hidden;
+            display: inline-block;
+            margin-top: 1em;
+        }
+        
+        #frmContactoGr .campo>img,
+        #frmContactoGr .campo>input {
+            float: left;
+        }
+        
+        #frmContactoGr .campo>input {
+            width: 300px;
+            border: none;
+            height: 21px;
+        }
+        
+        #frmContactoGr .campo>img {
+            width: 21px;
+            height: 21px;
+            margin-right: 0.5em;
+        }
+        
+        #frmContactoGr>textarea {
+            width: 80%;
+            margin-top: 1em;
+            border: solid 2px gray;
+            resize: none;
+            padding-bottom: 0.5em;
+            height: 100px;
+        }
+        
+        #frmContactoGr>.botonenviar {
+            display: inline-block;
+            border-radius: 10px;
+            padding: 0.5em 1em;
+            background-color: dodgerblue;
+            color: white;
+            margin: 1em 0;
+            cursor: pointer;
+        }
+    </style>
+</head>
+
+<body>
+    <div id="frmContactoGr">
+        <div class="campos">
+            <div>
+                <div class="campo">
+                    <img src="../../imagenes/nombre.png" class="icono" />
+                    <input type="text" class="campoTxt" placeholder="Nombre" />
+                </div>
+            </div>
+            <div class="campo">
+                <img src="../../imagenes/correo.png" class="icono" />
+                <input type="text" class="campoTxt" placeholder="Correo Electrónico" />
+            </div>
+            <div class="campo">
+                <img src="../../imagenes/ciudad.png" class="icono" />
+                <input type="text" class="campoTxt" placeholder="Ciudad" />
+            </div>
+            <div class="campo">
+                <img src="../../imagenes/email.png" class="icono" />
+                <input type="text" class="campoTxt" placeholder="Asunto mensaje" />
+            </div>
+        </div>
+        <textarea name="" id="" placeholder="Contenido"></textarea>
+        <span class="botonenviar">Enviar</span>
+    </div>
+</body>
+
+</html>
