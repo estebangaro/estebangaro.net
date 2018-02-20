@@ -162,6 +162,7 @@
     <Content Include="Resources\imagenes\menu\busqueda.png" />
     <Content Include="Resources\imagenes\menu\cerrar.png" />
     <Content Include="Resources\imagenes\menu\flecha.png" />
+    <Content Include="Resources\imagenes\menu\garo.png" />
     <Content Include="Resources\imagenes\menu\icono_menu_2.png" />
     <Content Include="Resources\imagenes\multimedia\flecha3A.png" />
     <Content Include="Resources\imagenes\multimedia\fondo.jpg" />

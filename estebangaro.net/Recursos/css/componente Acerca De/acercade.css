@@ -146,8 +146,8 @@
 
 #AcercaDeG>.segunda.seccion>.tabs>.tab:nth-child(1) {
     border-bottom-width: 2px;
-    border-bottom-color: rgb(0, 255, 0);
-    background-color: rgb(0, 255, 0);
+    border-bottom-color: rgba(0, 0, 0, 0.5);
+    background-color: rgba(0, 0, 0, 0.5);
 }
 
 #AcercaDeG>.seccion>.tabs>.tab:last-child {
@@ -175,6 +175,8 @@
 
 #AcercaDeG>.primera.seccion>.contenido>div:nth-child(1) {
     background-color: rgb(0, 0, 0);
+    background-image: url('../../imagenes/procesador.jpg');
+    background-size: cover;
 }
 
 #AcercaDeG>.primera.seccion>.tabs>.tab:first-child {
@@ -182,7 +184,7 @@
 }
 
 #AcercaDeG>.primera.seccion>.contenido>div:nth-child(2) {
-    background-color: rgb(0, 0, 77);
+    background-color: rgba(0, 0, 77, 0.5);
     background-repeat: no-repeat;
     background-image: url('../../imagenes/netframework.svg'), url('../../imagenes/sqlserver.png'), url('../../imagenes/mysql.png');
     background-size: 250px 250px, 150px 93px, 100px 51px;
@@ -195,6 +197,10 @@
 
 #AcercaDeG>.primera.seccion>.tabs>.tab:nth-child(3) {
     color: whitesmoke;
+}
+
+#AcercaDeG>.segunda.seccion>.tabs>.tab:nth-child(1) {
+    color: #00abec;;
 }
 
 #AcercaDeG>.seccion>.contenido>div>div {
@@ -226,6 +232,7 @@
     color: azure;
     padding: 0 0.5em;
     border-radius: 10px;
+    background-color: rgba(0,0,0,0.7)
 }
 
 #Biografia>.Descripcion>p {
@@ -368,4 +375,21 @@
     color: white;
     margin: 1em 0;
     cursor: pointer;
+}
+
+#acercaDegaRoNET{
+    background-image: url('../../imagenes/tecnologia.jpg');
+    background-size: cover;
+    position: relative;
+}
+.fondoAD{
+    padding:1em;
+    width: 80%;
+    margin: 0 auto;
+    background-color: rgba(0, 0, 0, 0.7);
+    color: whitesmoke;
+    border-radius: 10px;
+}
+.fondoAD > h1, .fondoAD > h2 {
+    color: #00abec;
 }

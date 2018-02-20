@@ -43,12 +43,19 @@
 
             function AjustaAcercaDe() {
                 ajustaEtiquetaBtnVertical();
+                ajustaAltoAcercaDegaRoNET();
                 centrarTabs();
                 centrarAcercaDe();
                 actualizaEtiquetaBtnVertical();
                 ajustaEtiquetaAcercaDe($('div[class="botonH Inf"]'),
                     $('#AcercaDeG > .seccion').eq(1));
                 desplazaSeccion2AcercaDe();
+            }
+
+            function ajustaAltoAcercaDegaRoNET(){
+                var _alto = $('#acercaDegaRoNET').outerHeight() / 2;
+                var _altoFondo = $('#acercaDegaRoNET > div.fondoAD').outerHeight() / 2;
+                $('#acercaDegaRoNET > div.fondoAD').css('margin-top', (1 * (_alto - _altoFondo)) + 'px')
             }
 
             function ajustaEtiquetaBtnVertical() {
