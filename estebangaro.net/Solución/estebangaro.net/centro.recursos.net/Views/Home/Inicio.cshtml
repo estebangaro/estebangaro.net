@@ -19,6 +19,8 @@
     <link href="~/Resources/css/autores.css" rel="stylesheet" />
     <link href="~/Resources/css/popupG.css" rel="stylesheet" />
     <link href="~/Resources/css/popupGr.css" rel="stylesheet" />
+    <link href="~/Resources/css/jqueryui/jquery-ui.css" rel="stylesheet" />
+    <link href="~/Resources/css/acercade.css" rel="stylesheet" />
     <script src="~/Scripts/jquery-3.2.1.min.js"></script>
     <script src="~/Resources/javascript/popupG.js"></script>
     <script src="~/Resources/javascript/popupGr.js"></script>
@@ -29,6 +31,8 @@
     <script src="~/Resources/javascript/noticias.js"></script>
     <script src="~/Resources/javascript/multimedia.js"></script>
     <script src="~/Resources/javascript/autores.js"></script>
+    <script src="~/Resources/javascript/jquery-ui.js"></script>
+    <script src="~/Resources/javascript/acercade.js"></script>
 </head>
 
 <body>
@@ -75,5 +79,12 @@
     </div>
     @Html.Action("_PopUpG", "Articulo")
     @Html.Partial("_PopupGr")
+    @Html.Partial("_AcercaDe")
+    @if (ViewBag.MuestraAcercaDe)
+    {
+        @: <script>
+        @: $('#FondoAcercaDeG').css('top', '0');
+        @: </script>
+    }
 </body>
 </html>

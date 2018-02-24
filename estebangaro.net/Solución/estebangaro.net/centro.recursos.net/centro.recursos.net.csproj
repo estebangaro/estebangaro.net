@@ -113,6 +113,7 @@
   <ItemGroup>
     <Content Include="Global.asax" />
     <Content Include="Models\Scripts\Columnas Autocalculadas.sql" />
+    <Content Include="Resources\css\acercade.css" />
     <Content Include="Resources\css\articulo.css" />
     <Content Include="Resources\css\artRelacionados.css" />
     <Content Include="Resources\css\autores.css" />
@@ -120,6 +121,7 @@
     <Content Include="Resources\css\carrusel.css" />
     <Content Include="Resources\css\comentarios.css" />
     <Content Include="Resources\css\infoarticulo.css" />
+    <Content Include="Resources\css\jqueryui\jquery-ui.css" />
     <Content Include="Resources\css\popupG.css" />
     <Content Include="Resources\css\popupGr.css" />
     <Content Include="Resources\css\popupGv.css" />
@@ -128,6 +130,37 @@
     <Content Include="Resources\css\menu.css" />
     <Content Include="Resources\css\multimedia.css" />
     <Content Include="Resources\css\noticias.css" />
+    <Content Include="Resources\imagenes\acercade\actividades.png" />
+    <Content Include="Resources\imagenes\acercade\asp.png" />
+    <Content Include="Resources\imagenes\acercade\azure.png" />
+    <Content Include="Resources\imagenes\acercade\azureappservice.png" />
+    <Content Include="Resources\imagenes\acercade\azuresqldatabase.png" />
+    <Content Include="Resources\imagenes\acercade\cerrarC.png" />
+    <Content Include="Resources\imagenes\acercade\ciudad.png" />
+    <Content Include="Resources\imagenes\acercade\corbata.png" />
+    <Content Include="Resources\imagenes\acercade\correo.png" />
+    <Content Include="Resources\imagenes\acercade\css.png" />
+    <Content Include="Resources\imagenes\acercade\email.png" />
+    <Content Include="Resources\imagenes\acercade\empresa.png" />
+    <Content Include="Resources\imagenes\acercade\flechaH.png" />
+    <Content Include="Resources\imagenes\acercade\html.png" />
+    <Content Include="Resources\imagenes\acercade\javascript.png" />
+    <Content Include="Resources\imagenes\acercade\javasxript.png" />
+    <Content Include="Resources\imagenes\acercade\jquery ui.png" />
+    <Content Include="Resources\imagenes\acercade\jquery.png" />
+    <Content Include="Resources\imagenes\acercade\mapa-mexico.png" />
+    <Content Include="Resources\imagenes\acercade\netframework.svg" />
+    <Content Include="Resources\imagenes\acercade\nombre.png" />
+    <Content Include="Resources\imagenes\acercade\procesador.jpg" />
+    <Content Include="Resources\imagenes\acercade\reloj.png" />
+    <Content Include="Resources\imagenes\acercade\seccion.png" />
+    <Content Include="Resources\imagenes\acercade\seccion2.png" />
+    <Content Include="Resources\imagenes\acercade\seccion3.png" />
+    <Content Include="Resources\imagenes\acercade\sqlserver.png" />
+    <Content Include="Resources\imagenes\acercade\tecnologia.jpg" />
+    <Content Include="Resources\imagenes\acercade\vs.svg" />
+    <Content Include="Resources\imagenes\acercade\web.png" />
+    <Content Include="Resources\imagenes\acercade\webapp.png" />
     <Content Include="Resources\imagenes\autores\facebook-icon.png" />
     <Content Include="Resources\imagenes\autores\garo.jpg" />
     <Content Include="Resources\imagenes\autores\jacky.jpg" />
@@ -159,9 +192,22 @@
     <Content Include="Resources\imagenes\infoarticulo\icono_lnk.png" />
     <Content Include="Resources\imagenes\infoarticulo\icono_tw.png" />
     <Content Include="Resources\imagenes\infoarticulo\tiempo.svg" />
+    <Content Include="Resources\imagenes\jqueryui-1\ui-bg_glass_20_555555_1x400.png" />
+    <Content Include="Resources\imagenes\jqueryui-1\ui-bg_glass_40_0078a3_1x400.png" />
+    <Content Include="Resources\imagenes\jqueryui-1\ui-bg_glass_40_ffc73d_1x400.png" />
+    <Content Include="Resources\imagenes\jqueryui-1\ui-bg_gloss-wave_25_333333_500x100.png" />
+    <Content Include="Resources\imagenes\jqueryui-1\ui-bg_highlight-soft_80_eeeeee_1x100.png" />
+    <Content Include="Resources\imagenes\jqueryui-1\ui-bg_inset-soft_25_000000_1x100.png" />
+    <Content Include="Resources\imagenes\jqueryui-1\ui-bg_inset-soft_30_f58400_1x100.png" />
+    <Content Include="Resources\imagenes\jqueryui-1\ui-icons_222222_256x240.png" />
+    <Content Include="Resources\imagenes\jqueryui-1\ui-icons_4b8e0b_256x240.png" />
+    <Content Include="Resources\imagenes\jqueryui-1\ui-icons_a83300_256x240.png" />
+    <Content Include="Resources\imagenes\jqueryui-1\ui-icons_cccccc_256x240.png" />
+    <Content Include="Resources\imagenes\jqueryui-1\ui-icons_ffffff_256x240.png" />
     <Content Include="Resources\imagenes\menu\busqueda.png" />
     <Content Include="Resources\imagenes\menu\cerrar.png" />
     <Content Include="Resources\imagenes\menu\flecha.png" />
+    <Content Include="Resources\imagenes\menu\garo.png" />
     <Content Include="Resources\imagenes\menu\icono_menu_2.png" />
     <Content Include="Resources\imagenes\multimedia\flecha3A.png" />
     <Content Include="Resources\imagenes\multimedia\fondo.jpg" />
@@ -181,6 +227,7 @@
     <Content Include="Resources\imagenes\popupG\msjicono.png" />
     <Content Include="Resources\imagenes\popupG\okicono.png" />
     <Content Include="Resources\imagenes\visualizadorcodigo\download.png" />
+    <Content Include="Resources\javascript\acercade.js" />
     <Content Include="Resources\javascript\articulo.js" />
     <Content Include="Resources\javascript\artRelacionados.js" />
     <Content Include="Resources\javascript\autores.js" />
@@ -188,6 +235,7 @@
     <Content Include="Resources\javascript\carrusel.js" />
     <Content Include="Resources\javascript\comentarios.js" />
     <Content Include="Resources\javascript\home.js" />
+    <Content Include="Resources\javascript\jquery-ui.js" />
     <Content Include="Resources\javascript\menu.js" />
     <Content Include="Resources\javascript\multimedia.js" />
     <Content Include="Resources\javascript\noticias.js" />
@@ -280,6 +328,7 @@
     <Content Include="Views\Shared\_PopUpG.cshtml" />
     <Content Include="Views\Shared\_PopupGv.cshtml" />
     <Content Include="Views\Shared\_PopUpGr.cshtml" />
+    <Content Include="Views\Shared\_AcercaDe.cshtml" />
     <None Include="Web.Debug.config">
       <DependentUpon>Web.config</DependentUpon>
     </None>
