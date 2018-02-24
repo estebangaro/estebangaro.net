@@ -15,6 +15,13 @@ namespace centro.recursos.net.Controllers
         {
             //HabilitaBD();
             //CargaDatos();
+            ViewBag.MuestraAcercaDe = false;
+            return View("Inicio");
+        }
+
+        public ActionResult QuienSoy()
+        {
+            ViewBag.MuestraAcercaDe = true;
             return View("Inicio");
         }
 
