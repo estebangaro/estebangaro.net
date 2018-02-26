@@ -47,6 +47,224 @@
                     $('#FondoAcercaDeG')
                         .css('top', '-100%');
                 });
+                $('#frmContactoGr > span.botonenviar').click(function () {
+                    if (ValidaCamposContacto()) {
+                        GuardarComentario();
+                    }
+                });
+            }
+
+            function ValidaCamposContacto() {
+                var estadoGeneral = true;
+                var validacion;
+                $('#frmContactoGr .campoTxt, #frmContactoGr > textarea').each(function () {
+                    if (estadoGeneral) {
+                        validacion = true;
+                        var campoTxt = $(this);
+                        var valorCampoTxt = campoTxt.val();
+                        var idCampoTxt = campoTxt.attr('id');
+                        var configValidacion = ObtenConfigValidacionAcercaD(idCampoTxt);
+                        if (configValidacion != undefined) {
+                            configValidacion.Elemento = campoTxt;
+                            configValidacion.Valor = valorCampoTxt;
+                            validacion = validaElementoPopupGv(configValidacion);
+                        }
+                        estadoGeneral = estadoGeneral && validacion;
+                    }
+                });
+
+                return estadoGeneral;
+            }
+
+            function GuardarComentario() {
+                var comentarioAcercaDe = {};
+                $('#frmContactoGr .campoTxt, #frmContactoGr > textarea').each(function () {
+                    var campoTxt = $(this);
+                    var valorCampoTxt = campoTxt.val();
+                    var idCampoTxt = campoTxt.attr('id');
+                    comentarioAcercaDe[idCampoTxt] = valorCampoTxt;
+                });
+
+                GuardarComentarioBD(comentarioAcercaDe);
+            }
+
+            function LimpiaComentariosAcercaD() {
+                $('#frmContactoGr .campoTxt, #frmContactoGr > textarea').each(function () {
+                    $(this).val('');
+                });
+            }
+
+            function GuardarComentarioBD(comentario) {
+                mostrarEsperaPopUpG(true, '#frmContactoGr');
+                $.ajax({
+                    url: '/api/Comentario',
+                    type: 'GaroComentariosAcercaD',
+                    dataType: 'json',
+                    data: JSON.stringify(comentario),
+                    contentType: 'application/json; charset=utf-8',
+                    success: function (data) {
+                        mostrarEsperaPopUpG(false, '#frmContactoGr');
+                        muestraPopUpGAcercaDe('OK', 'Enviar Mensaje',
+                            'Hemos recibido tu mensaje, en breve nos comunicaremos contigo.',
+                            obtenBotonPopUpGAcercaDe());
+                    },
+                    error: function () {
+                        mostrarEsperaPopUpG(false, '#frmContactoGr');
+                        muestraPopUpGAcercaDe('MSJ', 'Enviar Mensaje',
+                            'Ha fallado el envío del mensaje, favor de intentarlo mas tarde.',
+                            obtenBotonPopUpGAcercaDe());
+                    }
+                });
+            }
+
+            function obtenBotonPopUpGAcercaDe() {
+                var boton = $('<span/>').text('Aceptar')
+                    .addClass('habilitado')
+                    .click(function () {
+                        $('#popupG_preguntas > .cerrar').click();
+                        LimpiaComentariosAcercaD();
+                    });
+
+                return $('<div class="boton"></div>').append(boton);
+            }
+
+            function muestraPopUpGAcercaDe(Icono, Titulo, Contenido, Botones) {
+                mostrarPopupG({
+                    Icono: Icono,
+                    Titulo: $('<span/>').text(Titulo),
+                    Contenido: $('<span/>').text(configuracion.Contenido),
+                    Botones: Botones
+                });
+            }
+
+            function ObtenConfigValidacionAcercaD(idCampoTxt) {
+                var configObj;
+
+                switch (idCampoTxt) {
+                    case 'Nombre':
+                        configObj = {
+                            EsRequerido: {
+                                Valor: true,
+                                Titulo: 'Campo Obligatorio',
+                                Descripcion: 'Favor de introducir tu nombre'
+                            },
+                            LongitudMinima: {
+                                Valor: 2,
+                                Titulo: '¡Atención!',
+                                Descripcion: 'La longitud mínina es de 2 caracteres'
+                            },
+                            LongitudMaxima: {
+                                Valor: 60,
+                                Titulo: '¡Atención!',
+                                Descripcion: 'La longitud máxima es de 60 caracteres'
+                            },
+                            Patron: {
+                                Valor: /^[A-Z a-z0-9_-ñ\.\wáéíóú@]+$/,
+                                Titulo: 'Verificar Formato',
+                                Descripcion: 'Caracteres permitidos: A-Z a-z 0-9_-ñ.áéíóú@'
+                            }
+                        };
+                        break;
+                    case 'Email':
+                        configObj = {
+                            EsRequerido: {
+                                Valor: true,
+                                Titulo: 'Campo Obligatorio',
+                                Descripcion: 'Favor de introducir una cuenta de correo electrónico'
+                            },
+                            LongitudMinima: {
+                                Valor: 5,
+                                Titulo: '¡Atención!',
+                                Descripcion: 'La longitud mínina es de 5 caracteres'
+                            },
+                            LongitudMaxima: {
+                                Valor: 255,
+                                Titulo: '¡Atención!',
+                                Descripcion: 'La longitud máxima es de 255 caracteres'
+                            },
+                            Patron: {
+                                Valor: /^[\.A-Za-z0-9_-]+@[A-Za-z0-9_-]+(\.[A-Za-z0-9_-]+)*$/,
+                                Titulo: 'Verificar Formato',
+                                Descripcion: 'Favor de introducir una cuenta de correo electrónico válida'
+                            }
+                        };
+                        break;
+                    case 'Ciudad':
+                        configObj = {
+                            EsRequerido: {
+                                Valor: true,
+                                Titulo: 'Campo Obligatorio',
+                                Descripcion: 'Favor de introducir tu ciudad'
+                            },
+                            LongitudMinima: {
+                                Valor: 2,
+                                Titulo: '¡Atención!',
+                                Descripcion: 'La longitud mínina es de 2 caracteres'
+                            },
+                            LongitudMaxima: {
+                                Valor: 50,
+                                Titulo: '¡Atención!',
+                                Descripcion: 'La longitud máxima es de 50 caracteres'
+                            },
+                            Patron: {
+                                Valor: /^[A-Z a-z0-9ñ\.\wáéíóú]+$/,
+                                Titulo: 'Verificar Formato',
+                                Descripcion: 'Caracteres permitidos: A-Z a-z 0-9ñ.áéíóú'
+                            }
+                        };
+                        break;
+                    case 'Asuntomsj':
+                        configObj = {
+                            EsRequerido: {
+                                Valor: true,
+                                Titulo: 'Campo Obligatorio',
+                                Descripcion: 'Favor de introducir tu ciudad'
+                            },
+                            LongitudMinima: {
+                                Valor: 2,
+                                Titulo: '¡Atención!',
+                                Descripcion: 'La longitud mínina es de 2 caracteres'
+                            },
+                            LongitudMaxima: {
+                                Valor: 30,
+                                Titulo: '¡Atención!',
+                                Descripcion: 'La longitud máxima es de 30 caracteres'
+                            },
+                            Patron: {
+                                Valor: /^[A-Z a-z0-9ñ\.\wáéíóú]+$/,
+                                Titulo: 'Verificar Formato',
+                                Descripcion: 'Caracteres permitidos: A-Z a-z 0-9ñ.áéíóú'
+                            }
+                        };
+                        break;
+                    case 'Contenidomsj':
+                        configObj = {
+                            EsRequerido: {
+                                Valor: true,
+                                Titulo: 'Campo Obligatorio',
+                                Descripcion: 'Favor de introducir un comentario'
+                            },
+                            LongitudMinima: {
+                                Valor: 2,
+                                Titulo: '¡Atención!',
+                                Descripcion: 'La longitud mínina es de 2 caracteres'
+                            },
+                            LongitudMaxima: {
+                                Valor: 500,
+                                Titulo: '¡Atención!',
+                                Descripcion: 'La longitud máxima es de 500 caracteres'
+                            },
+                            Patron: {
+                                Valor: /^[A-Z a-z0-9_-ñ\.\wáéíóú,*\(\)\[\]\{\}\"\!\¡\'\;\+\-\#\$\%\&\/\¿\?\=\:@]+$/,
+                                Titulo: 'Verificar Formato',
+                                Descripcion: 'Caracteres permitidos: A-Z a-z0-9_-ñ.áéíóú,*()[]{}"!¡\';+-#$%&/¿?=:@'
+                            }
+                        };
+                        break;
+                    default:
+                        configObj = undefined;
+                }
+                return configObj;
             }
 
             function AjustaAcercaDe() {

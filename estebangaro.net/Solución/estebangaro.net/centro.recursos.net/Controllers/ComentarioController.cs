@@ -39,5 +39,15 @@ namespace centro.recursos.net.Controllers
                 }) :
                 Request.CreateResponse(HttpStatusCode.Conflict);
         }
+
+        [AcceptVerbs("GaroComentariosAcercaD")]
+        public HttpResponseMessage GuardaComentarioAcercaDe(ComentarioAcercaD comentario)
+        {
+            Respuesta<int> GuardaComentarioEstado =
+                Repositorio.GuardaComentario(comentario);
+
+            return GuardaComentarioEstado.Estado ? Request.CreateResponse(HttpStatusCode.Created) :
+                Request.CreateResponse(HttpStatusCode.Conflict);
+        }
     }
 }

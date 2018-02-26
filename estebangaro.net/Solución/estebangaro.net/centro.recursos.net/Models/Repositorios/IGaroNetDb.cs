@@ -30,6 +30,8 @@ namespace centro.recursos.net.Models.Repositorios
 
         Respuesta<Tuple<List<Comentario>, int>> GuardaComentario(Comentario comentario);
 
+        Respuesta<int> GuardaComentario(ComentarioAcercaD comentario);
+
         Respuesta<Tuple<List<Comentario>, int>> ObtenComentarios(string articulo, int idComentarioUltimoReciente = 0,
             COMENTARIOS tipo = COMENTARIOS.RECIENTES, int? idComentarioPadre = null, int? numeroComentarios = null);
 
