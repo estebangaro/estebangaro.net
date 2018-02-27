@@ -217,3 +217,23 @@ BEGIN
 		inserted ON Modificados.Id = inserted.Id;
 END;
 GO
+
+/*
+	Columnas autocalculadas [General].[ComentariosAcercaD]
+*/
+
+GO
+ALTER TABLE [General].[ComentariosAcercaD]
+ADD CONSTRAINT default_comentariosAcercaD DEFAULT GETDATE() FOR [Fecha Creacion];
+GO
+GO
+CREATE TRIGGER actualizaFechaMod_ComentariosAcercaD
+ON [General].[ComentariosAcercaD]
+AFTER UPDATE AS
+BEGIN
+	UPDATE Modificados
+	SET Modificados.[Fecha Modificacion] = GETDATE()
+	FROM [General].[ComentariosAcercaD] Modificados INNER JOIN
+		inserted ON Modificados.Id = inserted.Id;
+END;
+GO

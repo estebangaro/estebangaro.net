@@ -303,6 +303,32 @@ namespace centro.recursos.net.Models.Repositorios
             return estado;
         }
 
+        public Respuesta<int> GuardaComentario(ComentarioAcercaD comentario)
+        {
+            Respuesta<int> estado;
+
+            try
+            {
+                comentario.Auditoria = new InfoRegistro
+                {
+                    UsuarioCreacion = "WEB API"
+                };
+                dbContextoEF.CometariosEsteban.Add(comentario);
+                dbContextoEF.SaveChanges();
+
+                estado = Respuesta<int>.GeneraRespuestaNoExcepcion<int>(true,
+                    comentario.NumeroComentario);
+            }
+            catch (Exception ex)
+            {
+                estado = Respuesta<object>.
+                    GeneraRespuestaExcepcion<int>(ex,
+                    NombreMetodo: "GaroNetDb.GuardaComentario(ComentarioAcercaD)");
+            }
+
+            return estado;
+        }
+
         public Respuesta<Tuple<List<Comentario>, int>> ObtenComentarios(string articulo, int idComentarioUltimoReciente = 0,
             COMENTARIOS tipo = COMENTARIOS.RECIENTES, int? idComentarioPadre = null, int? numeroComentarios = null)
         {

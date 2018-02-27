@@ -28,6 +28,7 @@
         public virtual DbSet<Cliente> ClientesArticulos { get; set; }
         public virtual DbSet<RedSocial> RedesSociales { get; set; }
         public virtual DbSet<Tag> Tags { get; set; }
+        public virtual DbSet<ComentarioAcercaD> CometariosEsteban { get; set; }
 
         protected override void OnModelCreating(DbModelBuilder modelBuilder)
         {
@@ -46,7 +47,8 @@
                 .Add(new ClasePersonalizadaConfig())
                 .Add(new ClienteConfig())
                 .Add(new RedSocialConfig())
-                .Add(new TagConfig());
+                .Add(new TagConfig())
+                .Add(new ComentarioAcercaDConfig());
         }
     }
 }
