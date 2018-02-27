@@ -1,3 +1,10 @@
+.popupGv_validacion {
+    z-index:2;
+}
+#popupG{
+    z-index:3;
+}
+
 #FondoAcercaDeG {
     position: fixed;
     top: 0;
