@@ -99,16 +99,15 @@
                 $.ajax({
                     url: '/api/Comentario',
                     type: 'GaroComentariosAcercaD',
-                    dataType: 'json',
                     data: JSON.stringify(comentario),
                     contentType: 'application/json; charset=utf-8',
-                    success: function (data) {
+                    success: function () {
                         mostrarEsperaPopUpG(false, '#frmContactoGr');
                         muestraPopUpGAcercaDe('OK', 'Enviar Mensaje',
                             'Hemos recibido tu mensaje, en breve nos comunicaremos contigo.',
                             obtenBotonPopUpGAcercaDe());
                     },
-                    error: function () {
+                    error: function (error) {
                         mostrarEsperaPopUpG(false, '#frmContactoGr');
                         muestraPopUpGAcercaDe('MSJ', 'Enviar Mensaje',
                             'Ha fallado el envío del mensaje, favor de intentarlo mas tarde.',
@@ -132,7 +131,7 @@
                 mostrarPopupG({
                     Icono: Icono,
                     Titulo: $('<span/>').text(Titulo),
-                    Contenido: $('<span/>').text(configuracion.Contenido),
+                    Contenido: $('<span/>').text(Contenido),
                     Botones: Botones
                 });
             }

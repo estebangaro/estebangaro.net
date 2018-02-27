@@ -109,7 +109,7 @@
 }
 
 .titulo,
-.contenido {
+.cdrComentario .contenido {
     margin: 1em;
 }
 
@@ -155,7 +155,7 @@
     color: gray;
 }
 
-.contenido {
+.cdrComentario .contenido {
     text-align: justify;
 }
 

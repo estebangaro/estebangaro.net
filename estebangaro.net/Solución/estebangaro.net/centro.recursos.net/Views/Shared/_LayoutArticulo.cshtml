@@ -19,6 +19,8 @@
     <link href="~/Resources/css/popupGr.css" rel="stylesheet" />
     <link href="~/Resources/css/infoarticulo.css" rel="stylesheet" />
     <link href="~/Resources/css/artRelacionados.css" rel="stylesheet" />
+    <link href="~/Resources/css/jqueryui/jquery-ui.css" rel="stylesheet" />
+    <link href="~/Resources/css/acercade.css" rel="stylesheet" />
     @RenderSection("Styles", required: false)
     <script src="~/Scripts/jquery-3.2.1.min.js"></script>
     <script src="~/Resources/javascript/home.js"></script>
@@ -31,6 +33,8 @@
     <script src="~/Resources/javascript/popupGv.js"></script>
     <script src="~/Resources/javascript/popupGr.js"></script>
     <script src="~/Resources/javascript/artRelacionados.js"></script>
+    <script src="~/Resources/javascript/jquery-ui.js"></script>
+    <script src="~/Resources/javascript/acercade.js"></script>
     @RenderSection("Scripts", required: false)
 </head>
 <body>
@@ -47,25 +51,26 @@
             @Html.Action("_Comentarios", "Articulo")
         </div>
     </div>
-        <div id="dialogMsjArtRelG" class="styleVerifica">
-            <img src="/Resources/imagenes/comentarios/salir.png" class="cerrar" />
-            <div class="Flecha">
-                <img src="~/Resources/imagenes/carrusel/flecha3D.png" />
-            </div>
-            <p class="Titulo">Art&iacute;culos Relacionados</p>
-            <div class="Contenido">
-                <table>
-                    <tbody>
-                        @foreach(var articulo in Model.ArticulosRelacionados)
-                        {
-                            <tr><td><a href="@articulo.URI">@articulo.Titulo</a></td></tr>
-                        }
-                    </tbody>
-                </table>
-            </div>
+    <div id="dialogMsjArtRelG" class="styleVerifica">
+        <img src="/Resources/imagenes/comentarios/salir.png" class="cerrar" />
+        <div class="Flecha">
+            <img src="~/Resources/imagenes/carrusel/flecha3D.png" />
         </div>
+        <p class="Titulo">Art&iacute;culos Relacionados</p>
+        <div class="Contenido">
+            <table>
+                <tbody>
+                    @foreach (var articulo in Model.ArticulosRelacionados)
+                    {
+                        <tr><td><a href="@articulo.URI">@articulo.Titulo</a></td></tr>
+                    }
+                </tbody>
+            </table>
+        </div>
+    </div>
     @Html.Action("_PopUpG", "Articulo")
     @Html.Partial("_PopupGv")
     @Html.Partial("_PopupGr")
+    @Html.Partial("_AcercaDe")
 </body>
 </html>
