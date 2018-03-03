@@ -1,5 +1,5 @@
 .popupGv_validacion {
-    z-index:2;
+    z-index:3;
 }
 #popupG{
     z-index:3;
@@ -7,23 +7,19 @@
 
 #FondoAcercaDeG {
     position: fixed;
-    top: 0;
+    top: -100%;
     left: 0;
     width: 100%;
     height: 100%;
     background-color: rgba(255, 255, 255, 0.8);
-    transition: all 1s ease-in-out;
-    top: -100%;
-    z-index:2;
+    z-index: 2;
+    display: none;
 }
 
 #AcercaDeG {
     position: absolute;
     top: 50%;
     left: 50%;
-    width: 600px;
-    margin-top: -250px;
-    margin-left: -300px;
     overflow: hidden;
 }
 
@@ -31,8 +27,6 @@
     position: absolute;
     left: 0;
     top: 0;
-    width: 22px;
-    height: 22px;
     cursor: pointer;
 }
 
@@ -43,7 +37,6 @@
 
 #AcercaDeG>.botonH {
     width: 100%;
-    height: 62px;
     left: 0;
     text-align: center;
     cursor: pointer;
@@ -51,11 +44,6 @@
 
 #AcercaDeG>.botonH>p {
     margin: 0;
-}
-
-#AcercaDeG>.botonH img {
-    width: 32px;
-    height: 32px;
 }
 
 #AcercaDeG>.botonH>span {
@@ -66,7 +54,6 @@
 
 #AcercaDeG>.botonV {
     height: 100%;
-    width: 20px;
     top: 0;
     background-color: rgba(255, 255, 255, 0.5);
     display: none;
@@ -97,7 +84,6 @@
 }
 
 #AcercaDeG>.Inf {
-    bottom: -30px;
     transition: 1s all cubic-bezier(0.075, 0.82, 0.165, 1);
 }
 
@@ -122,8 +108,6 @@
 
 #AcercaDeG>.segunda.seccion {
     position: absolute;
-    /*Calcular desplazamiento vertical mediante secuencia de comandos.*/
-    /*top: 0;*/
     left: 0;
 }
 
@@ -168,7 +152,6 @@
     position: relative;
     /*Se define desplazamiento vertical en función del ancho en pixeles de los bordes.*/
     margin-top: -2px;
-    height: 500px;
 }
 
 #AcercaDeG>.seccion>.contenido>div {
@@ -193,12 +176,12 @@
     background-color: rgba(0,0,0,0.9);
 }
 
-    #AcercaDeG > .primera.seccion > .contenido > div:nth-child(4) {
-        background-color: rgba(255,255,255,0.9);
-        background-image: url('../imagenes/acercade/mapa-mexico.png');
-        background-repeat: no-repeat;
-        background-position: 50% 50%;
-    }
+#AcercaDeG > .primera.seccion > .contenido > div:nth-child(4) {
+    background-color: rgba(255,255,255,0.9);
+    background-image: url('../imagenes/acercade/mapa-mexico.png');
+    background-repeat: no-repeat;
+    background-position: 50% 50%;
+}
 
 #AcercaDeG>.segunda.seccion>.contenido>div:nth-child(1){
     background-color: rgba(0,0,0,0.9);
@@ -266,8 +249,6 @@
 }
 
 #Biografia>img {
-    width: 200px;
-    height: 201px;
     border-radius: 50%;
     margin: 0 auto;
     display: block;
@@ -327,18 +308,11 @@
 
 #Habilidades>table>thead>tr>th:first-child {
     color: gray;
-    width: 220px;
-}
-
-#Habilidades>table>thead>tr>th:nth-child(2) {
-    width: 250px;
 }
 
 #Habilidades>table>tbody>tr>td>div,
 #Habilidades>table>thead>tr>th>div {
-    width: 20px;
     border-radius: 50%;
-    height: 20px;
     margin: 0 auto;
 }
 
@@ -362,14 +336,11 @@
 }
 
 #jqueryUI_acordion>div>ul>li img {
-    width: 22px;
-    height: 22px;
     margin-right: 0.8em;
     float: left;
 }
 
 #frmContactoGr {
-    width: 350px;
     text-align: center;
     border: solid gray 2px;
     padding: 1em 0;
@@ -392,15 +363,11 @@
 }
 
 #frmContactoGr .campo>input {
-    width: 300px;
     border: none;
-    height: 21px;
     background-color: transparent;
 }
 
 #frmContactoGr .campo>img {
-    width: 21px;
-    height: 21px;
     margin-right: 0.5em;
 }
 
@@ -439,4 +406,238 @@
 }
 .fondoAD > h1, .fondoAD > h2 {
     color: #00abec;
+}
+
+/* Consulta de medios */
+
+@media screen and (min-width: 1025px) {
+    #AcercaDeG {
+        width: 600px;
+    }
+
+    #AcercaDeG .cerrar {
+        width: 22px;
+        height: 22px;
+    }
+
+    #AcercaDeG > .botonH {
+        height: 62px;
+    }
+
+    #AcercaDeG>.botonH img {
+        width: 32px;
+        height: 32px;
+    }
+
+    #AcercaDeG>.botonV {
+        width: 20px;
+    }
+
+    #AcercaDeG>.Inf {
+        bottom: -30px;
+    }
+
+    #AcercaDeG > .seccion > .contenido {
+        height: 500px;
+    }
+
+    #Biografia > img {
+        width: 200px;
+        height: 201px;
+    }
+
+    #Habilidades > table > thead > tr > th:first-child {
+        width: 220px;
+    }
+
+    #Habilidades > table > thead > tr > th:nth-child(2) {
+        width: 250px;
+    }
+
+    #Habilidades > table > tbody > tr > td > div,
+    #Habilidades > table > thead > tr > th > div {
+        width: 20px;
+        height: 20px;
+    }
+
+    #jqueryUI_acordion > div > ul > li img {
+        width: 22px;
+        height: 22px;
+    }
+
+    #frmContactoGr {
+        width: 350px;
+    }
+
+    #frmContactoGr .campo>input {
+        width: 300px;
+        height: 21px;
+    }
+
+    #frmContactoGr .campo>img {
+        width: 21px;
+        height: 21px;
+    }
+}
+
+@media screen and (min-width: 600px) and (max-width: 1025px) {
+    #AcercaDeG {
+        width: 80%;
+    }
+
+    #AcercaDeG .cerrar {
+        width: 22px;
+        height: 22px;
+    }
+
+    #AcercaDeG > .botonH {
+        height: auto;
+    }
+
+    #AcercaDeG>.botonH img {
+        display: none;
+    }
+
+    #AcercaDeG>.botonV {
+        width: 20px;
+    }
+
+    #AcercaDeG>.Inf {
+        bottom: 0;
+    }
+
+    #AcercaDeG > .seccion > .contenido {
+        height: 500px;
+    }
+
+    #Biografia > img {
+        width: 150px;
+        height: 149px;
+    }
+
+    #Habilidades > table > thead > tr > th:first-child {
+        width: 250px;
+    }
+
+    #Habilidades > table > thead > tr > th:nth-child(2) {
+        width: 220px;
+    }
+
+    #Habilidades > table > tbody > tr > td > div,
+    #Habilidades > table > thead > tr > th > div {
+        width: 20px;
+        height: 20px;
+    }
+
+    #jqueryUI_acordion > div > ul > li img {
+        width: 22px;
+        height: 22px;
+    }
+
+    #frmContactoGr {
+        width: 350px;
+    }
+
+    #frmContactoGr .campo>input {
+        width: 300px;
+        height: 21px;
+    }
+
+    #frmContactoGr .campo>img {
+        width: 21px;
+        height: 21px;
+    }
+}
+
+@media screen and (min-width: 100px) and (max-width: 600px) {
+    #AcercaDeG {
+        width: 90%;
+        height: 90%;
+    }
+
+    #AcercaDeG .cerrar {
+        width: 20px;
+        height: 20px;
+        z-index:2;
+    }
+
+    #AcercaDeG>.botonV {
+        display: block;
+    }
+    #AcercaDeG>.seccion>.tabs{
+        display: none;
+    }
+
+    #AcercaDeG > .botonH {
+        height: auto;
+    }
+
+    #AcercaDeG>.botonH img {
+        display: none;
+    }
+
+    #AcercaDeG>.botonV {
+        width: 20px;
+    }
+
+    #AcercaDeG>.Inf {
+        bottom: 0;
+    }
+
+    #AcercaDeG > .seccion{
+        height: 100%;
+    }
+
+    #AcercaDeG > .seccion > .contenido {
+        height: 100%;
+    }
+
+    #Biografia, #Habilidades, #jqueryUI_acordion, #acercaDegaRoNET {
+        font-size: 0.9em;
+    }
+
+    #Biografia > img {
+        width: 100px;
+        height: 99px;
+    }
+
+    #Habilidades > table > thead > tr > th:first-child {
+        width: 250px;
+    }
+
+    #Habilidades > table > thead > tr > th:nth-child(2) {
+        width: 220px;
+    }
+
+    #Habilidades > table > tbody > tr > td > div,
+    #Habilidades > table > thead > tr > th > div {
+        width: 20px;
+        height: 20px;
+    }
+    #jqueryUI_acordion > div > ul > li img {
+        width: 22px;
+        height: 22px;
+    }
+
+    #frmContactoGr {
+        width: 200px;
+    }
+
+    #frmContactoGr .campo>input {
+        width: 150px;
+        height: 21px;
+    }
+
+    #frmContactoGr .campo>img {
+        width: 16px;
+        height: 16px;
+    }
+
+    #AcercaDeG > .segunda.seccion > .contenido > div:nth-child(2) {
+        background-color: rgba(0, 0, 0, 0.9);
+        background-image: url('../imagenes/acercade/asp.png'), url('../imagenes/acercade/html.png'), url('../imagenes/acercade/css.png'), url('../imagenes/acercade/jquery ui.png'), url('../imagenes/acercade/javascript.png'), url('../imagenes/acercade/azure.png'), url('../imagenes/acercade/azuresqldatabase.png'), url('../imagenes/acercade/webapp.png'), url('../imagenes/acercade/azureappservice.png');
+        background-size: 130px 130px, 40px 51px, 40px 76px, 100px 100px,50px 50px, 120px 37px, 50px 50px, 50px 50px, 50px 50px;
+        background-position: 0 50%, 100% 50%, 90% 10%, 90% 90%, 70% 50%, 10% 10%, 35% 25%, 10% 85%, 45% 70%;
+        background-repeat: no-repeat;
+    }
 }

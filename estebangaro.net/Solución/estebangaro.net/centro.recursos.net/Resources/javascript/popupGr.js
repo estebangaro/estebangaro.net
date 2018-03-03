@@ -5,7 +5,6 @@
             });
             $('#agrupadorOpciones>div>nav:last-child').click(function(){
                 mostrarPopupRBusqueda();
-                $('.iconoMenu').click();
             });
             $(window).resize(function(){
                 centraPopupR();
@@ -63,7 +62,7 @@
 
         function mostrarPopupRBusqueda(){
             $('body').css('overflow', 'hidden');
-            $('#buscarPopupGr > input').val('').focus();
+            $('#buscarPopupGr > input').val('');
             $('#ctdrCampoBusqueda input').val('');
             $('#popupGr table > tbody').html('');
             $('#popupGr .Contenido > p').html('');
