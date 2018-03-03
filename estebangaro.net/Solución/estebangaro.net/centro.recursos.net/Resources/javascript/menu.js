@@ -49,7 +49,13 @@ function muestraOpcion(dePadre) {
                 'max-height': '0'
             });
         }
+        if(!esOpcionPadre(dePadre))
+            $('.iconoMenu').click();
     }
+}
+
+function esOpcionPadre(dePadre) {
+    return dePadre.children('ul').length > 0;
 }
 
 function validaOpcion(dePadre) {

@@ -30,6 +30,9 @@
 
             /*Declaración y definición de funciones*/
             function enlazaEventosAcercaDe() {
+                $(window).resize(function () {
+                    AjustaAcercaDe();
+                });
                 $('#AcercaDeG > .seccion > .tabs > .tab').click(function() {
                     refrescaTabs($(this));
                 });
@@ -40,12 +43,17 @@
                     BtnVertical_Clic($(this));
                 });
                 $('#agrupadorOpciones>div>nav:first-child').click(function () {
+                    $('body').css('overflow', 'hidden');
                     $('#FondoAcercaDeG')
-                        .css('top', '0');
+                        .show()
+                        .animate({ 'top': '0' }, 1000);
                 });
                 $('#AcercaDeG .cerrar').click(function () {
+                    $('body').css('overflow', 'auto');
                     $('#FondoAcercaDeG')
-                        .css('top', '-100%');
+                        .animate({ 'top': '-100%' }, 1000, function () {
+                            $(this).hide();
+                        });
                 });
                 $('#frmContactoGr > span.botonenviar').click(function () {
                     if (ValidaCamposContacto()) {
@@ -267,13 +275,20 @@
             }
 
             function AjustaAcercaDe() {
+                var cssDisplayEstado = $('#FondoAcercaDeG').css('display');
+                $('#FondoAcercaDeG').show();
+                $("#jqueryUI_acordion").accordion();
+                AjustaControlesAcercaDe();
+                if (cssDisplayEstado == 'none')
+                    $('#FondoAcercaDeG').hide();
+            }
+
+            function AjustaControlesAcercaDe() {
                 ajustaEtiquetaBtnVertical();
                 ajustaAltoAcercaDegaRoNET();
                 centrarTabs();
                 centrarAcercaDe();
                 actualizaEtiquetaBtnVertical();
-                ajustaEtiquetaAcercaDe($('div[class="botonH Inf"]'),
-                    $('#AcercaDeG > .seccion').eq(1));
                 desplazaSeccion2AcercaDe();
             }
 
@@ -335,18 +350,15 @@
             function desplazaSeccion2AcercaDe() {
                 var seccion2 = $('#AcercaDeG > .seccion').eq(1);
                 var altoSeccion = seccion2.outerHeight();
-                seccion2.css('top', (altoSeccion * -1) + 'px');
+                if (seccion2.css('top').replace("px", "") != '0') {
+                    seccion2.css('top', (altoSeccion * -1) + 'px');
+                    ajustaEtiquetaAcercaDe($('div[class="botonH Inf"]'),
+                        $('#AcercaDeG > .seccion').eq(1));
+                }
             }
 
             function ajustaEtiquetaAcercaDe(boton, siguienteSeccion) {
                 $('span', boton).text(siguienteSeccion.attr('id').replace(/_/g, " "));
-                /*
-                boton.html(
-                    '<p><img src="../../imagenes/seccion.png"/></p>' +
-                    '<span>' +
-                    siguienteSeccion.attr('id').replace(/_/g, " ") +
-                    '</span>'
-                );*/
             }
 
             function centrarTabs() {
@@ -363,19 +375,22 @@
             function centrarAcercaDe() {
                 var alto = $('#AcercaDeG').outerHeight() * -1;
                 var ancho = $('#AcercaDeG').outerWidth() * -1;
-                $('AcercaDeG').css({
+                $('#AcercaDeG').css({
                     'margin-top': (alto / 2) + 'px',
                     'margin-left': (ancho / 2) + 'px'
                 });
             }
 
             function refrescaTabs(tabElemento) {
+
                 var seccionElemento = obtenSeccionXTab(tabElemento);
                 var tabSeleccionada = obtenElementoSeleccionado('background-color',
                     tabPropiedadesSeleccionado['background-color'],
                     tabElemento.parent().children());
 
                 if (tabElemento.text() != tabSeleccionada.text()) {
+                    $('.botonV').off('click');
+
                     var seccionSeleccionada = obtenSeccionXTab(tabSeleccionada);
                     tabPropiedadesSeleccionado['background-color'] =
                         tabPropiedadesSeleccionado['border-bottom-color'] =
@@ -384,6 +399,9 @@
                     seccionElemento.on("transitionend",
                         function(e) {
                             actualizaEtiquetaBtnVertical();
+                            $('.botonV').on('click', function () {
+                                BtnVertical_Clic($(this));
+                            });
                             $(this).off("transitionend");
                         });
                     tabSeleccionada.attr('style', '');
