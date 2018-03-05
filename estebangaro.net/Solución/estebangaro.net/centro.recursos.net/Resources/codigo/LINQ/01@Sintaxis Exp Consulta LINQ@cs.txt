@@ -1,0 +1,54 @@
+using System;
+using System.Collections;
+using System.Collections.Generic;
+using System.Linq;
+
+namespace LINQ_0
+{
+    public class DefinicionExpresionesConsultaLINQ
+    {
+        public static void Main(string[] args)
+        {
+            IEnumerable<string> Resultado = LINQ_ExtensionAlLenguaje();
+            Console.WriteLine("Resultado de consulta definiendo expresión de consulta utilizando " +
+                "la extensión a la sintaxis del lenguaje.");
+            MuestraConsulta(Resultado);
+            Resultado = LINQ_InvocacionDeMetodos();
+            Console.WriteLine("Resultado de consulta definiendo expresión de consulta utilizando " +
+                "invocación de métodos.");
+            MuestraConsulta(Resultado);
+
+            Console.Read();
+        }
+
+        private static IEnumerable<string> LINQ_ExtensionAlLenguaje()
+        {
+            string[] NombresPersonas = { "Esteban", "Ámbar", "Dalia", "Fernando", "Victor" };
+
+            IEnumerable<string> NombresOrdenados = from nombre in NombresPersonas
+                                                   orderby nombre ascending
+                                                   select nombre.ToUpper();
+
+            return NombresOrdenados;
+        }
+
+        private static IEnumerable<string> LINQ_InvocacionDeMetodos()
+        {
+            string[] NombresPersonas = { "Esteban", "Ámbar", "Dalia", "Fernando", "Victor" };
+
+            IEnumerable<string> NombresOrdenados = NombresPersonas
+                .OrderBy(nombre => nombre)
+                .Select(nombre => nombre.ToUpper());
+
+            return NombresOrdenados;
+        }
+
+        private static void MuestraConsulta(IEnumerable Resultado)
+        {
+            foreach(var elemento in Resultado)
+            {
+                Console.WriteLine(elemento);
+            }
+        }
+    }
+}

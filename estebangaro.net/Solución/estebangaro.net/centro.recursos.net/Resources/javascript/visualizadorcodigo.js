@@ -27,7 +27,7 @@
         function muestraCodigoSeleccionado(elementos, estado) {
             elementos.encabezado.css({
                 'background-color': estado ? 'rgba(255,255,255,0.9)' : 'transparent',
-                'color': estado ? 'black' : 'purple'
+                'color': estado ? 'black' : 'white'
             });
             elementos.codigo.css({
                 'visibility': estado ? 'visible' : 'hidden',

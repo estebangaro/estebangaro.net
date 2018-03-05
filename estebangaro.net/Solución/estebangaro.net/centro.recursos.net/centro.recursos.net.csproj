@@ -113,6 +113,8 @@
   <ItemGroup>
     <Content Include="Global.asax" />
     <Content Include="Models\Scripts\Columnas Autocalculadas.sql" />
+    <Content Include="Resources\codigo\LINQ\02%40LINQ vs FOR%40cs.txt" />
+    <Content Include="Resources\codigo\LINQ\01%40Sintaxis Exp Consulta LINQ%40cs.txt" />
     <Content Include="Resources\css\acercade.css" />
     <Content Include="Resources\css\articulo.css" />
     <Content Include="Resources\css\artRelacionados.css" />
@@ -161,6 +163,10 @@
     <Content Include="Resources\imagenes\acercade\vs.svg" />
     <Content Include="Resources\imagenes\acercade\web.png" />
     <Content Include="Resources\imagenes\acercade\webapp.png" />
+    <Content Include="Resources\imagenes\articulo\check.png" />
+    <Content Include="Resources\imagenes\articulo\check_0.png" />
+    <Content Include="Resources\imagenes\articulo\codigo.png" />
+    <Content Include="Resources\imagenes\articulo\link.png" />
     <Content Include="Resources\imagenes\autores\facebook-icon.png" />
     <Content Include="Resources\imagenes\autores\garo.jpg" />
     <Content Include="Resources\imagenes\autores\jacky.jpg" />
@@ -227,6 +233,7 @@
     <Content Include="Resources\imagenes\popupG\msjicono.png" />
     <Content Include="Resources\imagenes\popupG\okicono.png" />
     <Content Include="Resources\imagenes\visualizadorcodigo\download.png" />
+    <Content Include="Resources\imagenes\visualizadorcodigo\download_2.png" />
     <Content Include="Resources\javascript\acercade.js" />
     <Content Include="Resources\javascript\articulo.js" />
     <Content Include="Resources\javascript\artRelacionados.js" />

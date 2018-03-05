@@ -1,0 +1,74 @@
+using System;
+using System.Collections;
+using System.Collections.Generic;
+using System.Linq;
+
+namespace LINQ_0
+{
+    public class EjemploPractico_LINQ
+    {
+        public static void Main(string[] args)
+        {
+            CompareLINQVSForLoopIterate("E", 4);
+            Console.Read();
+        }
+
+        private static IEnumerable GetThreeFirstNamesWith_LINQ(string String, IEnumerable<string> Names,
+            int NumberOfOcurrences)
+        {
+            IEnumerable Resultado = (from name in Names
+                                     where name.StartsWith(String)
+                                     orderby name ascending
+                                     select name.ToUpper()).Take(NumberOfOcurrences);
+
+            return Resultado;
+        }
+
+        private static IEnumerable GetThreeFirstNamesWith_For(string String, IEnumerable<string> Names,
+            int NumberOfOcurrences)
+        {
+            string[] NamesArray = Names.ToArray();
+            string Temp;
+            // Se implementa el algoritmo de ordenamiento de la burbuja.
+            for(int i = 0; i < NamesArray.Length - 1; i++)
+                for(int j = i + 1; j < NamesArray.Length; j++)
+                    if(NamesArray[i].CompareTo(NamesArray[j]) > 0)
+                    {
+                        Temp = NamesArray[j];
+                        NamesArray[j] = NamesArray[i];
+                        NamesArray[i] = Temp;
+                    }
+            // Se filtran los 3 primeros nombres que comiencen con la cadena especificada.
+            List<string> NamesStartWithList = new List<string>();
+            for (int i = 0; i < NamesArray.Length; i++)
+                if (NamesArray[i].StartsWith(String) && NamesStartWithList.Count < NumberOfOcurrences)
+                    NamesStartWithList.Add(NamesArray[i].ToUpper());
+
+            return NamesStartWithList;
+        }
+
+        public static void CompareLINQVSForLoopIterate(string String, int NumberOfOcurrences)
+        {
+            string[] NamesOfPersons = { "Esteban", "Ernesto", "Dalia", "Fernando", "Eduardo", "Dante", "Daniela",
+                "Francisco", "Ámbar", "Enrique"};
+
+            IEnumerable Res_LINQ = GetThreeFirstNamesWith_LINQ(String, NamesOfPersons, NumberOfOcurrences);
+            IEnumerable Res_FOR = GetThreeFirstNamesWith_For(String, NamesOfPersons, NumberOfOcurrences);
+
+            Console.WriteLine($"Primeros {NumberOfOcurrences} nombres que inician con '{String}' " +
+                $"ordenados alfabeticamente (LINQ)");
+            int index = 0;
+            foreach(var result in Res_LINQ)
+            {
+                Console.WriteLine($"{index++}) {result}");
+            }
+            Console.WriteLine($"Primeros {NumberOfOcurrences} nombres que inician con '{String}' " +
+                $"ordenados alfabeticamente (FOR)");
+            index = 0;
+            foreach (var result in Res_FOR)
+            {
+                Console.WriteLine($"{index++}) {result}");
+            }
+        }
+    }
+}
