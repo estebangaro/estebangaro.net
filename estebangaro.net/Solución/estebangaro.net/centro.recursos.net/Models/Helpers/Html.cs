@@ -142,7 +142,7 @@ namespace centro.recursos.net.Models.Helpers
                     marcado += $"<div class=\"ctdrCodigo\"><pre>{convertidor.ObtenHTML(contenido)}</pre></div>";
             }
             encabezados += $"<a><img src=" +
-                $"\"{Rutas.ImagenesVisualizadorCodigo}/download.png\" title=\"Descargar\" class=\"descargarCodigo\"></img></a>";
+                $"\"{Rutas.ImagenesVisualizadorCodigo}/download_2.png\" title=\"Descargar\" class=\"descargarCodigo\"></img></a>";
             encabezados += $"<input type=\"hidden\" value=\"{nombreCarpeta}\"/>";
             encabezados = $"<div class=\"EnzdosCodigoFuente\">{encabezados}</div>";
             marcado = $"<div class=\"CdrCodigoFuente\">{marcado}</div>";
