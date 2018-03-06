@@ -177,13 +177,13 @@
     <Content Include="Resources\imagenes\carrusel\flecha2D.png" />
     <Content Include="Resources\imagenes\carrusel\flecha2I.png" />
     <Content Include="Resources\imagenes\carrusel\flecha3D.png" />
-    <Content Include="Resources\imagenes\comentarios\avatars\akane.jpg" />
-    <Content Include="Resources\imagenes\comentarios\avatars\avatar.jpg" />
-    <Content Include="Resources\imagenes\comentarios\avatars\githubicono.png" />
+    <Content Include="Resources\imagenes\comentarios\avatars\batman.png" />
+    <Content Include="Resources\imagenes\comentarios\avatars\flash.png" />
+    <Content Include="Resources\imagenes\comentarios\avatars\joker.jpg" />
+    <Content Include="Resources\imagenes\comentarios\avatars\wonderwoman.png" />
     <Content Include="Resources\imagenes\comentarios\cancelarrojo.svg" />
     <Content Include="Resources\imagenes\comentarios\flechaDn.png" />
     <Content Include="Resources\imagenes\comentarios\flechaU.png" />
-    <Content Include="Resources\imagenes\comentarios\avatars\ranma.jpg" />
     <Content Include="Resources\imagenes\comentarios\responder.svg" />
     <Content Include="Resources\imagenes\comentarios\salir.png" />
     <Content Include="Resources\imagenes\home\computer-3036166_1920.jpg" />

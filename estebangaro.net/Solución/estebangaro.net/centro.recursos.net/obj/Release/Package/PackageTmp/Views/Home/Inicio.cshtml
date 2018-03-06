@@ -1,0 +1,94 @@
+﻿
+@{
+    Layout = null;
+}
+
+<!DOCTYPE html>
+<html>
+
+<head>
+    <title>garonet.com</title>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1" />
+    <link href="~/Resources/css/menu.css" rel="stylesheet" />
+    <link href="~/Resources/css/buscar.css" rel="stylesheet" />
+    <link href="~/Resources/css/home.css" rel="stylesheet" />
+    <link href="~/Resources/css/carrusel.css" rel="stylesheet" />
+    <link href="~/Resources/css/noticias.css" rel="stylesheet" />
+    <link href="~/Resources/css/multimedia.css" rel="stylesheet" />
+    <link href="~/Resources/css/autores.css" rel="stylesheet" />
+    <link href="~/Resources/css/popupG.css" rel="stylesheet" />
+    <link href="~/Resources/css/popupGr.css" rel="stylesheet" />
+    <link href="~/Resources/css/popupGv.css" rel="stylesheet" />
+    <link href="~/Resources/css/jqueryui/jquery-ui.css" rel="stylesheet" />
+    <link href="~/Resources/css/acercade.css" rel="stylesheet" />
+    <script src="~/Scripts/jquery-3.2.1.min.js"></script>
+    <script src="~/Resources/javascript/popupG.js"></script>
+    <script src="~/Resources/javascript/popupGr.js"></script>
+    <script src="~/Resources/javascript/popupGv.js"></script>
+    <script src="~/Resources/javascript/home.js"></script>
+    <script src="~/Resources/javascript/busqueda.js"></script>
+    <script src="~/Resources/javascript/menu.js"></script>
+    <script src="~/Resources/javascript/carrusel.js"></script>
+    <script src="~/Resources/javascript/noticias.js"></script>
+    <script src="~/Resources/javascript/multimedia.js"></script>
+    <script src="~/Resources/javascript/autores.js"></script>
+    <script src="~/Resources/javascript/jquery-ui.js"></script>
+    <script src="~/Resources/javascript/acercade.js"></script>
+</head>
+
+<body>
+    <div id="fondoFijo"></div>
+    <div class="fondoFijoColor"></div>
+    @Html.Action("_Menu")
+    <div id="seccion1Principal">
+        <div class="Contenido">
+            @Html.Action("_Carrusel")
+        </div>
+    </div>
+    <div id="seccion2Principal" class="styleVerifica">
+        <div class="fondoFijoColor"></div>
+        <div class="Contenido">
+            @Html.Action("_NoticiasP")
+        </div>
+    </div>
+    <div id="seccion3Principal">
+        @Html.Action("_SeccionesMultimedia")
+    </div>
+    <div id="seccion4Principal" class="styleVerifica">
+        <div id="ctdrVentanaAutores">
+            <div class="btnsAutores">
+                <p class="tituloAutores">Autores</p>
+                <div class="btns" id="izqAutor"><img src="../../imagenes/flechasAutores.png" alt=""></div>
+                <div class="btns" id="derAutor"><img src="../../imagenes/flechasAutores.png" alt=""></div>
+            </div>
+            <div id="ventanaAutores">
+                @Html.Action("_SeccionesAutor")
+            </div>
+        </div>
+        <div id="pieDePagina">
+            <p>
+                <span>estebangaro.net</span> |
+                <span>Objetivos</span> |
+                <span>Powered by Microsoft ASP .NET MVC</span>
+            </p>
+            <p>
+                <img src="~/Resources/imagenes/autores/twitter-icon.png" />
+                <img src="~/Resources/imagenes/autores/facebook-icon.png" />
+                <img src="~/Resources/imagenes/autores/linkedin-icon.png" />
+            </p>
+        </div>
+    </div>
+    @Html.Action("_PopUpG", "Articulo")
+    @Html.Partial("_PopupGv")
+    @Html.Partial("_PopupGr")
+    @Html.Partial("_AcercaDe")
+    @if (ViewBag.MuestraAcercaDe)
+    {
+        @: <script>
+        @: $('body').css('overflow', 'hidden');
+        @: $('#FondoAcercaDeG').show().animate({ 'top': '0' }, 1000);
+        @: </script>
+    }
+</body>
+</html>

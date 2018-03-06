@@ -1,0 +1,16 @@
+﻿<?xml version="1.0" encoding="utf-8"?>
+<parameters>
+  <parameter name="IIS Web Application Name" description="" value="garonet" tags="IisApp">
+    <parameterEntry kind="ProviderPath" scope="IisApp" match="^C:\\Users\\esteb\\Documents\\GitHub\\estebangaro\.net\\estebangaro\.net\\Solución\\estebangaro\.net\\centro\.recursos\.net\\obj\\Release\\Package\\PackageTmp$" />
+    <parameterEntry kind="ProviderPath" scope="setAcl" match="^C:\\Users\\esteb\\Documents\\GitHub\\estebangaro\.net\\estebangaro\.net\\Solución\\estebangaro\.net\\centro\.recursos\.net\\obj\\Release\\Package\\PackageTmp$" />
+  </parameter>
+  <parameter name="centro.recursos.net.Models.Entity_Framework.GaroNETDbContexto-Web.config Connection String" description="" value="centro.recursos.net.Models.Entity_Framework.GaroNETDbContexto_ConnectionString" tags="">
+    <parameterEntry kind="XmlFile" scope="C:\\Users\\esteb\\Documents\\GitHub\\estebangaro\.net\\estebangaro\.net\\Solución\\estebangaro\.net\\centro\.recursos\.net\\obj\\Release\\Package\\PackageTmp\\Web\.config$" match="/configuration/connectionStrings/add[@name='centro.recursos.net.Models.Entity_Framework.GaroNETDbContexto']/@connectionString" />
+  </parameter>
+  <parameter name="GaroNETDbContexto_dev-Web.config Connection String" description="GaroNETDbContexto_dev Cadena de conexión que usa la aplicación en web.config para obtener acceso a la base de datos." value="data source=(LocalDb)\MSSQLLocalDB;initial catalog=garonet.com;integrated security=True;MultipleActiveResultSets=True;App=EntityFramework" tags="SqlConnectionString">
+    <parameterEntry kind="XmlFile" scope="C:\\Users\\esteb\\Documents\\GitHub\\estebangaro\.net\\estebangaro\.net\\Solución\\estebangaro\.net\\centro\.recursos\.net\\obj\\Release\\Package\\PackageTmp\\Web\.config$" match="/configuration/connectionStrings/add[@name='GaroNETDbContexto_dev']/@connectionString" />
+  </parameter>
+  <parameter name="GaroNETDbContexto_prod-Web.config Connection String" description="GaroNETDbContexto_prod Cadena de conexión que usa la aplicación en web.config para obtener acceso a la base de datos." value="data source=tcp:garonetdatabaseserver.database.windows.net,1433;initial catalog=garonet.com;Persist Security Info=False;User ID=estebangaro;Password=Garonet03+;Encrypt=True;TrustServerCertificate=False;Connection Timeout=200;MultipleActiveResultSets=True;App=EntityFramework" tags="SqlConnectionString">
+    <parameterEntry kind="XmlFile" scope="C:\\Users\\esteb\\Documents\\GitHub\\estebangaro\.net\\estebangaro\.net\\Solución\\estebangaro\.net\\centro\.recursos\.net\\obj\\Release\\Package\\PackageTmp\\Web\.config$" match="/configuration/connectionStrings/add[@name='GaroNETDbContexto_prod']/@connectionString" />
+  </parameter>
+</parameters>
