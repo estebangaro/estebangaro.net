@@ -1,0 +1,40 @@
+﻿@using centro.recursos.net.Models.Helpers;
+
+<div id="popupG">
+    <img src="/Resources/imagenes/popupG/okicono.png" id="popupG_OK" class="popupG_icono" />
+    <img src="/Resources/imagenes/popupG/msjicono.png" id="popupG_MSJ" class="popupG_icono" />
+    <img src="~/Resources/imagenes/popupG/loading.gif" id="popupG_LOAD" class="popupG_icono" />
+    <img src="~/Resources/imagenes/popupG/icono_autor.svg" id="popupG_AUTOR" class="popupG_icono" />
+    <!-- Plantilla de formulario de campos para componente comentarios. -->
+    <!--No introducir elementos hijo antes de input "Correo electrónico"-->
+    <script>
+        var popupG_avatarCuenta = @ViewBag.NumeroAvatars;
+        var popupG_index = 0;
+        var popupG_ultimoCorreo = '';
+    </script>
+    <div id="popupG_Campos" class="campos popupG_icono">
+        <p><input type="text" placeholder="Correo electrónico" /></p>
+        <p><input type="text" placeholder="Nombre" /></p>
+        <div class="avatar">
+            @Html.GeneraImagenesAvatarsComentarios(Model as FileInfo[])
+            <img src="/Resources/imagenes/popupG/flechaI.png" class="flechaI" />
+            <img src="/Resources/imagenes/popupG/flechaD.png" class="flechaD" />
+        </div>
+    </div>
+    <!-- FIN Plantilla de formulario de campos para componente comentarios. -->
+    <!-- Plantilla de información general Autores. -->
+    <div id="popupG_Autor" class="autor">
+        <img src="" />
+        <div><p><img src="/Resources/imagenes/popupG/icono_c.png"></p><span></span></div>
+        <div><p><img src="/Resources/imagenes/popupG/icono_t.png"></p><span></span></div>
+        <div><p><img src="/Resources/imagenes/popupG/icono_correo.svg"></p><span></span></div>
+    </div>
+    <!-- FIN Plantilla de información general Autores. -->
+    <div id="popupG_preguntas">
+        <img src="/Resources/imagenes/comentarios/salir.png" class="cerrar" />
+        <div class="icono"></div>
+        <p class="titulo"></p>
+        <div class="contenido"></div>
+        <div class="botones"></div>
+    </div>
+</div>

@@ -1,0 +1,37 @@
+﻿@model List<centro.recursos.net.Models.Entity_Framework.Multimedia>
+
+<div id="franjaOpciones">
+    <div class="ctdrFranjaOpcion">
+        <div id="franjaSelector">
+            <input type="hidden" id="numeroOpcionesMult" value="@Model.Count"/>
+            <span>@Model[0].Titulo</span>
+            <img src="~/Resources/imagenes/multimedia/flecha3A.png" />
+        </div>
+        @for (int i = 0; i < Model.Count; i++)
+        {
+            <div class="franjaOpcion" id="op_@i.ToString()">
+                <div class="flechaFranjaOp"></div>
+                <span>@Model[i].Titulo</span>
+            </div>
+        }
+    </div>
+</div>
+<div id="ctdrMultimedia">
+    @foreach (var multimedia in Model)
+    {
+        <div class="ctdMultimedia" style="background-image:url(/Resources/imagenes/multimedia/@multimedia.Imagen)">
+            <div class="msjMultimedia">
+                <p>
+                    <span>
+                        @multimedia.Informacion
+                    </span>
+                </p>
+                <p>
+                    <a href="@multimedia.URI" class="@multimedia.Boton.Color">
+                        @multimedia.Boton.Texto
+                    </a>
+                </p>
+            </div>
+        </div>
+    }
+</div>

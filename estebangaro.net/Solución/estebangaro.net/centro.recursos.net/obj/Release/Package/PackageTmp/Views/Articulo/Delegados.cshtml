@@ -1,0 +1,18 @@
+﻿<!DOCTYPE html>
+
+<html>
+    <head>
+        <title>Delegados</title>
+        <meta charset="UTF-8" />
+        <meta name="viewport" content="width=device-width, initial-scale=1" />
+        <link href="~/Resources/css/visualizadorcodigo.css" rel="stylesheet" />
+        <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.2.1/jquery.min.js"></script>
+        <script src="~/Resources/javascript/visualizadorcodigo.js"></script>
+    </head>
+    <body>
+        <div id="delegedosCodigoFuente_1" class="codigoFuente">
+            @Html.Action("_ConvertidorCodigo",
+                new { rutaCodigos = "MVC", idArticulo = "/Frameworks/Entity Framework" })
+        </div>
+    </body>
+</html>

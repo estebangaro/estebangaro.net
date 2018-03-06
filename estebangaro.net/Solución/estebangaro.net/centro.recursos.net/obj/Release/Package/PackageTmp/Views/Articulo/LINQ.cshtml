@@ -1,0 +1,186 @@
+﻿@{ 
+    Layout = "~/Views/Shared/_LayoutArticulo.cshtml";
+}
+<div class="Articulo">
+    <p>
+        <span class="Negrita">LINQ</span> es el acr&oacute;nimo de <span class="Negrita">Language Integrated Query (consultas integradas en el lenguaje)</span> y representa una tecnolog&iacute;a de consulta de datos del .NET Framework a trav&eacute;s de la cual podemos definir <span class="Negrita">"expresiones de consultas"</span> contra una gran variedad
+        de "conjuntos de datos", que pueden ser desde colecciones de objetos en memoria, documentos XML hasta bases de datos relaciones o cualquier origen que podamos imaginar (documentos excel, directorios, etc, eso s&iacute; para estos casos habr&iacute;a que
+        echar mano de extensiones de terceros, pero de que se puede, se puede!), utilizando una misma "sintaxis de consulta" sin importar la naturaleza del origen de datos subyacente.
+    </p>
+    <div class="Vinetas">
+        <p><span class="Titulo Negrita">&iquest;Cu&aacute;les son las ventajas de incluir LINQ en nuestros desarrollos?</span></p>
+        <div class="Lista">
+            <div class="Vineta"><img src="~/Resources/imagenes/articulo/check_0.png" /></div><div class="ElementoLista">
+                Contar con <span class="Negrita">verificaci&oacute;n de errores</span> e <span class="Negrita">IntelliSense</span> durante la definici&oacute;n de nuestras "expresiones de consultas", pues al estar "incrustadas" en el c&oacute;digo fuente debemos cumplir con las reglas de sintaxis del lenguaje de programaci&oacute;n, en
+                este caso Visual C#.
+            </div>
+            <div class="Vineta"><img src="~/Resources/imagenes/articulo/check_0.png" /></div><div class="ElementoLista"><span class="Negrita">Olvidar el uso de ciclos, bucles y otras t&eacute;cnicas de iteraci&oacute;n</span> para realizar operaciones de ordenamiento, selecci&oacute;n, agrupaci&oacute;n, transformaci&oacute;n, entre otras, sobre un conjunto de datos determinado.</div>
+            <div class="Vineta"><img src="~/Resources/imagenes/articulo/check_0.png" /></div><div class="ElementoLista"><span class="Negrita">La sintaxis de LINQ es muy elegante y</span> al ser muy <span class="Negrita">parecida a</span> la sintaxis <span class="Negrita">SQL</span> resulta sumamente sencillo interpretar una consulta sin tener completo conocimiento de la sintaxis.</div>
+            <div class="Vineta"><img src="~/Resources/imagenes/articulo/check_0.png" /></div><div class="ElementoLista"><span class="Negrita">Si dominas la sintaxis LINQ to Objects</span> te resultar&aacute; muy <span class="Negrita">sencillo trabajar con</span> el resto de implementaciones disponibles en el .NET Framework; <span class="Negrita">LINQ to Dataset, LINQ to XML, LINQ to SQL y LINQ to Entities.</span></div>
+        </div>
+    </div>
+    <div class="Nota">
+        El grupo de <span class="Negrita">operadores de consulta est&aacute;ndar</span> de LINQ to Objects se podr&iacute;a considerar como la <span class="Negrita">base de operadores de consulta</span> que el resto de implementaciones LINQ deber&aacute;n
+        implementar como m&iacute;nimo (sean implementaciones del .NET Framework o personalizadas).
+    </div>
+    <p><span class="Titulo Negrita">&iquest;A qu&eacute; se le conoce como "expresiones de consultas"?</span></p>
+    <p>
+        Nos referimos a "expresiones de consultas" a todas aquellas <span class="Negrita">expresiones dentro del c&oacute;digo fuente de la aplicaci&oacute;n que hagan uso de los operadores LINQ</span> disponibles por "implementaci&oacute;n" (nos referimos
+        como "implementaci&oacute;n" a todas aquellas variantes de LINQ incluidas en el .NET Framework como LINQ to Objects, LINQ to Dataset, LINQ to XML, LINQ to SQL y LINQ to Entities) para la definici&oacute;n de consultas contra un origen de datos determinado.
+    </p>
+    <p>
+        <span class="Negrita">Existen 2 formas de crear "expresiones de consultas LINQ"</span> la primera de ellas es mediante la <span class="Negrita">extensi&oacute;n a la sintaxis del lenguaje</span> a trav&eacute;s del uso de palabras clave como "from", "where", "orderby", "select", etc lo que tambi&eacute;n se le conoce como
+        "az&uacute;car sint&aacute;ctico", pues de cierta forma "endulza" el c&oacute;digo fuente dando un significado mas cercano a lo que representa la expresi&oacute;n, en este caso representar una consulta ocupando una sintaxis muy parecida a la de SQL, la segunda forma consiste
+        en realizar <span class="Negrita">invocaciones "directas" a m&eacute;todos</span> disponibles en el tipo <span class="Negrita">IEnumerable&lt;E&gt; / IQueryable&lt;E&gt;</span>
+    </p>
+    <div class="Vinetas">
+        <p><span class="Titulo Negrita">&iquest;Cu&aacute;les son las principales caracter&iacute;sticas que dan soporte a LINQ?</span></p>
+        <div class="Lista">
+            <div class="Vineta"><img src="~/Resources/imagenes/articulo/check_0.png" /></div><div class="ElementoLista">Tipos an&oacute;nimos inmutables (declaraci&oacute;n de variables "var" y creaci&oacute;n de objetos an&oacute;nimos).</div>
+            <div class="Vineta"><img src="~/Resources/imagenes/articulo/check_0.png" /></div><div class="ElementoLista">M&eacute;todos de extensi&oacute;n (Todos los operadores LINQ se encuentran implementados como m&eacute;todos de extensi&oacute;n para el tipo IEnumerable&lt;E&gt; a trav&eacute;s de la clase auxiliar Enumerable/Queryable</div>
+            <div class="Vineta"><img src="~/Resources/imagenes/articulo/check_0.png" /></div><div class="ElementoLista">M&eacute;todos an&oacute;nimos (Sintaxis tradicional o expresiones lambda para definir delegados requeridos por los operadores LINQ).</div>
+        </div>
+    </div>
+    <div class="Vinetas">
+        <p><span class="Titulo Negrita">Ejemplos pr&aacute;cticos</span></p>
+        <p>Los siguientes ejemplos de código fuente se pueden ejecutar como proyectos de <span class="Negrita">aplicaci&oacute;n de consola (.NET Framework)</span>.</p>
+        <div class="Lista">
+            <div class="Vineta"><img src="~/Resources/imagenes/articulo/codigo.png" /></div><div class="ElementoLista"><span class="Negrita">Exp Consulta LINQ.cs</span>, presenta las diferencias entre las 2 formas posibles para crear "expresiones de consulta" con LINQ.</div>
+            <div class="Vineta"><img src="~/Resources/imagenes/articulo/codigo.png" /></div><div class="ElementoLista"><span class="Negrita">LINQ vs FOR.cs</span>, presenta la ventaja del uso de LINQ contra el uso de bloques de iteraci&oacute;n.</div>
+        </div>
+    </div>
+    <div class="codigoFuente delegadosCodigoFuente_1">
+        @Html.Action("_ConvertidorCodigo", "Articulo",
+                                   new { rutaCodigos = "LINQ", idArticulo = "/Articulo/CSharp/LINQ" })
+    </div>
+    <div class="Vinetas">
+        <p><span class="Titulo Negrita">Puedes conocer m&aacute;s de LINQ en los siguentes enlaces:</span></p>
+        <div class="Lista">
+            <div class="Vineta"><img src="~/Resources/imagenes/articulo/link.png" /></div><div class="ElementoLista"><a class="Enlace" target="_blank" href="https://docs.microsoft.com/en-us/dotnet/csharp/programming-guide/concepts/linq/">Language Integrated Query (LINQ).</a></div>
+            <div class="Vineta"><img src="~/Resources/imagenes/articulo/link.png" /></div><div class="ElementoLista"><a class="Enlace" target="_blank" href="https://docs.microsoft.com/en-us/dotnet/csharp/programming-guide/concepts/linq/introduction-to-linq">Introduction to LINQ (C#).</a></div>
+        </div>
+    </div>
+</div>
+    @section Styles{
+        <style>
+            .codigoFuente {
+                margin: 1em 0;
+            }
+
+            #InfoArticulo {
+                border-bottom: solid white 2px;
+            }
+
+                #InfoArticulo > .Imagen > div {
+                    border-radius: 10px;
+                    border: solid 2px black;
+                    background-image: url('../../Resources/imagenes/noticias/linq_1.PNG');
+                    background-repeat: no-repeat;
+                    height: 149px;
+                    width: 655px;
+                    margin: 0 auto;
+                }
+
+            .FondoSeccionContenidoFijo {
+                background-image: url('../../Resources/imagenes/home/milky-way-2695569_1920.jpg');
+                background-image: url('../../Resources/imagenes/home/computer-3036166_1920.jpg');
+                background-repeat: no-repeat;
+                background-size: cover;
+            }
+
+            #fondoMenu {
+                background-color: transparent;
+            }
+
+            #InfoArticulo > .Titulo,
+            #InfoArticulo > .Descripcion {
+                color: whitesmoke;
+            }
+
+            #InfoArticulo > .Autor > .Nombre > span {
+                color: lawngreen;
+            }
+
+                #InfoArticulo > .Autor > .Fecha > span,
+                #InfoArticulo > .Autor > .Nombre > span:first-child {
+                    color: white;
+                }
+
+            /*Inicio Articulo*/
+            .Nota {
+                background-color: gainsboro;
+                border-left: solid blue 5px;
+                padding: 0.8em;
+                /*clear: both;*/
+                color: black;
+                margin: 1em 0;
+            }
+
+            .Negrita {
+                font-weight: bold;
+            }
+
+            .Titulo {
+                color: lawngreen;
+                font-size: 1.22rem;
+            }
+
+            .Enlace {
+                text-decoration: none;
+                color: lightskyblue;
+            }
+
+            .Lista {
+                width: 99%;
+                float: right;
+            }
+
+                .Lista div > img {
+                    width: 14px;
+                    height: 14px;
+                }
+
+                .Lista div {
+                    float: left;
+                    box-sizing: border-box;
+                }
+
+                    .Lista div.Vineta {
+                        width: 5%;
+                        text-align: center;
+                    }
+
+                    .Lista div.ElementoLista {
+                        width: 95%;
+                        margin-bottom: 0.7em;
+                    }
+            .Articulo {
+                text-align: justify;
+                font-family: segoe-ui_normal,Segoe UI,Segoe,Segoe WP,Helvetica Neue,Helvetica,sans-serif;
+                font-size: 1.07rem;
+                color: whitesmoke;
+            }
+            .Vinetas{
+                overflow: hidden;
+            }
+            .delegadosCodigoFuente_1{
+                font-size: initial;
+                margin: 1em;
+                color:black;
+            }
+            /*Fin Articulo*/
+            @@media screen and (min-width: 600px) and (max-width: 1025px) {
+                #InfoArticulo > .Imagen > div {
+                    width: 100%;
+                    background-size: contain;
+                }
+            }
+
+            @@media screen and (min-width: 100px) and (max-width: 600px) {
+                #InfoArticulo > .Imagen > div {
+                    width: 100%;
+                    background-size: contain;
+                }
+            }
+        </style>
+    }
