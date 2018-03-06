@@ -1,0 +1,138 @@
+#InfoArticulo {
+    width: 100%;
+    padding: 1em 0;
+    margin-bottom: 1.5em;
+}
+
+#InfoArticulo>p {
+    text-align: center;
+}
+
+#InfoArticulo>.Titulo,
+#InfoArticulo>.Descripcion {
+    margin: 0;
+}
+
+#InfoArticulo>.Titulo {
+    font-size: 3em;
+    font-family: 'Lucida Sans', 'Lucida Sans Regular', 'Lucida Grande', 'Lucida Sans Unicode', Geneva, Verdana, sans-serif;
+}
+
+#InfoArticulo>.Descripcion {
+    font-size: 1.3em;
+}
+
+#InfoArticulo>.Imagen,
+#InfoArticulo>.Autor {
+    width: 100%;
+}
+
+/* #InfoArticulo>.Imagen {
+    height: 250px;
+} */
+
+/* #InfoArticulo>.Imagen>div {
+    height: 100%;
+    width: 800px;
+    margin: 0 auto;
+} */
+
+#InfoArticulo>.Autor {
+    overflow: hidden;
+    margin: 0.5em 0;
+    position: relative;
+}
+
+#InfoArticulo>.Autor>*,
+#InfoArticulo>.Autor>.Fecha>* {
+    float: left;
+}
+
+#InfoArticulo>.Autor>img {
+    width: 48px;
+    height: 48px;
+    border-radius: 50%;
+    cursor: pointer;
+}
+
+#InfoArticulo>.Autor>img,
+#InfoArticulo>.Autor>.Nombre,
+#InfoArticulo>.Autor>.Fecha {
+    margin-left: 0.5em;
+}
+
+#InfoArticulo>.Autor>.Nombre>span {
+    text-decoration-line: underline;
+    cursor: pointer;
+}
+
+#InfoArticulo>.Autor>.Nombre>span:first-child {
+    font-weight: bold;
+    text-decoration-line: none;
+    cursor: default;
+}
+
+#InfoArticulo>.Autor>.Fecha {
+    overflow: hidden;
+}
+
+#InfoArticulo>.Autor>.Fecha>img {
+    width: 18px;
+    height: 20px;
+}
+
+@media screen and (min-width: 600px) and (max-width: 1025px) {
+    #InfoArticulo>.Imagen>div {
+        width: 100%;
+    }
+    #InfoArticulo>.Titulo {
+        font-size: 2em;
+    }
+    #InfoArticulo>.Descripcion {
+        font-size: 1.3em;
+    }
+    #InfoArticulo>.Autor>img {
+        width: 42px;
+        height: 42px;
+    }
+    #InfoArticulo>.Autor>img,
+    #InfoArticulo>.Autor>.Nombre,
+    #InfoArticulo>.Autor>.Fecha {
+        font-size: 1em;
+        margin-left: 0.3em;
+    }
+}
+
+@media screen and (min-width: 100px) and (max-width: 600px) {
+    #InfoArticulo>.Imagen>div {
+        width: 100%;
+    }
+    #InfoArticulo>.Titulo {
+        font-size: 1.5em;
+    }
+    #InfoArticulo>.Descripcion {
+        font-size: 1em;
+    }
+    #InfoArticulo>.Autor{
+        text-align: center;
+    }
+    #InfoArticulo>.Autor>img {
+        width: 32px;
+        height: 32px;
+    }
+    #InfoArticulo>.Autor>img,
+    #InfoArticulo>.Autor>.Nombre,
+    #InfoArticulo>.Autor>.Fecha {
+        margin-left: 0.2em;
+        font-size: 1em;
+        float: none;
+    }
+
+    #InfoArticulo>.Autor>.Fecha>*{
+        float:none;
+    }
+
+    #InfoArticulo>.Autor>.Fecha>img{
+        height: 12px;
+    }
+}
