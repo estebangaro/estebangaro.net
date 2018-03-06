@@ -338,6 +338,7 @@
     <Content Include="Views\Shared\_PopupGv.cshtml" />
     <Content Include="Views\Shared\_PopUpGr.cshtml" />
     <Content Include="Views\Shared\_AcercaDe.cshtml" />
+    <None Include="Properties\PublishProfiles\garonet - Web Deploy.pubxml" />
     <None Include="Web.Debug.config">
       <DependentUpon>Web.config</DependentUpon>
     </None>

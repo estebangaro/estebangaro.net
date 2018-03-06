@@ -43,14 +43,15 @@
     </div>
     <div class="Vinetas">
         <p><span class="Titulo Negrita">Ejemplos pr&aacute;cticos</span></p>
+        <p>Los siguientes ejemplos de código fuente se pueden ejecutar como proyectos de <span class="Negrita">aplicaci&oacute;n de consola (.NET Framework)</span>.</p>
         <div class="Lista">
             <div class="Vineta"><img src="~/Resources/imagenes/articulo/codigo.png" /></div><div class="ElementoLista"><span class="Negrita">Exp Consulta LINQ.cs</span>, presenta las diferencias entre las 2 formas posibles para crear "expresiones de consulta" con LINQ.</div>
             <div class="Vineta"><img src="~/Resources/imagenes/articulo/codigo.png" /></div><div class="ElementoLista"><span class="Negrita">LINQ vs FOR.cs</span>, presenta la ventaja del uso de LINQ contra el uso de bloques de iteraci&oacute;n.</div>
         </div>
     </div>
-    <div class="codigoFuente delegadosCodigoFuente_1" >
+    <div class="codigoFuente delegadosCodigoFuente_1">
         @Html.Action("_ConvertidorCodigo", "Articulo",
-                              new { rutaCodigos = "LINQ", idArticulo = "/Articulo/CSharp/LINQ" })
+                                   new { rutaCodigos = "LINQ", idArticulo = "/Articulo/CSharp/LINQ" })
     </div>
     <div class="Vinetas">
         <p><span class="Titulo Negrita">Puedes conocer m&aacute;s de LINQ en los siguentes enlaces:</span></p>
@@ -63,7 +64,6 @@
     @section Styles{
         <style>
             .codigoFuente {
-                width: 100%;
                 margin: 1em 0;
             }
 

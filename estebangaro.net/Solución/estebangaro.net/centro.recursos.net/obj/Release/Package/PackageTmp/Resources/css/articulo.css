@@ -1,0 +1,47 @@
+﻿#fondoMenu {
+    position: absolute;
+}
+
+.FondoSeccionContenidoFijo {
+    position: fixed;
+    height: 100%;
+}
+
+#SeccionArticulo {
+    position: absolute;
+    background-color: rgba(0,0,0,0.7);
+}
+
+.FondoSeccionContenidoFijo,
+#SeccionArticulo {
+    top: 0;
+    left: 0;
+    width: 100%;
+}
+
+#SeccionArticulo>.FondoSeccionContenido {
+    width: 100%;
+}
+
+#SeccionArticulo>.FondoSeccionContenido>.SeccionContenido {
+    width: 80%;
+    margin: 0 auto;
+}
+
+#SeccionArticulo>.SeccionComentarios {
+    padding: 1em 0;
+    position: relative;
+    width: 100%;
+}
+
+@media screen and (min-width: 600px) and (max-width: 1025px) {
+    #SeccionArticulo>.FondoSeccionContenido>.SeccionContenido {
+        width: 90%;
+    }
+}
+
+@media screen and (min-width: 100px) and (max-width: 600px) {
+    #SeccionArticulo>.FondoSeccionContenido>.SeccionContenido {
+        width: 95%;
+    }
+}

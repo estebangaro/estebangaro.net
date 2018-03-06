@@ -1,0 +1,137 @@
+        #dialogMsjArtRelG{
+            position: fixed;
+            top: 50%;
+            transition: 1s all cubic-bezier(0.215, 0.610, 0.355, 1);
+            box-shadow: 0 0 10px black;
+        }
+        #dialogMsjArtRelG > .Flecha{
+            display: block;
+            position: absolute;
+            top:0;
+            right: 0;
+            margin-right: -30px;
+            width: 25px;
+            height: 100%;
+            text-align: center;
+            border-radius: 10px;
+        }
+        #dialogMsjArtRelG > .Flecha > img{
+            position: relative;
+            top: 50%;
+            cursor: pointer;
+        }
+        #dialogMsjArtRelG > .Titulo{
+            text-align: center;
+        }
+        #dialogMsjArtRelG > .Contenido{
+            overflow: auto;
+            max-height: 222px;
+            margin: 0.5em;
+        }
+        #dialogMsjArtRelG > .Contenido > table{
+            border-collapse: collapse;
+            width: 100%;
+            margin-bottom: 0.5em;
+        }
+        #dialogMsjArtRelG > .Contenido > table tr{
+            border-bottom: solid gray 1px;
+        }
+        #dialogMsjArtRelG > .Contenido > table tr a{
+            text-decoration: none;
+            color: blue;
+        }
+        #dialogMsjArtRelG > .Contenido > table tr th{
+            text-align: left;
+        }
+        #dialogMsjArtRelG > .Contenido > table tr td, #dialogMsjArtRelG > .Contenido > table tr th{
+           padding: 1em 0;
+        }
+        #dialogMsjArtRelG > .cerrar{
+            position: absolute;
+            right: 0;
+            top:0;
+            cursor: pointer;
+            display: none;
+        }
+
+        @media screen and (min-width: 1025px) {
+            #dialogMsjArtRelG{
+                width: 300px;
+                left: -300px;
+                border-top-right-radius: 12px;
+                border-bottom-right-radius: 12px;
+                background-color: rgb(255, 255, 255);
+            }
+            #dialogMsjArtRelG > .Flecha{
+                background-color: rgba(255, 255, 255, 0.2);
+                transition: all 1s linear;
+            }
+            #dialogMsjArtRelG > .Flecha > img{
+                width: 22px;
+                height: 22px;
+                margin-top: -11px;
+            }
+            #dialogMsjArtRelG > .Flecha:hover{
+                background-color:transparent;
+            }
+            #dialogMsjArtRelG > .Titulo{
+                font-size: 1.3em;
+            }
+            #dialogMsjArtRelG > .cerrar{
+                margin-top: -10px;
+                margin-right: -10px;
+                width: 20px;
+                height: 20px;
+            }
+        }
+
+        @media screen and (min-width: 600px) and (max-width: 1025px) {
+            #dialogMsjArtRelG{
+                width: 250px;
+                left: -250px;
+                border-top-right-radius: 10px;
+                border-bottom-right-radius: 10px;
+                background-color: rgba(255, 255, 255, 0.9);
+            }
+            #dialogMsjArtRelG > .Flecha{
+                background-color: rgba(255, 255, 255, 0.3);
+            }
+            #dialogMsjArtRelG > .Flecha > img{
+                width: 20px;
+                height: 20px;
+                margin-top: -10px;
+            }
+            #dialogMsjArtRelG > .Titulo{
+                font-size: 1.2em;
+            }
+            #dialogMsjArtRelG > .cerrar{
+                margin-top: -9px;
+                margin-right: -9px;
+                width: 18px;
+                height: 18px;
+            }
+        }
+
+        @media screen and (min-width: 100px) and (max-width: 600px) {
+            #dialogMsjArtRelG{
+                width: 80%;
+                left: -80%;
+                border-top-right-radius: 10px;
+                border-bottom-right-radius: 10px;
+                background-color: rgba(255, 255, 255, 0.9);
+            }
+            #dialogMsjArtRelG > .Flecha > img{
+                width: 20px;
+                height: 20px;
+                margin-top: -10px;
+            }
+            #dialogMsjArtRelG > .Titulo{
+                font-size: 1.1em;
+            }
+            #dialogMsjArtRelG > .cerrar{
+                margin-top: -10px;
+                margin-right: -10px;
+                width: 20px;
+                height: 20px;
+            }
+        }

@@ -1,0 +1,142 @@
+#franjaOpciones {
+    position: absolute;
+    width: 100%;
+    background-color: rgba(255, 255, 255, 0.3);
+    text-align: center;
+    z-index: 1;
+}
+
+#franjaOpciones>.ctdrFranjaOpcion {
+    display: inline-block;
+}
+
+.ctdrFranjaOpcion>.franjaOpcion,
+#franjaSelector {
+    box-sizing: border-box;
+    padding: 1em 1em;
+    margin: 0;
+    cursor: pointer;
+    color: white;
+    position: relative;
+    display: inline-block;
+}
+
+#franjaSelector {
+    display: none;
+}
+
+#franjaSelector>img {
+    width: 22px;
+    height: 22px;
+    position: absolute;
+    right: 0;
+    margin-right: 0.5em;
+}
+
+.flechaFranjaOp {
+    position: absolute;
+    bottom: 0;
+    left: 50%;
+    background-color: whitesmoke;
+    -ms-transform: rotate(45deg);
+    /* IE 9 */
+    -webkit-transform: rotate(45deg);
+    /* Chrome, Safari, Opera */
+    transform: rotate(45deg);
+    display: none;
+}
+
+.ctdrFranjaOpcion>.franjaOpcion:nth-child(2) {
+    background-color: whitesmoke;
+    color: cornflowerblue;
+}
+
+.ctdrFranjaOpcion>.franjaOpcion:nth-child(2)>.flechaFranjaOp {
+    display: block;
+}
+
+#ctdrMultimedia {
+    position: absolute;
+    top: 0;
+    left: 0;
+    /*width: 300%; */
+    /* En función del número de elementos multimedia */
+    height: 100%;
+    overflow: hidden;
+    transition: all 1s cubic-bezier(0.175, 0.885, 0.32, 1.275);
+}
+
+#ctdrMultimedia>.ctdMultimedia {
+    box-sizing: border-box;
+    /* width: 33.33%; */
+    /*En función del número de elementos multimedia*/
+    float: left;
+    height: 100%;
+    background-size: cover;
+}
+
+.msjMultimedia {
+    background-color: rgba(0, 0, 0, 0.5);
+}
+
+.ctdMultimedia p {
+    width: 50%;
+    margin: 1em auto;
+    text-align: center;
+}
+
+.ctdMultimedia span {
+    font-size: 1.5em;
+    color: azure;
+}
+
+.ctdMultimedia a {
+    border: 2px solid white;
+    padding: 0.5em 1em;
+    color: azure;
+    display: inline-block;
+    text-decoration: none;
+}
+
+#ctdrMultimedia>.ctdMultimedia:first-child {
+    background-image: url(../../imagenes/fondo.JPG);
+}
+
+#ctdrMultimedia>.ctdMultimedia:last-child {
+    background-image: url(../../imagenes/fondo2.jpg);
+}
+
+@media screen and (min-width: 100px) and (max-width: 600px) {
+    #franjaOpciones {
+        background-color: transparent;
+    }
+    #franjaOpciones>.ctdrFranjaOpcion {
+        display: block;
+    }
+    .ctdrFranjaOpcion>div {
+        border: solid whitesmoke 1px;
+        border-top: 0;
+    }
+    .ctdrFranjaOpcion>.franjaOpcion {
+        display: block;
+        visibility: hidden;
+        opacity: 0;
+        background-color: rgba(0, 255, 255, 0.5);
+    }
+    .ctdrFranjaOpcion>.franjaOpcion:nth-child(2) {
+        color: yellow;
+        background-color: rgba(0, 255, 255, 0.5);
+    }
+    .flechaFranjaOp,
+    .ctdrFranjaOpcion>.franjaOpcion:nth-child(2)>.flechaFranjaOp {
+        display: none;
+    }
+    #franjaSelector {
+        display: block;
+        background-color: rgba(0, 255, 255, 0.5);
+        border-top: solid whitesmoke 1px;
+    }
+    .ctdMultimedia p{
+        font-size: 0.8em;
+    }
+}
