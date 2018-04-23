@@ -8,7 +8,7 @@ using System.Threading.Tasks;
 
 namespace centro.recursos.net.Models.Repositorios
 {
-    public interface IGaroNetDb
+    public interface IGaroNetDb: IDisposable
     {
         Respuesta<List<OpcionMenu>> ObtenOpcionesMenu();
 

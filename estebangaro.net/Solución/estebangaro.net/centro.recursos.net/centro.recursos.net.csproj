@@ -177,6 +177,7 @@
     <Content Include="Resources\imagenes\carrusel\flecha2D.png" />
     <Content Include="Resources\imagenes\carrusel\flecha2I.png" />
     <Content Include="Resources\imagenes\carrusel\flecha3D.png" />
+    <Content Include="Resources\imagenes\comentarios\avatars\avatar.jpg" />
     <Content Include="Resources\imagenes\comentarios\avatars\batman.png" />
     <Content Include="Resources\imagenes\comentarios\avatars\flash.png" />
     <Content Include="Resources\imagenes\comentarios\avatars\joker.jpg" />
@@ -364,7 +365,7 @@
           <AutoAssignPort>True</AutoAssignPort>
           <DevelopmentServerPort>54868</DevelopmentServerPort>
           <DevelopmentServerVPath>/</DevelopmentServerVPath>
-          <IISUrl>http://192.168.0.6:2510</IISUrl>
+          <IISUrl>http://localhost:5680</IISUrl>
           <NTLMAuthentication>False</NTLMAuthentication>
           <UseCustomServer>False</UseCustomServer>
           <CustomServerUrl>

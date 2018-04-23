@@ -1,4 +1,5 @@
 ﻿using centro.recursos.net.Models.Entity_Framework;
+using centro.recursos.net.Models.Repositorios;
 using centro.recursos.net.Models.Utileria;
 using System;
 using System.Collections.Generic;
@@ -30,16 +31,16 @@ namespace centro.recursos.net.Controllers
             Respuesta<List<OpcionMenu>> opciones;
 
             if (Session["_HTMLmenu"] == null)
-                opciones = Repositorio.ObtenOpcionesMenu();
+                opciones = new Respuesta<List<OpcionMenu>>
+                {
+                    Resultado = new List<OpcionMenu>(),
+                    Estado = true
+                };
             else
                 opciones = null;
             PartialViewResult resultado = null;
             if (opciones != null && opciones.Estado)
                 resultado = PartialView(opciones.Resultado);
-            else if (opciones != null)
-                ViewBag.LayoutExcepcion += (ViewBag.LayoutExcepcion != null ?
-                    $"@{GeneraRespuestaExcepcion<List<OpcionMenu>>(opciones)}" :
-                    GeneraRespuestaExcepcion<List<OpcionMenu>>(opciones));
             else
                 resultado = PartialView(null);
 
@@ -48,69 +49,81 @@ namespace centro.recursos.net.Controllers
 
         public PartialViewResult _Carrusel()
         {
-            Respuesta<List<AvisoCarrusel>> avisos;
-
-            if (Session["_HTMLavisoscarrusel"] == null)
-                avisos = Repositorio.ObtenAvisosCarrusel();
-            else
-                avisos = null;
-            PartialViewResult resultado = null;
-
-            if (avisos != null && avisos.Estado)
-                resultado = PartialView(avisos.Resultado);
-            else if (avisos != null)
-                ViewBag.LayoutExcepcion += (ViewBag.LayoutExcepcion != null ?
-                    $"@{GeneraRespuestaExcepcion<List<AvisoCarrusel>>(avisos)}" :
-                    GeneraRespuestaExcepcion<List<AvisoCarrusel>>(avisos));
-            else
+            using (IGaroNetDb repositorio = Repositorio)
             {
-                resultado = PartialView(null);
-                ViewBag.AvisosCuenta = ((Tuple<MvcHtmlString, int>)Session["_HTMLavisoscarrusel"]).Item2;
-            }
+                Respuesta<List<AvisoCarrusel>> avisos;
 
-            return resultado;
+                if (Session["_HTMLavisoscarrusel"] == null)
+                    avisos = repositorio.ObtenAvisosCarrusel();
+                else
+                    avisos = null;
+                PartialViewResult resultado = null;
+
+                if (avisos != null && avisos.Estado)
+                    resultado = PartialView(avisos.Resultado);
+                else if (avisos != null)
+                    ViewBag.LayoutExcepcion += (ViewBag.LayoutExcepcion != null ?
+                        $"@{GeneraRespuestaExcepcion<List<AvisoCarrusel>>(avisos)}" :
+                        GeneraRespuestaExcepcion<List<AvisoCarrusel>>(avisos));
+                else
+                {
+                    resultado = PartialView(null);
+                    ViewBag.AvisosCuenta = ((Tuple<MvcHtmlString, int>)Session["_HTMLavisoscarrusel"]).Item2;
+                }
+
+                return resultado;
+            }
         }
 
         public PartialViewResult _NoticiasP()
         {
-            Respuesta<List<NoticiaPrincipal>> noticias = Repositorio.ObtenNoticias();
-            PartialViewResult resultado = null;
-            if (noticias.Estado)
-                resultado = PartialView(noticias.Resultado);
-            else
-                ViewBag.LayoutExcepcion += (ViewBag.LayoutExcepcion != null ?
-                    $"@{GeneraRespuestaExcepcion<List<NoticiaPrincipal>>(noticias)}" :
-                    GeneraRespuestaExcepcion<List<NoticiaPrincipal>>(noticias));
+            using (IGaroNetDb repositorio = Repositorio)
+            {
+                Respuesta<List<NoticiaPrincipal>> noticias = repositorio.ObtenNoticias();
+                PartialViewResult resultado = null;
+                if (noticias.Estado)
+                    resultado = PartialView(noticias.Resultado);
+                else
+                    ViewBag.LayoutExcepcion += (ViewBag.LayoutExcepcion != null ?
+                        $"@{GeneraRespuestaExcepcion<List<NoticiaPrincipal>>(noticias)}" :
+                        GeneraRespuestaExcepcion<List<NoticiaPrincipal>>(noticias));
 
-            return resultado;
+                return resultado;
+            }
         }
 
         public PartialViewResult _SeccionesMultimedia()
         {
-            Respuesta<List<Multimedia>> multimedia = Repositorio.ObtenMultimedia();
-            PartialViewResult resultado = null;
-            if (multimedia.Estado)
-                resultado = PartialView(multimedia.Resultado);
-            else
-                ViewBag.LayoutExcepcion += (ViewBag.LayoutExcepcion != null ?
-                    $"@{GeneraRespuestaExcepcion<List<Multimedia>>(multimedia)}" :
-                    GeneraRespuestaExcepcion<List<Multimedia>>(multimedia));
+            using (IGaroNetDb repositorio = Repositorio)
+            {
+                Respuesta<List<Multimedia>> multimedia = repositorio.ObtenMultimedia();
+                PartialViewResult resultado = null;
+                if (multimedia.Estado)
+                    resultado = PartialView(multimedia.Resultado);
+                else
+                    ViewBag.LayoutExcepcion += (ViewBag.LayoutExcepcion != null ?
+                        $"@{GeneraRespuestaExcepcion<List<Multimedia>>(multimedia)}" :
+                        GeneraRespuestaExcepcion<List<Multimedia>>(multimedia));
 
-            return resultado;
+                return resultado;
+            }
         }
 
         public PartialViewResult _SeccionesAutor()
         {
-            Respuesta<List<Autor>> autores = Repositorio.ObtenAutores();
-            PartialViewResult resultado = null;
-            if (autores.Estado)
-                resultado = PartialView(autores.Resultado);
-            else
-                ViewBag.LayoutExcepcion += (ViewBag.LayoutExcepcion != null ?
-                    $"@{GeneraRespuestaExcepcion<List<Autor>>(autores)}" :
-                    GeneraRespuestaExcepcion<List<Autor>>(autores));
+            using (IGaroNetDb repositorio = Repositorio)
+            {
+                Respuesta<List<Autor>> autores = repositorio.ObtenAutores();
+                PartialViewResult resultado = null;
+                if (autores.Estado)
+                    resultado = PartialView(autores.Resultado);
+                else
+                    ViewBag.LayoutExcepcion += (ViewBag.LayoutExcepcion != null ?
+                        $"@{GeneraRespuestaExcepcion<List<Autor>>(autores)}" :
+                        GeneraRespuestaExcepcion<List<Autor>>(autores));
 
-            return resultado;
+                return resultado;
+            }
         }
     }
 }
