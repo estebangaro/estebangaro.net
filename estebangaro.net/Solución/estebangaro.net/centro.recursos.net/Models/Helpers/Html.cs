@@ -15,18 +15,38 @@ namespace centro.recursos.net.Models.Helpers
 {
     public static class Html
     {
+        public static string CadenaConexion
+        {
+            get
+            {
+                string amb = ConfigurationManager.AppSettings["ambiente"];
+                amb = string.IsNullOrEmpty(amb) ? "dev" : amb;
+                return $"GaroNETDbContexto_{amb}";
+            }
+        }
+
         public static MvcHtmlString GeneraMenu(this HtmlHelper helper, List<OpcionMenu> opciones)
         {
             if (opciones != null)
             {
-                List<XElement> _opciones = new List<XElement>();
-                foreach (OpcionMenu opcion in opciones)
-                    _opciones.Add(ObtenMarcado(opcion));
+                using (Repositorios.IGaroNetDb Repositorio = 
+                    new Models.Repositorios.GaroNetDb(CadenaConexion))
+                {
+                    var Consulta = Repositorio.ObtenOpcionesMenu();
+                    opciones = Consulta.Resultado;
 
-                MvcHtmlString _menu = new MvcHtmlString(new XElement("div", _opciones).ToString());
-                helper.ViewContext.RequestContext.HttpContext.Session["_HTMLmenu"] = _menu;
+                    if (Consulta.Estado)
+                    {
+                        List<XElement> _opciones = new List<XElement>();
+                        foreach (OpcionMenu opcion in opciones)
+                            _opciones.Add(ObtenMarcado(opcion));
 
-                return _menu;
+                        MvcHtmlString _menu = new MvcHtmlString(new XElement("div", _opciones).ToString());
+                        helper.ViewContext.RequestContext.HttpContext.Session["_HTMLmenu"] = _menu;
+
+                        return _menu;
+                    }
+                }
             }
             return helper.ViewContext.RequestContext.
                 HttpContext.Session["_HTMLmenu"] as MvcHtmlString;

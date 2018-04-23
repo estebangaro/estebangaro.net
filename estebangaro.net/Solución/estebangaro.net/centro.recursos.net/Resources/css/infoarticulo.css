@@ -27,16 +27,6 @@
     width: 100%;
 }
 
-/* #InfoArticulo>.Imagen {
-    height: 250px;
-} */
-
-/* #InfoArticulo>.Imagen>div {
-    height: 100%;
-    width: 800px;
-    margin: 0 auto;
-} */
-
 #InfoArticulo>.Autor {
     overflow: hidden;
     margin: 0.5em 0;

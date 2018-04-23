@@ -1,4 +1,5 @@
-﻿using System;
+﻿using centro.recursos.net.Models.Repositorios;
+using System;
 using System.Collections.Generic;
 using System.Linq;
 using System.Net;
@@ -13,29 +14,35 @@ namespace centro.recursos.net.Controllers
         // http://localhost/api/Autor/25 HTTP VERB: GaroAutores
         public HttpResponseMessage ObtenAutor(int id)
         {
-            var Consulta = Repositorio.ObtenAutor(id);
-            HttpResponseMessage Respuesta = Consulta.Estado ? Request.CreateResponse(HttpStatusCode.OK,
-                new
-                {
-                    Estado = Consulta.Resultado != null,
-                    Autor = Consulta.Resultado,
-                    Edad = Consulta.Resultado != null ? Models.Utileria.Utileria.CalculaEdad(Consulta.Resultado.Nacimiento) :
-                        0
-                }) :
-                Request.CreateResponse(HttpStatusCode.Conflict);
+            using (IGaroNetDb repositorio = Repositorio)
+            {
+                var Consulta = repositorio.ObtenAutor(id);
+                HttpResponseMessage Respuesta = Consulta.Estado ? Request.CreateResponse(HttpStatusCode.OK,
+                    new
+                    {
+                        Estado = Consulta.Resultado != null,
+                        Autor = Consulta.Resultado,
+                        Edad = Consulta.Resultado != null ? Models.Utileria.Utileria.CalculaEdad(Consulta.Resultado.Nacimiento) :
+                            0
+                    }) :
+                    Request.CreateResponse(HttpStatusCode.Conflict);
 
-            return Respuesta;
+                return Respuesta;
+            }
         }
 
         [Route("Articulo/Busqueda/{busqueda}")]
         [AcceptVerbs("GaroArticulos")]
         public HttpResponseMessage ObtenArticulosPorEtiquetas(string busqueda)
         {
-            var Consulta = Repositorio.ObtenArticulos(busqueda);
-            HttpResponseMessage Respuesta = Consulta.Estado ? Request.CreateResponse(HttpStatusCode.OK,
-                Consulta.Resultado) : Request.CreateResponse(HttpStatusCode.Conflict);
+            using (IGaroNetDb repositorio = Repositorio)
+            {
+                var Consulta = repositorio.ObtenArticulos(busqueda);
+                HttpResponseMessage Respuesta = Consulta.Estado ? Request.CreateResponse(HttpStatusCode.OK,
+                    Consulta.Resultado) : Request.CreateResponse(HttpStatusCode.Conflict);
 
-            return Respuesta;
+                return Respuesta;
+            }
         }
     }
 }

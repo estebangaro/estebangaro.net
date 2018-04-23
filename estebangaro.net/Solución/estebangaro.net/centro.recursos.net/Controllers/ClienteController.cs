@@ -1,4 +1,5 @@
-﻿using System;
+﻿using centro.recursos.net.Models.Repositorios;
+using System;
 using System.Collections.Generic;
 using System.Linq;
 using System.Net;
@@ -12,12 +13,15 @@ namespace centro.recursos.net.Controllers
         [AcceptVerbs("GaroClientes")]
         public HttpResponseMessage ObtenCliente(string id)
         {
-            var Consulta = Repositorio.ObtenCliente(id);
-            HttpResponseMessage Respuesta = Consulta.Estado ? Request.CreateResponse(HttpStatusCode.OK,
-                new { Estado = Consulta.Resultado != null, Cliente = Consulta.Resultado }) :
-                Request.CreateResponse(HttpStatusCode.Conflict);
+            using (IGaroNetDb repositorio = Repositorio)
+            {
+                var Consulta = repositorio.ObtenCliente(id);
+                HttpResponseMessage Respuesta = Consulta.Estado ? Request.CreateResponse(HttpStatusCode.OK,
+                    new { Estado = Consulta.Resultado != null, Cliente = Consulta.Resultado }) :
+                    Request.CreateResponse(HttpStatusCode.Conflict);
 
-            return Respuesta;
+                return Respuesta;
+            }
         }
     }
 }

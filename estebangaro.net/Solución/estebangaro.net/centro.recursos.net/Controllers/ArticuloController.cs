@@ -1,4 +1,5 @@
 ﻿using centro.recursos.net.Models.Entity_Framework;
+using centro.recursos.net.Models.Repositorios;
 using centro.recursos.net.Models.Utileria;
 using System;
 using System.Collections.Generic;
@@ -15,51 +16,58 @@ namespace centro.recursos.net.Controllers
         public ActionResult CSharp(string id)
         {
             ViewBag.Title = id;
-            Respuesta<Articulo> articuloInfo = 
-                Repositorio.ObtenInfoArticulo(Request.Path.ToLower());
-            Respuesta<List<Articulo>> articulosRel =
-                Repositorio.ObtenArticulosRelacionados(Request.Path.ToLower());
 
-            if (articuloInfo.Estado && articulosRel.Estado)
-                return View(viewName: id, model: new ArticuloInfo
-                {
-                    Articulo = articuloInfo.Resultado,
-                    ArticulosRelacionados = articulosRel.Resultado
-                });
-            else
-                return View(viewName: "Error", model: articuloInfo.Detalle);
+            using (IGaroNetDb repositorio = Repositorio)
+            {
+                Respuesta<Articulo> articuloInfo =
+                    repositorio.ObtenInfoArticulo(Request.Path.ToLower());
+                Respuesta<List<Articulo>> articulosRel =
+                    repositorio.ObtenArticulosRelacionados(Request.Path.ToLower());
+
+                if (articuloInfo.Estado && articulosRel.Estado)
+                    return View(viewName: id, model: new ArticuloInfo
+                    {
+                        Articulo = articuloInfo.Resultado,
+                        ArticulosRelacionados = articulosRel.Resultado
+                    });
+                else
+                    return View(viewName: "Error", model: articuloInfo.Detalle);
+            }
         }
 
         [ChildActionOnly]
         public PartialViewResult _ConvertidorCodigo(string rutaCodigos, 
             string idArticulo = null)
         {
-            Respuesta<List<ClasePersonalizada>> clasesPersonalizadas = 
-                Repositorio.ObtenClasesPersonalizadasCodigo(idArticulo);
-            Respuesta<List<PalabraCodigo>> palabrascodigo =
-                Repositorio.ObtenPalabrasCodigo();
-            PartialViewResult resultado = null;
+            using (IGaroNetDb repositorio = Repositorio)
+            {
+                Respuesta<List<ClasePersonalizada>> clasesPersonalizadas =
+                    repositorio.ObtenClasesPersonalizadasCodigo(idArticulo);
+                Respuesta<List<PalabraCodigo>> palabrascodigo =
+                    repositorio.ObtenPalabrasCodigo();
+                PartialViewResult resultado = null;
 
-            if (clasesPersonalizadas.Estado && palabrascodigo.Estado)
-                resultado = PartialView(new PalabrasCodigo
-                {
-                    RutaCodigoFuente = rutaCodigos,
-                    ClasesPersonalizadas = clasesPersonalizadas
-                        .Resultado
-                        .Select(clase => clase.Nombre)
-                        .ToList(),
-                    PalabrasReservadas = palabrascodigo.Resultado
-                });
-            else if (!clasesPersonalizadas.Estado)
-                ViewBag.LayoutExcepcion += (ViewBag.LayoutExcepcion != null ?
-                    $"@{GeneraRespuestaExcepcion<List<ClasePersonalizada>>(clasesPersonalizadas)}" :
-                    GeneraRespuestaExcepcion<List<ClasePersonalizada>>(clasesPersonalizadas));
-            else if (!palabrascodigo.Estado)
-                ViewBag.LayoutExcepcion += (ViewBag.LayoutExcepcion != null ?
-                    $"@{GeneraRespuestaExcepcion<List<PalabraCodigo>>(palabrascodigo)}" :
-                    GeneraRespuestaExcepcion<List<PalabraCodigo>>(palabrascodigo));
-        
-            return resultado;
+                if (clasesPersonalizadas.Estado && palabrascodigo.Estado)
+                    resultado = PartialView(new PalabrasCodigo
+                    {
+                        RutaCodigoFuente = rutaCodigos,
+                        ClasesPersonalizadas = clasesPersonalizadas
+                            .Resultado
+                            .Select(clase => clase.Nombre)
+                            .ToList(),
+                        PalabrasReservadas = palabrascodigo.Resultado
+                    });
+                else if (!clasesPersonalizadas.Estado)
+                    ViewBag.LayoutExcepcion += (ViewBag.LayoutExcepcion != null ?
+                        $"@{GeneraRespuestaExcepcion<List<ClasePersonalizada>>(clasesPersonalizadas)}" :
+                        GeneraRespuestaExcepcion<List<ClasePersonalizada>>(clasesPersonalizadas));
+                else if (!palabrascodigo.Estado)
+                    ViewBag.LayoutExcepcion += (ViewBag.LayoutExcepcion != null ?
+                        $"@{GeneraRespuestaExcepcion<List<PalabraCodigo>>(palabrascodigo)}" :
+                        GeneraRespuestaExcepcion<List<PalabraCodigo>>(palabrascodigo));
+
+                return resultado;
+            }
         }
 
         public ActionResult DescargarCodigo(string archivo, int indice, string carpeta)
