@@ -123,7 +123,9 @@
                         Descripcion: 'La longitud máxima es de 60 caracteres'
                     },
                     Patron: {
-                        Valor: /^[A-Z a-z0-9_-ñ\.\wáéíóú@]+$/,
+                        Valor: $('img.iconoMenu').css('display') == 'none' ?
+                            /^[A-Z a-z0-9_-ñ\.\wáéíóú@]+$/ :
+                            /^[^<>]{2,}$/,
                         Titulo: 'Verificar Formato',
                         Descripcion: 'Caracteres permitidos: A-Z a-z 0-9_-ñ.áéíóú@'
                     },
@@ -391,7 +393,9 @@
                         Descripcion: 'La longitud máxima es de 500 caracteres'
                     },
                     Patron: {
-                        Valor: /^[A-Z a-z0-9_-ñ\.\wáéíóú,*\(\)\[\]\{\}\"\!\¡\'\;\+\-\#\$\%\&\/\¿\?\=\:@]+$/,
+                        Valor: $('img.iconoMenu').css('display') == 'none'?
+                            /^[A-Z a-z0-9_-ñ\.\wáéíóú,*\(\)\[\]\{\}\"\!\¡\'\;\+\-\#\$\%\&\/\¿\?\=\:@]+$/ :
+                            /^[^<>]{2,}$/,
                         Titulo: 'Verificar Formato',
                         Descripcion: 'Caracteres permitidos: A-Z a-z0-9_-ñ.áéíóú,*()[]{}"!¡\';+-#$%&/¿?=:@'
                     },
