@@ -126,8 +126,8 @@ C:\Users\estebangaro\Documents\GitHub\estebangaro.net\estebangaro.net\Solución\
 C:\Users\estebangaro\Documents\GitHub\estebangaro.net\estebangaro.net\Solución\estebangaro.net\centro.recursos.net\bin\es\System.Web.Webpages.Razor.resources.dll
 C:\Users\estebangaro\Documents\GitHub\estebangaro.net\estebangaro.net\Solución\estebangaro.net\centro.recursos.net\bin\es\System.Web.Helpers.resources.dll
 C:\Users\estebangaro\Documents\GitHub\estebangaro.net\estebangaro.net\Solución\estebangaro.net\centro.recursos.net\bin\es\System.Web.Mvc.resources.dll
-C:\Users\estebangaro\Documents\GitHub\estebangaro.net\estebangaro.net\Solución\estebangaro.net\centro.recursos.net\obj\Release\centro.recursos.net.csprojResolveAssemblyReference.cache
 C:\Users\estebangaro\Documents\GitHub\estebangaro.net\estebangaro.net\Solución\estebangaro.net\centro.recursos.net\obj\Release\centro.recursos.net.csproj.CoreCompileInputs.cache
 C:\Users\estebangaro\Documents\GitHub\estebangaro.net\estebangaro.net\Solución\estebangaro.net\centro.recursos.net\obj\Release\centro.recursos.net.csproj.CopyComplete
 C:\Users\estebangaro\Documents\GitHub\estebangaro.net\estebangaro.net\Solución\estebangaro.net\centro.recursos.net\obj\Release\centro.recursos.net.dll
 C:\Users\estebangaro\Documents\GitHub\estebangaro.net\estebangaro.net\Solución\estebangaro.net\centro.recursos.net\obj\Release\centro.recursos.net.pdb
+C:\Users\estebangaro\Documents\GitHub\estebangaro.net\estebangaro.net\Solución\estebangaro.net\centro.recursos.net\obj\Release\centro.recursos.net.csprojAssemblyReference.cache
